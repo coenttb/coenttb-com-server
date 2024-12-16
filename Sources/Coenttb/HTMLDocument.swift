@@ -126,7 +126,7 @@ public struct CoenttbHTMLDocumentHeader<
             canonicalHost.map { "\(description) - \($0)" } ?? "\(description)"
         }
 
-        let canonicalHref = URL(string: "\(canonicalHost ?? "localhost:8080")\(siteRouter.href(for: page))")!
+        let canonicalHref = siteRouter.url(for: page)
         let description = page.description()?.description
         let hreflang = { siteRouter.url(for: .init(language: $0, page: page)) }
 
@@ -158,9 +158,7 @@ public struct CoenttbHTMLDocumentHeader<
             languages: languages,
             hreflang: hreflang,
             styles: styles,
-            scripts: {
-                scripts
-            },
+            scripts: { scripts },
             favicons: favicons
         )
     }
