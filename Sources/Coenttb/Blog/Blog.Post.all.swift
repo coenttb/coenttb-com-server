@@ -21,7 +21,7 @@ extension [CoenttbWebBlog.Blog.Post] {
             id: .init(),
             index: 1,
             publishedAt: .now,
-            image: Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(30.percent)),
+            image: div { Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(15.percent)) }.position(.absolute),
             title: TranslatedString(
                 dutch: "Van blut naar build in public: open source coenttb.com",
                 english: "From broke to building in public: open-sourcing coenttb.com"
