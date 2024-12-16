@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+	<head>
+		<link rel="alternate" hreflang="ar" href="http://127.0.0.1:8080/ar"/>
+		<link rel="alternate" hreflang="bn" href="http://127.0.0.1:8080/bn"/>
+		<link rel="alternate" hreflang="zh" href="http://127.0.0.1:8080/zh"/>
+		<link rel="alternate" hreflang="da" href="http://127.0.0.1:8080/da"/>
+		<link rel="alternate" hreflang="nl" href="http://127.0.0.1:8080/nl"/>
+		<link rel="alternate" hreflang="fr" href="http://127.0.0.1:8080/fr"/>
+		<link rel="alternate" hreflang="de" href="http://127.0.0.1:8080/de"/>
+		<link rel="alternate" hreflang="hi" href="http://127.0.0.1:8080/hi"/>
+		<link rel="alternate" hreflang="id" href="http://127.0.0.1:8080/id"/>
+		<link rel="alternate" hreflang="it" href="http://127.0.0.1:8080/it"/>
+		<link rel="alternate" hreflang="ja" href="http://127.0.0.1:8080/ja"/>
+		<link rel="alternate" hreflang="jv" href="http://127.0.0.1:8080/jv"/>
+		<link rel="alternate" hreflang="ko" href="http://127.0.0.1:8080/ko"/>
+		<link rel="alternate" hreflang="pl" href="http://127.0.0.1:8080/pl"/>
+		<link rel="alternate" hreflang="pt" href="http://127.0.0.1:8080/pt"/>
+		<link rel="alternate" hreflang="ro" href="http://127.0.0.1:8080/ro"/>
+		<link rel="alternate" hreflang="ru" href="http://127.0.0.1:8080/ru"/>
+		<link rel="alternate" hreflang="sk" href="http://127.0.0.1:8080/sk"/>
+		<link rel="alternate" hreflang="sl" href="http://127.0.0.1:8080/sl"/>
+		<link rel="alternate" hreflang="es" href="http://127.0.0.1:8080/es"/>
+		<link rel="alternate" hreflang="sv" href="http://127.0.0.1:8080/sv"/>
+		<link rel="alternate" hreflang="tr" href="http://127.0.0.1:8080/tr"/>
+		<script>function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var htmlElement = document.documentElement;
+    var themeToggleBtn = document.getElementById("themeToggleBtn");
+
+    function toggleMode() {
+        var currentTheme = htmlElement.getAttribute("data-bs-theme");
+        var newTheme = currentTheme === "dark" ? "light" : "dark";
+        htmlElement.setAttribute("data-bs-theme", newTheme);
+        setCookie("theme", newTheme, 7); // Save for 7 days
+    }
+
+    // Set the initial theme from the cookie
+    var savedTheme = getCookie("theme");
+    if (savedTheme) {
+        htmlElement.setAttribute("data-bs-theme", savedTheme);
+    }
+
+    // Add event listener to the button
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", toggleMode);
+    }
+});</script>
+		<title>coenttb.com</title>
+		<meta name="twitter:title" content="coenttb.com"/>
+		<meta property="og:title" content="coenttb.com"/>
+		<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" type="text/css"/>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="canonical" href="https://coenttb.com/en"/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png"/>
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.svg"/>
+		<link rel="manifest" href="/assets/favicon/site.webmanifest"/>
+		<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#000000"/>
+		<meta name="msapplication-TileColor" content="#000000"/>
+		<meta name="theme-color" content="rgb(244, 244, 249)"/>
+		<link rel="stylesheet" href="/css/custom.css" type="text/css"/>
+		<link rel="stylesheet" href="/css/code.css" type="text/css"/><!-- Google tag (gtag.js) -->
+	</head>
+	<body class="d-flex flex-column min-vh-100">
+		<div class="container mt-5">
+			<nav class="navbar navbar-expand-md fixed-top navbar-light" style="--bs-bg-opacity: 1; background-color: rgb(244, 244, 249); !important;" aria-label="navigationbar">
+				<div class="container">
+					<a href="/en" class="navbar-brand d-flex align-items-center text-dark text-decoration-none">
+						<img class="d-block mx-2" src="/assets/logo/logo.svg" alt="Logo" width="40" height="40"/>
+						<span>coenttb.com</span>
+					</a>
+					<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-id" aria-controls="navbar-id" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbar-id">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link " href="/en/about">About</a>
+							</li>
+						</ul>
+						<small class="navbar-text text-muted">
+							<a href="/en/log-in">Log in</a>
+							<small class="text-muted">&nbsp;&nbsp;|&nbsp;&nbsp;</small>
+							<a href="/en/registration">Sign up</a>
+						</small>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<main class="flex-grow-1 mt-4 pt-3">
+			<p>test!</p>
+		</main>
+		<footer class="mt-auto py-2 rounded-bottom rounded-5" style="--bs-bg-opacity: 1; background-color: rgb(244, 244, 249); !important;">
+			<section class="container footer py-3">
+				<div class="row g-3">
+					<div class="col-md-12 col-lg-6 col-xl-4 order-2 order-md-2 order-lg-1 order-xl-1 text-muted">
+						<small>Copyright © 2024 coenttb.com. All rights reserved.</small>
+					</div>
+					<div class="col-md-12 col-lg-12 col-xl-5  order-3 order-md-3 order-lg-3 order-xl-2 text-dark">
+						<a class="text-dark" href="/en/privacy-policy">
+							<small>Privacy policy</small>
+						</a>
+						<small class="text-muted">&nbsp;&nbsp;|&nbsp;&nbsp;</small>
+						<a class="text-dark" href="/en/terms-of-use">
+							<small>Terms of use</small>
+						</a>
+						<small class="text-muted">&nbsp;&nbsp;|&nbsp;&nbsp;</small>
+						<a class="text-dark" href="/en/about">
+							<small>About</small>
+						</a>
+					</div>
+					<div class="col-md-12 col-lg-6 col-xl-3  order-1 order-md-1 order-lg-2 order-xl-3 text-lg-end">
+						<small>
+							<a id="themeToggleBtn" href=".">Dark mode</a>
+							<small class="text-muted">&nbsp;&nbsp;|&nbsp;&nbsp;</small>
+							<a href="/en/choose-country-region">🇺🇸 English</a>
+						</small>
+					</div>
+				</div>
+			</section>
+		</footer>
+		<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	</body>
+</html>

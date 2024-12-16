@@ -1,0 +1,4 @@
+.build/
+.swiftpm/
+.tenthijeboonkkamp-env
+.env

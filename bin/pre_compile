@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ ! -f Package.swift ]; then
+    echo "File Package.swift does not exist."
+    exit 1
+fi
+
+if [ -f "$ENV_DIR/GITHUB_USER" ]; then
+    GITHUB_USER=$(<"$ENV_DIR/GITHUB_USER")
+fi
+
+if [ -f "$ENV_DIR/GITHUB_AUTH_TOKEN" ]; then
+    GITHUB_AUTH_TOKEN=$(<"$ENV_DIR/GITHUB_AUTH_TOKEN")
+fi
+
+if [ -z "$GITHUB_USER" ]; then
+    echo "GITHUB_USER is not set."
+    exit 1
+fi
+
+if [ -z "$GITHUB_AUTH_TOKEN" ]; then
+    echo "GITHUB_AUTH_TOKEN is not set."
+    exit 1
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS version of sed
+    sed -i '' "s#https://github\.com/coenttb/#https://$GITHUB_USER:$GITHUB_AUTH_TOKEN@github.com/coenttb/#g" Package.swift
+else
+    # Linux version of sed
+    sed -i "s#https://github\.com/coenttb/#https://$GITHUB_USER:$GITHUB_AUTH_TOKEN@github.com/coenttb/#g" Package.swift
+fi
