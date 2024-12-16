@@ -4,7 +4,7 @@
 
 Read more about me in my [introductory post on coenttb.com](https://www.coenttb.com/blog/1-from-broke-to-building-in-public-open-sourcing-coenttb-com).
 
-## About the Project
+## About the project
 
 Building a website in Swift? It’s *fun*. It’s *clean*. It’s also *painful*. 
 
@@ -15,7 +15,7 @@ As a lawyer who writes code, I’ve spent years experimenting with rules as code
 - **Functional elegance**: Clean architecture inspired by PointFree's best practices.
 - **Hypermodular**: Each module integrates only the parts that it needs.
 
-## Why Open Source?
+## Why open source?
 
 Building in Swift for the web is both rewarding and frustrating. I’ve made mistakes, learned from them, and found ways to overcome challenges unique to Swift web development. By open-sourcing this project, I hope to:
 1. Show how to structure a Swift Vapor website *elegantly*.
@@ -24,7 +24,7 @@ Building in Swift for the web is both rewarding and frustrating. I’ve made mis
 
 Plus, I feel like I owe it to the PointFree guys.
 
-## Getting Started
+## Getting started
 
 1. Clone the repo.
 2. Copy the `.env.example` file and rename it `.env.development`.
@@ -32,7 +32,7 @@ Plus, I feel like I owe it to the PointFree guys.
 4. If you want to see the Account system in action, you will need to setup Mailgun. Adjust the `MAILGUN_PRIVATE_API_KEY` and `MAILGUN_DOMAIN` variables with your specific details.
 5. Go to Xcode and run the `Server` executable target.
  
-## Related Projects
+## Related projects
 
 * [coenttb/swift-html](https://www.github.com/coenttb/swift-html): A Swift DSL for HTML and CSS, based on [pointfreeco/swift-html](https://www.github.com/pointfreeco/swift-html), with various extensions and [swift-css](https://www.github.com/coenttb/swift-css) integration.
 * **unreleased** [coenttb-html](https://www.github.com/coenttb/coenttb-html): Extends [coenttb/swift-html](https://www.github.com/coenttb/swift-html) with additional functionality and integrations for HTML, Markdown, Email, and printing HTML to PDF.
@@ -43,7 +43,7 @@ Plus, I feel like I owe it to the PointFree guys.
 
 Contact me for access to the unreleased packages. 
 
-## Feedback is Much Appreciated!
+## Feedback is much appreciated!
   
 If you’re working on your own Swift web project, feel free to learn, fork, and contribute.
 
