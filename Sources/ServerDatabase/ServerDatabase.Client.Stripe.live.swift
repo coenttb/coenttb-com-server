@@ -29,10 +29,12 @@ extension ServerDatabase.Client.Stripe {
             },
             delete: { (stripeCustomerId: String) in
 
-                @Dependency(\.request!.db) var database
-
+                @Dependency(\.request?.db) var database
+                
                 do {
-                    guard let user: ServerDatabase.User = try await ServerDatabase.User.query(on: database)
+                    guard
+                        let database,
+                        let user: ServerDatabase.User = try await ServerDatabase.User.query(on: database)
                         .filter(\.$stripe.$customerId == stripeCustomerId)
                         .with(\.$identity)
                         .first()
