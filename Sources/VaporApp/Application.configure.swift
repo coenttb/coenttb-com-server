@@ -38,8 +38,6 @@ extension Application {
 
         app.queues.use(.fluent())
         try app.queues.startInProcessJobs(on: .default)
-
-    
         
         try await CoenttbVapor.Application.configure(
             app: app,
