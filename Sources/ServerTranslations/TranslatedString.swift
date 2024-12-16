@@ -10,7 +10,7 @@ import CoenttbWebTranslations
 import Foundation
 import Languages
 
-extension String {
+extension String {    
     public static let coenttb_title: TranslatedString = .init(
         dutch: "Rechten. Code. Startups. Successen (en mislukkingen)",
         english: "Law. Code. Startups. Wins (and failures)"
