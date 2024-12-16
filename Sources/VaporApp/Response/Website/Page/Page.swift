@@ -32,7 +32,7 @@ extension WebsitePage {
 
             case let .blog(route):
                 @Dependency(\.blog.getAll) var blogPosts
-                @Dependency(\.envVars.companyXComHandle!) var companyXComHandle
+                @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
                 let localPosts = blogPosts()
                 
@@ -131,7 +131,7 @@ extension WebsitePage {
 extension WebsitePage {
     static func dashboard() async throws -> any AsyncResponseEncodable {
 
-        @Dependency(\.envVars.companyXComHandle!) var companyXComHandle
+        @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
         return Coenttb.DefaultHTMLDocument {
             PageHeader(
@@ -139,9 +139,12 @@ extension WebsitePage {
             ) {
                 HTMLGroup {
                     span { "Want to see what’s coming up next? " }
-                    Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
-                        .linkUnderline(true)
-                        .linkColor(.coenttbLinkColor)
+                    
+                    if let companyXComHandle {
+                        Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
+                            .linkUnderline(true)
+                            .linkColor(.coenttbLinkColor)
+                    }
                 }
                 .color(.gray300.withDarkColor(.gray800))
             }

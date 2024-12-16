@@ -41,7 +41,7 @@ extension WebsitePage.Account {
             return try await CoenttbWebAccount.Route.response(
                 route: route,
                 logo: .coenttb,
-                canonicalHref: URL(string: "\(canonicalHost ?? "localhost:8080")\(serverRouter.url(for: .account(account)).relativeString)")!,
+                canonicalHref: serverRouter.url(for: .account(account)),
                 favicons: .coenttb,
                 hreflang: { _, language in serverRouter.url(for: .init(language: language, page: .account(account))) },
                 termsOfUse: serverRouter.url(for: .terms_of_use),

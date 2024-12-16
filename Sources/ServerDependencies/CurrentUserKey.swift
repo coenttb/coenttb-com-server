@@ -10,11 +10,11 @@ import Foundation
 import ServerModels
 
 public enum CurrentUserKey: TestDependencyKey {
-    public static let testValue: User? = nil
+    public static let testValue: ServerModels.User? = nil
 }
 
 extension DependencyValues {
-    public var currentUser: User? {
+    public var currentUser: ServerModels.User? {
         get { self[CurrentUserKey.self] }
         set { self[CurrentUserKey.self] = newValue }
     }

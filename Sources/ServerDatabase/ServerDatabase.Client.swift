@@ -12,6 +12,10 @@ public struct Client: Sendable {
     public let stripe: ServerDatabase.Client.Stripe?
 }
 
+extension Client {
+    public static let noop: Self = .init(newsletter: .previewValue, account: .previewValue, stripe: .previewValue)
+}
+
 public enum DatabaseClientKey {}
 
 extension DatabaseClientKey: TestDependencyKey {

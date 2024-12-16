@@ -59,7 +59,14 @@ extension BlogKey: @retroactive DependencyKey {
 
 extension DatabaseClientKey: DependencyKey {
     public static let liveValue: ServerDatabase.Client = {
-        @Dependency(\.request!.db) var database
+        @Dependency(\.request?.db) var database
+        
+        guard
+            let database
+        else {
+            return ServerDatabase.Client.noop
+        }
+        
         return .live(database: database)
     }()
 }
