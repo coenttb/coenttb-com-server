@@ -39,9 +39,7 @@ Plus, I feel like I owe it to the PointFree guys.
 * [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for type-safe, extensible, and transformable CSS styles.
 * [coenttb/swift-web](https://www.github.com/coenttb/swift-web): A modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), providing modular tools to simplify web development in Swift.
 * [coenttb-web](https://www.github.com/coenttb/coenttb-web): Builds on [coenttb/swift-web](https://www.github.com/coenttb/swift-web) with additional features and integrations for Vapor and other frameworks.
-* [swift-languages](https://www.github.com/coenttb/swift-languages): A cross-platform translation library written in Swift.
-
-Contact me for access to the unreleased packages. 
+* [swift-languages](https://www.github.com/coenttb/swift-languages): A cross-platform translation library written in Swift. 
 
 ## Feedback is much appreciated!
   
