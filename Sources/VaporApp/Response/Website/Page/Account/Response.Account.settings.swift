@@ -9,6 +9,7 @@ import Coenttb
 import CoenttbWebAccount
 import CoenttbWebHTML
 import CoenttbWebStripe
+import CoenttbWebTranslations
 import Foundation
 import ServerRouter
 import Vapor
@@ -53,8 +54,11 @@ func settings(
                             
                             LazyVGrid(columns: [.desktop: [1, 1]]) {
                                 SectionCard(
-                                    title: "Profile",
-                                    subtitle: "Personal details, password, and your communication preferences.",
+                                    title: String.profile.capitalizingFirstLetter().description,
+                                    subtitle: TranslatedString(
+                                        dutch: "Persoonsgegevens, wachtwoord en jouw communicatievoorkeuren",
+                                        english: "Personal details, password, and your communication preferences"
+                                    ).period.description,
                                     href: serverRouter.url(for: .account(.settings(.profile))).absoluteString,
                                     icon: .init(icon: "user")
                                 )
@@ -64,7 +68,7 @@ func settings(
                         }
                         title: {
                             Header(4) {
-                                "Manage billing"
+                                String.settings.capitalizingFirstLetter().description
                             }
                             .padding(bottom: 1.5.rem)
                             
@@ -136,7 +140,7 @@ func settings(
                         }
                         title: {
                             Header(4) {
-                                "Identity"
+                                String.identity.capitalizingFirstLetter()
                             }
                             .padding(bottom: 1.5.rem)
                             
