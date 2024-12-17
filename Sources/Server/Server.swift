@@ -1,7 +1,6 @@
 import CoenttbVapor
 import Dependencies
 import Foundation
-import Logging
 import VaporApp
 
 @main
