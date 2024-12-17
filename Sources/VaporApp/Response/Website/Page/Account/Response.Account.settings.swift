@@ -120,6 +120,9 @@ func settings(
                     main: {
                         PageModule(theme: .mainContent) {
                             VStack {
+                                Header(5) {
+                                    String.identity.capitalizingFirstLetter()
+                                }
                                 
                                 NameChangeForm()
                                     .width(100.percent)
@@ -140,7 +143,7 @@ func settings(
                         }
                         title: {
                             Header(4) {
-                                String.identity.capitalizingFirstLetter()
+                                String.profile.capitalizingFirstLetter()
                             }
                             .padding(bottom: 1.5.rem)
                             
