@@ -25,11 +25,11 @@ extension ServerRoute {
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.logger) var logger
         @Dependency(\.database.account.currentUser) var currentUser
-
+        
         return try await withDependencies {
             $0.envVars = .liveValue
         } operation: {
-
+            
             return try await withDependencies {
                 @Dependency(\.envVars) var envVars
                 $0.request = request
@@ -39,24 +39,24 @@ extension ServerRoute {
                 return try await withDependencies {
                     $0.currentUser = try await currentUser()
                 } operation: {
-
+                    
                     @Dependency(\.uuid) var uuid
                     @Dependency(\.serverRouter) var siteRouter
                     @Dependency(\.currentUser) var currentUser
-
+                    
                     switch route {
                     case let .api(api):
                         return try await API.response(api: api)
-
+                        
                     case let .webhook(webhook):
                         return try await Webhook.response(webhook: webhook)
-
+                        
                     case .index:
                         return try await Website<WebsitePage>.response(website: .init(language: nil, page: .home))
-
+                        
                     case let .website(website):
                         return try await Website<WebsitePage>.response(website: website)
-
+                        
                     case .public(.sitemap):
                         return Response(
                             status: .ok,
@@ -66,21 +66,15 @@ extension ServerRoute {
                     case .public(.rssXml):
                         
                         @Dependency(\.blog.getAll) var blogPosts
-                        @Dependency(\.envVars.baseUrl) var baseUrl
-                        @Dependency(\.envVars.companyName) var companyName
                         
                         return await RSS.Feed.Response(
                             feed: RSS.Feed.memoized {
                                 RSS.Feed(
-                                    posts: blogPosts(),
-                                    baseURL: baseUrl,
-                                    title: companyName ?? "RSS",
-                                    description: companyName ?? "description",
-                                    authorName: companyName ?? "Author"
+                                    posts: blogPosts()
                                 )
                             }
                         )
-
+                        
                     case .public(.robots):
                         let disallows = Languages.Language.allCases.map {
                         """
@@ -88,11 +82,11 @@ extension ServerRoute {
                         Disallow: /\($0.rawValue)/checkout/
                         """
                         }.joined(separator: "\n")
-
+                        
                         return Response.robots(
                             disallows: disallows
                         )
-
+                        
                     case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
                         @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
                         if let appleDeveloperMerchantIdDomainAssociation {
@@ -100,10 +94,10 @@ extension ServerRoute {
                         } else {
                             throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association")
                         }
-
+                        
                     case let .public(.favicon(favicon)):
                         return request.fileio.streamFile(at: .favicon(favicon))
-
+                        
                     case let .public(`public`):
                         return request.fileio.streamFile(at: `public`)
                     }
@@ -115,26 +109,27 @@ extension ServerRoute {
 
 extension FileIO {
     func streamFile(at public: Public) -> Vapor.Response {
-        @Dependency(\.serverRouter) var siteRouter
-        return self.streamFile(at: siteRouter.url(for: .public(`public`)).absoluteString)
+        @Dependency(\.serverRouter) var serverRouter
+        return self.streamFile(at: serverRouter.url(for: .public(`public`)).absoluteString)
     }
 }
 
 extension RSS.Feed {
-     init(
-        posts: [Blog.Post],
-        baseURL: URL,
-        title: String,
-        description: String,
-        authorName: String
+    init(
+        posts: [Blog.Post]
     ) {
+        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.envVars.baseUrl) var baseUrl
+        @Dependency(\.envVars.companyName) var companyName
+        
         self = RSS.Feed(
             metadata: .init(
-                title: title,
-                link: baseURL,
-                description: description
+                title: companyName ?? "RSS",
+                link: baseUrl,
+                description: Coenttb.oneliner.english,
+                imageURL: serverRouter.url(for: .public(.asset(.logo(.favicon_dark))))
             ),
-            items: posts.map { RSS.Feed.Item(from: $0, author: authorName) }
+            items: posts.map { RSS.Feed.Item(from: $0, author: companyName ?? "Author") }
         )
     }
 }
