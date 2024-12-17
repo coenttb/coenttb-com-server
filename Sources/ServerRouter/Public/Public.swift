@@ -17,6 +17,7 @@ public enum Public: Equatable, Sendable {
     case wellKnown(Public.WellKnown)
     case robots
     case sitemap
+    case rssXml
     case favicon(FaviconRouter.Route)
 }
 
@@ -30,6 +31,9 @@ extension Public {
                 URLRouting.Route(.case(Public.asset)) {
                     Path.assets
                     Public.Asset.Router()
+                }
+                URLRouting.Route(.case(Public.rssXml)) {
+                    Path.rssXml
                 }
                 URLRouting.Route(.case(Public.wellKnown)) {
                     Path.well_known

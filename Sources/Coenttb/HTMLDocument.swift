@@ -36,7 +36,6 @@ public struct DefaultHTMLDocument<
 
     public init(
         themeColor: HTMLColor = .coenttbAccentColor,
-        languages: [Languages.Language] = Languages.Language.allCases,
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = {
             HTMLGroup {
@@ -57,7 +56,8 @@ public struct DefaultHTMLDocument<
         }
     ) {
         self.themeColor = themeColor
-        self.languages = languages
+        @Dependency(\.envVars.languages) var languages
+        self.languages = languages ?? [.english]
         self.styles = styles()
         self.scripts = scripts()
         self.favicons = favicons()
@@ -70,11 +70,10 @@ public struct DefaultHTMLDocument<
     public var head: some HTML {
         CoenttbHTMLDocumentHeader(
             themeColor: themeColor,
-            languages: languages,
             styles: { styles },
             scripts: { scripts },
             favicons: { favicons }
-        )!
+        )
     }
 
     @Dependency(\.language) var language
@@ -101,9 +100,8 @@ public struct CoenttbHTMLDocumentHeader<
     Styles: HTML,
     Scripts: HTML
 >: HTML {
-    public init?(
+    public init(
         themeColor: HTMLColor = .coenttbAccentColor,
-        languages: [Languages.Language] = Languages.Language.allCases,
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = { HTMLEmpty() },
         @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb }
@@ -111,24 +109,27 @@ public struct CoenttbHTMLDocumentHeader<
 
         @Dependency(\.serverRouter) var siteRouter
         @Dependency(\.language) var language
+        @Dependency(\.envVars.languages) var languages
         @Dependency(\.route.website?.page) var page
         @Dependency(\.envVars.hotjarAnalytics?.id) var hotjarAnalyticsId
         @Dependency(\.envVars.googleAnalytics?.id) var googleAnalyticsId
         @Dependency(\.envVars.canonicalHost) var canonicalHost
+        @Dependency(\.envVars.baseUrl) var baseUrl
 
-        guard let page
-        else { return nil }
-
-        let title: String = switch page.title?.capitalizingFirstLetter() {
+        let title: String = switch page?.title?.capitalizingFirstLetter() {
         case nil:
             canonicalHost ?? ""
         case let .some(description):
             canonicalHost.map { "\(description) - \($0)" } ?? "\(description)"
         }
 
-        let canonicalHref = siteRouter.url(for: page)
-        let description = page.description()?.description
-        let hreflang = { siteRouter.url(for: .init(language: $0, page: page)) }
+        let canonicalHref: URL = page.map { siteRouter.url(for: $0) } ?? baseUrl
+        let description = page?.description()?.description
+        let hreflang: (Languages.Language) -> URL = { language in
+            page.map { page in
+                siteRouter.url(for: .init(language: language, page: page))
+            } ?? baseUrl
+        }
 
         let scripts = HTMLGroup {
             FontAwesomeScript()
@@ -153,9 +154,10 @@ public struct CoenttbHTMLDocumentHeader<
             title: title,
             description: description,
             canonicalHref: canonicalHref,
+            rssXml: siteRouter.url(for: .public(.rssXml)),
             themeColor: themeColor,
             language: language,
-            languages: languages,
+            languages: languages ?? [.english],
             hreflang: hreflang,
             styles: styles,
             scripts: { scripts },

@@ -6,7 +6,9 @@
 //
 
 import Coenttb
+import CoenttbWebBlog
 import CoenttbWebDependencies
+import CoenttbVapor
 import CoenttbWebHTML
 import Dependencies
 import EnvVars
@@ -60,6 +62,24 @@ extension ServerRoute {
                             status: .ok,
                             body: .init(stringLiteral: try await SiteMap.default().xml)
                         )
+                        
+                    case .public(.rssXml):
+                        
+                        @Dependency(\.blog.getAll) var blogPosts
+                        @Dependency(\.envVars.baseUrl) var baseUrl
+                        @Dependency(\.envVars.companyName) var companyName
+                        
+                        return await RSS.Feed.Response(
+                            feed: RSS.Feed.memoized {
+                                RSS.Feed(
+                                    posts: blogPosts(),
+                                    baseURL: baseUrl,
+                                    title: companyName ?? "RSS",
+                                    description: companyName ?? "description",
+                                    authorName: companyName ?? "Author"
+                                )
+                            }
+                        )
 
                     case .public(.robots):
                         let disallows = Languages.Language.allCases.map {
@@ -97,5 +117,37 @@ extension FileIO {
     func streamFile(at public: Public) -> Vapor.Response {
         @Dependency(\.serverRouter) var siteRouter
         return self.streamFile(at: siteRouter.url(for: .public(`public`)).absoluteString)
+    }
+}
+
+extension RSS.Feed {
+     init(
+        posts: [Blog.Post],
+        baseURL: URL,
+        title: String,
+        description: String,
+        authorName: String
+    ) {
+        self = RSS.Feed(
+            metadata: .init(
+                title: title,
+                link: baseURL,
+                description: description
+            ),
+            items: posts.map { RSS.Feed.Item(from: $0, author: authorName) }
+        )
+    }
+}
+
+extension RSS.Feed.Item {
+    init(from post: Blog.Post, author: String)  {
+        @Dependency(\.serverRouter) var serverRouter
+        self = RSS.Feed.Item(
+            title: post.title,
+            link: serverRouter.url(for: .blog(.post(post))),
+            creator: author,
+            publicationDate: post.publishedAt,
+            description: post.blurb
+        )
     }
 }

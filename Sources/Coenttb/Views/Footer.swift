@@ -87,7 +87,8 @@ public struct CoenttbFooter: HTML {
                         (label: "\(String.terms_of_use.capitalizingFirstLetter())", href: serverRouter.href(for: .terms_of_use)),
                         newsletterSubscribed == true
                         ? (label: "\(String.unsubscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.unsubscribe)))
-                        : (label: "\(String.subscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.subscribe)))
+                        : (label: "\(String.subscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.subscribe))),
+                        (label: "RSS", href: serverRouter.href(for: .rssXml)),
                     ]
                         .compactMap { $0 }
                 )
