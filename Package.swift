@@ -98,7 +98,6 @@ let package = Package(
         .package(url: "https://github.com/coenttb/swift-web.git", branch: "main"),
         .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.3.0"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
-        .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.1.3"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
         .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
