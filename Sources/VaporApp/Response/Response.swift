@@ -11,6 +11,7 @@ import CoenttbWebDependencies
 import CoenttbVapor
 import CoenttbWebHTML
 import Dependencies
+import CoenttbWebSyndication
 import EnvVars
 import Languages
 import ServerModels
