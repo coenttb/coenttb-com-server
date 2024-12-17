@@ -96,10 +96,8 @@ public struct CoenttbNavigationBar: HTML {
             },
             mobileNavItems: {
                 ul {
-
                     HTMLGroup {
                         HTMLForEach([
-//                            NavigationBarMobileNavItems.NavListItem.init("\(String.services.capitalizingFirstLetter())", href: services),
                             !posts.isEmpty ? NavigationBarMobileNavItems.NavListItem("Blog", href: blog) : nil
                         ].compactMap { $0 }) { item in
                             li {
@@ -158,7 +156,6 @@ extension CoenttbNavigationBar {
                                 div {
                                     AnyHTML(
                                         Image.coenttbGreenSuit
-                                            .halftone(dotSize: (0.0625 * 2).rem)
                                             .dependency(\.objectStyle.position, .y(30.percent))
                                             .loading(.lazy)
                                     )
