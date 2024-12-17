@@ -31,7 +31,6 @@ extension Target.Dependency {
     static var coenttbWebStripeLive: Self { .product(name: "CoenttbWebStripeLive", package: "coenttb-web") }
     static var coenttbWebAccount: Self { .product(name: "CoenttbWebAccount", package: "coenttb-web") }
     static var coenttbWebAccountLive: Self { .product(name: "CoenttbWebAccountLive", package: "coenttb-web") }
-    static var casepaths: Self { .product(name: "CasePaths", package: "swift-case-paths") }
     static var coenttbEmail: Self { .product(name: "CoenttbEmail", package: "coenttb-html") }
     static var coenttbEnvVars: Self { .product(name: "CoenttbEnvVars", package: "coenttb-web") }
     static var coenttbWebHTML: Self { .product(name: "CoenttbWebHTML", package: "coenttb-web") }
@@ -56,7 +55,6 @@ extension Target.Dependency {
     static var postgres: Self { .product(name: "Postgres", package: "coenttb-web") }
     static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-web") }
     static var language: Self { .product(name: "Languages", package: "swift-language") }
-    static var logging: Self { .product(name: "Logging", package: "swift-log") }
     static var loggingDependencies: Self { .product(name: "LoggingDependencies", package: "swift-web") }
     static var macroCodableKit: Self { .product(name: "MacroCodableKit", package: "macro-codable-kit") }
     static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-web") }
@@ -67,7 +65,6 @@ extension Target.Dependency {
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var sitemap: Self { .product(name: "Sitemap", package: "swift-web") }
     static var splash: Self { .product(name: "Splash", package: "Splash") }
-    static var stripeKit: Self { .product(name: "StripeKit", package: "stripe-kit") }
     static var swiftDate: Self { .product(name: "Date", package: "swift-date") }
     static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
     static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
@@ -93,7 +90,6 @@ let package = Package(
         .library(name: .vaporApp, targets: [.vaporApp])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.6.1"),
         .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-html.git", branch: "main"),
         .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
@@ -104,7 +100,6 @@ let package = Package(
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.1.3"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
-        .package(url: "https://github.com/pointfreeco/swift-prelude.git", branch: "main"),
         .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
@@ -112,7 +107,6 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.7.2"),
         .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
         .package(url: "https://github.com/vapor/vapor.git", from: "4.105.2"),
-        .package(url: "https://github.com/vapor-community/stripe-kit.git", from: "25.1.1"),
 
         // Any dependency of a dependency that requires authentication should be directly included here for linking on heroku to succeed.
     ],
@@ -124,7 +118,6 @@ let package = Package(
                 .dependencies,
                 .gitHub,
                 .language,
-                .logging,
                 .mailgun,
                 .memberwiseInit,
                 .serverModels,
