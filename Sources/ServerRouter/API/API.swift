@@ -9,6 +9,7 @@ import CasePaths
 import CoenttbWebAccount
 import CoenttbWebNewsletter
 import CoenttbWebStripe
+import CoenttbWebSyndication
 import Dependencies
 import EmailAddress
 import Foundation
@@ -42,7 +43,7 @@ extension API {
     public enum Version1: Equatable, Sendable {
         case newsletter(CoenttbWebNewsletter.API)
         case account(CoenttbWebAccount.API)
-        //        case stripe(CoenttbWebStripe.API)
+        case rss(CoenttbWebSyndication.API)
     }
 }
 
@@ -63,6 +64,11 @@ extension API.Version1 {
                 URLRouting.Route(.case(API.Version1.account)) {
                     Path { "account" }
                     CoenttbWebAccount.API.Router()
+                }
+                
+                URLRouting.Route(.case(API.Version1.rss)) {
+                    Path { "rss" }
+                    CoenttbWebSyndication.API.Router()
                 }
             }
         }

@@ -43,6 +43,7 @@ extension Target.Dependency {
     static var coenttbWebBlog: Self { .product(name: "CoenttbWebBlog", package: "coenttb-web") }
     static var coenttbWebTranslations: Self { .product(name: "CoenttbWebTranslations", package: "coenttb-web") }
     static var coenttbServerRouter: Self { .product(name: "CoenttbServerRouter", package: "coenttb-web") }
+    static var coenttbWebSyndication: Self { .product(name: "CoenttbWebSyndication", package: "coenttb-web") }
     static var coenttbVapor: Self { .product(name: "CoenttbVapor", package: "coenttb-web") }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
@@ -65,6 +66,7 @@ extension Target.Dependency {
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var sitemap: Self { .product(name: "Sitemap", package: "swift-web") }
     static var splash: Self { .product(name: "Splash", package: "Splash") }
+    static var swiftGD: Self { .product(name: "SwiftGD", package: "SwiftGD") }
     static var swiftDate: Self { .product(name: "Date", package: "swift-date") }
     static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
     static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
@@ -102,6 +104,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
+        .package(url: "https://github.com/twostraws/SwiftGD.git", from: "2.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.10.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.7.2"),
         .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
@@ -182,7 +185,8 @@ let package = Package(
                 .coenttbWebStripe,
                 .coenttbWebNewsletter,
                 .coenttbWebAccount,
-                .coenttbWebBlog
+                .coenttbWebBlog,
+                .coenttbWebSyndication,
             ]
         ),
         .target(
@@ -235,7 +239,22 @@ let package = Package(
                 .coenttbWebNewsletter,
                 .queuesFluentDriver,
                 .coenttbWebStripeLive,
-                .coenttbWebAccountLive
+                .coenttbWebAccountLive,
+                .swiftGD
+            ],
+            swiftSettings: [
+                .unsafeFlags(
+                    {
+                        #if os(Linux)
+                        return ["-I/usr/include", "-L/usr/lib"]
+                        #else
+                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
+                        #endif
+                    }()
+                )
+            ],
+            linkerSettings: [
+                .linkedLibrary("gd")
             ]
         ),
         .executableTarget(
