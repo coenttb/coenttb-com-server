@@ -1,5 +1,5 @@
 {
-  "originHash" : "9738f443ebe4210ffc778c9552166da357800e7fd8ce69762943e17998f048bb",
+  "originHash" : "6e29b5a1f57a9ceac1684f99614bad25222a91e3aa7a16495d9bb13af7636a68",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "65ab81c00ba27af6ca4c56d6ce3e13e147935a82"
+        "revision" : "a9cc9263048d4727d5b07dcf018437998f0f8348"
       }
     },
     {
@@ -566,6 +566,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "49cb65be87302536e4583959e1973f6427d5086c"
+      }
+    },
+    {
+      "identity" : "swiftgd",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/SwiftGD.git",
+      "state" : {
+        "revision" : "1960998971b453101e740f25bc6d9fb01e0ba225",
+        "version" : "2.5.0"
       }
     },
     {

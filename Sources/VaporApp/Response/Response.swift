@@ -140,7 +140,10 @@ extension RSS.Feed.Item {
         self = RSS.Feed.Item(
             title: post.title,
             link: serverRouter.url(for: .blog(.post(post))),
-            imageURL: serverRouter.url(for: .public(.asset(.logo(.muted)))),
+            image: .init(
+                url: serverRouter.url(for: .api(.v1(.rss(.image("TEST"))))),
+                variant: .png
+            ),
             creator: author,
             publicationDate: post.publishedAt,
             description: post.blurb
