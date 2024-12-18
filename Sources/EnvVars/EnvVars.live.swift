@@ -124,6 +124,10 @@ extension EnvVars {
         self["DEMO_PASSWORD"]
     }
     
+    public var demoNewsletterEmail: String? {
+        self["DEMO_NEWSLETTER_EMAIL"]
+    }
+    
     public var demoStripeCustomerId: String? {
         self["DEMO_STRIPE_CUSTOMER_ID"]
     }

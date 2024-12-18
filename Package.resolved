@@ -1,5 +1,5 @@
 {
-  "originHash" : "c48ebed84d9b9bb5dd70623ffdbf352b051b028649c46a7f3e3bf9121112835f",
+  "originHash" : "6e29b5a1f57a9ceac1684f99614bad25222a91e3aa7a16495d9bb13af7636a68",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
-        "branch" : "newsletter-confirmation",
-        "revision" : "50ab9e3f7ea7cce1a8613d2eee084a5864c0b112"
+        "branch" : "main",
+        "revision" : "32d2e250e5a88b25b01b719cfb382b7f4953931c"
       }
     },
     {
