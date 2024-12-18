@@ -193,3 +193,12 @@ extension GitHub.Client: @retroactive DependencyKey {
         )
     }
 }
+
+
+extension DatabaseConfigurationKey: @retroactive DependencyKey {
+    public static let liveValue = DatabaseConfiguration(
+        maxConnectionsPerEventLoop: 1,
+        connectionPoolTimeout: .seconds(10)
+    )
+}
+

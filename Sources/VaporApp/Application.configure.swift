@@ -22,10 +22,18 @@ extension Application {
         @Dependency(\.sqlConfiguration) var sqlConfiguration
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
+        @Dependency(\.databaseConfiguration) var databaseConfiguration
         
         app.environment = .init(envVarsEnvironment: envVars.appEnv)
         
-        app.databases.use(.postgres(configuration: sqlConfiguration), as: .psql)
+        app.databases.use(
+            .postgres(
+                configuration: sqlConfiguration,
+                maxConnectionsPerEventLoop: databaseConfiguration.maxConnectionsPerEventLoop,
+                connectionPoolTimeout: databaseConfiguration.connectionPoolTimeout
+            ),
+            as: .psql
+        )
         
         [any Migration].coenttb.forEach { app.migrations.add($0) }
         
@@ -96,3 +104,5 @@ extension Vapor.Environment {
         }
     }
 }
+
+
