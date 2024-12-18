@@ -121,8 +121,7 @@ extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
         @Dependency(\.sqlConfiguration) var sqlConfiguration
         
         return .init(
-            source: PostgresConnectionSource(
-                sqlConfiguration: sqlConfiguration),
+            source: PostgresConnectionSource(sqlConfiguration: sqlConfiguration),
             on: mainEventLoopGroup
         )
     }
