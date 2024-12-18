@@ -21,7 +21,7 @@ extension ServerDatabase.Client {
         @Dependencies.Dependency(\.stripe?.client) var stripeClient
 
         return .init(
-            newsletter: .live(
+            newsletter: CoenttbWebNewsletter.Client.live(
                 database: database,
                 logger: logger,
                 notifyOfNewSubscriptionEmail: {
@@ -57,9 +57,30 @@ extension ServerDatabase.Client {
                     else { return nil }
 
                     return { email in try await sendEmail(email) }
-                }()
+                }(),
+                sendVerificationEmail: { email, token in
+                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.fireAndForget) var fireAndForget
+                    @Dependencies.Dependency(\.serverRouter) var serverRouter
+                    @Dependencies.Dependency(\.envVars.companyName!) var businessName
+                    @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
+                    @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
+
+                    await fireAndForget {
+                        _ = try await sendEmail?(
+                            .requestEmailVerification(
+                                verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email))))),
+                                businessName: "\(businessName)",
+                                supportEmail: supportEmail,
+                                from: "\(businessName) <\(fromEmail)>",
+                                to: (name: nil, email: .init(email)),
+                                primaryColor: .green550.withDarkColor(.green600)
+                            )
+                        )
+                    }
+                }
             ),
-            account: .live(
+            account: CoenttbWebAccount.Client.live(
                 database: database,
                 logger: logger,
                 getDatabaseUser: (

@@ -82,7 +82,7 @@ extension WebsitePage {
                                 .textAlign(.center, media: .desktop)
 
                                 NewsletterSubscriptionForm(
-                                    newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.init())))))
+                                    newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
                                 )
                                 .width(100.percent)
                             }

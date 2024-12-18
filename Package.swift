@@ -92,7 +92,7 @@ let package = Package(
         .library(name: .vaporApp, targets: [.vaporApp])
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "newsletter-confirmation"),
         .package(url: "https://github.com/coenttb/coenttb-html.git", branch: "main"),
         .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
         .package(url: "https://github.com/coenttb/swift-date.git", branch: "main"),

@@ -58,7 +58,7 @@ extension WebsitePage {
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
                             newsletterSubscribed: currentUser?.newsletterSubscribed == true,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.init())))))
+                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
                         )
                     },
                     defaultDocument: { closure in
@@ -94,7 +94,7 @@ extension WebsitePage {
                     VStack {
                         CoenttbWebNewsletter.Route.Subscribe.View(
                             caption: String.subscribe_to_my_newsletter.capitalizingFirstLetter().description,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.init())))))
+                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
                         )
                     }
                     .margin(vertical: 3.rem)
