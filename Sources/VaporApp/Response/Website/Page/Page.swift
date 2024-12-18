@@ -87,31 +87,26 @@ extension WebsitePage {
 
             case .terms_of_use:
                 return try await WebsitePage.termsOfUse()
-
-            case .newsletter(.subscribe):
+                
+            case let .newsletter(newsletter):
+                
                 @Dependency(\.serverRouter) var serverRouter
-                return Coenttb.DefaultHTMLDocument {
-                    VStack {
-                        CoenttbWebNewsletter.Route.Subscribe.View(
-                            caption: String.subscribe_to_my_newsletter.capitalizingFirstLetter().description,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
-                        )
-                    }
-                    .margin(vertical: 3.rem)
-                }
 
-            case .newsletter(.unsubscribe):
-                @Dependency(\.serverRouter) var serverRouter
-                return Coenttb.DefaultHTMLDocument {
-                    VStack {
-                        CoenttbWebNewsletter.Route.Unsubscribe.View(
-                            form_id: "coenttb-web-newsletter-route-unsubscribe-view",
-                            localStorageKey: String.newsletterSubscribed,
-                            newsletterUnsubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.unsubscribe(.init())))))
-                        )
-                    }
-                    .margin(vertical: 3.rem)
-                }
+                return try await CoenttbWebNewsletter.Route.response(
+                    newsletter: newsletter,
+                    htmlDocument: { html in
+                        Coenttb.DefaultHTMLDocument.init {
+                            AnyHTML(html)
+                        }
+                    },
+                    subscribeCaption: { String.subscribe_to_my_newsletter.capitalizingFirstLetter().description },
+                    subscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init())))))) },
+                    verificationAction: { verify in serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.verify(.init(token: verify.token, email: verify.email))))))) },
+                    verificationRedirectURL: { serverRouter.url(for: .home) },
+                    newsletterUnsubscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.unsubscribe(.init()))))) },
+                    form_id: { "coenttb-web-newsletter-route-unsubscribe-view" },
+                    localStorageKey: { String.newsletterSubscribed }
+                )
             }
         }
     }
