@@ -22,14 +22,15 @@ extension [any Fluent.Migration] {
             CoenttbWebAccount.EmailChangeRequest.Migration(),
             ServerDatabase.User.CreateMigration(),
             CoenttbWebNewsletter.Newsletter.Migration.Create(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
             CoenttbWebNewsletter.Newsletter.Token.Migration.Create(),
+            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
             CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification(),
         ]
-
-    #if DEBUG
+        
+#if DEBUG
         migrations.append(CreateDemoUserMigration())
-    #endif
+        migrations.append(CreateUnverifiedNewsletterMigration())
+#endif
 
         return migrations
     }
@@ -107,5 +108,53 @@ public struct CreateDemoUserMigration: AsyncMigration {
             .delete()
 
         try await identity.delete(on: database)
+    }
+}
+
+
+public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
+    public init() {}
+    
+    
+
+    public func prepare(on database: Database) async throws {
+        @Dependency(\.envVars) var envVars
+        @Dependency(\.logger) var logger
+
+        guard let email: String = envVars.demoNewsletterEmail else {
+            logger.log(.warning, "Environment variable for demo newsletter email is missing.")
+            return
+        }
+        
+        let newsletterSubscription = try Newsletter(
+            email: email,
+            emailVerificationStatus: .unverified
+        )
+
+        do {
+            try await newsletterSubscription.save(on: database)
+            logger.log(.info, "Created unverified newsletter subscription for email: \(email)")
+        } catch {
+            logger.log(.error, "Failed to create unverified newsletter subscription: \(error)")
+        }
+    }
+
+    public func revert(on database: Database) async throws {
+        @Dependency(\.envVars) var envVars
+        @Dependency(\.logger) var logger
+
+        guard let email: String = envVars.demoNewsletterEmail else {
+            logger.log(.warning, "Environment variable for demo newsletter email is missing.")
+            return
+        }
+        
+        do {
+            try await Newsletter.query(on: database)
+                .filter(\.$email == email)
+                .delete()
+            logger.log(.info, "Deleted unverified newsletter subscription for email: \(email)")
+        } catch {
+            logger.log(.error, "Failed to delete unverified newsletter subscription: \(error)")
+        }
     }
 }

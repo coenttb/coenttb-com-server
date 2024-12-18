@@ -58,27 +58,7 @@ extension ServerDatabase.Client {
 
                     return { email in try await sendEmail(email) }
                 }(),
-                sendVerificationEmail: { email, token in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
-                    @Dependencies.Dependency(\.fireAndForget) var fireAndForget
-                    @Dependencies.Dependency(\.serverRouter) var serverRouter
-                    @Dependencies.Dependency(\.envVars.companyName!) var businessName
-                    @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
-                    @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
-
-                    await fireAndForget {
-                        _ = try await sendEmail?(
-                            .requestEmailVerification(
-                                verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email))))),
-                                businessName: "\(businessName)",
-                                supportEmail: supportEmail,
-                                from: "\(businessName) <\(fromEmail)>",
-                                to: (name: nil, email: .init(email)),
-                                primaryColor: .green550.withDarkColor(.green600)
-                            )
-                        )
-                    }
-                }
+                sendVerificationEmail: CoenttbWebNewsletter.Client.sendVerificationEmail
             ),
             account: CoenttbWebAccount.Client.live(
                 database: database,
@@ -366,4 +346,28 @@ extension BusinessDetails {
             primaryColor: .green550.withDarkColor(.green600)
         )
     }()
+}
+
+extension CoenttbWebNewsletter.Client {
+    public static func sendVerificationEmail(email: String, token: String) async throws -> Void { 
+        @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+        @Dependencies.Dependency(\.fireAndForget) var fireAndForget
+        @Dependencies.Dependency(\.serverRouter) var serverRouter
+        @Dependencies.Dependency(\.envVars.companyName!) var businessName
+        @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
+        @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
+
+        await fireAndForget {
+            _ = try await sendEmail?(
+                .requestEmailVerification(
+                    verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email))))),
+                    businessName: "\(businessName)",
+                    supportEmail: supportEmail,
+                    from: "\(businessName) <\(fromEmail)>",
+                    to: (name: nil, email: .init(email)),
+                    primaryColor: .green550.withDarkColor(.green600)
+                )
+            )
+        }
+    }
 }

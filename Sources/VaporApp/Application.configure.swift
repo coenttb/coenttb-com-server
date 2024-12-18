@@ -27,6 +27,8 @@ extension Application {
         app.databases.use(.postgres(configuration: sqlConfiguration), as: .psql)
 
         [any Migration].coenttb.forEach { app.migrations.add($0) }
+        
+        [any AsyncCommand].coenttb.forEach { app.asyncCommands.use($0.0, as: $0.1) }
 
         app.migrations.add(JobMetadataMigrate())
 
