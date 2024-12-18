@@ -1,40 +1,16 @@
 //
 //  File.swift
-//  
+//  coenttb-com-server
 //
-//  Created by Coen ten Thije Boonkkamp on 06-01-2024.
+//  Created by Coen ten Thije Boonkkamp on 18/12/2024.
 //
-
-import Foundation
-import Vapor
-import CoenttbWebNewsletter
-import ServerDatabase
-import Vapor
-import Fluent
-import Dependencies
-import EmailAddress
-
-
-
-struct HelloCommand: AsyncCommand {
-    struct Signature: CommandSignature { }
-
-    var help: String {
-        "Says hello"
-    }
-
-    func run(using context: CommandContext, signature: Signature) async throws {
-        let name = context.console.ask("What is your \("name", color: .green)?")
-        context.console.print("Hello, \(name) 👋")
-    }
-}
-
 
 import Vapor
 import Fluent
 import Dependencies
 import EmailAddress
 import CoenttbWebNewsletter
+import Mailgun
 
 struct ResendVerificationEmailsCommand: AsyncCommand {
     struct Signature: CommandSignature {
@@ -51,13 +27,34 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
         "Resends verification emails to all unverified newsletter subscribers"
     }
     
+    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.envVars.companyName) var companyName
+    @Dependency(\.envVars.companyInfoEmailAddress) var supportEmail
+    @Dependency(\.envVars.mailgun?.domain) var domain
+    @Dependency(\.mailgun?.sendEmail) var sendEmail
+    
     func run(using context: CommandContext, signature: Signature) async throws {
+        // Get required dependencies from the application
+        guard let sendEmail else {
+            context.console.error("Mailgun configuration is missing")
+            throw Abort(.internalServerError)
+        }
+        
+        
+        
+        // Validate required environment variables
+        guard let companyName = companyName,
+              let supportEmail = supportEmail,
+              let domain = domain else {
+            context.console.error("Required environment variables are missing")
+            throw Abort(.internalServerError)
+        }
+        
         let batchSize = signature.batchSize ?? 50
-        let delayMs = signature.delayMs ?? 500 // Default 500ms delay
+        let delayMs = signature.delayMs ?? 500
         
         context.console.info("Starting to process unverified newsletter subscriptions...")
         
-        // Get all unverified subscriptions
         let unverifiedSubscriptions = try await Newsletter.query(on: context.application.db)
             .filter(\.$emailVerificationStatus == .unverified)
             .all()
@@ -67,33 +64,35 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
         var successCount = 0
         var failureCount = 0
         
-        // Process in batches
         for batch in unverifiedSubscriptions.chunks(ofCount: batchSize) {
             for subscription in batch {
                 do {
-                    // Check token generation limit
                     guard try await subscription.canGenerateToken(on: context.application.db) else {
                         context.console.warning("Token generation limit exceeded for email: \(subscription.email)")
                         failureCount += 1
                         continue
                     }
                     
-                    // Generate new verification token
                     let verificationToken = try subscription.generateToken(
                         type: .emailVerification,
-                        validUntil: Date().addingTimeInterval(24 * 60 * 60) // 24 hours
+                        validUntil: Date().addingTimeInterval(24 * 60 * 60)
                     )
                     try await verificationToken.save(on: context.application.db)
                     
-                    // Update status to pending
                     subscription.emailVerificationStatus = .pending
                     try await subscription.save(on: context.application.db)
                     
-                    // Send verification email using the static client function
-                    try await CoenttbWebNewsletter.Client.sendVerificationEmail(
-                        email: subscription.email,
-                        token: verificationToken.value
+                    // Use mailgun directly instead of the static client
+                    let email = Email.requestEmailVerification(
+                        verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
+                        businessName: companyName,
+                        supportEmail: supportEmail,
+                        from: "\(companyName) <postmaster@\(domain.rawValue)>",
+                        to: (name: nil, email: .init(subscription.email)),
+                        primaryColor: .green550.withDarkColor(.green600)
                     )
+                    
+                    _ = try await sendEmail(email)
                     
                     successCount += 1
                     context.console.success("Successfully sent verification email to: \(subscription.email)")
@@ -108,7 +107,6 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                 }
             }
             
-            // Progress update after each batch
             context.console.info("""
                 Progress:
                 - Processed: \(successCount + failureCount)
