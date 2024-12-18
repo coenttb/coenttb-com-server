@@ -17,21 +17,14 @@ import Foundation
 extension [any Fluent.Migration] {
     public static var coenttb: Self {
         var migrations: [any Fluent.Migration] = [
-//            CoenttbWebAccount.Identity.Migration.Create(),
-//            CoenttbWebAccount.Identity.Token.Migration(),
-//            CoenttbWebAccount.EmailChangeRequest.Migration(),
-//            ServerDatabase.User.CreateMigration(),
-//            CoenttbWebNewsletter.Newsletter.Migration.Create(),
-//            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddEmailVerification()
-            // 1. Core identity/user tables
-//                CoenttbWebAccount.Identity.Migration.Create(),
-//                ServerDatabase.User.CreateMigration(),
-                
-                // 2. Newsletter base
-//                CoenttbWebNewsletter.Newsletter.Migration.Create(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification(),
+            CoenttbWebAccount.Identity.Migration.Create(),
             CoenttbWebAccount.Identity.Token.Migration(),
+            CoenttbWebAccount.EmailChangeRequest.Migration(),
+            ServerDatabase.User.CreateMigration(),
+            CoenttbWebNewsletter.Newsletter.Migration.Create(),
+            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
+            CoenttbWebNewsletter.Newsletter.Token.Migration.Create(),
+            CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification(),
         ]
 
     #if DEBUG
