@@ -1,5 +1,5 @@
 {
-  "originHash" : "6e29b5a1f57a9ceac1684f99614bad25222a91e3aa7a16495d9bb13af7636a68",
+  "originHash" : "57a106ce0608996c474564b9592f69a6bb367b29017b9b0e8fcdc2f595d344fb",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "36a68c83003bd64e47d6253b8b2fe22544d906ed"
+        "revision" : "0b88b8fb7b31f08b9dca9a32549814f7e9a6aa74"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "732a79b26d8897cee1195340d5789020d50c7fef"
+        "revision" : "394cee9a7b442c396e1e5034cad01279fff9c5c6"
       }
     },
     {
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "3498e60218e6003894ff95192d756e238c01f44e",
         "version" : "4.7.1"
+      }
+    },
+    {
+      "identity" : "pointfree-html",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/pointfree-html.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "16274b6ee9107675dc57c49d5dc45367db824aef"
       }
     },
     {
@@ -295,7 +304,7 @@
       "location" : "https://github.com/coenttb/swift-css.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3b6af73f376c598e84ac861b0288f219a5272769"
+        "revision" : "4be90a31063cbe49121d3480d4c6b6993cee0fcc"
       }
     },
     {
@@ -337,10 +346,10 @@
     {
       "identity" : "swift-html",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-html.git",
+      "location" : "https://github.com/coenttb/swift-html",
       "state" : {
         "branch" : "main",
-        "revision" : "9c6b70f7945182e45f3e438a8d858bd5435d9990"
+        "revision" : "575fcf2ff4b1538dd16b2c70307a11a0a4c7645d"
       }
     },
     {
@@ -349,7 +358,7 @@
       "location" : "https://github.com/coenttb/swift-html-to-pdf.git",
       "state" : {
         "branch" : "main",
-        "revision" : "80417671ab977cc58e964f57f80e48c0d3534e7d"
+        "revision" : "91331a52a63fcd472069f53866a7e9792614502e"
       }
     },
     {
@@ -376,7 +385,7 @@
       "location" : "https://github.com/coenttb/swift-language.git",
       "state" : {
         "branch" : "main",
-        "revision" : "444fdd596f3cf1c02264a1914d4cf06f0ff073e1"
+        "revision" : "83ed96d0b9deece2a862b21f035fa299884fc347"
       }
     },
     {
@@ -565,7 +574,7 @@
       "location" : "https://github.com/coenttb/swift-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "49cb65be87302536e4583959e1973f6427d5086c"
+        "revision" : "5c70a5cebeb5c0670f482126fb056801bc5e4dde"
       }
     },
     {
