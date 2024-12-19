@@ -1,57 +1,236 @@
-# 
+# When simplicity backfires: building an elegant bot-proof newsletter system in Swift
 
-Welcome to my personal blog. I'm Coen ten Thije Boonkkamp, and this where I want to feel free to share any and all thoughts. Law. Code. Startups. Wins (and failures). I want to write about it all. 
+When I first launched the newsletter for my Swift-powered website, I thought I had it figured out. The implementation was clean and minimal: users enter their email, click subscribe, and they're done. Simple and effective, or so I thought.
 
-## A bit about me
+Reality hit fast. Within hours of going live, my inbox was flooded with new "subscriptions" arriving every 20-40 minutes - all of them bots. It became clear that building a secure newsletter system needed more than just a simple form submission. Here's how I solved it using Swift and Vapor.
 
-Built a legal tech startup as a student and discovered I didn't want to work in Word for the rest of my life. However, I went broke and spend two months on social welfare. I landed a job at the premier Dutch trust office at that time—*a character-building* chapter I can’t legally talk freely about, but let’s just say: not birthday-party material. 
- 
-Tried my hand at another startup—this time with UtrechtInc. Great community and solid teachings for most startups. Could I have gotten more out of it? Probably. But then COVID hit, the world flipped upside down, and I found myself staring down bankruptcy. Again.
- 
-Hit reset and went back to my fallback: legal work. Joined Liance and thrived, advising cutting-edge life science projects and leveling up professionally. It was the launchpad I needed, but now I’m doing my own thing again, working on some amazing projects like the [100+ study of Amsterdam UMC](https://100plus.nl), the [Alzheimer Genetics Hub](https://alzheimergenetics.org), and the [DEMENTREE biobank](https://www.alzheimercentrum.nl/wetenschap/lopend-onderzoek/biobank-dementree/).
+## The Initial Naive Implementation
 
-> Tip: Still offering [well-reviewed](https://tenthijeboonkkamp.nl) legal advice to select life science projects. Got something cool? [Let’s talk](https://tenthijeboonkkamp.nl/products).
+Look, we've all been there. You think, "How hard can it be? It's just collecting emails!" So you write some clean Swift code:
+1. User types email
+2. Click submit
+3. Store in database
+4. Done!
 
-## A Lawyer Who Codes
+The code was beautiful. The user experience was frictionless. And the bots? They were having a field day.
 
-Oh, and programming. Almost forgot to mention that. I discovered the Swift programming language early on and realized it was perfect for writing legal business logic. Naturally, I followed the classic advice: "Launch an app quickly!" So, I built a legal tech app... only to learn that *no one* uses mobile apps for legal tech. Like, seriously, it’s just not a thing normies do.
+## The Swift Solution: Email Verification Flow
 
-So, I pivoted to a website. But here’s the catch: I’m stubborn. I didn’t want to write HTML, CSS, or JavaScript. I wanted to write *Swift*. Turns out, writing an elegant website in Swift is *hard*. Did I mention I love elegant code? It’s like art to me, and writing elegant code is anything but easy.
+After watching the bot parade, I rebuilt the system with proper verification. Here's the elegant (and secure) way, all in Swift:
 
-Thankfully, the folks at [PointFree](https://www.pointfree.co) came to the rescue. I’ve been a subscriber since 2018, and their content is pure gold. Their approach is provably the best—clean, functional, and elegant. But there’s a catch: aside from their (open-source) website, there are *no good examples* of Swift websites in action.
+### 1. The Newsletter Model
 
-## Open Sourcing coenttb.com: A Swift Vapor Website Inspired by PointFree  
+First, we need to track subscription states properly:
 
-Building a website in Swift? It’s *fun*. It’s *clean*. It’s also *painful*. Inspired by the functional elegance of [PointFree](https://www.pointfree.co), I set out to build **coenttb.com** using Swift and Vapor. The journey? Rewarding—but full of headaches. Dynamic front-end? Still a work in progress (any Swift WASM wizards out there? Let’s talk!). Writing elegant, maintainable code? Harder than it looks when you're swimming against the HTML/CSS/JS tide.
+```swift
+public final class Newsletter: Model {
+    public static let schema = "newsletter_subscriptions"
 
-So here’s the deal: I’m open-sourcing **coenttb.com**.
+    @ID(key: .id)
+    public var id: UUID?
 
-Why? Because starting from scratch is overrated, and I’d rather help others skip the headaches I’ve endured. Whether you're a Swift nerd or just curious about using Swift for web dev, this is for you.
+    @Field(key: "email")
+    public var email: String
 
-Here’s what I hope to do:  
-1. Show how to structure a Swift Vapor website *elegantly*.
-2. Save you the trial-and-error grind.
-3. Get feedback to make it even better.
+    @Field(key: "email_verification_status")
+    public var emailVerificationStatus: EmailVerificationStatus
 
-Swift for web dev isn’t the easy path, but it’s a rewarding one when done right. If you’re on this journey too, check out the code, learn, fork, contribute—whatever floats your boat.
+    // A proper enum for status tracking
+    public enum EmailVerificationStatus: String, Codable {
+        case unverified
+        case pending
+        case verified
+        case failed
+    }
+}
+```
 
-> Tip: 👉 **[Github repository link here](https://github.com/coenttb/coenttb-com-server)**  
+### 2. Verification Tokens
 
-## Subscribe to My Newsletter  
+We need single-use, time-limited tokens for verification:
 
-If this post resonates with you, you’ll love my newsletter. I go deeper into legal tech, Swift/Vapor tips, and lessons learned from the grind.
+```swift
+extension Newsletter {
+    public final class Token: Model {
+        public static let schema = "newsletter_verification_tokens"
+        
+        @Field(key: "value")
+        public var value: String
+        
+        @Field(key: "valid_until")
+        public var validUntil: Date
+        
+        // Rate limiting constraints
+        static let generationLimit = 5
+        static let generationWindow: TimeInterval = 3600 // 1 hour
+    }
+}
+```
 
-Here’s what you’ll get:  
-- Legal tech insights you won’t find anywhere else.
-- Tips for building in Swift/Vapor without losing your mind.
-- Honest takes on the grind, the wins, and the lessons learned.
-- The occasional deep dive into life sciences and the future of tech.
+### 3. Rate Limiting
 
-No fluff, no spam—just real, actionable content for builders, thinkers, and creators.
+Here's where it gets interesting. To stop the bot onslaught, I implemented a rate limiter:
 
-> Tip: 👉 [Subscribe here](http://coenttb.com/en/newsletter/subscribe)
+```swift
+actor SubscriptionRateLimiter {
+    private var attemptsByEmail: [String: AttemptInfo] = [:]
+    private let maxAttempts: Int = 5
+    private let windowDuration: TimeInterval = 3600 // 1 hour
+    
+    func subscribe(_ email: String) throws {
+        // Check and enforce rate limits
+    }
+}
+```
 
-> Tip: [Follow me on X](http://x.com/coenttb)
-> 
-> [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
+## The New Flow
+
+Now when someone wants to subscribe:
+
+1. They submit their email
+2. System checks rate limits (bye-bye, spam bots)
+3. If passed, generates a verification token
+4. Sends a verification email
+5. Marks subscription as 'pending'
+6. User clicks the link
+7. System verifies the token and activates the subscription
+
+## Security First, But Keep It Swift-y
+
+The implementation includes several Swift-native security measures:
+
+1. **Rate Limiting**: Using Swift actors for thread-safe attempt tracking
+2. **Token Expiration**: Verification links die after 24 hours
+3. **One-Time Use Tokens**: Each verification token works exactly once
+4. **Email Validation**: Basic format validation before touching the database
+5. **Database Constraints**: Unique email constraints because duplicates are no fun
+
+## The Results?
+
+Bot subscriptions? Zero. Legitimate subscribers? They still get through just fine. Yes, it's an extra step for real users, but it's worth it for maintaining a clean subscriber list.
+
+## Lessons Learned
+
+1. **Never Trust User Input**: Even something as simple as a newsletter form needs proper validation
+2. **Swift Actors Are Your Friend**: They're perfect for rate limiting and thread-safe state management
+3. **Database Models Matter**: Proper status tracking and constraints save headaches later
+4. **Type Safety is Beautiful**: Swift's type system makes complex flows manageable
+
+## Clean Architecture: Separating Concerns
+
+Here's where it gets interesting. Instead of cramming everything into one file (we've all been there), I split the newsletter system into distinct modules. Why? Because clean architecture isn't just a buzzword—it makes your code maintainable and testable.
+
+### The Three-Layer Split
+
+```
+CoenttbWebNewsletter/
+├── API/           # How the world talks to us
+├── Route/         # How we present ourselves
+└── Dependency/    # How we get things done
+```
+
+Let's break this down:
+
+1. **API Layer**: This is your public interface. It defines how other services interact with your newsletter system:
+
+```swift
+public enum API: Equatable, Sendable {
+    case subscribe(Subscribe)
+    case unsubscribe(Unsubscribe)
+}
+
+extension API {
+    public enum Subscribe: Equatable, Sendable {
+        case request(Request)
+        case verify(Verify)
+    }
+}
+```
+
+2. **Route Layer**: Handles how users interact with your newsletter through URLs:
+
+```swift
+public enum Route: Codable, Hashable, Sendable {
+    case subscribe(Subscribe)
+    case unsubscribe
+
+    public enum Subscribe: Codable, Hashable, Sendable {
+        case request
+        case verify(Verify)
+    }
+}
+```
+
+3. **Dependency Layer**: This is where the magic happens. All the actual work—sending emails, storing data, verifying tokens—happens here:
+
+```swift
+@DependencyClient
+public struct Client: @unchecked Sendable {
+    public var subscribe: Subscribe
+    @DependencyEndpoint
+    public var unsubscribe: (EmailAddress) async throws -> Void
+}
+```
+
+### The Power of Abstraction
+
+Here's the cool part: the newsletter system is a separate package (`CoenttbWebNewsletter`). Why does this matter? Because:
+
+1. **Reusability**: Want to add a newsletter to another Swift project? Just import the package.
+2. **Testing**: Each layer can be tested independently. No more "it works on my machine" surprises.
+3. **Flexibility**: Need to change how emails are sent? Just swap out the dependency implementation.
+4. **Clean Dependencies**: The package manages its own dependencies—no need to pollute your main project.
+
+### Real-World Implementation
+
+In practice, it looks something like this:
+
+```swift
+// In your main app
+import CoenttbWebNewsletter
+
+// Set up your routes
+app.get("newsletter", "subscribe") { req in
+    // Route handles presentation
+    return Route.response(
+        newsletter: .subscribe(.request),
+        htmlDocument: { html in ... },
+        subscribeCaption: { "Join our newsletter!" },
+        subscribeAction: { yourSubscribeURL },
+        // ... other configuration
+    )
+}
+
+// Handle the API calls
+app.post("api", "newsletter", "subscribe") { req in
+    // API handles the business logic
+    return try await API.response(
+        client: yourNewsletterClient,
+        logger: req.logger,
+        cookieId: "newsletter_subscribed",
+        newsletter: .subscribe(.request(...))
+    )
+}
+```
+
+This separation isn't just architectural nitpicking—it makes your code more maintainable and testable. Each piece has a single responsibility, making it easier to understand, modify, and debug.
+
+## What's Next?
+
+While the current system works well, there's always room for improvement:
+
+1. Better analytics for subscription patterns
+2. Automated cleanup of unverified subscriptions
+3. IP-based rate limiting as an additional layer
+4. More detailed error messages for different failure scenarios
+
+## The Takeaway
+
+Sometimes the simplest solution isn't the right one. Yes, building a proper newsletter system took more code than I initially planned. But using Swift's type system and Vapor's elegant API, the implementation remained clean and maintainable.
+
+Remember: in web development, especially with Swift, it's worth taking the time to do things right. Your future self (and your legitimate subscribers) will thank you.
+
+---
+
+*Want to see more about building websites in Swift? Check out the [complete source code](https://github.com/coenttb/coenttb-web) or [subscribe to my newsletter](http://coenttb.com/en/newsletter/subscribe) for more Swift web development insights.*
 
