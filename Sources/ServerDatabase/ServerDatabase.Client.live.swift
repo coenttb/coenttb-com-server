@@ -35,7 +35,7 @@ extension ServerDatabase.Client {
                         let mailgunCompanyEmail,
                         let companyName = envVars.companyName
                     else { return nil }
-                    
+
                     let companyEmail: EmailAddress = switch appEnv {
                     case .production: .init(mailgunCompanyEmail)
                     default: .init("\(companyName) <postmaster@\(domain.rawValue)>")
@@ -349,7 +349,7 @@ extension BusinessDetails {
 }
 
 extension CoenttbWebNewsletter.Client {
-    public static func sendVerificationEmail(email: String, token: String) async throws -> Void { 
+    public static func sendVerificationEmail(email: String, token: String) async throws {
         @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget
         @Dependencies.Dependency(\.serverRouter) var serverRouter

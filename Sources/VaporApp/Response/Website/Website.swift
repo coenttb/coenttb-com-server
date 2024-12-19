@@ -13,8 +13,8 @@ import Language
 import Languages
 import ServerDependencies
 import ServerRouter
-import Vapor
 import SwiftGD
+import Vapor
 
 extension Website<WebsitePage> {
     static func response(
@@ -23,7 +23,7 @@ extension Website<WebsitePage> {
 
         @Dependency(\.envVars.languages) var languages
         @Dependency(\.request) var request
-        
+
         return try await withDependencies {
             $0.route = .website(website)
             $0.locale = request?.locale ?? $0.locale

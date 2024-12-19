@@ -6,12 +6,12 @@
 //
 
 import Coenttb
+import CoenttbVapor
 import CoenttbWebBlog
 import CoenttbWebDependencies
-import CoenttbVapor
 import CoenttbWebHTML
-import Dependencies
 import CoenttbWebSyndication
+import Dependencies
 import EnvVars
 import Languages
 import ServerModels
@@ -26,11 +26,11 @@ extension ServerRoute {
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.logger) var logger
         @Dependency(\.database.account.currentUser) var currentUser
-        
+
         return try await withDependencies {
             $0.envVars = .liveValue
         } operation: {
-            
+
             return try await withDependencies {
                 @Dependency(\.envVars) var envVars
                 $0.request = request
@@ -40,34 +40,34 @@ extension ServerRoute {
                 return try await withDependencies {
                     $0.currentUser = try await currentUser()
                 } operation: {
-                    
+
                     @Dependency(\.uuid) var uuid
                     @Dependency(\.serverRouter) var siteRouter
                     @Dependency(\.currentUser) var currentUser
-                    
+
                     switch route {
                     case let .api(api):
                         return try await API.response(api: api)
-                        
+
                     case let .webhook(webhook):
                         return try await Webhook.response(webhook: webhook)
-                        
+
                     case .index:
                         return try await Website<WebsitePage>.response(website: .init(language: nil, page: .home))
-                        
+
                     case let .website(website):
                         return try await Website<WebsitePage>.response(website: website)
-                        
+
                     case .public(.sitemap):
                         return Response(
                             status: .ok,
                             body: .init(stringLiteral: try await SiteMap.default().xml)
                         )
-                        
+
                     case .public(.rssXml):
-                        
+
                         @Dependency(\.blog.getAll) var blogPosts
-                        
+
                         return await RSS.Feed.Response(
                             feed: RSS.Feed.memoized {
                                 RSS.Feed(
@@ -75,7 +75,7 @@ extension ServerRoute {
                                 )
                             }
                         )
-                        
+
                     case .public(.robots):
                         let disallows = Languages.Language.allCases.map {
                         """
@@ -83,11 +83,11 @@ extension ServerRoute {
                         Disallow: /\($0.rawValue)/checkout/
                         """
                         }.joined(separator: "\n")
-                        
+
                         return Response.robots(
                             disallows: disallows
                         )
-                        
+
                     case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
                         @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
                         if let appleDeveloperMerchantIdDomainAssociation {
@@ -95,10 +95,10 @@ extension ServerRoute {
                         } else {
                             throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association")
                         }
-                        
+
                     case let .public(.favicon(favicon)):
                         return request.fileio.streamFile(at: .favicon(favicon))
-                        
+
                     case let .public(`public`):
                         return request.fileio.streamFile(at: `public`)
                     }
@@ -122,7 +122,7 @@ extension RSS.Feed {
         @Dependency(\.serverRouter) var serverRouter
         @Dependency(\.envVars.baseUrl) var baseUrl
         @Dependency(\.envVars.companyName) var companyName
-        
+
         self = RSS.Feed(
             metadata: .init(
                 title: companyName ?? "RSS",
@@ -136,7 +136,7 @@ extension RSS.Feed {
 }
 
 extension RSS.Feed.Item {
-    init(from post: Blog.Post, author: String)  {
+    init(from post: Blog.Post, author: String) {
         @Dependency(\.serverRouter) var serverRouter
         self = RSS.Feed.Item(
             title: post.title,

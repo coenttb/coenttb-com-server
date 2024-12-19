@@ -5,16 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 06-01-2024.
 //
 
-import Foundation
-import Vapor
 import CoenttbWebNewsletter
-import ServerDatabase
-import Vapor
-import Fluent
 import Dependencies
 import EmailAddress
-
-
+import Fluent
+import Foundation
+import ServerDatabase
+import Vapor
 
 struct HelloCommand: AsyncCommand {
     struct Signature: CommandSignature { }
@@ -28,4 +25,3 @@ struct HelloCommand: AsyncCommand {
         context.console.print("Hello, \(name) 👋")
     }
 }
-

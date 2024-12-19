@@ -24,9 +24,9 @@ extension [any Fluent.Migration] {
             CoenttbWebNewsletter.Newsletter.Migration.Create(),
             CoenttbWebNewsletter.Newsletter.Token.Migration.Create(),
             CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification(),
+            CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification()
         ]
-        
+
 #if DEBUG
         migrations.append(CreateDemoUserMigration())
         migrations.append(CreateUnverifiedNewsletterMigration())
@@ -111,11 +111,8 @@ public struct CreateDemoUserMigration: AsyncMigration {
     }
 }
 
-
 public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
     public init() {}
-    
-    
 
     public func prepare(on database: Database) async throws {
         @Dependency(\.envVars) var envVars
@@ -125,7 +122,7 @@ public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
             return
         }
-        
+
         let newsletterSubscription = try Newsletter(
             email: email,
             emailVerificationStatus: .unverified
@@ -147,7 +144,7 @@ public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
             return
         }
-        
+
         do {
             try await Newsletter.query(on: database)
                 .filter(\.$email == email)

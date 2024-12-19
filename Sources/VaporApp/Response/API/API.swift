@@ -12,8 +12,8 @@ import Languages
 import Mailgun
 import ServerModels
 import ServerRouter
-import Vapor
 import SwiftGD
+import Vapor
 
 extension ServerRouterAPI {
     static func response(
@@ -117,31 +117,27 @@ extension ServerRouterAPI {
 //                )
 
             case let .rss(string):
-                
+
                 let width = 400
                 let height = 500
-                
+
                 let image = Image(width: width, height: height)
                 image?.colorize(using: .red)
-                
-                
-                
+
                 guard let pngData = try image?.export(as: .png)
                 else {
                     throw Abort(.internalServerError, reason: "Failed to generate PNG")
                 }
-                
-                
+
                 // Return the image with correct headers
                 var headers = HTTPHeaders()
                 headers.add(name: .contentType, value: "image/png")
-                
+
                 return Response(status: .ok, headers: headers, body: .init(data: pngData))
             }
         }
     }
 }
-
 
 extension ServerModels.User {
     init?(update: CoenttbWebAccount.API.Update) {

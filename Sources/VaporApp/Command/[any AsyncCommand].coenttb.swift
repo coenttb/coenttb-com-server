@@ -12,7 +12,7 @@ extension [any AsyncCommand] {
     static var coenttb: [(any AsyncCommand, String)] {
         [
             (HelloCommand(), "hello"),
-            (ResendVerificationEmailsCommand(), "resend-verification-emails"),
+            (ResendVerificationEmailsCommand(), "resend-verification-emails")
         ]
     }
 }
