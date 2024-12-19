@@ -108,7 +108,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent.git", from: "4.10.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.7.2"),
         .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.105.2"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.105.2")
 
         // Any dependency of a dependency that requires authentication should be directly included here for linking on heroku to succeed.
     ],
@@ -127,7 +127,7 @@ let package = Package(
                 .coenttbEnvVars,
                 .hotjar,
                 .googleAnalytics,
-                .postgres,
+                .postgres
             ]
         ),
         .target(
@@ -186,7 +186,7 @@ let package = Package(
                 .coenttbWebNewsletter,
                 .coenttbWebAccount,
                 .coenttbWebBlog,
-                .coenttbWebSyndication,
+                .coenttbWebSyndication
             ]
         ),
         .target(
@@ -216,7 +216,7 @@ let package = Package(
                 .coenttbWebStripeLive,
                 .coenttbWebLegal,
                 .hotjar,
-                .googleAnalytics,
+                .googleAnalytics
             ],
             resources: [
                 .process("Blog/Posts")

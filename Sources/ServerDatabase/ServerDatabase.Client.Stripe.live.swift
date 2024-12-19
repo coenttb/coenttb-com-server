@@ -30,7 +30,7 @@ extension ServerDatabase.Client.Stripe {
             delete: { (stripeCustomerId: String) in
 
                 @Dependency(\.request?.db) var database
-                
+
                 do {
                     guard
                         let database,

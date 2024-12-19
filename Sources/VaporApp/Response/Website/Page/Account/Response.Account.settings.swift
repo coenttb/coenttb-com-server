@@ -19,7 +19,7 @@ func settings(
     create_customer_portal_session_return_url: URL
 ) async throws -> AsyncResponseEncodable {
     @Dependency(\.serverRouter) var serverRouter
-    
+
     switch settings {
     case .index:
         return Coenttb.DefaultHTMLDocument(
@@ -37,7 +37,7 @@ func settings(
                             } title: {
                                 CoenttbNavigationBar.CoenttbLogo()
                                     .height(100.percent)
-                                
+
                                 Header(3) {
                                     Link(
                                         destination: .account(.settings(.index)),
@@ -51,7 +51,7 @@ func settings(
                     ),
                     main: {
                         PageModule(theme: .mainContent) {
-                            
+
                             LazyVGrid(columns: [.desktop: [1, 1]]) {
                                 SectionCard(
                                     title: String.profile.capitalizingFirstLetter().description,
@@ -64,14 +64,14 @@ func settings(
                                 )
                             }
                             .linkColor(.coenttbPrimaryColor)
-                            
+
                         }
                         title: {
                             Header(4) {
                                 String.settings.capitalizingFirstLetter().description
                             }
                             .padding(bottom: 1.5.rem)
-                            
+
                         }
                     },
                     mobileHeader: {
@@ -84,12 +84,12 @@ func settings(
     case .profile:
         @Dependency(\.uuid) var uuid
         @Dependency(\.currentUser) var currentUser
-        
+
         guard
             let currentUser,
             currentUser.authenticated == true
         else { throw Abort(.internalServerError, reason: "Must be logged in to access profile.") }
-        
+
         return Coenttb.DefaultHTMLDocument(
             scripts: {
                 fontAwesomeScript
@@ -105,7 +105,7 @@ func settings(
                             } title: {
                                 CoenttbNavigationBar.CoenttbLogo()
                                     .height(100.percent)
-                                
+
                                 Header(3) {
                                     Link(
                                         destination: .account(.settings(.index)),
@@ -123,22 +123,22 @@ func settings(
                                 Header(5) {
                                     String.identity.capitalizingFirstLetter()
                                 }
-                                
+
                                 NameChangeForm()
                                     .width(100.percent)
                                     .maxWidth(20.rem, media: .desktop)
                                     .maxWidth(24.rem, media: .mobile)
-                                
+
                                 EmailChangeRequestButton()
-                                
+
                                 PasswordChangeRequestButton()
-                                
+
                                 Button {
                                     String.logout.capitalizingFirstLetter()
                                 }
                                 .color(.primary)
                                 .href(serverRouter.url(for: .account(.logout)).absoluteString)
-                                
+
                             }
                         }
                         title: {
@@ -146,7 +146,7 @@ func settings(
                                 String.profile.capitalizingFirstLetter()
                             }
                             .padding(bottom: 1.5.rem)
-                            
+
                         }
                     },
                     mobileHeader: {
@@ -161,7 +161,7 @@ func settings(
 
 public struct PasswordChangeRequestButton: HTML {
     @Dependency(\.serverRouter) var serverRouter
-    
+
     public var body: some HTML {
         form {
             Button(
@@ -178,7 +178,7 @@ public struct PasswordChangeRequestButton: HTML {
 public struct EmailChangeRequestButton: HTML {
     @Dependency(\.serverRouter) var serverRouter
     @Dependency(\.currentUser) var currentUser
-    
+
     public var body: some HTML {
         HStack {
             Input.default(CoenttbWebAccount.API.Verify.CodingKeys.email)
@@ -186,7 +186,7 @@ public struct EmailChangeRequestButton: HTML {
                 .placeholder("Email")
                 .value(currentUser?.email?.rawValue ?? "")
                 .disabled(true)
-            
+
             Button(
                 tag: a,
                 style: .secondary,
@@ -208,9 +208,9 @@ public struct EmailChangeRequestButton: HTML {
 public struct NameChangeForm: HTML {
     @Dependency(\.serverRouter) var serverRouter
     @Dependency(\.currentUser) var currentUser
-    
+
     let form_identity_id: String = "form_identity_id-name-change-form"
-    
+
     public var body: some HTML {
         form {
             VStack {
@@ -223,7 +223,7 @@ public struct NameChangeForm: HTML {
         .id(form_identity_id)
         .method(.post)
         .action(serverRouter.url(for: .api(.v1(.account(.update(.init()))))).absoluteString)
-        
+
         LiveInputScript(
             formID: form_identity_id,
             inputID: CoenttbWebAccount.API.Update.CodingKeys.name.rawValue

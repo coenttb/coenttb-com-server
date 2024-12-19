@@ -65,7 +65,7 @@ extension API.Version1 {
                     Path { "account" }
                     CoenttbWebAccount.API.Router()
                 }
-                
+
                 URLRouting.Route(.case(API.Version1.rss)) {
                     Path { "rss" }
                     CoenttbWebSyndication.API.Router()

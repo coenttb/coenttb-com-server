@@ -7,6 +7,7 @@
 
 import CoenttbVapor
 import CoenttbWebBlog
+import CoenttbWebNewsletter
 import CoenttbWebStripe
 import CoenttbWebStripeLive
 import Dependencies
@@ -17,7 +18,6 @@ import Foundation
 import GitHub
 import LoggingDependencies
 import Mailgun
-import CoenttbWebNewsletter
 import PostgresKit
 import ServerDatabase
 import ServerDependencies
@@ -29,7 +29,7 @@ extension BlogKey: @retroactive DependencyKey {
         getAll: {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
-            
+
             return [CoenttbWebBlog.Blog.Post].all
                 .filter {
                     appEnv == .production
@@ -60,13 +60,13 @@ extension BlogKey: @retroactive DependencyKey {
 extension DatabaseClientKey: DependencyKey {
     public static let liveValue: ServerDatabase.Client = {
         @Dependency(\.request?.db) var database
-        
+
         guard
             let database
         else {
             return ServerDatabase.Client.noop
         }
-        
+
         return .live(database: database)
     }()
 }
@@ -75,7 +75,7 @@ extension PreviewPostKey: DependencyKey {
     public static let liveValue: @Sendable () -> [CoenttbWebBlog.Blog.Post] = {
         @Dependency(\.envVars.appEnv) var appEnv
         @Dependency(\.date.now) var now
-        
+
         return [CoenttbWebBlog.Blog.Post].preview
             .filter {
                 appEnv == .production
@@ -104,10 +104,10 @@ extension ServerRouterKey: DependencyKey {
 
 extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
     public static var liveValue: SQLPostgresConfiguration {
-        
+
         @Dependency(\.envVars.emergencyMode) var emergencyMode
         @Dependency(\.envVars.postgres.databaseUrl) var postgresDatabaseUrl
-        
+
         return .liveValue(
             emergencyMode: emergencyMode,
             postgresDatabaseUrl: postgresDatabaseUrl)
@@ -119,7 +119,7 @@ extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
     EventLoopGroupConnectionPool<PostgresConnectionSource> {
         @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
         @Dependency(\.sqlConfiguration) var sqlConfiguration
-        
+
         return .init(
             source: PostgresConnectionSource(sqlConfiguration: sqlConfiguration),
             on: mainEventLoopGroup
@@ -140,7 +140,7 @@ extension Logger: @retroactive DependencyKey {
 extension Mailgun.Client: @retroactive DependencyKey {
     public static var liveValue: Mailgun.Client? {
         @Dependency(\.envVars) var envVars
-        
+
         guard
             let baseUrl = envVars.mailgun?.baseUrl,
             let apiKey = envVars.mailgun?.apiKey,
@@ -148,7 +148,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         else {
             return nil
         }
-        
+
         return Mailgun.Client(
             baseUrl: .init(string: baseUrl) ?? .mailgun_eu_baseUrl,
             apiKey: apiKey,
@@ -162,13 +162,13 @@ extension StripeClientKey: @retroactive DependencyKey {
     public static var liveValue: CoenttbWebStripe.Client? {
         @Dependency(\.envVars) var envVars
         @Dependency(\.httpClient) var httpClient
-        
+
         guard
             let stripeSecretKey = envVars.stripe?.secretKey
         else {
             return nil
         }
-        
+
         return CoenttbWebStripe.Client.live(
             stripeSecretKey: stripeSecretKey,
             httpClient: httpClient
@@ -179,14 +179,14 @@ extension StripeClientKey: @retroactive DependencyKey {
 extension GitHub.Client: @retroactive DependencyKey {
     public static var liveValue: GitHub.Client? {
         @Dependency(\.envVars) var envVars
-        
+
         guard
             let clientId = envVars.gitHub?.clientId,
             let clientSecret = envVars.gitHub?.clientSecret
         else {
             return nil
         }
-        
+
         return GitHub.Client(
             clientId: clientId,
             clientSecret: clientSecret
@@ -194,11 +194,9 @@ extension GitHub.Client: @retroactive DependencyKey {
     }
 }
 
-
 extension DatabaseConfigurationKey: @retroactive DependencyKey {
     public static let liveValue = DatabaseConfiguration(
         maxConnectionsPerEventLoop: 1,
         connectionPoolTimeout: .seconds(10)
     )
 }
-

@@ -7,11 +7,11 @@
 
 import CoenttbMarkdown
 import CoenttbWebHTML
+import CoenttbWebLegal
 import Dependencies
 import Foundation
 import Languages
 import ServerRouter
-import CoenttbWebLegal
 
 extension Clauses {
     nonisolated(unsafe)

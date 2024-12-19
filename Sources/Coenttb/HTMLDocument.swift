@@ -10,11 +10,11 @@ import Dependencies
 import EnvVars
 import Favicon
 import Foundation
+import GoogleAnalytics
+import Hotjar
 import Languages
 import ServerRouter
 import Vapor
-import Hotjar
-import GoogleAnalytics
 
 public struct DefaultHTMLDocument<
     Styles: HTML,

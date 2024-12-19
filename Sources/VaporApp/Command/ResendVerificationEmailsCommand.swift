@@ -5,31 +5,31 @@
 //  Created by Coen ten Thije Boonkkamp on 18/12/2024.
 //
 
-import Vapor
-import Fluent
+import CoenttbWebNewsletter
 import Dependencies
 import EmailAddress
-import CoenttbWebNewsletter
+import Fluent
 import Mailgun
+import Vapor
 
 struct ResendVerificationEmailsCommand: AsyncCommand {
     struct Signature: CommandSignature {
         @Option(name: "delay", short: "d", help: "Delay in milliseconds between each email")
         var delayMs: Int?
-        
+
         init() { }
     }
-    
+
     var help: String {
         "Resends verification emails to all unverified newsletter subscribers"
     }
-    
+
     @Dependency(\.serverRouter) var serverRouter
     @Dependency(\.envVars.companyName) var companyName
     @Dependency(\.envVars.companyInfoEmailAddress) var supportEmail
     @Dependency(\.envVars.mailgun?.domain) var domain
     @Dependency(\.mailgun?.sendEmail) var sendEmail
-    
+
     func run(using context: CommandContext, signature: Signature) async throws {
         try await withDependencies {
             $0.databaseConfiguration.connectionPoolTimeout = .seconds(30)
@@ -40,7 +40,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                 context.console.error("Mailgun configuration is missing")
                 throw Abort(.internalServerError)
             }
-            
+
             // Validate required environment variables
             guard let companyName = companyName,
                   let supportEmail = supportEmail,
@@ -48,23 +48,23 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                 context.console.error("Required environment variables are missing")
                 throw Abort(.internalServerError)
             }
-            
+
             let delayMs = signature.delayMs ?? 10000 // Default 10 seconds between emails
-            
+
             context.console.info("Starting to process unverified newsletter subscriptions...")
-            
+
             // Get all unverified subscriptions in a single transaction
             let unverifiedSubscriptions = try await context.application.db.transaction { db in
                 try await Newsletter.query(on: db)
                     .filter(\.$emailVerificationStatus == .unverified)
                     .all()
             }
-            
+
             context.console.info("Found \(unverifiedSubscriptions.count) unverified subscriptions")
-            
+
             var successCount = 0
             var failureCount = 0
-            
+
             // Process subscriptions one at a time
             for subscription in unverifiedSubscriptions {
                 do {
@@ -74,18 +74,18 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                             context.console.warning("Token generation limit exceeded for email: \(subscription.email)")
                             throw Abort(.tooManyRequests)
                         }
-                        
+
                         // Generate new verification token
                         let verificationToken = try subscription.generateToken(
                             type: .emailVerification,
                             validUntil: Date().addingTimeInterval(24 * 60 * 60)
                         )
                         try await verificationToken.save(on: db)
-                        
+
                         // Update status to pending
                         subscription.emailVerificationStatus = .pending
                         try await subscription.save(on: db)
-                        
+
                         // Send verification email
                         let email = Email.requestEmailVerification(
                             verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
@@ -95,18 +95,18 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                             to: (name: nil, email: .init(subscription.email)),
                             primaryColor: .green550.withDarkColor(.green600)
                         )
-                        
+
                         _ = try await sendEmail(email)
                     }
-                    
+
                     successCount += 1
                     context.console.success("Successfully sent verification email to: \(subscription.email)")
-                    
+
                     // Add delay between processing emails
                     if delayMs > 0 {
                         try await Task.sleep(nanoseconds: UInt64(delayMs * 1_000_000))
                     }
-                    
+
                 } catch {
                     failureCount += 1
                     context.console.error("""
@@ -116,7 +116,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                         Raw error: \(error)
                         """)
                 }
-                
+
                 // Show progress after each email
                 context.console.info("""
                     Progress:
@@ -125,7 +125,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                     - Success rate: \(Double(successCount) / Double(successCount + failureCount) * 100)%
                     """)
             }
-            
+
             context.console.success("""
                 Verification email resend completed:
                 - Total processed: \(unverifiedSubscriptions.count)

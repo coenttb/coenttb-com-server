@@ -35,7 +35,7 @@ extension WebsitePage {
                 @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
                 let localPosts = blogPosts()
-                
+
                 return try await CoenttbWebBlog.Route.response(
                     route: route,
                     blurb: Coenttb.oneliner,
@@ -46,13 +46,13 @@ extension WebsitePage {
                             let newsletterSubscribed = currentUser?.newsletterSubscribed,
                             let accessToBlog = currentUser?.accessToBlog
                         else { return nil }
-                        
+
                         return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
                     },
                     coenttbWebNewsletter: {
                         @Dependency(\.serverRouter) var serverRouter
                         @Dependency(\.currentUser) var currentUser
-                        
+
                         return .init(
                             image: Image.coenttbGreenSuit,
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
@@ -87,9 +87,9 @@ extension WebsitePage {
 
             case .terms_of_use:
                 return try await WebsitePage.termsOfUse()
-                
+
             case let .newsletter(newsletter):
-                
+
                 @Dependency(\.serverRouter) var serverRouter
 
                 return try await CoenttbWebNewsletter.Route.response(
@@ -134,7 +134,7 @@ extension WebsitePage {
             ) {
                 HTMLGroup {
                     span { "Want to see what’s coming up next? " }
-                    
+
                     if let companyXComHandle {
                         Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
                             .linkUnderline(true)
