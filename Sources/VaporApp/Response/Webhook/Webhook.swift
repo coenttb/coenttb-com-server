@@ -6,7 +6,7 @@
 //
 
 import CoenttbWebHTML
-import CoenttbWebStripe
+import CoenttbStripe
 import Dependencies
 import Fluent
 import Foundation
@@ -31,7 +31,7 @@ extension Webhook {
         case .stripe:
             @Dependency(\.request) var request
             guard let request else { return Response.internalServerError }
-            return try await CoenttbWebStripe.Client.webhook(request: request)
+            return try await CoenttbStripe.Client.webhook(request: request)
         }
     }
 }

@@ -6,8 +6,8 @@
 //
 
 import CoenttbWeb
-import CoenttbWebStripe
-import GitHub
+import EnvironmentVariables
+import CoenttbStripe
 import GoogleAnalytics
 import Hotjar
 import Mailgun
@@ -23,7 +23,7 @@ extension EnvVars: @retroactive DependencyKey {
             return nil
 #endif
         }()
-        return CoenttbEnvVars.EnvVars.live(
+        return try! EnvVars.live(
             localDevelopment: localDevelopment
         )
     }
@@ -52,7 +52,7 @@ extension EnvVars {
         )
     }
 
-    public var stripe: CoenttbWebStripe.Client.EnvVars? {
+    public var stripe: CoenttbStripe.Client.EnvVars? {
         guard
             let endpointSecret = self["STRIPE_ENDPOINT_SECRET"],
             let publishableKey = self["STRIPE_PUBLISHABLE_KEY"],
@@ -65,21 +65,6 @@ extension EnvVars {
             endpointSecret: endpointSecret,
             publishableKey: publishableKey,
             secretKey: secretKey
-        )
-    }
-
-    public var gitHub: GitHub.Client.EnvVars? {
-
-        guard
-            let clientId = self["GITHUB_CLIENT_ID"],
-            let clientSecret = self["GITHUB_CLIENT_SECRET"]
-        else {
-            return nil
-        }
-
-        return .init(
-            clientId: .init(clientId),
-            clientSecret: .init(clientSecret)
         )
     }
 

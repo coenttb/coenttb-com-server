@@ -7,7 +7,7 @@
 
 import CoenttbWebHTML
 import Dependencies
-import EnvVars
+import ServerEnvVars
 import Favicon
 import Foundation
 import GoogleAnalytics

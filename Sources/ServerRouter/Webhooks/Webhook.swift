@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import CoenttbWebStripe
+import CoenttbStripe
 import Dependencies
 import Either
 import Foundation

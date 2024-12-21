@@ -6,10 +6,10 @@
 //
 
 import CoenttbVapor
-import CoenttbWebBlog
-import CoenttbWebNewsletter
-import CoenttbWebStripe
-import CoenttbWebStripeLive
+import CoenttbBlog
+import CoenttbNewsletter
+import CoenttbStripe
+import CoenttbStripeLive
 import Dependencies
 import Fluent
 import FluentKit
@@ -25,12 +25,12 @@ import ServerModels
 import ServerRouter
 
 extension BlogKey: @retroactive DependencyKey {
-    public static let liveValue: CoenttbWebBlog.Client = .init(
+    public static let liveValue: CoenttbBlog.Client = .init(
         getAll: {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
 
-            return [CoenttbWebBlog.Blog.Post].all
+            return [CoenttbBlog.Blog.Post].all
                 .filter {
                     appEnv == .production
                     ? $0.publishedAt <= now
@@ -72,11 +72,11 @@ extension DatabaseClientKey: DependencyKey {
 }
 
 extension PreviewPostKey: DependencyKey {
-    public static let liveValue: @Sendable () -> [CoenttbWebBlog.Blog.Post] = {
+    public static let liveValue: @Sendable () -> [CoenttbBlog.Blog.Post] = {
         @Dependency(\.envVars.appEnv) var appEnv
         @Dependency(\.date.now) var now
 
-        return [CoenttbWebBlog.Blog.Post].preview
+        return [CoenttbBlog.Blog.Post].preview
             .filter {
                 appEnv == .production
                 ? $0.publishedAt <= now
@@ -159,7 +159,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
 }
 
 extension StripeClientKey: @retroactive DependencyKey {
-    public static var liveValue: CoenttbWebStripe.Client? {
+    public static var liveValue: CoenttbStripe.Client? {
         @Dependency(\.envVars) var envVars
         @Dependency(\.httpClient) var httpClient
 
@@ -169,7 +169,7 @@ extension StripeClientKey: @retroactive DependencyKey {
             return nil
         }
 
-        return CoenttbWebStripe.Client.live(
+        return CoenttbStripe.Client.live(
             stripeSecretKey: stripeSecretKey,
             httpClient: httpClient
         )

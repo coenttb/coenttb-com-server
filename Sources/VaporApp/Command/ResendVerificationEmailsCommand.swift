@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 18/12/2024.
 //
 
-import CoenttbWebNewsletter
+import CoenttbNewsletter
 import Dependencies
 import EmailAddress
 import Fluent

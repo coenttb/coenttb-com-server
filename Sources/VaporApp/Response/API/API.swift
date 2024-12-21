@@ -2,9 +2,9 @@ import Coenttb
 import CoenttbIdentity
 import CoenttbIdentityLive
 import CoenttbWebHTML
-import CoenttbWebNewsletter
-import CoenttbWebStripe
-import CoenttbWebStripeLive
+import CoenttbNewsletter
+import CoenttbStripe
+import CoenttbStripeLive
 import Dependencies
 import Fluent
 import Foundation
@@ -27,7 +27,7 @@ extension ServerRouterAPI {
 
                 @Dependency(\.database.newsletter) var client
 
-                return try await CoenttbWebNewsletter.API.response(
+                return try await CoenttbNewsletter.API.response(
                     client: client,
                     logger: logger,
                     cookieId: String.newsletterSubscribed,
@@ -86,7 +86,7 @@ extension ServerRouterAPI {
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey
 //
-//                return try await CoenttbWebStripe.API.response(
+//                return try await CoenttbStripe.API.response(
 //                    stripe: stripe,
 //                    publishableKey: publishableKey,
 //                    productLookupKeys: Coenttb.Stripe.monthlyBlogSubscriptionPriceLookupKey,

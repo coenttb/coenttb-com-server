@@ -10,7 +10,7 @@ import CoenttbMarkdown
 import CoenttbIdentity
 import CoenttbWebHTML
 import Dependencies
-import EnvVars
+import ServerEnvVars
 import Foundation
 import Languages
 import ServerDatabase

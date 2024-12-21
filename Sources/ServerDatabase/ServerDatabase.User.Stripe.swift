@@ -7,7 +7,7 @@
 
 import CoenttbIdentity
 import CoenttbWebModels
-@preconcurrency import CoenttbWebStripe
+@preconcurrency import CoenttbStripe
 import EmailAddress
 import Fluent
 import Foundation

@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 07-01-2024.
 //
 
-import CoenttbWebBlog
+import CoenttbBlog
 import Dependencies
 import Foundation
 import ServerRouter
@@ -35,7 +35,7 @@ extension [WebsitePage: SiteMap.URL.MetaData] {
 }
 
 extension [WebsitePage: SiteMap.URL.MetaData] {
-    init(blogPosts: [CoenttbWebBlog.Blog.Post]) {
+    init(blogPosts: [CoenttbBlog.Blog.Post]) {
         self = Dictionary(
             uniqueKeysWithValues: blogPosts.enumerated().map { index, post in
                 (

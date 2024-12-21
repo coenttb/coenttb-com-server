@@ -43,6 +43,7 @@ extension Target.Dependency {
     static var coenttbWeb: Self { .product(name: "CoenttbWeb", package: "coenttb-web") }
     
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
+    static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
 }
 
 let package = Package(
@@ -74,6 +75,7 @@ let package = Package(
 
         .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
+        .package(url: "https://github.com/pointfreeco/dependencies.git", from: "1.0.0"),
         // Any dependency of a dependency that requires authentication should be directly included here for linking on heroku to succeed.
     ],
     targets: [
@@ -85,6 +87,8 @@ let package = Package(
                 .mailgun,
                 .googleAnalytics,
                 .postgres,
+                .stripe,
+                .stripeLive,
                 .serverModels,
             ]
         ),
@@ -98,6 +102,7 @@ let package = Package(
                 .serverDependencies,
                 .serverRouter,
                 .queuesFluentDriver,
+                .dependenciesMacros
             ]
         ),
         .target(
@@ -118,11 +123,14 @@ let package = Package(
         .target(
             name: .serverRouter,
             dependencies: [
+                .blog,
                 .coenttbWeb,
+                .coenttbIdentity,
+                .coenttbSyndication,
                 .serverTranslations,
                 .serverDependencies,
                 .stripe,
-                .coenttbIdentity
+                .newsletter,
             ]
         ),
         .target(

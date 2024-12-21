@@ -6,7 +6,7 @@
 //
 
 import CoenttbMarkdown
-import CoenttbWebBlog
+import CoenttbBlog
 import CoenttbWebHTML
 import Date
 import Dependencies
