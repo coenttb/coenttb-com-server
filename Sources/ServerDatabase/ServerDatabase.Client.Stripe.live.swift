@@ -7,8 +7,8 @@
 
 import CoenttbIdentity
 import CoenttbWebDatabase
-import CoenttbWebNewsletter
-import CoenttbWebStripe
+import CoenttbNewsletter
+import CoenttbStripe
 import EmailAddress
 import ServerModels
 import StripeKit

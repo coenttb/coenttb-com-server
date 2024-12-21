@@ -8,8 +8,8 @@
 import CoenttbVapor
 import CoenttbIdentity
 import CoenttbWebModels
-import CoenttbWebNewsletter
-import CoenttbWebStripe
+import CoenttbNewsletter
+import CoenttbStripe
 import Dependencies
 import Fluent
 import Foundation
@@ -21,10 +21,10 @@ extension [any Fluent.Migration] {
             CoenttbIdentity.Identity.Token.Migration(),
             CoenttbIdentity.EmailChangeRequest.Migration(),
             ServerDatabase.User.CreateMigration(),
-            CoenttbWebNewsletter.Newsletter.Migration.Create(),
-            CoenttbWebNewsletter.Newsletter.Token.Migration.Create(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
-            CoenttbWebNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification()
+            CoenttbNewsletter.Newsletter.Migration.Create(),
+            CoenttbNewsletter.Newsletter.Token.Migration.Create(),
+            CoenttbNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
+            CoenttbNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification()
         ]
 
 #if DEBUG

@@ -7,12 +7,12 @@
 
 import CasePaths
 import Coenttb
-import CoenttbWebBlog
+import CoenttbBlog
 import CoenttbWebHTML
-import CoenttbWebNewsletter
+import CoenttbNewsletter
 import Date
 import Dependencies
-import EnvVars
+import ServerEnvVars
 import Foundation
 import Languages
 import ServerRouter
@@ -36,7 +36,7 @@ extension WebsitePage {
 
                 let localPosts = blogPosts()
 
-                return try await CoenttbWebBlog.Route.response(
+                return try await CoenttbBlog.Route.response(
                     route: route,
                     blurb: Coenttb.oneliner,
                     companyXComHandle: companyXComHandle,
@@ -92,7 +92,7 @@ extension WebsitePage {
 
                 @Dependency(\.serverRouter) var serverRouter
 
-                return try await CoenttbWebNewsletter.Route.response(
+                return try await CoenttbNewsletter.Route.response(
                     newsletter: newsletter,
                     htmlDocument: { html in
                         Coenttb.DefaultHTMLDocument.init {

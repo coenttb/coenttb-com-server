@@ -2,7 +2,7 @@ import Coenttb
 import CoenttbVapor
 import CoenttbWebHTML
 import Dependencies
-import EnvVars
+import ServerEnvVars
 import Fluent
 import FluentPostgresDriver
 import Queues

@@ -123,7 +123,7 @@ Here's where it gets interesting. Instead of cramming everything into one file (
 ### The Three-Layer Split
 
 ```
-CoenttbWebNewsletter/
+CoenttbNewsletter/
 ├── API/           # How the world talks to us
 ├── Route/         # How we present ourselves
 └── Dependency/    # How we get things done
@@ -174,7 +174,7 @@ public struct Client: @unchecked Sendable {
 
 ### The Power of Abstraction
 
-Here's the cool part: the newsletter system is a separate package (`CoenttbWebNewsletter`). Why does this matter? Because:
+Here's the cool part: the newsletter system is a separate package (`CoenttbNewsletter`). Why does this matter? Because:
 
 1. **Reusability**: Want to add a newsletter to another Swift project? Just import the package.
 2. **Testing**: Each layer can be tested independently. No more "it works on my machine" surprises.
@@ -187,7 +187,7 @@ In practice, it looks something like this:
 
 ```swift
 // In your main app
-import CoenttbWebNewsletter
+import CoenttbNewsletter
 
 // Set up your routes
 app.get("newsletter", "subscribe") { req in

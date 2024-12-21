@@ -8,7 +8,7 @@
 import Coenttb
 import CoenttbIdentity
 import CoenttbWebHTML
-import CoenttbWebStripe
+import CoenttbStripe
 import CoenttbWebTranslations
 import Foundation
 import ServerRouter

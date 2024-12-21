@@ -1,10 +1,10 @@
 import CoenttbIdentity
 import CoenttbWebDatabase
 import CoenttbWebHTML
-import CoenttbWebNewsletter
+import CoenttbNewsletter
 import CoenttbWebUtils
 import EmailAddress
-import EnvVars
+import ServerEnvVars
 import Mailgun
 import PostgresKit
 import ServerDependencies
@@ -21,7 +21,7 @@ extension ServerDatabase.Client {
         @Dependencies.Dependency(\.stripe?.client) var stripeClient
 
         return .init(
-            newsletter: CoenttbWebNewsletter.Client.live(
+            newsletter: CoenttbNewsletter.Client.live(
                 database: database,
                 logger: logger,
                 notifyOfNewSubscriptionEmail: {
@@ -58,7 +58,7 @@ extension ServerDatabase.Client {
 
                     return { email in try await sendEmail(email) }
                 }(),
-                sendVerificationEmail: CoenttbWebNewsletter.Client.sendVerificationEmail
+                sendVerificationEmail: CoenttbNewsletter.Client.sendVerificationEmail
             ),
             account: CoenttbIdentity.Client.live(
                 database: database,
@@ -348,7 +348,7 @@ extension BusinessDetails {
     }()
 }
 
-extension CoenttbWebNewsletter.Client {
+extension CoenttbNewsletter.Client {
     public static func sendVerificationEmail(email: String, token: String) async throws {
         @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget

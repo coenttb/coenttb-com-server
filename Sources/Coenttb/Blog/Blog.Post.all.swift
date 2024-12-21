@@ -7,16 +7,16 @@
 
 import CoenttbHTML
 import CoenttbMarkdown
-import CoenttbWebBlog
+import CoenttbBlog
 import CoenttbWebHTML
 import Date
 import Dependencies
 import Foundation
 import Languages
 
-extension [CoenttbWebBlog.Blog.Post] {
+extension [CoenttbBlog.Blog.Post] {
 
-    public static let all: [CoenttbWebBlog.Blog.Post] = [
+    public static let all: [CoenttbBlog.Blog.Post] = [
         .init(
             id: .init(),
             index: 1,

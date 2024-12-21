@@ -6,7 +6,7 @@
 //
 
 import CoenttbWebHTML
-import CoenttbWebStripe
+import CoenttbStripe
 import Dependencies
 import Fluent
 import Foundation
@@ -16,7 +16,7 @@ import Prelude
 import ServerDependencies
 import Vapor
 
-extension CoenttbWebStripe.Client {
+extension CoenttbStripe.Client {
     static func webhook(
         request: Vapor.Request
     ) async throws -> any AsyncResponseEncodable {
@@ -97,7 +97,7 @@ extension CoenttbWebStripe.Client {
                 _ = try await database.deleteCustomerIdFromUser(stripeCustomerId: customer.id)
 
             } catch {
-                logger.log(.warning, "Stripe Webhook received .customerDeleted, but couldn't find User with that CoenttbWebStripe.customerId. This suggests that the synchronization between Stripe and the Database is not working correctly.")
+                logger.log(.warning, "Stripe Webhook received .customerDeleted, but couldn't find User with that CoenttbStripe.customerId. This suggests that the synchronization between Stripe and the Database is not working correctly.")
                 throw Abort(.internalServerError, reason: "Unknown customer id")
             }
         case (.paymentMethodAttached, .paymentMethod(_)):

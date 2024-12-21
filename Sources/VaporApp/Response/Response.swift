@@ -7,12 +7,12 @@
 
 import Coenttb
 import CoenttbVapor
-import CoenttbWebBlog
+import CoenttbBlog
 import CoenttbWebDependencies
 import CoenttbWebHTML
-import CoenttbWebSyndication
+import CoenttbSyndication
 import Dependencies
-import EnvVars
+import ServerEnvVars
 import Languages
 import ServerModels
 import ServerRouter
