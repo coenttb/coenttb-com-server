@@ -1,4 +1,4 @@
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebDatabase
 import CoenttbWebNewsletter
 import CoenttbWebStripe
@@ -8,7 +8,7 @@ import ServerModels
 @DependencyClient
 public struct Client: Sendable {
     public let newsletter: CoenttbWebNewsletter.Client
-    public let account: CoenttbWebAccount.Client<ServerModels.User>
+    public let account: CoenttbIdentity.Client<ServerModels.User>
     public let stripe: ServerDatabase.Client.Stripe?
 }
 

@@ -6,7 +6,7 @@
 //
 
 import CoenttbVapor
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebModels
 import CoenttbWebNewsletter
 import CoenttbWebStripe
@@ -17,9 +17,9 @@ import Foundation
 extension [any Fluent.Migration] {
     public static var coenttb: Self {
         var migrations: [any Fluent.Migration] = [
-            CoenttbWebAccount.Identity.Migration.Create(),
-            CoenttbWebAccount.Identity.Token.Migration(),
-            CoenttbWebAccount.EmailChangeRequest.Migration(),
+            CoenttbIdentity.Identity.Migration.Create(),
+            CoenttbIdentity.Identity.Token.Migration(),
+            CoenttbIdentity.EmailChangeRequest.Migration(),
             ServerDatabase.User.CreateMigration(),
             CoenttbWebNewsletter.Newsletter.Migration.Create(),
             CoenttbWebNewsletter.Newsletter.Token.Migration.Create(),

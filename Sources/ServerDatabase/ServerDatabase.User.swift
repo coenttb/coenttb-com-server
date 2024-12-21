@@ -1,4 +1,4 @@
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebDatabase
 import EmailAddress
 import Foundation
@@ -14,7 +14,7 @@ final class User: Model, @unchecked Sendable {
     var id: UUID?
 
     @Parent(key: FieldKeys.identityId)
-    var identity: CoenttbWebAccount.Identity
+    var identity: CoenttbIdentity.Identity
 
     @OptionalField(key: FieldKeys.dateOfBirth)
     var dateOfBirth: Date?
@@ -42,7 +42,7 @@ final class User: Model, @unchecked Sendable {
 
     init(
         id: UUID? = nil,
-        identityID: CoenttbWebAccount.Identity.IDValue,
+        identityID: CoenttbIdentity.Identity.IDValue,
         dateOfBirth: Date? = nil,
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
@@ -76,7 +76,7 @@ extension ServerDatabase.User {
         func prepare(on database: Fluent.Database) async throws {
             try await database.schema(ServerDatabase.User.schema)
                 .id()
-                .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbWebAccount.Identity.schema, .id))
+                .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentity.Identity.schema, .id))
                 .field(FieldKeys.dateOfBirth, .date)
                 .field(FieldKeys.newsletterConsent, .bool)
                 .field([FieldKeys.stripe, Stripe.FieldKeys.customerId], .string)

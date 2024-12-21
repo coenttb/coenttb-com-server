@@ -1,6 +1,6 @@
 import Coenttb
-import CoenttbWebAccount
-import CoenttbWebAccountLive
+import CoenttbIdentity
+import CoenttbIdentityLive
 import CoenttbWebHTML
 import CoenttbWebNewsletter
 import CoenttbWebStripe
@@ -12,7 +12,6 @@ import Languages
 import Mailgun
 import ServerModels
 import ServerRouter
-import SwiftGD
 import Vapor
 
 extension ServerRouterAPI {
@@ -39,7 +38,7 @@ extension ServerRouterAPI {
 
                 @Dependency(\.database.account) var database
 
-                return try await CoenttbWebAccount.API.response(
+                return try await CoenttbIdentity.API.response(
                     logoutRedirectURL: { try await WebsitePage.response(page: .home) },
                     account: account,
                     database: database,
@@ -140,7 +139,7 @@ extension ServerRouterAPI {
 }
 
 extension ServerModels.User {
-    init?(update: CoenttbWebAccount.API.Update) {
+    init?(update: CoenttbIdentity.API.Update) {
         @Dependency(\.currentUser) var currentUser
 
         guard var user = currentUser else {

@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 extension String {
-    static let envVars: Self = "EnvVars"
+    static let serverEnvVars: Self = "ServerEnvVars"
     static let serverDatabase: Self = "ServerDatabase"
     static let serverDependencies: Self = "ServerDependencies"
     static let serverModels: Self = "ServerModels"
@@ -16,7 +16,7 @@ extension String {
 }
 
 extension Target.Dependency {
-    static var envVars: Self { .target(name: .envVars) }
+    static var serverEnvVars: Self { .target(name: .serverEnvVars) }
     static var serverDatabase: Self { .target(name: .serverDatabase) }
     static var serverDependencies: Self { .target(name: .serverDependencies) }
     static var serverModels: Self { .target(name: .serverModels) }
@@ -27,53 +27,22 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var coenttbWebStripe: Self { .product(name: "CoenttbWebStripe", package: "coenttb-web") }
-    static var coenttbWebStripeLive: Self { .product(name: "CoenttbWebStripeLive", package: "coenttb-web") }
-    static var coenttbWebAccount: Self { .product(name: "CoenttbWebAccount", package: "coenttb-web") }
-    static var coenttbWebAccountLive: Self { .product(name: "CoenttbWebAccountLive", package: "coenttb-web") }
-    static var coenttbEmail: Self { .product(name: "CoenttbEmail", package: "coenttb-html") }
-    static var coenttbEnvVars: Self { .product(name: "CoenttbEnvVars", package: "coenttb-web") }
-    static var coenttbWebHTML: Self { .product(name: "CoenttbWebHTML", package: "coenttb-web") }
-    static var coenttbWebDatabase: Self { .product(name: "CoenttbWebDatabase", package: "coenttb-web") }
-    static var coenttbWebDependencies: Self { .product(name: "CoenttbWebDependencies", package: "coenttb-web") }
-    static var coenttbWebUtils: Self { .product(name: "CoenttbWebUtils", package: "coenttb-web") }
-    static var coenttbWebModels: Self { .product(name: "CoenttbWebModels", package: "coenttb-web") }
-    static var coenttbWebLegal: Self { .product(name: "CoenttbWebLegal", package: "coenttb-web") }
-    static var coenttbWebNewsletter: Self { .product(name: "CoenttbWebNewsletter", package: "coenttb-web") }
-    static var coenttbWebBlog: Self { .product(name: "CoenttbWebBlog", package: "coenttb-web") }
-    static var coenttbWebTranslations: Self { .product(name: "CoenttbWebTranslations", package: "coenttb-web") }
-    static var coenttbServerRouter: Self { .product(name: "CoenttbServerRouter", package: "coenttb-web") }
-    static var coenttbWebSyndication: Self { .product(name: "CoenttbWebSyndication", package: "coenttb-web") }
-    static var coenttbVapor: Self { .product(name: "CoenttbVapor", package: "coenttb-web") }
-    static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
-    static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
-    static var emailaddress: Self { .product(name: "EmailAddress", package: "swift-web") }
-    static var favicon: Self { .product(name: "Favicon", package: "swift-web") }
-    static var fluent: Self { .product(name: "Fluent", package: "fluent") }
-    static var fluentPostgresDriver: Self { .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver") }
-    static var gitHub: Self { .product(name: "GitHub", package: "coenttb-web") }
-    static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-web") }
-    static var postgres: Self { .product(name: "Postgres", package: "coenttb-web") }
-    static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-web") }
-    static var language: Self { .product(name: "Languages", package: "swift-language") }
-    static var loggingDependencies: Self { .product(name: "LoggingDependencies", package: "swift-web") }
-    static var macroCodableKit: Self { .product(name: "MacroCodableKit", package: "macro-codable-kit") }
-    static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-web") }
-    static var memberwiseInit: Self { .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro") }
-    static var money: Self { .product(name: "Money", package: "swift-money") }
-    static var percent: Self { .product(name: "Percent", package: "swift-percent") }
-    static var postgresKit: Self { .product(name: "PostgresKit", package: "postgres-kit") }
+    static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
+    static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
+    static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-google-analytics") }
+    static var newsletter: Self { .product(name: "CoenttbNewsletter", package: "coenttb-newsletter") }
+    static var blog: Self { .product(name: "CoenttbBlog", package: "coenttb-blog") }
+    static var stripe: Self { .product(name: "CoenttbStripe", package: "coenttb-stripe") }
+    static var stripeLive: Self { .product(name: "CoenttbStripeLive", package: "coenttb-stripe") }
+    static var postgres: Self { .product(name: "Postgres", package: "coenttb-postgres") }
+    
+    static var coenttbIdentity: Self { .product(name: "CoenttbIdentity", package: "coenttb-identity") }
+    static var coenttbIdentityFluent: Self { .product(name: "CoenttbIdentityFluent", package: "coenttb-identity") }
+    static var coenttbSyndication: Self { .product(name: "CoenttbSyndication", package: "coenttb-syndication") }
+    
+    static var coenttbWeb: Self { .product(name: "CoenttbWeb", package: "coenttb-web") }
+    
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
-    static var sitemap: Self { .product(name: "Sitemap", package: "swift-web") }
-    static var splash: Self { .product(name: "Splash", package: "Splash") }
-    static var swiftGD: Self { .product(name: "SwiftGD", package: "SwiftGD") }
-    static var swiftDate: Self { .product(name: "Date", package: "swift-date") }
-    static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
-    static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
-    static var urlFormCoding: Self { .product(name: "UrlFormCoding", package: "swift-web") }
-    static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
-    static var vapor: Self { .product(name: "Vapor", package: "vapor") }
-    static var vaporRouting: Self { .product(name: "VaporRouting", package: "vapor-routing") }
 }
 
 let package = Package(
@@ -82,7 +51,7 @@ let package = Package(
         .macOS(.v14)
     ],
     products: [
-        .library(name: .envVars, targets: [.envVars]),
+        .library(name: .serverEnvVars, targets: [.serverEnvVars]),
         .library(name: .serverDatabase, targets: [.serverDatabase]),
         .library(name: .serverDependencies, targets: [.serverDependencies]),
         .library(name: .serverModels, targets: [.serverModels]),
@@ -93,130 +62,89 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-html.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/swift-date.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/swift-language.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/swift-web.git", branch: "main"),
-        .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.3.0"),
-        .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
-        .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
-        .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
-        .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
-        .package(url: "https://github.com/twostraws/SwiftGD.git", from: "2.0.0"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.10.0"),
-        .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.7.2"),
-        .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.105.2")
+        .package(url: "https://github.com/coenttb/coenttb-blog.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-newsletter.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-identity.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-postgres.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-google-analytics.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-hotjar.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-mailgun.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-stripe.git", branch: "main"),
 
+        .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
+        .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         // Any dependency of a dependency that requires authentication should be directly included here for linking on heroku to succeed.
     ],
     targets: [
         .target(
-            name: .envVars,
+            name: .serverEnvVars,
             dependencies: [
-                .coenttbWebModels,
-                .dependencies,
-                .gitHub,
-                .language,
-                .mailgun,
-                .memberwiseInit,
-                .serverModels,
-                .tagged,
-                .coenttbEnvVars,
+                .coenttbWeb,
                 .hotjar,
+                .mailgun,
                 .googleAnalytics,
-                .postgres
+                .postgres,
+                .serverModels,
             ]
         ),
         .target(
             name: .serverDatabase,
             dependencies: [
-                .dependenciesMacros,
-                .coenttbWebModels,
-                .coenttbWebDatabase,
-                .coenttbServerRouter,
-                .dependencies,
-                .emailaddress,
-                .envVars,
-                .fluent,
-                .language,
+                .coenttbWeb,
+                .coenttbIdentity,
+                .serverEnvVars,
                 .mailgun,
                 .serverDependencies,
                 .serverRouter,
-                .tagged,
-                .vapor,
-                .coenttbEmail,
-                .coenttbWebAccount,
-                .coenttbWebUtils,
-                .queuesFluentDriver
+                .queuesFluentDriver,
             ]
         ),
         .target(
             name: .serverDependencies,
             dependencies: [
+                .coenttbWeb,
                 .serverModels,
-                .coenttbWebDependencies,
-                .postgresKit
             ]
         ),
         .target(
             name: .serverModels,
             dependencies: [
-                .emailaddress,
-                .coenttbWebModels,
-                .coenttbWebStripe,
-                .coenttbWebAccount
+                .coenttbWeb,
+                .stripe,
+                .coenttbIdentity
             ]
         ),
         .target(
             name: .serverRouter,
             dependencies: [
-                .macroCodableKit,
-                .memberwiseInit,
-                .favicon,
+                .coenttbWeb,
                 .serverTranslations,
                 .serverDependencies,
-                .urlFormCoding,
-                .urlRouting,
-                .coenttbWebModels,
-                .coenttbServerRouter,
-                .coenttbWebStripe,
-                .coenttbWebNewsletter,
-                .coenttbWebAccount,
-                .coenttbWebBlog,
-                .coenttbWebSyndication
+                .stripe,
+                .coenttbIdentity
             ]
         ),
         .target(
             name: .serverTranslations,
             dependencies: [
-                .coenttbWebHTML,
-                .coenttbWebTranslations
+                .coenttbWeb,
             ]
         ),
         .target(
             name: .coenttb,
             dependencies: [
-                .serverTranslations,
-                .coenttbWebHTML,
-                .coenttbWebModels,
-                .envVars,
-                .gitHub,
-                .loggingDependencies,
+                .coenttbIdentity,
+                .coenttbWeb,
+                .serverEnvVars,
+                .googleAnalytics,
+                .hotjar,
                 .mailgun,
+                .serverTranslations,
                 .serverDatabase,
                 .serverModels,
                 .serverRouter,
-                .sitemap,
-                .coenttbWebAccount,
-                .swiftDate,
-                .vapor,
-                .coenttbWebStripeLive,
-                .coenttbWebLegal,
-                .hotjar,
-                .googleAnalytics
+                .stripeLive,
             ],
             resources: [
                 .process("Blog/Posts")
@@ -225,22 +153,17 @@ let package = Package(
         .target(
             name: .vaporApp,
             dependencies: [
-                .coenttbVapor,
-                .fluent,
-                .fluentPostgresDriver,
-                .coenttbWebHTML,
+                .coenttbWeb,
+                .serverEnvVars,
                 .serverDependencies,
-                .sitemap,
-                .swiftDate,
                 .coenttb,
-                .vapor,
-                .vaporRouting,
                 .serverDatabase,
-                .coenttbWebNewsletter,
+                .newsletter,
                 .queuesFluentDriver,
-                .coenttbWebStripeLive,
-                .coenttbWebAccountLive,
-                .swiftGD
+                .stripeLive,
+                .coenttbIdentityFluent,
+                .blog,
+                .newsletter
             ],
             swiftSettings: [
                 .unsafeFlags(
@@ -261,12 +184,12 @@ let package = Package(
             name: .server,
             dependencies: [
                 .vaporApp,
-                .coenttbVapor
+                .coenttbWeb,
             ]
         ),
         .testTarget(
             name: "Coenttb Tests",
-            dependencies: [.coenttbWebHTML, .coenttb])
+            dependencies: [.coenttbWeb, .coenttb])
     ],
     swiftLanguageModes: [.v6]
 )

@@ -1,5 +1,5 @@
 {
-  "originHash" : "57a106ce0608996c474564b9592f69a6bb367b29017b9b0e8fcdc2f595d344fb",
+  "originHash" : "a56f6f4b86f0f6dbfc4c550877831a519c4d9a0c079c4a382ee48faf2be6c9b4",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -29,12 +29,102 @@
       }
     },
     {
+      "identity" : "coenttb-blog",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-blog.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "92eb7983028e96aae9e3a78e42eb7d7df8da0f33"
+      }
+    },
+    {
+      "identity" : "coenttb-google-analytics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-google-analytics.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9ba02f1ce3b2e5ee99a5278c52cd9b84d95436b0"
+      }
+    },
+    {
+      "identity" : "coenttb-hotjar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-hotjar.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ad78b2db654f3cfa855b962825aa914a77c5b6d3"
+      }
+    },
+    {
       "identity" : "coenttb-html",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/coenttb-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0b88b8fb7b31f08b9dca9a32549814f7e9a6aa74"
+        "revision" : "1ce8153312b4f78e38744858a116cadcb096bbca"
+      }
+    },
+    {
+      "identity" : "coenttb-identity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-identity.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a895bf7602a1cdde0ca01b3ba818c6468c9eebbd"
+      }
+    },
+    {
+      "identity" : "coenttb-mailgun",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-mailgun.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "eea9f35c46365ae9249a0d8cc052ed4f87bf708d"
+      }
+    },
+    {
+      "identity" : "coenttb-newsletter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-newsletter.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "aa684a07517f7b682780c02f3698ef4df527bd9c"
+      }
+    },
+    {
+      "identity" : "coenttb-postgres",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-postgres.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1a6d022756b49de295ba046c910b0419f055a256"
+      }
+    },
+    {
+      "identity" : "coenttb-stripe",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-stripe.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f65332c630074bf96a2266e7fd75e56033f6d779"
+      }
+    },
+    {
+      "identity" : "coenttb-syndication",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-syndication.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "07d9b2b7b2d17ec12c38082577c35d0324d9e529"
+      }
+    },
+    {
+      "identity" : "coenttb-utils",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-utils.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "03cdc7f28e600db96b9f3e4bc70b1a79b52a95fd"
       }
     },
     {
@@ -43,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "394cee9a7b442c396e1e5034cad01279fff9c5c6"
+        "revision" : "3dc7ae99b09bb67ea4a465d459c5fe006f9556b4"
       }
     },
     {
@@ -92,24 +182,6 @@
       }
     },
     {
-      "identity" : "jwt",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/jwt.git",
-      "state" : {
-        "revision" : "ec5a9d489a73560732c7a27ce860fe799b1413be",
-        "version" : "5.1.1"
-      }
-    },
-    {
-      "identity" : "jwt-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/jwt-kit.git",
-      "state" : {
-        "revision" : "6f745e91e2422608fe14c9a66ee3826cb661e2a6",
-        "version" : "5.1.1"
-      }
-    },
-    {
       "identity" : "macro-codable-kit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/macro-codable-kit.git",
@@ -133,7 +205,16 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "16274b6ee9107675dc57c49d5dc45367db824aef"
+        "revision" : "3d56e6c42029c62d6913f6b623ab3036d9f30092"
+      }
+    },
+    {
+      "identity" : "pointfree-web",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/pointfree-web",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6fdb3612b3db916e87c04f27628448f56c9f4677"
       }
     },
     {
@@ -236,21 +317,21 @@
       }
     },
     {
+      "identity" : "swift-authentication",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-authentication.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5d6ac084ad384dbd0e6d73843f735c32a7c07ed9"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths.git",
       "state" : {
         "revision" : "bc92c4b27f9a84bfb498cdbfdf35d5a357e9161f",
         "version" : "1.5.6"
-      }
-    },
-    {
-      "identity" : "swift-certificates",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-certificates.git",
-      "state" : {
-        "revision" : "1fbb6ef21f1525ed5faf4c95207b9c11bea27e94",
-        "version" : "1.6.1"
       }
     },
     {
@@ -304,16 +385,7 @@
       "location" : "https://github.com/coenttb/swift-css.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4be90a31063cbe49121d3480d4c6b6993cee0fcc"
-      }
-    },
-    {
-      "identity" : "swift-custom-dump",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-custom-dump",
-      "state" : {
-        "revision" : "82645ec760917961cfa08c9c0c7104a57a0fa4b1",
-        "version" : "1.3.3"
+        "revision" : "1d6fa6441c9cfd56b9ec55fc7c7c76154f162d94"
       }
     },
     {
@@ -335,6 +407,24 @@
       }
     },
     {
+      "identity" : "swift-distributed-tracing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-distributed-tracing.git",
+      "state" : {
+        "revision" : "6483d340853a944c96dbcc28b27dd10b6c581703",
+        "version" : "1.1.2"
+      }
+    },
+    {
+      "identity" : "swift-environment-variables",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-environment-variables.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d9413bf1dac21f03536d21b4877aea32700b3307"
+      }
+    },
+    {
       "identity" : "swift-format",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-format.git",
@@ -349,7 +439,7 @@
       "location" : "https://github.com/coenttb/swift-html",
       "state" : {
         "branch" : "main",
-        "revision" : "575fcf2ff4b1538dd16b2c70307a11a0a4c7645d"
+        "revision" : "fa85b77ab6eea64d2dac76bf5f3eb5aceae053ca"
       }
     },
     {
@@ -358,7 +448,7 @@
       "location" : "https://github.com/coenttb/swift-html-to-pdf.git",
       "state" : {
         "branch" : "main",
-        "revision" : "91331a52a63fcd472069f53866a7e9792614502e"
+        "revision" : "e9502908acecfc71399c4009475f5ffc8e2c2189"
       }
     },
     {
@@ -368,15 +458,6 @@
       "state" : {
         "revision" : "ef18d829e8b92d731ad27bb81583edd2094d1ce3",
         "version" : "1.3.1"
-      }
-    },
-    {
-      "identity" : "swift-identified-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-identified-collections",
-      "state" : {
-        "revision" : "2f5ab6e091dd032b63dacbda052405756010dc3b",
-        "version" : "1.1.0"
       }
     },
     {
@@ -497,15 +578,6 @@
       }
     },
     {
-      "identity" : "swift-perception",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-perception",
-      "state" : {
-        "revision" : "8d52279b9809ef27eabe7d5420f03734528f19da",
-        "version" : "1.4.1"
-      }
-    },
-    {
       "identity" : "swift-prelude",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-prelude.git",
@@ -515,21 +587,21 @@
       }
     },
     {
+      "identity" : "swift-service-context",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-service-context.git",
+      "state" : {
+        "revision" : "0c62c5b4601d6c125050b5c3a97f20cce881d32b",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "swift-service-lifecycle",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-service-lifecycle.git",
       "state" : {
         "revision" : "f70b838872863396a25694d8b19fe58bcd0b7903",
         "version" : "2.6.2"
-      }
-    },
-    {
-      "identity" : "swift-sharing",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-sharing.git",
-      "state" : {
-        "revision" : "b68bf99b05cb974392f6ffa380351e9b7391e233",
-        "version" : "1.1.0"
       }
     },
     {
@@ -571,19 +643,10 @@
     {
       "identity" : "swift-web",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-web.git",
+      "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "5c70a5cebeb5c0670f482126fb056801bc5e4dde"
-      }
-    },
-    {
-      "identity" : "swiftgd",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/twostraws/SwiftGD.git",
-      "state" : {
-        "revision" : "1960998971b453101e740f25bc6d9fb01e0ba225",
-        "version" : "2.5.0"
+        "revision" : "f559d72afb1a19e8891d8f16eed2e03a67e24e91"
       }
     },
     {
@@ -591,8 +654,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "e1002f35edf92e2a579580f2d1df92e01287c6c7",
-        "version" : "4.108.0"
+        "revision" : "1f29415ed888a942bb23486ca9e422123a07e70f",
+        "version" : "4.110.0"
       }
     },
     {
