@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebModels
 import Foundation
 import ServerModels

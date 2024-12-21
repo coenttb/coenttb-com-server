@@ -6,7 +6,7 @@
 //
 
 import Coenttb
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebHTML
 import CoenttbWebStripe
 import CoenttbWebTranslations
@@ -181,7 +181,7 @@ public struct EmailChangeRequestButton: HTML {
 
     public var body: some HTML {
         HStack {
-            Input.default(CoenttbWebAccount.API.Verify.CodingKeys.email)
+            Input.default(CoenttbIdentity.API.Verify.CodingKeys.email)
                 .type(.email)
                 .placeholder("Email")
                 .value(currentUser?.email?.rawValue ?? "")
@@ -214,7 +214,7 @@ public struct NameChangeForm: HTML {
     public var body: some HTML {
         form {
             VStack {
-                Input.default(CoenttbWebAccount.API.Update.CodingKeys.name)
+                Input.default(CoenttbIdentity.API.Update.CodingKeys.name)
                     .type(.text)
                     .placeholder("Name")
                     .value(currentUser?.name ?? "")
@@ -226,7 +226,7 @@ public struct NameChangeForm: HTML {
 
         LiveInputScript(
             formID: form_identity_id,
-            inputID: CoenttbWebAccount.API.Update.CodingKeys.name.rawValue
+            inputID: CoenttbIdentity.API.Update.CodingKeys.name.rawValue
         )
     }
 }

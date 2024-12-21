@@ -5,10 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 30/08/2024.
 //
 
-@_exported import CoenttbEnvVars
+import CoenttbWeb
 import CoenttbWebStripe
-import Dependencies
-import Foundation
 import GitHub
 import GoogleAnalytics
 import Hotjar

@@ -7,7 +7,7 @@
 
 import CasePaths
 import CoenttbServerRouter
-import CoenttbWebAccount
+import CoenttbIdentity
 import Dependencies
 import Foundation
 import Languages
@@ -21,12 +21,12 @@ extension WebsitePage {
     public enum Account: Codable, Hashable, Sendable {
         case index
         case settings(WebsitePage.Account.Settings)
-        case create(CoenttbWebAccount.Route.Create)
+        case create(CoenttbIdentity.Route.Create)
         case delete
         case login
         case logout
-        case password(CoenttbWebAccount.Route.Password)
-        case emailChange(CoenttbWebAccount.Route.EmailChange)
+        case password(CoenttbIdentity.Route.Password)
+        case emailChange(CoenttbIdentity.Route.EmailChange)
     }
 }
 
@@ -38,10 +38,10 @@ extension WebsitePage.Account {
                 Route(
                     .convert(
                         apply: WebsitePage.Account.init,
-                        unapply: CoenttbWebAccount.Route.init
+                        unapply: CoenttbIdentity.Route.init
                     )
                 ) {
-                    CoenttbWebAccount.Route.Router()
+                    CoenttbIdentity.Route.Router()
                 }
 
                 Route(.case(WebsitePage.Account.settings)) {
@@ -56,7 +56,7 @@ extension WebsitePage.Account {
 }
 
 extension WebsitePage.Account {
-    fileprivate init(_ accountRoute: CoenttbWebAccount.Route) {
+    fileprivate init(_ accountRoute: CoenttbIdentity.Route) {
         switch accountRoute {
         case .create(let create):
             self = .create(create)
@@ -74,7 +74,7 @@ extension WebsitePage.Account {
     }
 }
 
-extension CoenttbWebAccount.Route {
+extension CoenttbIdentity.Route {
     public init?(_ accountRoute: WebsitePage.Account) {
         switch accountRoute {
         case .create(let create):

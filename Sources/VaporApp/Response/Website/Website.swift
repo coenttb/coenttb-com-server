@@ -13,7 +13,6 @@ import Language
 import Languages
 import ServerDependencies
 import ServerRouter
-import SwiftGD
 import Vapor
 
 extension Website<WebsitePage> {

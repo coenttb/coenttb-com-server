@@ -1,4 +1,4 @@
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebDatabase
 import CoenttbWebHTML
 import CoenttbWebNewsletter
@@ -60,7 +60,7 @@ extension ServerDatabase.Client {
                 }(),
                 sendVerificationEmail: CoenttbWebNewsletter.Client.sendVerificationEmail
             ),
-            account: CoenttbWebAccount.Client.live(
+            account: CoenttbIdentity.Client.live(
                 database: database,
                 logger: logger,
                 getDatabaseUser: (

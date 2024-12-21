@@ -7,7 +7,7 @@
 
 import Coenttb
 import CoenttbMarkdown
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebHTML
 import Dependencies
 import EnvVars
@@ -33,12 +33,12 @@ extension WebsitePage.Account {
                 create_customer_portal_session_return_url: serverRouter.url(for: .account(.settings(.index)))
             )
         case .create, .delete, .login, .logout, .password, .emailChange:
-            guard let route = CoenttbWebAccount.Route(account) else { throw Abort(.internalServerError) }
+            guard let route = CoenttbIdentity.Route(account) else { throw Abort(.internalServerError) }
 
             @Dependency(\.database.account) var accountDependency
             @Dependency(\.envVars.canonicalHost) var canonicalHost
 
-            return try await CoenttbWebAccount.Route.response(
+            return try await CoenttbIdentity.Route.response(
                 route: route,
                 logo: .coenttb,
                 canonicalHref: serverRouter.url(for: .account(account)),
@@ -79,9 +79,9 @@ extension WebsitePage.Account {
     }
 }
 
-extension CoenttbWebAccount.Logo {
+extension CoenttbIdentity.Logo {
     nonisolated(unsafe)
-    static let coenttb: Self = CoenttbWebAccount.Logo(
+    static let coenttb: Self = CoenttbIdentity.Logo(
         logo: .coenttb(),
         logoHref: {
             @Dependency(\.serverRouter) var serverRouter

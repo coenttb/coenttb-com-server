@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-import CoenttbWebAccount
+import CoenttbIdentity
 import CoenttbWebModels
 @preconcurrency import CoenttbWebStripe
 import EmailAddress
