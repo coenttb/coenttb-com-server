@@ -1,4 +1,7 @@
+import Fluent
+import Dependencies
 import CoenttbIdentity
+import CoenttbIdentityFluent
 import CoenttbWebDatabase
 import EmailAddress
 import Foundation
@@ -14,7 +17,7 @@ final class User: Model, @unchecked Sendable {
     var id: UUID?
 
     @Parent(key: FieldKeys.identityId)
-    var identity: CoenttbIdentity.Identity
+    var identity: CoenttbIdentityFluent.Identity
 
     @OptionalField(key: FieldKeys.dateOfBirth)
     var dateOfBirth: Date?
@@ -42,7 +45,7 @@ final class User: Model, @unchecked Sendable {
 
     init(
         id: UUID? = nil,
-        identityID: CoenttbIdentity.Identity.IDValue,
+        identityID: CoenttbIdentityFluent.Identity.IDValue,
         dateOfBirth: Date? = nil,
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
@@ -73,10 +76,13 @@ final class User: Model, @unchecked Sendable {
 
 extension ServerDatabase.User {
     struct CreateMigration: AsyncMigration {
+        
+        var name: String = "ServerDatabase.User.CreateMigration"
+        
         func prepare(on database: Fluent.Database) async throws {
             try await database.schema(ServerDatabase.User.schema)
                 .id()
-                .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentity.Identity.schema, .id))
+                .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentityFluent.Identity.schema, .id))
                 .field(FieldKeys.dateOfBirth, .date)
                 .field(FieldKeys.newsletterConsent, .bool)
                 .field([FieldKeys.stripe, Stripe.FieldKeys.customerId], .string)

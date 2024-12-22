@@ -12,13 +12,13 @@ import GoogleAnalytics
 import Hotjar
 import Mailgun
 import Postgres
-import ServerModels
 
 extension EnvVars: @retroactive DependencyKey {
     public static var liveValue: Self {
         let localDevelopment: URL? = {
 #if DEBUG
-            return URL.projectRoot.appendingPathComponent(".env.development")
+            @Dependency(\.projectRoot) var projectRoot
+            return projectRoot.appendingPathComponent(".env.development")
 #else
             return nil
 #endif
@@ -90,8 +90,8 @@ extension EnvVars {
 }
 
 extension EnvVars {
-    public var mailgunCompanyEmail: String? {
-        self["MAILGUN_COMPANY_EMAIL"]
+    public var mailgunCompanyEmail: EmailAddress? {
+        try? self["MAILGUN_COMPANY_EMAIL"].map(EmailAddress.init)
     }
 }
 extension EnvVars {
@@ -99,16 +99,16 @@ extension EnvVars {
         self["DEMO_NAME"]
     }
 
-    public var demoEmail: String? {
-        self["DEMO_EMAIL"]
+    public var demoEmail: EmailAddress? {
+        try? self["DEMO_EMAIL"].map(EmailAddress.init)
     }
 
     public var demoPassword: String? {
         self["DEMO_PASSWORD"]
     }
 
-    public var demoNewsletterEmail: String? {
-        self["DEMO_NEWSLETTER_EMAIL"]
+    public var demoNewsletterEmail: EmailAddress? {
+        try? self["DEMO_NEWSLETTER_EMAIL"].map(EmailAddress.init)
     }
 
     public var demoStripeCustomerId: String? {
@@ -127,8 +127,8 @@ extension EnvVars {
         self["COMPANY_NAME"]
     }
 
-    public var companyInfoEmailAddress: String? {
-        self["COMPANY_INFO_EMAIL_ADDRESS"]
+    public var companyInfoEmailAddress: EmailAddress? {
+        try? self["COMPANY_INFO_EMAIL_ADDRESS"].map(EmailAddress.init)
     }
 
     public var companyXComHandle: String? {

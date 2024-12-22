@@ -1,12 +1,10 @@
+import CoenttbWeb
 import CoenttbIdentity
-import CoenttbWebDatabase
-import CoenttbWebHTML
+import CoenttbIdentityLive
+import CoenttbIdentityFluent
 import CoenttbNewsletter
-import CoenttbWebUtils
-import EmailAddress
 import ServerEnvVars
 import Mailgun
-import PostgresKit
 import ServerDependencies
 import ServerModels
 import ServerRouter
@@ -28,30 +26,26 @@ extension ServerDatabase.Client {
                     @Dependency(\.envVars.appEnv) var appEnv
                     @Dependency(\.envVars.mailgun?.domain) var domain
                     @Dependency(\.envVars.mailgunCompanyEmail) var mailgunCompanyEmail
+                    @Dependency(\.envVars.companyName) var companyName
                     @Dependency(\.envVars) var envVars
 
                     guard
-                        let domain,
                         let mailgunCompanyEmail,
-                        let companyName = envVars.companyName
-                    else { return nil }
+                        let companyName
+                    else { return .none }
 
-                    let companyEmail: EmailAddress = switch appEnv {
-                    case .production: .init(mailgunCompanyEmail)
-                    default: .init("\(companyName) <postmaster@\(domain.rawValue)>")
-                    }
                     return { subscriberEmail in
                         Email.notifyOfNewSubscription(
-                            companyName: companyName,
-                            to: .init(mailgunCompanyEmail),
-                            companyEmail: companyEmail,
-                            subscriberEmail: .init(subscriberEmail),
-                            domain: domain.rawValue
+                            from: mailgunCompanyEmail,
+                            to: mailgunCompanyEmail,
+                            subscriberEmail: subscriberEmail,
+                            companyEmail: mailgunCompanyEmail,
+                            companyName: companyName
                         )
                     }
                 }(),
                 sendEmail: {
-                    @Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependency(\.mailgunClient?.messages.send) var sendEmail
 
                     guard let sendEmail
                     else { return nil }
@@ -76,7 +70,7 @@ extension ServerDatabase.Client {
                     }
                 ),
                 userInit: { identity, user in
-                    ServerModels.User.init(identity, user: user)
+                    try! ServerModels.User.init(identity, user: user)
                 },
                 userUpdate: { update, identity, user in
                     func updateIfPresent<T>(_ value: T?, on property: inout T) {
@@ -105,7 +99,7 @@ extension ServerDatabase.Client {
                     return currentUserId
                 },
                 currentUserEmail: {
-                    @Dependencies.Dependency(\.currentUser?.email?.rawValue) var currentUserEmail
+                    @Dependencies.Dependency(\.currentUser?.email) var currentUserEmail
                     return currentUserEmail
                 },
                 request: {
@@ -113,7 +107,7 @@ extension ServerDatabase.Client {
                     return request
                 },
                 sendVerificationEmail: { email, token in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
                     @Dependencies.Dependency(\.envVars.companyName!) var businessName
@@ -123,11 +117,11 @@ extension ServerDatabase.Client {
                     await fireAndForget {
                         _ = try await sendEmail?(
                             .requestEmailVerification(
-                                verificationUrl: serverRouter.url(for: .account(.create(.verify(.init(token: token, email: email))))),
+                                verificationUrl: serverRouter.url(for: .account(.create(.verify(.init(token: token, email: email.rawValue))))),
                                 businessName: "\(businessName)",
                                 supportEmail: supportEmail,
-                                from: "\(businessName) <\(fromEmail)>",
-                                to: (name: nil, email: .init(email)),
+                                from: fromEmail,
+                                to: (name: nil, email: email),
                                 primaryColor: .green550.withDarkColor(.green600)
                             )
                         )
@@ -150,12 +144,12 @@ extension ServerDatabase.Client {
                     guard let request else { throw Abort.requestUnavailable }
                     request.auth.logout(Identity.self)
                 },
-                isValidEmail: /*appEnv == .development ? { _ in true } : */Bool.isValidEmail,
+                isValidEmail: /*appEnv == .development ? { _ in true } : */{ _ in true },
                 isValidPassword: appEnv == .development ? { _ in true } : Bool.isValidPassword,
                 sendPasswordResetEmail: {
                     email,
                     token in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
@@ -169,7 +163,7 @@ extension ServerDatabase.Client {
                                         .init(
                                             resetUrl: serverRouter.url(for: .account(.password(.reset(.confirm(.init(token: token, newPassword: "")))))),
                                             userName: currentUserName,
-                                            userEmail: .init(email)
+                                            userEmail: email
                                         )
                                     )
                                 )
@@ -178,7 +172,7 @@ extension ServerDatabase.Client {
                     }
                 },
                 sendPasswordChangeNotification: { email in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
@@ -187,13 +181,13 @@ extension ServerDatabase.Client {
                         _ = try await sendEmail?(
                             Email(
                                 business: .fromEnvVars,
-                                passwordEmail: .change(.notification(.init(userName: currentUserName, userEmail: .init(email))))
+                                passwordEmail: .change(.notification(.init(userName: currentUserName, userEmail: email)))
                             )
                         )
                     }
                 },
                 sendEmailChangeConfirmation: { currentEmail, newEmail, token in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
@@ -206,8 +200,8 @@ extension ServerDatabase.Client {
                                     .request(
                                         .init(
                                             verificationURL: serverRouter.url(for: .account(.emailChange(.confirm(.init(token: token))))),
-                                            currentEmail: .init(currentEmail),
-                                            newEmail: .init(newEmail),
+                                            currentEmail: currentEmail,
+                                            newEmail: newEmail,
                                             userName: currentUserName
                                         )
                                     )
@@ -217,7 +211,7 @@ extension ServerDatabase.Client {
                     }
                 },
                 sendEmailChangeRequestNotification: { currentEmail, newEmail in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
@@ -229,8 +223,8 @@ extension ServerDatabase.Client {
                                 emailChange: .request(
                                     .notification(
                                         .init(
-                                            currentEmail: .init(currentEmail),
-                                            newEmail: .init(newEmail),
+                                            currentEmail: currentEmail,
+                                            newEmail: newEmail,
                                             userName: currentUserName
                                         )
                                     )
@@ -240,7 +234,7 @@ extension ServerDatabase.Client {
                     }
                 },
                 onEmailChangeSuccess: { currentEmail, newEmail in
-                    @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+                    @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.currentUser?.stripe?.customerId) var stripeCustomerId
@@ -251,7 +245,7 @@ extension ServerDatabase.Client {
                     await fireAndForget {
                         do {
                             guard let identity = try await Identity.query(on: database)
-                                .filter(\.$email == newEmail)
+                                .filter(\.$email == newEmail.rawValue)
                                 .first()
                             else {
                                 logger.error("Could not find user with email \(currentEmail) when updating Stripe")
@@ -273,7 +267,7 @@ extension ServerDatabase.Client {
 
                             _ = try await stripe?.customers.update(
                                 customer: customerId,
-                                email: newEmail
+                                email: newEmail.rawValue
                             )
                             logger.info("Successfully updated Stripe customer \(customerId) email to \(newEmail)")
                         } catch {
@@ -291,8 +285,8 @@ extension ServerDatabase.Client {
                                             .notification(
                                                 .currentEmail(
                                                     .init(
-                                                        currentEmail: .init(currentEmail),
-                                                        newEmail: .init(newEmail),
+                                                        currentEmail: currentEmail,
+                                                        newEmail: newEmail,
                                                         userName: currentUserName
                                                     )
                                                 )
@@ -310,8 +304,8 @@ extension ServerDatabase.Client {
                                             .notification(
                                                 .newEmail(
                                                     .init(
-                                                        currentEmail: .init(currentEmail),
-                                                        newEmail: .init(newEmail),
+                                                        currentEmail: currentEmail,
+                                                        newEmail: newEmail,
                                                         userName: currentUserName
                                                     )
                                                 )
@@ -342,32 +336,30 @@ extension BusinessDetails {
         return BusinessDetails(
             name: businessName,
             supportEmail: supportEmail,
-            fromEmail: "\(businessName) <postmaster@\(domain!)>",
+            fromEmail: fromEmail,
             primaryColor: .green550.withDarkColor(.green600)
         )
     }()
 }
 
 extension CoenttbNewsletter.Client {
-    public static func sendVerificationEmail(email: String, token: String) async throws {
-        @Dependencies.Dependency(\.mailgun?.sendEmail) var sendEmail
+    public static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Mailgun.Messages.Send.Response {
+        @Dependencies.Dependency(\.mailgunClient!.messages.send) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget
         @Dependencies.Dependency(\.serverRouter) var serverRouter
         @Dependencies.Dependency(\.envVars.companyName!) var businessName
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
 
-        await fireAndForget {
-            _ = try await sendEmail?(
-                .requestEmailVerification(
-                    verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email))))),
-                    businessName: "\(businessName)",
-                    supportEmail: supportEmail,
-                    from: "\(businessName) <\(fromEmail)>",
-                    to: (name: nil, email: .init(email)),
-                    primaryColor: .green550.withDarkColor(.green600)
-                )
+        return try await sendEmail(
+            .requestEmailVerification(
+                verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email.rawValue))))),
+                businessName: "\(businessName)",
+                supportEmail: supportEmail,
+                from: fromEmail,
+                to: (name: nil, email: email),
+                primaryColor: .green550.withDarkColor(.green600)
             )
-        }
+        )
     }
 }

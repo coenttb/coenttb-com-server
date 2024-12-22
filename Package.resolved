@@ -1,5 +1,5 @@
 {
-  "originHash" : "a56f6f4b86f0f6dbfc4c550877831a519c4d9a0c079c4a382ee48faf2be6c9b4",
+  "originHash" : "ed988699e2ed9dfcbfa5f2458b5fce560124827bfbb407ad533a781a266e4c66",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a895bf7602a1cdde0ca01b3ba818c6468c9eebbd"
+        "revision" : "0e496d274662b1d728e332313983a05e4320a5b9"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "eea9f35c46365ae9249a0d8cc052ed4f87bf708d"
+        "revision" : "01b7a9449102da3387c841442de65bc6cb93ff67"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "aa684a07517f7b682780c02f3698ef4df527bd9c"
+        "revision" : "6cba1faf23b3507b2957c944761b1d0931e49c87"
       }
     },
     {
@@ -115,7 +115,7 @@
       "location" : "https://github.com/coenttb/coenttb-syndication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "07d9b2b7b2d17ec12c38082577c35d0324d9e529"
+        "revision" : "5c4e7ed85b236b5ff5bb8f792bd3e7725ed8bade"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3dc7ae99b09bb67ea4a465d459c5fe006f9556b4"
+        "revision" : "1ec22f33d0197265cde6a6daa6cb49909ff048ad"
       }
     },
     {
@@ -214,7 +214,7 @@
       "location" : "https://github.com/coenttb/pointfree-web",
       "state" : {
         "branch" : "main",
-        "revision" : "6fdb3612b3db916e87c04f27628448f56c9f4677"
+        "revision" : "5994fff00e459c2bc4277cfa57ed7a184b3c51ad"
       }
     },
     {
@@ -466,7 +466,7 @@
       "location" : "https://github.com/coenttb/swift-language.git",
       "state" : {
         "branch" : "main",
-        "revision" : "83ed96d0b9deece2a862b21f035fa299884fc347"
+        "revision" : "d01ca3bafea825c8562fee17363d69642213bcf2"
       }
     },
     {
@@ -646,7 +646,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "f559d72afb1a19e8891d8f16eed2e03a67e24e91"
+        "revision" : "d8f6b42e1e551f34529c9ee463e394ed2cc12d35"
       }
     },
     {

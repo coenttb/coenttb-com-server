@@ -27,21 +27,19 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
-    static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
-    static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-google-analytics") }
-    static var newsletter: Self { .product(name: "CoenttbNewsletter", package: "coenttb-newsletter") }
-    static var blog: Self { .product(name: "CoenttbBlog", package: "coenttb-blog") }
-    static var stripe: Self { .product(name: "CoenttbStripe", package: "coenttb-stripe") }
-    static var stripeLive: Self { .product(name: "CoenttbStripeLive", package: "coenttb-stripe") }
-    static var postgres: Self { .product(name: "Postgres", package: "coenttb-postgres") }
-    
     static var coenttbIdentity: Self { .product(name: "CoenttbIdentity", package: "coenttb-identity") }
     static var coenttbIdentityFluent: Self { .product(name: "CoenttbIdentityFluent", package: "coenttb-identity") }
     static var coenttbSyndication: Self { .product(name: "CoenttbSyndication", package: "coenttb-syndication") }
-    
+    static var blog: Self { .product(name: "CoenttbBlog", package: "coenttb-blog") }
+    static var newsletter: Self { .product(name: "CoenttbNewsletter", package: "coenttb-newsletter") }
+    static var newsletterFluent: Self { .product(name: "CoenttbNewsletterFluent", package: "coenttb-newsletter") }
+    static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
+    static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
+    static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-google-analytics") }
+    static var stripe: Self { .product(name: "CoenttbStripe", package: "coenttb-stripe") }
+    static var stripeLive: Self { .product(name: "CoenttbStripeLive", package: "coenttb-stripe") }
+    static var postgres: Self { .product(name: "Postgres", package: "coenttb-postgres") }
     static var coenttbWeb: Self { .product(name: "CoenttbWeb", package: "coenttb-web") }
-    
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
 }
@@ -72,10 +70,9 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-mailgun.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-stripe.git", branch: "main"),
-
-        .package(url: "https://github.com/coenttb/macro-codable-kit.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
-        .package(url: "https://github.com/pointfreeco/dependencies.git", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.6.0"),
+        
         // Any dependency of a dependency that requires authentication should be directly included here for linking on heroku to succeed.
     ],
     targets: [
@@ -89,7 +86,6 @@ let package = Package(
                 .postgres,
                 .stripe,
                 .stripeLive,
-                .serverModels,
             ]
         ),
         .target(
@@ -97,12 +93,14 @@ let package = Package(
             dependencies: [
                 .coenttbWeb,
                 .coenttbIdentity,
+                .coenttbIdentityFluent,
                 .serverEnvVars,
                 .mailgun,
                 .serverDependencies,
                 .serverRouter,
                 .queuesFluentDriver,
-                .dependenciesMacros
+                .dependenciesMacros,
+                .newsletterFluent,
             ]
         ),
         .target(
@@ -117,7 +115,8 @@ let package = Package(
             dependencies: [
                 .coenttbWeb,
                 .stripe,
-                .coenttbIdentity
+                .coenttbIdentity,
+                .serverEnvVars,
             ]
         ),
         .target(
@@ -171,22 +170,21 @@ let package = Package(
                 .stripeLive,
                 .coenttbIdentityFluent,
                 .blog,
-                .newsletter
-            ],
-            swiftSettings: [
-                .unsafeFlags(
-                    {
-                        #if os(Linux)
-                        return ["-I/usr/include", "-L/usr/lib"]
-                        #else
-                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
-                        #endif
-                    }()
-                )
-            ],
-            linkerSettings: [
-                .linkedLibrary("gd")
             ]
+//            swiftSettings: [
+//                .unsafeFlags(
+//                    {
+//                        #if os(Linux)
+//                        return ["-I/usr/include", "-L/usr/lib"]
+//                        #else
+//                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
+//                        #endif
+//                    }()
+//                )
+//            ],
+//            linkerSettings: [
+//                .linkedLibrary("gd")
+//            ]
         ),
         .executableTarget(
             name: .server,

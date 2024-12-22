@@ -6,6 +6,7 @@
 //
 
 import CoenttbNewsletter
+import CoenttbNewsletterFluent
 import Dependencies
 import EmailAddress
 import Fluent
@@ -28,7 +29,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
     @Dependency(\.envVars.companyName) var companyName
     @Dependency(\.envVars.companyInfoEmailAddress) var supportEmail
     @Dependency(\.envVars.mailgun?.domain) var domain
-    @Dependency(\.mailgun?.sendEmail) var sendEmail
+    @Dependency(\.mailgunClient?.messages.send) var sendEmail
 
     func run(using context: CommandContext, signature: Signature) async throws {
         try await withDependencies {
@@ -87,11 +88,11 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                         try await subscription.save(on: db)
 
                         // Send verification email
-                        let email = Email.requestEmailVerification(
+                        let email = try Email.requestEmailVerification(
                             verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
                             businessName: companyName,
                             supportEmail: supportEmail,
-                            from: "\(companyName) <postmaster@\(domain.rawValue)>",
+                            from: .init(name: companyName, localPart: "postmaster", domain: domain.rawValue),
                             to: (name: nil, email: .init(subscription.email)),
                             primaryColor: .green550.withDarkColor(.green600)
                         )

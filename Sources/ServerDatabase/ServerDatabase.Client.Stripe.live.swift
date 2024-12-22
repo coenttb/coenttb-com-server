@@ -12,6 +12,7 @@ import CoenttbStripe
 import EmailAddress
 import ServerModels
 import StripeKit
+import CoenttbWeb
 
 extension ServerDatabase.Client.Stripe {
     static func live(
@@ -43,7 +44,7 @@ extension ServerDatabase.Client.Stripe {
                     user.stripe.customerId = nil
                     try await user.save(on: database)
 
-                    return .init(user.identity, user: user)
+                    return try .init(user.identity, user: user)
                 } catch {
                     throw Abort(.internalServerError, reason: "Failed to delete Stripe Customer ID: \(error.localizedDescription)")
                 }

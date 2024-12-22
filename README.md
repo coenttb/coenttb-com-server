@@ -57,14 +57,20 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 
 ## License
 
-The content of [coenttb.com](https://coenttb.com), including text, images, and other media, is all rights reserved. Unauthorized use, reproduction, or distribution of the content is prohibited without prior permission.
+The paid content of [coenttb.com](https://coenttb.com), including text, images, and other media, is all rights reserved.
+Unauthorized use, reproduction, or distribution of this content is prohibited without prior permission.
 
-This project, excluding content of coenttb.com, is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.  
-You are free to use, modify, and distribute it under the terms of the AGPL-3.0.  
+All other content (such as blog posts, documentation, and media not part of paid content) is licensed under [CC BY-NC-SA 4.0 LICENSE](CC%20BY-NC-SA%204.0%20LICENSE).
+
+This project's source code, excluding content of coenttb.com, is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+You are free to use, modify, and distribute it under the terms of the AGPL-3.0.
 For full details, please refer to the [LICENSE](LICENSE) file.
 
 ### Commercial Licensing
 
-A **Commercial License** is available for organizations or individuals who wish to use this project without adhering to the terms of the AGPL-3.0 (e.g., to use it in proprietary software or SaaS products).
+A **Commercial License** is available for organizations or individuals who wish to use this project without adhering to the terms of the AGPL-3.0. This option is ideal for:
+- Using the codebase in proprietary software
+- Incorporating it into SaaS products
+- Avoiding the source code sharing requirements of AGPL-3.0
 
 For inquiries about commercial licensing, please contact **info@coenttb.com**.
