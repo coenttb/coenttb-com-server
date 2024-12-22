@@ -5,23 +5,20 @@
 //  Created by Coen ten Thije Boonkkamp on 04-01-2024.
 //
 
-import CoenttbVapor
+import CoenttbWeb
 import CoenttbBlog
 import CoenttbNewsletter
 import CoenttbStripe
 import CoenttbStripeLive
-import Dependencies
-import Fluent
-import FluentKit
-import FluentPostgresDriver
-import Foundation
-import LoggingDependencies
 import Mailgun
-import PostgresKit
 import ServerDatabase
 import ServerDependencies
 import ServerModels
 import ServerRouter
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 extension BlogKey: @retroactive DependencyKey {
     public static let liveValue: CoenttbBlog.Client = .init(
@@ -114,8 +111,7 @@ extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
 }
 
 extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
-    public static var liveValue:
-    EventLoopGroupConnectionPool<PostgresConnectionSource> {
+    public static var liveValue: EventLoopGroupConnectionPool<PostgresConnectionSource> {
         @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
         @Dependency(\.sqlConfiguration) var sqlConfiguration
 
