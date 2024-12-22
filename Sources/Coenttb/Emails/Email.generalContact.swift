@@ -15,8 +15,7 @@ import Tagged
 
 extension Email {
     public static func generalContact(
-        from: EmailAddress = "",
-        domain: String = ""
+        from: EmailAddress
     ) -> Email {
 
         let subject = String?.none
@@ -49,15 +48,14 @@ extension Email {
         )
 
         @Dependency(\.envVars) var envVars
-        let to: EmailAddress = .init(envVars.companyInfoEmailAddress!)
+        let to: EmailAddress = envVars.companyInfoEmailAddress!
 
         return .init(
             from: from,
             to: [to],
             subject: subject?.description ?? "",
-            text: body.description,
             html: nil,
-            domain: domain
+            text: body.description
         )
     }
 }

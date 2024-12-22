@@ -58,10 +58,7 @@ public struct CoenttbFooter: HTML {
                     "."
                 }
             ),
-            copyrightHolder: (
-                name: "coenttb",
-                color: .tertiary
-            ),
+            copyrightSection: Licences(),
             columns: [
                 (
                     title: "Content",
@@ -96,3 +93,38 @@ public struct CoenttbFooter: HTML {
         )
     }
 }
+
+extension CoenttbFooter {
+    struct Licences: HTML {
+        
+        @Dependency(\.envVars.companyName) var companyName
+        private let repository = "https://github.com/coenttb/coenttb-com-server"
+        var body: some HTML {
+            
+
+            if let companyName {
+                let year = Calendar(identifier: .gregorian).component( .year, from: Date.now)
+                HTMLMarkdown {"""
+                ## License
+                
+                © \(year)\(" " + companyName), all rights reserved for the paid content of coenttb.com, including text, images, and other media. Unauthorized use, reproduction, or distribution of this content is prohibited without prior written permission by coenttb.
+                
+                All other content of coenttb.com (such as blog posts, documentation, and media not part of paid content) is licensed under [CC BY-NC-SA 4.0 LICENSE](\(repository)/blob/main/CC%20BY-NC-SA%204.0%20LICENSE.md).
+                
+                The [source code](\(repository) of this website, excluding all content, is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](\(repository)/blob/main/LICENSE).
+                
+                For organizations or individuals wishing to use content or source code outside the AGPL-3.0 terms, such as in proprietary software or closed-source systems, a commercial license is available. Please contact info@coenttb.com for inquiries.
+                """}
+                .color(.secondary)
+                .fontStyle(.body(.small))
+                .padding(top: 2.rem, media: .mobile)
+                .linkColor(.coenttbPrimaryColor)
+                
+            }
+            
+        }
+    }
+}
+
+
+

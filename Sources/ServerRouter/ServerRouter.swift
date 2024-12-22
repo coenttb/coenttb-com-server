@@ -13,7 +13,16 @@ public typealias ServerRouter = ServerRoute.Router<
 >
 
 public enum ServerRouterKey: TestDependencyKey {
-    public static var testValue: ServerRouter {fatalError()}
+    public static let testValue: ServerRouter = {
+        @Dependency(\.envVars) var envVars
+        return ServerRouter(
+            baseURL: envVars.baseUrl,
+            apiRouter: API.Router.shared,
+            webhookRouter: Webhook.Router.shared,
+            publicRouter: Public.Router.shared,
+            pageRouter: WebsitePage.Router.shared
+        )
+    }()
 }
 
 extension DependencyValues {

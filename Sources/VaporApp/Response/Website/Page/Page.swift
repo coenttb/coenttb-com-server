@@ -5,18 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 31-12-2023.
 //
 
-import CasePaths
 import Coenttb
+import CoenttbWeb
 import CoenttbBlog
-import CoenttbWebHTML
 import CoenttbNewsletter
-import Date
-import Dependencies
 import ServerEnvVars
-import Foundation
-import Languages
 import ServerRouter
-import Vapor
 
 extension WebsitePage {
     static func response(
@@ -53,7 +47,7 @@ extension WebsitePage {
                         @Dependency(\.serverRouter) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
-                        return .init(
+                        return CoenttbNewsletter.Route.Subscribe.Overlay (
                             image: Image.coenttbGreenSuit,
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,

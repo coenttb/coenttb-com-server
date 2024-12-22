@@ -6,15 +6,16 @@
 //
 
 import CoenttbIdentity
+import CoenttbIdentityFluent
 import CoenttbWebModels
 import Foundation
 import ServerModels
 
 extension ServerModels.User {
-    init(_ identity: Identity, user: ServerDatabase.User) {
+    init(_ identity: Identity, user: ServerDatabase.User) throws {
         self = .init(
             id: .init(identity.id!),
-            email: .init(identity.email),
+            email: try .init(identity.email),
             name: identity.name,
             authenticated: true,
             isAdmin: identity.isAdmin,

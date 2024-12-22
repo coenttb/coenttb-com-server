@@ -1,18 +1,15 @@
 import Coenttb
+import CoenttbWeb
 import CoenttbIdentity
 import CoenttbIdentityLive
-import CoenttbWebHTML
+import CoenttbIdentityFluent
 import CoenttbNewsletter
 import CoenttbStripe
 import CoenttbStripeLive
-import Dependencies
-import Fluent
-import Foundation
-import Languages
+import CoenttbSyndication
 import Mailgun
 import ServerModels
 import ServerRouter
-import Vapor
 
 extension ServerRouterAPI {
     static func response(
@@ -39,9 +36,8 @@ extension ServerRouterAPI {
                 @Dependency(\.database.account) var database
 
                 return try await CoenttbIdentity.API.response(
-                    logoutRedirectURL: { try await WebsitePage.response(page: .home) },
-                    account: account,
-                    database: database,
+                    api: account,
+                    client: database,
                     userInit: ServerModels.User.init(update:),
                     reauthenticateForEmailChange: { password in
                         @Dependency(\.currentUser) var currentUser
@@ -49,7 +45,7 @@ extension ServerRouterAPI {
                         @Dependency(\.request?.db) var db
 
                         guard
-                            let email = currentUser?.email?.rawValue,
+                            let email = currentUser?.email,
                             let id = currentUser?.id?.rawValue,
                             let db
                         else { throw Abort(.internalServerError) }
@@ -68,7 +64,7 @@ extension ServerRouterAPI {
                         @Dependency(\.request?.db) var db
 
                         guard
-                            let email = currentUser?.email?.rawValue,
+                            let email = currentUser?.email,
                             let id = currentUser?.id?.rawValue,
                             let db
                         else { throw Abort(.internalServerError) }
@@ -80,8 +76,12 @@ extension ServerRouterAPI {
 
                         let token = try Identity.Token(identity: identity, type: .reauthenticationToken)
                         try await token.save(on: db)
-                    }
+                    },
+                    logoutRedirectURL: { try await WebsitePage.response(page: .home) }
                 )
+                
+                
+                
 
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey
@@ -115,24 +115,26 @@ extension ServerRouterAPI {
 //                    }
 //                )
 
-            case let .rss(string):
+            case .rss(_):
 
-                let width = 400
-                let height = 500
-
-                let image = Image(width: width, height: height)
-                image?.colorize(using: .red)
-
-                guard let pngData = try image?.export(as: .png)
-                else {
-                    throw Abort(.internalServerError, reason: "Failed to generate PNG")
-                }
-
-                // Return the image with correct headers
-                var headers = HTTPHeaders()
-                headers.add(name: .contentType, value: "image/png")
-
-                return Response(status: .ok, headers: headers, body: .init(data: pngData))
+//                let width = 400
+//                let height = 500
+//
+//                let image = Image(width: width, height: height)
+//                image?.colorize(using: .red)
+//
+//                guard let pngData = try image?.export(as: .png)
+//                else {
+//                    throw Abort(.internalServerError, reason: "Failed to generate PNG")
+//                }
+//
+//                // Return the image with correct headers
+//                var headers = HTTPHeaders()
+//                headers.add(name: .contentType, value: "image/png")
+//
+//                return Response(status: .ok, headers: headers, body: .init(data: pngData))
+                
+                return Response.ok
             }
         }
     }

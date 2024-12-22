@@ -1,7 +1,6 @@
 import Coenttb
-import CoenttbVapor
-import CoenttbWebHTML
-import Dependencies
+import CoenttbWeb
+import CoenttbIdentityFluent
 import ServerEnvVars
 import Fluent
 import FluentPostgresDriver
@@ -10,8 +9,6 @@ import QueuesFluentDriver
 import ServerDatabase
 import ServerModels
 import ServerRouter
-import Vapor
-import VaporRouting
 
 extension Application {
     public static func configure(app: Application) async throws {

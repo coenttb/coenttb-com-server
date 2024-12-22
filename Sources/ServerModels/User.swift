@@ -57,6 +57,8 @@ public struct User: Codable, Hashable, Sendable {
     }
 }
 
+extension User.Stripe.SubscriptionStatus: @retroactive @unchecked Sendable {}
+
 extension User {
     public var accessToBlog: Bool {
         switch self.stripe?.subscriptionStatus {

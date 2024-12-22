@@ -7,24 +7,69 @@
 
 import CoenttbVapor
 import CoenttbIdentity
+import CoenttbIdentityLive
+import CoenttbIdentityFluent
 import CoenttbWebModels
-import CoenttbNewsletter
+import CoenttbNewsletterFluent
 import CoenttbStripe
 import Dependencies
 import Fluent
 import Foundation
+import EmailAddress
 
 extension [any Fluent.Migration] {
     public static var coenttb: Self {
         var migrations: [any Fluent.Migration] = [
-            CoenttbIdentity.Identity.Migration.Create(),
-            CoenttbIdentity.Identity.Token.Migration(),
-            CoenttbIdentity.EmailChangeRequest.Migration(),
-            ServerDatabase.User.CreateMigration(),
-            CoenttbNewsletter.Newsletter.Migration.Create(),
-            CoenttbNewsletter.Newsletter.Token.Migration.Create(),
-            CoenttbNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt(),
-            CoenttbNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification()
+            {
+                var migration = CoenttbIdentityFluent.Identity.Migration.Create()
+                migration.name = "CoenttbIdentity.Identity.Migration.Create"
+                return migration
+            }(),
+            {
+                var migration = CoenttbIdentityFluent.Identity.Token.Migration()
+                migration.name = "CoenttbIdentity.Identity.Token.Migration.Create"
+                return migration
+            }(),
+            {
+                var migration = CoenttbIdentityFluent.EmailChangeRequest.Migration()
+                migration.name = "CoenttbIdentity.EmailChangeRequest.Migration.Create"
+                return migration
+            }(),
+//            {
+//                var migration = CoenttbIdentityFluent.PasswordChangeRequest.Migration()
+//                migration.name = "CoenttbIdentity.PasswordChangeRequest.Migration.Create"
+//                return migration
+//            }(),
+            {
+                var migration = ServerDatabase.User.CreateMigration()
+                migration.name = "ServerDatabase.User.Migration.Create"
+                return migration
+            }(),
+            {
+                var migration = Newsletter.Migration.Create()
+                migration.name = "CoenttbNewsletter.Newsletter.Migration.Create"
+                return migration
+            }(),
+            {
+                var migration = CoenttbNewsletterFluent.Newsletter.Token.Migration.Create()
+                migration.name = "CoenttbNewsletter.Newsletter.Token.Migration.Create"
+                return migration
+            }(),
+            {
+                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_1_AddUpdatedAt()
+                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt"
+                return migration
+            }(),
+            {
+                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_2_AddEmailVerification()
+                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification"
+                return migration
+            }(),
+            {
+                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_3_AddLastEmailMessageId()
+                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_3_AddLastEmailMessageId"
+                return migration
+            }(),
         ]
 
 #if DEBUG
@@ -45,14 +90,14 @@ public struct CreateDemoUserMigration: AsyncMigration {
         @Dependency(\.logger) var logger
 
         guard
-            let email: String = envVars.demoEmail,
+            let email: EmailAddress = envVars.demoEmail,
             let name: String = envVars.demoName,
             let password: String = envVars.demoPassword,
             let stripeCustomerId: String = envVars.demoStripeCustomerId
         else { return }
 
         let identity = try Identity(
-            email: email,
+            email: email.rawValue,
             password: password,
             name: name,
             isAdmin: false,
@@ -75,7 +120,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
         do {
             _ = try await stripe?.customers.update(
                 customer: stripeCustomerId,
-                email: email
+                email: email.address
             )
         } catch {
             logger.log(.warning, "\(error)")
@@ -94,11 +139,11 @@ public struct CreateDemoUserMigration: AsyncMigration {
         @Dependency(\.envVars) var envVars
 
         guard
-            let email: String = envVars.demoEmail
+            let email: EmailAddress = envVars.demoEmail
         else { return }
 
         guard let identity = try await Identity.query(on: database)
-            .filter(\.$email == email)
+            .filter(\.$email == email.rawValue)
             .first() else {
             return
         }
@@ -118,13 +163,13 @@ public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
 
-        guard let email: String = envVars.demoNewsletterEmail else {
+        guard let email: EmailAddress = envVars.demoNewsletterEmail else {
             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
             return
         }
 
         let newsletterSubscription = try Newsletter(
-            email: email,
+            email: email.rawValue,
             emailVerificationStatus: .unverified
         )
 
@@ -140,14 +185,14 @@ public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
 
-        guard let email: String = envVars.demoNewsletterEmail else {
+        guard let email: EmailAddress = envVars.demoNewsletterEmail else {
             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
             return
         }
 
         do {
             try await Newsletter.query(on: database)
-                .filter(\.$email == email)
+                .filter(\.$email == email.rawValue)
                 .delete()
             logger.log(.info, "Deleted unverified newsletter subscription for email: \(email)")
         } catch {

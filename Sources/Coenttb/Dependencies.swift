@@ -15,7 +15,6 @@ import Fluent
 import FluentKit
 import FluentPostgresDriver
 import Foundation
-import GitHub
 import LoggingDependencies
 import Mailgun
 import PostgresKit
@@ -149,11 +148,11 @@ extension Mailgun.Client: @retroactive DependencyKey {
             return nil
         }
 
-        return Mailgun.Client(
-            baseUrl: .init(string: baseUrl) ?? .mailgun_eu_baseUrl,
+        return Mailgun.Client.live(
             apiKey: apiKey,
-            appSecret: envVars.appSecret,
-            domain: domain
+            baseUrl: .init(string: baseUrl) ?? URL.mailgun_eu_baseUrl,
+            domain: domain.rawValue,
+            session: { try await URLSession.shared.data(for: $0) }
         )
     }
 }
@@ -172,24 +171,6 @@ extension StripeClientKey: @retroactive DependencyKey {
         return CoenttbStripe.Client.live(
             stripeSecretKey: stripeSecretKey,
             httpClient: httpClient
-        )
-    }
-}
-
-extension GitHub.Client: @retroactive DependencyKey {
-    public static var liveValue: GitHub.Client? {
-        @Dependency(\.envVars) var envVars
-
-        guard
-            let clientId = envVars.gitHub?.clientId,
-            let clientSecret = envVars.gitHub?.clientSecret
-        else {
-            return nil
-        }
-
-        return GitHub.Client(
-            clientId: clientId,
-            clientSecret: clientSecret
         )
     }
 }
