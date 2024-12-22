@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0e496d274662b1d728e332313983a05e4320a5b9"
+        "revision" : "df0062586a2adc84cd086a518c3ac625e1459fc1"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "01b7a9449102da3387c841442de65bc6cb93ff67"
+        "revision" : "8ddb202daf8eb9451039d390d738f80b9b6d99e4"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6cba1faf23b3507b2957c944761b1d0931e49c87"
+        "revision" : "c5d333167324e58ab3a674f83e64aa68a5010692"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1ec22f33d0197265cde6a6daa6cb49909ff048ad"
+        "revision" : "234098f26c8986c17857e3968fa71435896043c8"
       }
     },
     {
