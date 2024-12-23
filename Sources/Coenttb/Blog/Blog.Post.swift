@@ -12,7 +12,7 @@ import Date
 import Dependencies
 import Foundation
 import Languages
-import ServerRouter
+import Server_Router
 
 extension DependencyValues {
     public var previewPosts: @Sendable () -> [Blog.Post] {

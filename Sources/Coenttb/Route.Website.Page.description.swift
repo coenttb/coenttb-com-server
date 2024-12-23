@@ -9,9 +9,9 @@ import Dependencies
 import Foundation
 import Languages
 import MemberwiseInit
-import ServerDependencies
-import ServerRouter
-import ServerTranslations
+import Server_Dependencies
+import Server_Router
+import Server_Translations
 
 extension WebsitePage {
     public func description() -> TranslatedString? {

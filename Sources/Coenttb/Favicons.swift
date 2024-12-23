@@ -8,7 +8,7 @@
 import Dependencies
 import Favicon
 import Foundation
-import ServerRouter
+import Server_Router
 
 extension Favicons {
     nonisolated(unsafe)

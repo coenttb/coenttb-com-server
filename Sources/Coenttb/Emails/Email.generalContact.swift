@@ -7,7 +7,7 @@
 
 import Dependencies
 import EmailAddress
-import ServerEnvVars
+import Server_EnvVars
 import Foundation
 import Languages
 import Mailgun

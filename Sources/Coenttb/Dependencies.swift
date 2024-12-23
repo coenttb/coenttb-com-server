@@ -11,11 +11,11 @@ import CoenttbNewsletter
 import CoenttbStripe
 import CoenttbStripeLive
 import Mailgun
-import ServerClient
-import ServerClientLive
-import ServerDependencies
-import ServerModels
-import ServerRouter
+import Server_Client
+import Server_Client_Live
+import Server_Dependencies
+import Server_Models
+import Server_Router
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -55,13 +55,13 @@ extension BlogKey: @retroactive DependencyKey {
 }
 
 extension DatabaseClientKey: DependencyKey {
-    package static let liveValue: ServerClient.Client = {
+    package static let liveValue: Server_Client.Client = {
         @Dependency(\.request?.db) var database
         
         guard
             let database
         else {
-            return ServerClient.Client.previewValue
+            return Server_Client.Client.previewValue
         }
         
         return .live(database: database)
@@ -86,10 +86,10 @@ extension CurrentUserKey: DependencyKey {
     package static let liveValue: User? = nil
 }
 
-extension ServerRouterKey: DependencyKey {
-    public static let liveValue: ServerRouter = {
+extension Server_RouterKey: DependencyKey {
+    public static let liveValue: Server_Router = {
         @Dependency(\.envVars) var envVars
-        return ServerRouter(
+        return Server_Router(
             baseURL: envVars.baseUrl,
             apiRouter: API.Router.shared,
             webhookRouter: Webhook.Router.shared,
