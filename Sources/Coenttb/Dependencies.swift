@@ -68,20 +68,6 @@ extension DatabaseClientKey: DependencyKey {
     }()
 }
 
-extension PreviewPostKey: DependencyKey {
-    public static let liveValue: @Sendable () -> [CoenttbBlog.Blog.Post] = {
-        @Dependency(\.envVars.appEnv) var appEnv
-        @Dependency(\.date.now) var now
-        
-        return [CoenttbBlog.Blog.Post].preview
-            .filter {
-                appEnv == .production
-                ? $0.publishedAt <= now
-                : true
-            }
-    }
-}
-
 extension CurrentUserKey: DependencyKey {
     package static let liveValue: User? = nil
 }
@@ -148,7 +134,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         @Dependency(\.envVars) var envVars
         
         guard
-            let baseUrl = envVars.mailgun?.baseUrl,
+            let baseURL = envVars.mailgun?.baseURL,
             let apiKey = envVars.mailgun?.apiKey,
             let domain = envVars.mailgun?.domain
         else {
@@ -157,7 +143,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         
         return Mailgun.Client.live(
             apiKey: apiKey,
-            baseUrl: .init(string: baseUrl) ?? URL.mailgun_eu_baseUrl,
+            baseUrl: baseURL,
             domain: domain.rawValue,
             session: { try await URLSession.shared.data(for: $0) }
         )

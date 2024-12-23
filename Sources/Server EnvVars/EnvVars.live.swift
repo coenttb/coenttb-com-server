@@ -38,7 +38,7 @@ extension EnvVars {
 
     public var mailgun: Mailgun.Client.EnvVars? {
         guard
-            let baseUrl = self["MAILGUN_BASE_URL"],
+            let baseURL = self.url("MAILGUN_BASE_URL"),
             let apiKey = self["MAILGUN_PRIVATE_API_KEY"],
             let domain = self["MAILGUN_DOMAIN"]
         else {
@@ -46,7 +46,7 @@ extension EnvVars {
         }
 
         return .init(
-            baseUrl: .init(baseUrl),
+            baseURL: baseURL,
             apiKey: .init(apiKey),
             domain: .init(domain)
         )
