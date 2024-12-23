@@ -19,7 +19,7 @@ x-shared_environment: &shared_environment
 
 services:
     app:
-    image: coenttb-legal-server:latest
+    image: coenttb-com-server:latest
     build:
         context: .
     environment:
