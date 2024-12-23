@@ -11,7 +11,7 @@ import CoenttbNewsletterFluent
 import CoenttbStripe
 
 extension [any Fluent.Migration] {
-    public static var allCases: Self {
+    package static var allCases: Self {
         var migrations: [any Fluent.Migration] = [
             {
                 var migration = CoenttbIdentityFluent.Identity.Migration.Create()
@@ -69,10 +69,10 @@ extension [any Fluent.Migration] {
     }
 }
 
-public struct CreateDemoUserMigration: AsyncMigration {
-    public init() {}
+package struct CreateDemoUserMigration: AsyncMigration {
+    package init() {}
 
-    public func prepare(on database: Database) async throws {
+    package func prepare(on database: Database) async throws {
 
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
@@ -122,7 +122,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
         try await user.save(on: database)
     }
 
-    public func revert(on database: Database) async throws {
+    package func revert(on database: Database) async throws {
 
         @Dependency(\.envVars) var envVars
 
@@ -144,10 +144,10 @@ public struct CreateDemoUserMigration: AsyncMigration {
     }
 }
 
-public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
-    public init() {}
+package struct CreateUnverifiedNewsletterMigration: AsyncMigration {
+    package init() {}
 
-    public func prepare(on database: Database) async throws {
+    package func prepare(on database: Database) async throws {
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
 
@@ -169,7 +169,7 @@ public struct CreateUnverifiedNewsletterMigration: AsyncMigration {
         }
     }
 
-    public func revert(on database: Database) async throws {
+    package func revert(on database: Database) async throws {
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
 

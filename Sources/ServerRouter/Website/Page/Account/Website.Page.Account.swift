@@ -75,7 +75,7 @@ extension WebsitePage.Account {
 }
 
 extension CoenttbIdentity.Route {
-    public init?(_ accountRoute: WebsitePage.Account) {
+    package init?(_ accountRoute: WebsitePage.Account) {
         switch accountRoute {
         case .create(let create):
             self = .create(create)
@@ -103,7 +103,6 @@ extension WebsitePage.Account {
 }
 
 extension WebsitePage.Account.Settings {
-
     struct Router: ParserPrinter {
         var body: some URLRouting.Router<WebsitePage.Account.Settings> {
             OneOf {

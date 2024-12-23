@@ -12,7 +12,7 @@ import ServerRouter
 import ServerClient
 
 extension ServerClient.Client {
-    public static func live(
+    package static func live(
         database: Fluent.Database
     ) -> Self {
         @Dependencies.Dependency(\.envVars.appEnv) var appEnv
@@ -326,7 +326,7 @@ extension ServerClient.Client {
 }
 
 extension BusinessDetails {
-    public static let fromEnvVars: BusinessDetails = {
+    package static let fromEnvVars: BusinessDetails = {
         @Dependency(\.envVars.mailgun?.domain) var domain
         
         @Dependencies.Dependency(\.envVars.companyName!) var businessName
@@ -343,7 +343,7 @@ extension BusinessDetails {
 }
 
 extension CoenttbNewsletter.Client {
-    public static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Mailgun.Messages.Send.Response {
+    package static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Mailgun.Messages.Send.Response {
         @Dependencies.Dependency(\.mailgunClient!.messages.send) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget
         @Dependencies.Dependency(\.serverRouter) var serverRouter

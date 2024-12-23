@@ -10,9 +10,9 @@ import Dependencies
 import Foundation
 import ServerRouter
 
-public struct CoenttbNavigationBar: HTML {
+package struct CoenttbNavigationBar: HTML {
 
-    public init() {}
+    package init() {}
 
     @Dependency(\.serverRouter) var serverRouter
     @Dependency(\.blog.getAll) var blogPosts
@@ -23,7 +23,7 @@ public struct CoenttbNavigationBar: HTML {
     private var signupHref: String { serverRouter.href(for: .account(.create(.request))) }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
-    public var body: some HTML {
+    package var body: some HTML {
 
         let posts = blogPosts()
 
@@ -141,13 +141,13 @@ public struct CoenttbNavigationBar: HTML {
 }
 
 extension CoenttbNavigationBar {
-    public struct CoenttbLogo: HTML {
+    package struct CoenttbLogo: HTML {
 
         @Dependency(\.serverRouter) var serverRouter
 
-        public init() {}
+        package init() {}
 
-        public var body: some HTML {
+        package var body: some HTML {
             VStack {
                 Header(4) {
                     HStack(alignment: .center) {

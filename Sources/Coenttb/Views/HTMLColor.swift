@@ -13,7 +13,7 @@ import Dependencies
 import Foundation
 
 extension HTMLColor {
-    public static let coenttbAccentColor: Self = .green850
-    public static let coenttbPrimaryColor: Self = .green550.withDarkColor(.green600)
-    public static let coenttbLinkColor: Self = .orange600
+    package static let coenttbAccentColor: Self = .green850
+    package static let coenttbPrimaryColor: Self = .green550.withDarkColor(.green600)
+    package static let coenttbLinkColor: Self = .orange600
 }

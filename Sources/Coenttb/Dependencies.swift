@@ -27,7 +27,7 @@ extension BlogKey: @retroactive DependencyKey {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
             
-            return [CoenttbBlog.Blog.Post].all
+            return [CoenttbBlog.Blog.Post].allCases
                 .filter {
                     appEnv == .production
                     ? $0.publishedAt <= now
@@ -55,7 +55,7 @@ extension BlogKey: @retroactive DependencyKey {
 }
 
 extension DatabaseClientKey: DependencyKey {
-    public static let liveValue: ServerClient.Client = {
+    package static let liveValue: ServerClient.Client = {
         @Dependency(\.request?.db) var database
         
         guard
@@ -83,7 +83,7 @@ extension PreviewPostKey: DependencyKey {
 }
 
 extension CurrentUserKey: DependencyKey {
-    public static let liveValue: User? = nil
+    package static let liveValue: User? = nil
 }
 
 extension ServerRouterKey: DependencyKey {

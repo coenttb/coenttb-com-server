@@ -16,7 +16,7 @@ import Languages
 
 extension [CoenttbBlog.Blog.Post] {
 
-    public static let all: [CoenttbBlog.Blog.Post] = [
+    package static let allCases: [CoenttbBlog.Blog.Post] = [
         .init(
             id: .init(),
             index: 1,

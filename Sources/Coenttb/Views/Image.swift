@@ -12,7 +12,7 @@ import ServerRouter
 
 extension Image {
     nonisolated(unsafe)
-    public static let coenttbGreenSuit: Image = {
+    package static let coenttbGreenSuit: Image = {
         @Dependency(\.serverRouter) var serverRouter
         return Image(source: serverRouter.href(for: .asset(.image("coenttb-halftone.png"))), description: "coenttb avatar")
     }()

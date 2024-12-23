@@ -12,7 +12,7 @@ import ServerModels
 import ServerRouter
 
 extension Application {
-    public static func configure(app: Application) async throws {
+    package static func configure(app: Application) async throws {
 
         Application.preloadStaticResources()
 
@@ -92,7 +92,7 @@ extension Application {
 }
 
 extension Vapor.Environment {
-    public init(envVarsEnvironment: EnvVars.AppEnv) {
+    package init(envVarsEnvironment: EnvVars.AppEnv) {
         self =
         switch envVarsEnvironment {
         case .development: .development

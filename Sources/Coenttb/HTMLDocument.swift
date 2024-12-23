@@ -16,7 +16,7 @@ import Languages
 import ServerRouter
 import Vapor
 
-public struct DefaultHTMLDocument<
+package struct DefaultHTMLDocument<
     Styles: HTML,
     Scripts: HTML,
     Body: HTML,
@@ -34,7 +34,7 @@ public struct DefaultHTMLDocument<
     let _body: Body
     let _footer: Footer
 
-    public init(
+    package init(
         themeColor: HTMLColor = .coenttbAccentColor,
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = {
@@ -67,7 +67,7 @@ public struct DefaultHTMLDocument<
         self._footer = footer()
     }
 
-    public var head: some HTML {
+    package var head: some HTML {
         CoenttbHTMLDocumentHeader(
             themeColor: themeColor,
             styles: { styles },
@@ -78,7 +78,7 @@ public struct DefaultHTMLDocument<
 
     @Dependency(\.language) var language
 
-    public var body: some HTML {
+    package var body: some HTML {
         HTMLGroup {
 
             _navigationBar
@@ -96,11 +96,11 @@ public struct DefaultHTMLDocument<
 
 extension DefaultHTMLDocument: AsyncResponseEncodable {}
 
-public struct CoenttbHTMLDocumentHeader<
+package struct CoenttbHTMLDocumentHeader<
     Styles: HTML,
     Scripts: HTML
 >: HTML {
-    public init(
+    package init(
         themeColor: HTMLColor = .coenttbAccentColor,
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = { HTMLEmpty() },
@@ -165,7 +165,7 @@ public struct CoenttbHTMLDocumentHeader<
         )
     }
 
-    public let body: CoenttbWebHTMLDocumentHeader<
+    package let body: CoenttbWebHTMLDocumentHeader<
         Styles,
         HTMLGroup<_HTMLTuple<FontAwesomeScript, PrismJSHead, Scripts, GoogleAnalyticsHead?, HotjarHead?>>
     >
