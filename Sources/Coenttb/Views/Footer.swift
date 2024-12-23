@@ -13,26 +13,6 @@ import Dependencies
 import Foundation
 import Server_Router
 
-extension HTML {
-
-    @HTMLBuilder
-    public func fontStyle2(_ fontStyle: CoenttbHTML.FontStyle) -> some HTML {
-        switch fontStyle {
-        case .body(.small):
-            self
-//            self.fontScale(.h6)
-//                .font(.weight(.normal))
-//                .lineHeight(.number(1.5))
-
-        case .body(.regular):
-            self
-//            self.fontScale(.h5)
-//                .font(.weight(.normal))
-//                .lineHeight(.number(1.5))
-        }
-    }
-}
-
 package struct CoenttbFooter: HTML {
 
     @Dependency(\.serverRouter) var serverRouter
