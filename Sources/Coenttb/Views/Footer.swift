@@ -113,7 +113,7 @@ extension CoenttbFooter {
                 
                 The [source code](\(repository)) of this website, excluding all content, is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](\(repository)/blob/main/LICENSE.md).
                 
-                For organizations or individuals wishing to use content or source code outside the AGPL-3.0 terms, such as in proprietary software or closed-source systems, a commercial license is available. Please contact info@coenttb.com for inquiries.
+                For organizations or individuals wishing to use content or source code outside of these licensing terms, a commercial license is available. Please contact info@coenttb.com for inquiries.
                 """}
                 .color(.secondary)
                 .fontStyle(.body(.small))
