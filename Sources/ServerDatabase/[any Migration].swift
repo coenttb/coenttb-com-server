@@ -5,21 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-import CoenttbVapor
-import CoenttbIdentity
-import CoenttbIdentityLive
+import CoenttbWeb
 import CoenttbIdentityFluent
-import CoenttbWebModels
 import CoenttbNewsletterFluent
 import CoenttbStripe
-import Dependencies
-import Fluent
-import Foundation
-import EmailAddress
-
 
 extension [any Fluent.Migration] {
-    public static var coenttb: Self {
+    public static var allCases: Self {
         var migrations: [any Fluent.Migration] = [
             {
                 var migration = CoenttbIdentityFluent.Identity.Migration.Create()
@@ -36,14 +28,9 @@ extension [any Fluent.Migration] {
                 migration.name = "CoenttbIdentity.EmailChangeRequest.Migration.Create"
                 return migration
             }(),
-//            {
-//                var migration = CoenttbIdentityFluent.PasswordChangeRequest.Migration()
-//                migration.name = "CoenttbIdentity.PasswordChangeRequest.Migration.Create"
-//                return migration
-//            }(),
             {
-                var migration = ServerClientLive.User.CreateMigration()
-                migration.name = "ServerClientLive.User.Migration.Create"
+                var migration = ServerDatabase.User.CreateMigration()
+                migration.name = "ServerDatabase.User.Migration.Create"
                 return migration
             }(),
             {
@@ -107,7 +94,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
 
         try await identity.save(on: database)
 
-        let user = ServerClientLive.User(
+        let user = ServerDatabase.User(
             identityID: try identity.requireID(),
             dateOfBirth: nil,
             newsletterConsent: true
@@ -149,7 +136,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
             return
         }
 
-        try await ServerClientLive.User.query(on: database)
+        try await ServerDatabase.User.query(on: database)
             .filter(\.$identity.$id == identity.id!)
             .delete()
 

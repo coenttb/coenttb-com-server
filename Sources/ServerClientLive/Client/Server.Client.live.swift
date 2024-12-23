@@ -6,6 +6,7 @@ import CoenttbNewsletter
 import ServerEnvVars
 import Mailgun
 import ServerDependencies
+import ServerDatabase
 import ServerModels
 import ServerRouter
 import ServerClient
@@ -14,11 +15,10 @@ extension ServerClient.Client {
     public static func live(
         database: Fluent.Database
     ) -> Self {
-
         @Dependencies.Dependency(\.envVars.appEnv) var appEnv
         @Dependencies.Dependency(\.logger) var logger
         @Dependencies.Dependency(\.stripe?.client) var stripeClient
-
+        
         return .init(
             newsletter: CoenttbNewsletter.Client.live(
                 database: database,
@@ -29,12 +29,12 @@ extension ServerClient.Client {
                     @Dependency(\.envVars.mailgunCompanyEmail) var mailgunCompanyEmail
                     @Dependency(\.envVars.companyName) var companyName
                     @Dependency(\.envVars) var envVars
-
+                    
                     guard
                         let mailgunCompanyEmail,
                         let companyName
                     else { return .none }
-
+                    
                     return { subscriberEmail in
                         Email.notifyOfNewSubscription(
                             from: mailgunCompanyEmail,
@@ -47,10 +47,10 @@ extension ServerClient.Client {
                 }(),
                 sendEmail: {
                     @Dependency(\.mailgunClient?.messages.send) var sendEmail
-
+                    
                     guard let sendEmail
                     else { return nil }
-
+                    
                     return { email in try await sendEmail(email) }
                 }(),
                 sendVerificationEmail: CoenttbNewsletter.Client.sendVerificationEmail
@@ -60,12 +60,12 @@ extension ServerClient.Client {
                 logger: logger,
                 getDatabaseUser: (
                     byUserId: { userId in
-                        try await ServerClientLive.User.query(on: database)
+                        try await ServerDatabase.User.query(on: database)
                             .filter(\.$id == userId)
                             .first()
                     },
                     byIdentityId: { identityId in
-                        try await ServerClientLive.User.query(on: database)
+                        try await ServerDatabase.User.query(on: database)
                             .filter(\.$identity.$id == identityId)
                             .first()
                     }
@@ -79,21 +79,21 @@ extension ServerClient.Client {
                             property = newValue
                         }
                     }
-
+                    
                     updateIfPresent(update.name, on: &identity.name)
                     updateIfPresent(update.stripe?.customerId, on: &user.stripe.customerId)
-
+                    
                     if let stripeCustomerId = update.stripe?.customerId {
                         user.stripe.customerId = stripeCustomerId
                     }
-
+                    
                     if let stripe = update.stripe {
                         user.stripe.customerId = stripe.customerId
                         user.stripe.subscription.status = stripe.subscriptionStatus
                     }
                 },
                 createDatabaseUser: { identityId in
-                    return ServerClientLive.User(id: nil, identityID: identityId, dateOfBirth: nil, newsletterConsent: true)
+                    return ServerDatabase.User(id: nil, identityID: identityId, dateOfBirth: nil, newsletterConsent: true)
                 },
                 currentUserId: {
                     @Dependencies.Dependency(\.currentUser?.id?.rawValue) var currentUserId
@@ -114,7 +114,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.envVars.companyName!) var businessName
                     @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
                     @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
-
+                    
                     await fireAndForget {
                         _ = try await sendEmail?(
                             .requestEmailVerification(
@@ -154,7 +154,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
-
+                    
                     await fireAndForget {
                         _ = try await sendEmail?(
                             Email(
@@ -177,7 +177,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
-
+                    
                     await fireAndForget {
                         _ = try await sendEmail?(
                             Email(
@@ -192,7 +192,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
-
+                    
                     await fireAndForget {
                         _ = try await sendEmail?(
                             Email(
@@ -216,7 +216,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.fireAndForget) var fireAndForget
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
-
+                    
                     await fireAndForget {
                         _ = try await sendEmail?(
                             Email(
@@ -242,7 +242,7 @@ extension ServerClient.Client {
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
                     @Dependencies.Dependency(\.stripe) var stripe
                     @Dependencies.Dependency(\.logger) var logger
-
+                    
                     try await database.transaction { database in
                         do {
                             guard let identity = try await Identity.query(on: database)
@@ -252,20 +252,20 @@ extension ServerClient.Client {
                                 logger.error("Could not find user with email \(currentEmail) when updating Stripe")
                                 return
                             }
-
-                            let user = try await ServerClientLive.User.query(on: database)
+                            
+                            let user = try await ServerDatabase.User.query(on: database)
                                 .filter(\.$identity.$id == identity.id!)
                                 .first()
-
+                            
                             guard let user = user
                             else { return }
-
+                            
                             guard let customerId = user.stripe.customerId
                             else {
                                 logger.info("Couldn't find stripeCustomerId")
                                 return
                             }
-
+                            
                             _ = try await stripe?.customers.update(
                                 customer: customerId,
                                 email: newEmail.rawValue
@@ -275,7 +275,7 @@ extension ServerClient.Client {
                             logger.error("Failed to update Stripe customer email: \(error.localizedDescription)")
                         }
                     }
-
+                    
                     await fireAndForget {
                         try await withThrowingTaskGroup(of: Void.self) { [sendEmail, currentEmail, newEmail, currentUserName] group in
                             group.addTask {
@@ -296,7 +296,6 @@ extension ServerClient.Client {
                                     )
                                 )
                             }
-
                             group.addTask {
                                 _ = try await sendEmail?(
                                     Email(
@@ -315,7 +314,7 @@ extension ServerClient.Client {
                                     )
                                 )
                             }
-
+                            
                             try await group.waitForAll()
                         }
                     }
@@ -329,11 +328,11 @@ extension ServerClient.Client {
 extension BusinessDetails {
     public static let fromEnvVars: BusinessDetails = {
         @Dependency(\.envVars.mailgun?.domain) var domain
-
+        
         @Dependencies.Dependency(\.envVars.companyName!) var businessName
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
-
+        
         return BusinessDetails(
             name: businessName,
             supportEmail: supportEmail,
@@ -351,7 +350,7 @@ extension CoenttbNewsletter.Client {
         @Dependencies.Dependency(\.envVars.companyName!) var businessName
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
         @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
-
+        
         return try await sendEmail(
             .requestEmailVerification(
                 verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: token, email: email.rawValue))))),
