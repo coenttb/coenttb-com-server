@@ -30,7 +30,7 @@ extension [any Fluent.Migration] {
             }(),
             {
                 var migration = Server_Database.User.CreateMigration()
-                migration.name = "ServerDatabase.User.Migration.Create"
+                migration.name = "Server_Database.User.Migration.Create"
                 return migration
             }(),
             {
