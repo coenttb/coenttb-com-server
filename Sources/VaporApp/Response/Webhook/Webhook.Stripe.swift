@@ -50,8 +50,8 @@ extension CoenttbStripe.Client {
 
         @Dependency(\.envVars.stripe?.secretKey) var secretKey
         @Dependency(\.currentUser) var currentUser
-        @Dependency(\.database) var database
-        @Dependency(\.database.account) var account
+        @Dependency(\.serverClient) var database
+        @Dependency(\.serverClient.account) var account
 
         switch (event.type, event.data?.object) {
         case (

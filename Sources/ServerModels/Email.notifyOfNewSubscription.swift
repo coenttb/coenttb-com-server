@@ -17,9 +17,6 @@ extension Email {
         subscriberEmail: EmailAddress,
         domain: String
     ) -> Email {
-        
-        @Dependencies.Dependency(\.envVars.appEnv) var appEnv
-
         return Mailgun.Email.notifyOfNewSubscription(
             from: companyEmail,
             to: to,
@@ -64,31 +61,3 @@ extension Email {
         )
     }
 }
-
-
-//
-//extension Email {
-//    public static func notifyOfNewSubscription(
-//        from: String,
-//        subscriberEmail: String
-//    ) -> Email? {
-//        @Dependency(\.envVars.appEnv) var appEnv
-//        @Dependency(\.envVars.mailgun?.domain) var domain
-//        @Dependency(\.envVars) var envVars
-//
-//        guard
-//            let domain = domain,
-//            let companyEmailString = envVars.companyInfoEmailAddress,
-//            let companyName = envVars.companyName
-//        else {
-//            return nil
-//        }
-//
-//        return Email.notifyOfNewSubscription(
-//            companyName: companyName,
-//            companyEmail: .init(companyEmailString),
-//            subscriberEmail: subscriberEmail,
-//            domain: domain.rawValue
-//        )
-//    }
-//}

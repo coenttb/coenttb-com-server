@@ -15,7 +15,7 @@ import EmailAddress
 import ServerModels
 import StripeKit
 
-extension ServerDatabase.Client {
+extension ServerClient.Client {
     @DependencyClient
     public struct Stripe: @unchecked Sendable {
         @DependencyEndpoint
@@ -26,6 +26,6 @@ extension ServerDatabase.Client {
     }
 }
 
-extension ServerDatabase.Client.Stripe: TestDependencyKey {
+extension ServerClient.Client.Stripe: TestDependencyKey {
     public static var testValue: Self { .init() }
 }

@@ -10,7 +10,6 @@ import Dependencies
 import EmailAddress
 import Fluent
 import Foundation
-import ServerDatabase
 import Vapor
 
 struct HelloCommand: AsyncCommand {

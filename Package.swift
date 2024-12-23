@@ -5,7 +5,6 @@ import PackageDescription
 
 extension String {
     static let serverEnvVars: Self = "ServerEnvVars"
-    static let serverDatabase: Self = "ServerDatabase"
     static let serverDependencies: Self = "ServerDependencies"
     static let serverModels: Self = "ServerModels"
     static let serverRouter: Self = "ServerRouter"
@@ -13,17 +12,20 @@ extension String {
     static let coenttb: Self = "Coenttb"
     static let vaporApp: Self = "VaporApp"
     static let server: Self = "Server"
+    static let serverClient: Self = "ServerClient"
+    static let serverClientLive: Self = "ServerClientLive"
 }
 
 extension Target.Dependency {
     static var serverEnvVars: Self { .target(name: .serverEnvVars) }
-    static var serverDatabase: Self { .target(name: .serverDatabase) }
     static var serverDependencies: Self { .target(name: .serverDependencies) }
     static var serverModels: Self { .target(name: .serverModels) }
     static var serverRouter: Self { .target(name: .serverRouter) }
     static var serverTranslations: Self { .target(name: .serverTranslations) }
     static var coenttb: Self { .target(name: .coenttb) }
     static var vaporApp: Self { .target(name: .vaporApp) }
+    static var serverClient: Self { .target(name: .serverClient) }
+    static var serverClientLive: Self { .target(name: .serverClientLive) }
 }
 
 extension Target.Dependency {
@@ -51,13 +53,14 @@ let package = Package(
     ],
     products: [
         .library(name: .serverEnvVars, targets: [.serverEnvVars]),
-        .library(name: .serverDatabase, targets: [.serverDatabase]),
         .library(name: .serverDependencies, targets: [.serverDependencies]),
         .library(name: .serverModels, targets: [.serverModels]),
         .library(name: .serverRouter, targets: [.serverRouter]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
         .library(name: .coenttb, targets: [.coenttb]),
-        .library(name: .vaporApp, targets: [.vaporApp])
+        .library(name: .vaporApp, targets: [.vaporApp]),
+        .library(name: .serverClient, targets: [.serverClient]),
+        .library(name: .serverClientLive, targets: [.serverClientLive])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "main"),
@@ -85,22 +88,35 @@ let package = Package(
                 .googleAnalytics,
                 .postgres,
                 .stripe,
-                .stripeLive,
             ]
         ),
         .target(
-            name: .serverDatabase,
+            name: .serverClient,
             dependencies: [
+                .serverEnvVars,
+                .serverDependencies,
+                .serverRouter,
+                .dependenciesMacros,
+                .coenttbWeb,
+                .coenttbIdentity,
+                .mailgun,
+                .newsletter,
+            ]
+        ),
+        .target(
+            name: .serverClientLive,
+            dependencies: [
+                .serverClient,
+                .serverDependencies,
+                .serverEnvVars,
+                .serverRouter,
+                .dependenciesMacros,
                 .coenttbWeb,
                 .coenttbIdentity,
                 .coenttbIdentityFluent,
-                .serverEnvVars,
-                .mailgun,
-                .serverDependencies,
-                .serverRouter,
-                .queuesFluentDriver,
-                .dependenciesMacros,
+                .newsletter,
                 .newsletterFluent,
+                .mailgun,
             ]
         ),
         .target(
@@ -113,21 +129,21 @@ let package = Package(
         .target(
             name: .serverModels,
             dependencies: [
-                .coenttbWeb,
-                .stripe,
-                .coenttbIdentity,
                 .serverEnvVars,
+                .coenttbWeb,
+                .coenttbIdentity,
+                .stripe,
             ]
         ),
         .target(
             name: .serverRouter,
             dependencies: [
-                .blog,
+                .serverDependencies,
+                .serverTranslations,
                 .coenttbWeb,
+                .blog,
                 .coenttbIdentity,
                 .coenttbSyndication,
-                .serverTranslations,
-                .serverDependencies,
                 .stripe,
                 .newsletter,
             ]
@@ -141,16 +157,16 @@ let package = Package(
         .target(
             name: .coenttb,
             dependencies: [
-                .coenttbIdentity,
-                .coenttbWeb,
                 .serverEnvVars,
+                .serverTranslations,
+                .serverRouter,
+                .serverClientLive,
+                .coenttbWeb,
+                .coenttbIdentity,
+                .coenttbIdentityFluent,
                 .googleAnalytics,
                 .hotjar,
                 .mailgun,
-                .serverTranslations,
-                .serverDatabase,
-                .serverModels,
-                .serverRouter,
                 .stripeLive,
             ],
             resources: [
@@ -164,12 +180,10 @@ let package = Package(
                 .serverEnvVars,
                 .serverDependencies,
                 .coenttb,
-                .serverDatabase,
                 .newsletter,
                 .queuesFluentDriver,
-                .stripeLive,
-                .coenttbIdentityFluent,
                 .blog,
+                .serverClient,
             ]
 //            swiftSettings: [
 //                .unsafeFlags(
