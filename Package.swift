@@ -205,21 +205,21 @@ let package = Package(
                 .coenttbNewsletter,
                 .coenttbBlog,
                 .queuesFluentDriver,
-            ],
-            swiftSettings: [
-                .unsafeFlags(
-                    {
-                        #if os(Linux)
-                        return ["-I/usr/include", "-L/usr/lib"]
-                        #else
-                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
-                        #endif
-                    }()
-                )
-            ],
-            linkerSettings: [
-                .linkedLibrary("gd")
             ]
+//            swiftSettings: [
+//                .unsafeFlags(
+//                    {
+//                        #if os(Linux)
+//                        return ["-I/usr/include", "-L/usr/lib"]
+//                        #else
+//                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
+//                        #endif
+//                    }()
+//                )
+//            ],
+//            linkerSettings: [
+//                .linkedLibrary("gd")
+//            ]
         ),
         .executableTarget(
             name: .server,

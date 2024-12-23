@@ -35,23 +35,32 @@ extension BlogKey: @retroactive DependencyKey {
                 }
         },
         filenameToResourceUrl: { fileName in
-            Bundle.module.url(forResource: fileName, withExtension: "md")
+            print(fileName)
+            return Bundle.module.url(forResource: fileName, withExtension: "md")
         },
         postToRoute: { post in
             @Dependency(\.serverRouter) var serverRouter
             return serverRouter.url(for: .blog(.post(post)))
         },
         postToFilename: { post in
-                .init { language in
-                    (
-                        post.hidden == .preview
-                        ? "Preview-Blog-\(post.index)"
-                        : "Blog-\(post.index)"
-                    )
-                    + "-\(language.rawValue)"
-                }
+            return .init { language in
+                [
+                    post.category.map{ $0(language) },
+                    "\(post.index)",
+                    language.rawValue
+                ]
+                    .compactMap{ $0 }
+                    .joined(separator: "-")
+            }
         }
     )
+}
+
+extension LanguagesKey: @retroactive DependencyKey {
+    public static let liveValue: [Language] = {
+        @Dependency(\.envVars.languages) var languages
+        return languages ?? [.english]
+    }()
 }
 
 extension DatabaseClientKey: DependencyKey {
