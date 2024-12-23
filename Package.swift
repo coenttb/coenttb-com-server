@@ -176,14 +176,14 @@ let package = Package(
         .target(
             name: .vaporApp,
             dependencies: [
-                .coenttbWeb,
                 .serverEnvVars,
+                .serverClient,
                 .serverDependencies,
+                .coenttbWeb,
                 .coenttb,
                 .newsletter,
-                .queuesFluentDriver,
                 .blog,
-                .serverClient,
+                .queuesFluentDriver,
             ]
 //            swiftSettings: [
 //                .unsafeFlags(

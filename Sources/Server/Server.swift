@@ -1,6 +1,4 @@
-import CoenttbVapor
-import Dependencies
-import Foundation
+import CoenttbWeb
 import VaporApp
 
 @main

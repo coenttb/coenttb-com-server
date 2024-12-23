@@ -69,7 +69,6 @@ extension EnvVars {
     }
 
     public var googleAnalytics: GoogleAnalytics.Client.EnvVars? {
-
         guard let id = self["GOOGLE_ANALYTICS_ID"]
         else { return nil }
 
@@ -79,7 +78,6 @@ extension EnvVars {
     }
 
     public var hotjarAnalytics: Hotjar.Client.EnvVars? {
-
         guard let id = self["HOTJAR_ANALYTICS_ID"]
         else { return nil }
 
