@@ -11,7 +11,7 @@ import CoenttbWebLegal
 import Dependencies
 import Foundation
 import Languages
-import ServerRouter
+import Server_Router
 
 extension Clauses {
     nonisolated(unsafe)

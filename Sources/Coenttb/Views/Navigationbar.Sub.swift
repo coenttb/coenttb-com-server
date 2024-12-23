@@ -10,8 +10,8 @@ import CoenttbWebModels
 import Dependencies
 import Foundation
 import Languages
-import ServerRouter
-import ServerTranslations
+import Server_Router
+import Server_Translations
 import URLRouting
 
 extension [(URL, String)] {

@@ -8,7 +8,7 @@
 import CoenttbWebHTML
 import Dependencies
 import Foundation
-import ServerRouter
+import Server_Router
 
 extension Link {
     package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {

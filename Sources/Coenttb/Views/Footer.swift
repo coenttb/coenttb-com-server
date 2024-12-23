@@ -11,7 +11,7 @@ import CoenttbWebHTML
 import CoenttbWebTranslations
 import Dependencies
 import Foundation
-import ServerRouter
+import Server_Router
 
 extension HTML {
 

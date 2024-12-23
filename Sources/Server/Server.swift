@@ -1,5 +1,5 @@
 import CoenttbWeb
-import VaporApp
+import Vapor_Application
 
 @main
 struct Server {

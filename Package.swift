@@ -4,17 +4,17 @@ import Foundation
 import PackageDescription
 
 extension String {
-    static let serverEnvVars: Self = "ServerEnvVars"
-    static let serverDependencies: Self = "ServerDependencies"
-    static let serverModels: Self = "ServerModels"
-    static let serverRouter: Self = "ServerRouter"
-    static let serverTranslations: Self = "ServerTranslations"
+    static let serverEnvVars: Self = "Server EnvVars"
+    static let serverDependencies: Self = "Server Dependencies"
+    static let serverModels: Self = "Server Models"
+    static let serverRouter: Self = "Server Router"
+    static let serverTranslations: Self = "Server Translations"
     static let coenttb: Self = "Coenttb"
-    static let vaporApp: Self = "VaporApp"
+    static let vaporApp: Self = "Vapor Application"
     static let server: Self = "Server"
-    static let serverClient: Self = "ServerClient"
-    static let serverClientLive: Self = "ServerClientLive"
-    static let serverDatabase: Self = "ServerDatabase"
+    static let serverClient: Self = "Server Client"
+    static let serverClientLive: Self = "Server Client Live"
+    static let serverDatabase: Self = "Server Database"
 }
 
 extension Target.Dependency {
