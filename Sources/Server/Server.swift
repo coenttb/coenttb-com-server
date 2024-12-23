@@ -10,9 +10,7 @@ struct Server {
         let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
         let logLevel = envVars.logLevel ?? .info
 
-        LoggingSystem.bootstrap { _ in
-            CoenttbLogHandler(label: "main", logLevel: logLevel, metadataProvider: nil)
-        }
+        LoggingSystem.bootstrap { CoenttbLogHandler(label: $0, logLevel: logLevel, metadataProvider: nil) }
 
         @Dependency(\.logger) var logger
 
@@ -33,7 +31,7 @@ struct Server {
                 logger.critical("Application failed to start: \(error.localizedDescription)")
                 throw error
             }
-
+            
         } catch {
             logger.critical("Critical failure: \(error.localizedDescription)")
             throw error

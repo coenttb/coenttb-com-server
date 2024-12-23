@@ -46,6 +46,7 @@ extension Target.Dependency {
     static var coenttbWeb: Self { .product(name: "CoenttbWeb", package: "coenttb-web") }
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
+    static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
 }
 
 let package = Package(
@@ -226,7 +227,13 @@ let package = Package(
         ),
         .testTarget(
             name: "Coenttb Tests",
-            dependencies: [.coenttbWeb, .coenttb])
+            dependencies: [
+                .coenttbWeb,
+                .coenttb,
+                .dependenciesTestSupport,
+                .coenttbBlog
+            ]
+        )
     ],
     swiftLanguageModes: [.v6]
 )
