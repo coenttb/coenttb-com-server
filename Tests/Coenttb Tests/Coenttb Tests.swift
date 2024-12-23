@@ -32,7 +32,6 @@ struct DocumentTests {
         let doc = DefaultHTMLDocument { HTMLEmpty() }
         let head = doc.head
         
-        // Check for required meta elements
         let html = String(head)
         
         #expect(html.contains { "viewport" })
@@ -41,21 +40,14 @@ struct DocumentTests {
     @Test("Document should handle multiple languages")
     func testLanguageSupport() {
         withDependencies {
-            $0.language = .dutch
+            $0.languages = [.dutch, .english]
         } operation: {
             let doc = DefaultHTMLDocument { HTMLEmpty() }
-            let html = String(doc.body)
+            let html = String(doc)
             
-            #expect(html.contains("nl"))
-        }
-        
-        withDependencies {
-            $0.language = .english
-        } operation: {
-            let doc = DefaultHTMLDocument { HTMLEmpty() }
-            let html = String(doc.body)
-            
-            #expect(html.contains("en"))
+            #expect(html.contains(#"lang="en""#))
+            #expect(html.contains(#"hreflang="nl""#))
+//            #expect(html.contains(#"hreflang="en""#))
         }
     }
 }

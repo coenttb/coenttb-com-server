@@ -105,15 +105,30 @@ extension CoenttbFooter {
             if let companyName {
                 let year = Calendar(identifier: .gregorian).component( .year, from: Date.now)
                 HTMLMarkdown {"""
-                ## License
-                
-                © \(year)\(" " + companyName), all rights reserved for the paid content of coenttb.com, including text, images, and other media. Unauthorized use, reproduction, or distribution of this content is prohibited without prior written permission by coenttb.
-                
-                All other content of coenttb.com (such as blog posts, documentation, and media not part of paid content) is licensed under [CC BY-NC-SA 4.0 LICENSE](\(repository)/blob/main/CC%20BY-NC-SA%204.0%20LICENSE.md).
-                
-                The [source code](\(repository)) of this website, excluding all content, is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](\(repository)/blob/main/LICENSE.md).
-                
-                For organizations or individuals wishing to use content or source code outside of these licensing terms, a commercial license is available. Please contact info@coenttb.com for inquiries.
+                \(TranslatedString(
+                    dutch: """
+                    ## Licentie
+
+                    © \(year)\(" " + companyName), alle rechten voorbehouden voor de betaalde inhoud van coenttb.com, inclusief tekst, afbeeldingen en andere media. Ongeautoriseerd gebruik, reproductie of verspreiding van deze inhoud is verboden zonder voorafgaande schriftelijke toestemming van coenttb.
+
+                    Alle overige inhoud van coenttb.com (zoals blogposts, documentatie en media die geen onderdeel uitmaken van betaalde inhoud) valt onder de [CC BY-NC-SA 4.0 LICENTIE](\(repository)/blob/main/CC%20BY-NC-SA%204.0%20LICENSE.md).
+
+                    De [broncode](\(repository)) van deze website, met uitzondering van alle inhoud, is gelicenseerd onder de [GNU Affero General Public License v3.0 (AGPL-3.0)](\(repository)/blob/main/LICENSE.md).
+
+                    Voor organisaties of individuen die content of broncode buiten deze licentievoorwaarden willen gebruiken, is een commerciële licentie beschikbaar. Neem voor meer informatie contact op via info@coenttb.com.
+                    """,
+                    english: """
+                    ## License
+                    
+                    © \(year)\(" " + companyName), all rights reserved for the paid content of coenttb.com, including text, images, and other media. Unauthorized use, reproduction, or distribution of this content is prohibited without prior written permission by coenttb.
+                    
+                    All other content of coenttb.com (such as blog posts, documentation, and media not part of paid content) is licensed under [CC BY-NC-SA 4.0 LICENSE](\(repository)/blob/main/CC%20BY-NC-SA%204.0%20LICENSE.md).
+                    
+                    The [source code](\(repository)) of this website, excluding all content, is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](\(repository)/blob/main/LICENSE.md).
+                    
+                    For organizations or individuals wishing to use content or source code outside of these licensing terms, a commercial license is available. Please contact info@coenttb.com for inquiries.
+                    """
+                ))
                 """}
                 .color(.secondary)
                 .fontStyle(.body(.small))

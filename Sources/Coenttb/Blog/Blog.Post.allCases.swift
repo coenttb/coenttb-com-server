@@ -16,43 +16,45 @@ import Languages
 
 extension [CoenttbBlog.Blog.Post] {
 
-    package static let allCases: [CoenttbBlog.Blog.Post] = [
-        .init(
-            id: .init(),
-            index: 1,
-            publishedAt: .now,
-            image: div { Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(15.percent)) }.position(.absolute),
-            title: TranslatedString(
-                dutch: "Van blut naar build in public: open source coenttb.com",
-                english: "From broke to building in public: open-sourcing coenttb.com"
-            ).description,
-            hidden: .no,
-            blurb: """
-            \(
-                TranslatedString(
-                    dutch: """
-                    Start-up gebouwd. Blut gegaan. Ziel verkocht. Nog een startup gebouwd. Bijna weer blut. Toen op reset gedrukt, mezelf opnieuw uitgevonden in de life sciences, en nu bouw ik mijn eigen ding—legal tech in Swift, en ik deel de reis.
+    package static var allCases: [CoenttbBlog.Blog.Post] {
+        [
+            .init(
+                id: .init(),
+                index: 1,
+                publishedAt: .now,
+                image: div { Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(15.percent)) }.position(.absolute),
+                title: TranslatedString(
+                    dutch: "Van blut naar build in public: open source coenttb.com",
+                    english: "From broke to building in public: open-sourcing coenttb.com"
+                ).description,
+                hidden: .no,
+                blurb: """
+                \(
+                    TranslatedString(
+                        dutch: """
+                        Start-up gebouwd. Blut gegaan. Ziel verkocht. Nog een startup gebouwd. Bijna weer blut. Toen op reset gedrukt, mezelf opnieuw uitgevonden in de life sciences, en nu bouw ik mijn eigen ding—legal tech in Swift, en ik deel de reis.
 
-                    Ik open-source **coenttb.com**, mijn Swift Vapor-website, omdat van scratch beginnen zwaar overrated is. Swift voor web is *moeilijk*, maar hoeft niet eenzaam te zijn.
+                        Ik open-source **coenttb.com**, mijn Swift Vapor-website, omdat van scratch beginnen zwaar overrated is. Swift voor web is *moeilijk*, maar hoeft niet eenzaam te zijn.
 
-                    Volg voor legal tech, Swift-tips en lessen van (bijna) twee keer blut gaan.
+                        Volg voor legal tech, Swift-tips en lessen van (bijna) twee keer blut gaan.
 
-                    > 👉 [Nieuwsbrief](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
-                    """,
-                    english: """
-                    Built a startup. Went broke. Sold soul. Built another startup. Almost went broke *again*. Hit reset, leveled up in life sciences, and now I’m doing my own thing—coding legal tech with Swift and sharing the grind.
+                        > 👉 [Nieuwsbrief](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
+                        """,
+                        english: """
+                        Built a startup. Went broke. Sold soul. Built another startup. Almost went broke *again*. Hit reset, leveled up in life sciences, and now I’m doing my own thing—coding legal tech with Swift and sharing the grind.
 
-                    I’m open-sourcing **coenttb.com**, my Swift Vapor website, because starting from scratch is overrated. Swift for web is *hard*, but it doesn’t have to be lonely.
+                        I’m open-sourcing **coenttb.com**, my Swift Vapor website, because starting from scratch is overrated. Swift for web is *hard*, but it doesn’t have to be lonely.
 
-                    Follow for legal tech, Swift tips, and lessons from almost going broke (twice).
+                        Follow for legal tech, Swift tips, and lessons from almost going broke (twice).
 
-                    > 👉 [Newsletter](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
-                    """
+                        > 👉 [Newsletter](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
+                        """
+                    )
                 )
+                """,
+                estimatedTimeToComplete: 5.minutes,
+                permission: .free
             )
-            """,
-            estimatedTimeToComplete: 5.minutes,
-            permission: .free
-        )
-    ]
+        ]
+    }
 }
