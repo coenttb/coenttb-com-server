@@ -25,7 +25,6 @@ package struct DefaultHTMLDocument<
     Footer: HTML
 >: HTMLDocument {
     let themeColor: HTMLColor
-    let languages: [Languages.Language]
     let styles: Styles
     let scripts: Scripts
     let favicons: Favicons
@@ -39,9 +38,7 @@ package struct DefaultHTMLDocument<
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = {
             HTMLGroup {
-                PrismJSHead(
-                    languages: ["swift"]
-                )
+                PrismJSHead(languages: ["swift"])
                 fontAwesomeScript
             }
         },
@@ -56,8 +53,6 @@ package struct DefaultHTMLDocument<
         }
     ) {
         self.themeColor = themeColor
-        @Dependency(\.envVars.languages) var languages
-        self.languages = languages ?? [.english]
         self.styles = styles()
         self.scripts = scripts()
         self.favicons = favicons()
@@ -67,6 +62,8 @@ package struct DefaultHTMLDocument<
         self._footer = footer()
     }
 
+    @Dependency(\.languages) var languages
+    
     package var head: some HTML {
         CoenttbHTMLDocumentHeader(
             themeColor: themeColor,
@@ -157,7 +154,6 @@ package struct CoenttbHTMLDocumentHeader<
             rssXml: siteRouter.url(for: .public(.rssXml)),
             themeColor: themeColor,
             language: language,
-            languages: languages ?? [.english],
             hreflang: hreflang,
             styles: styles,
             scripts: { scripts },

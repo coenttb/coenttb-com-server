@@ -1,5 +1,5 @@
 {
-  "originHash" : "8d7c39d71f1f03fbceb4619cbe8186534f6063494383925829705f20efd2be51",
+  "originHash" : "ecaba7b8489c19773e7caf68d0811060f0e36d49ddaf4c278c4ef7057e05ed0e",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "92eb7983028e96aae9e3a78e42eb7d7df8da0f33"
+        "revision" : "1d1666474540aef37951d1e778d5cd455c6d891b"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "df0062586a2adc84cd086a518c3ac625e1459fc1"
+        "revision" : "4b8d40d1a8e081fbd35a6d619ee082258914255e"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0343131627de5d6483eb100f937c800f4e2d2e3c"
+        "revision" : "f236cda8d160c1d446585217c18e66e918cc0d64"
       }
     },
     {
