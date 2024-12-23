@@ -12,7 +12,7 @@ import Server_Models
 import Server_Router
 
 extension Application {
-    package static func configure(app: Application) async throws {
+    package static func configure(app: Vapor.Application) async throws {
 
         Application.preloadStaticResources()
 
