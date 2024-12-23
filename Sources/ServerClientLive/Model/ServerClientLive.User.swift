@@ -74,13 +74,13 @@ final class User: Model, @unchecked Sendable {
     }
 }
 
-extension ServerDatabase.User {
+extension ServerClientLive.User {
     struct CreateMigration: AsyncMigration {
         
-        var name: String = "ServerDatabase.User.CreateMigration"
+        var name: String = "ServerClientLive.User.CreateMigration"
         
         func prepare(on database: Fluent.Database) async throws {
-            try await database.schema(ServerDatabase.User.schema)
+            try await database.schema(ServerClientLive.User.schema)
                 .id()
                 .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentityFluent.Identity.schema, .id))
                 .field(FieldKeys.dateOfBirth, .date)
@@ -99,7 +99,7 @@ extension ServerDatabase.User {
         }
 
         func revert(on database: Fluent.Database) async throws {
-            try await database.schema(ServerDatabase.User.schema).delete()
+            try await database.schema(ServerClientLive.User.schema).delete()
         }
     }
 }
@@ -119,7 +119,7 @@ public struct ConfirmDeleteUserJob: AsyncScheduledJob {
         let currentTime = Date.now
         let gracePeriodDuration: TimeInterval = 7 * 24 * 60 * 60 // 7 days
 
-        let usersPendingDeletion = try await ServerDatabase.User.query(on: db)
+        let usersPendingDeletion = try await ServerClientLive.User.query(on: db)
             .filter(\.$deletionState == .pending)
             .all()
 
@@ -134,10 +134,10 @@ public struct ConfirmDeleteUserJob: AsyncScheduledJob {
                     try await user.save(on: db)
 
                     // Log the deletion
-                    logger.info("ServerDatabase.User \(user.id?.uuidString ?? "unknown") has been permanently deleted.")
+                    logger.info("ServerClientLive.User \(user.id?.uuidString ?? "unknown") has been permanently deleted.")
                 } else {
                     // Log that the user is still within the grace period
-                    logger.info("ServerDatabase.User \(user.id?.uuidString ?? "unknown") is still within the grace period.")
+                    logger.info("ServerClientLive.User \(user.id?.uuidString ?? "unknown") is still within the grace period.")
                 }
             }
         }

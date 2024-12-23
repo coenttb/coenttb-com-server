@@ -8,8 +8,9 @@ import Mailgun
 import ServerDependencies
 import ServerModels
 import ServerRouter
+import ServerClient
 
-extension ServerDatabase.Client {
+extension ServerClient.Client {
     public static func live(
         database: Fluent.Database
     ) -> Self {
@@ -59,12 +60,12 @@ extension ServerDatabase.Client {
                 logger: logger,
                 getDatabaseUser: (
                     byUserId: { userId in
-                        try await ServerDatabase.User.query(on: database)
+                        try await ServerClientLive.User.query(on: database)
                             .filter(\.$id == userId)
                             .first()
                     },
                     byIdentityId: { identityId in
-                        try await ServerDatabase.User.query(on: database)
+                        try await ServerClientLive.User.query(on: database)
                             .filter(\.$identity.$id == identityId)
                             .first()
                     }
@@ -92,7 +93,7 @@ extension ServerDatabase.Client {
                     }
                 },
                 createDatabaseUser: { identityId in
-                    return ServerDatabase.User(id: nil, identityID: identityId, dateOfBirth: nil, newsletterConsent: true)
+                    return ServerClientLive.User(id: nil, identityID: identityId, dateOfBirth: nil, newsletterConsent: true)
                 },
                 currentUserId: {
                     @Dependencies.Dependency(\.currentUser?.id?.rawValue) var currentUserId
@@ -242,7 +243,7 @@ extension ServerDatabase.Client {
                     @Dependencies.Dependency(\.stripe) var stripe
                     @Dependencies.Dependency(\.logger) var logger
 
-                    await fireAndForget {
+                    try await database.transaction { database in
                         do {
                             guard let identity = try await Identity.query(on: database)
                                 .filter(\.$email == newEmail.rawValue)
@@ -252,7 +253,7 @@ extension ServerDatabase.Client {
                                 return
                             }
 
-                            let user = try await ServerDatabase.User.query(on: database)
+                            let user = try await ServerClientLive.User.query(on: database)
                                 .filter(\.$identity.$id == identity.id!)
                                 .first()
 
@@ -320,7 +321,7 @@ extension ServerDatabase.Client {
                     }
                 }
             ),
-            stripe: stripeClient.map(ServerDatabase.Client.Stripe.live(stripeClient:))
+            stripe: stripeClient.map(ServerClient.Client.Stripe.live(stripeClient:))
         )
     }
 }

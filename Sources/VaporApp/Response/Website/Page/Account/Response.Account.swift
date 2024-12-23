@@ -13,7 +13,7 @@ import Dependencies
 import ServerEnvVars
 import Foundation
 import Languages
-import ServerDatabase
+import ServerClient
 import ServerDependencies
 import ServerModels
 import ServerRouter
@@ -35,7 +35,7 @@ extension WebsitePage.Account {
         case .create, .delete, .login, .logout, .password, .emailChange:
             guard let route = CoenttbIdentity.Route(account) else { throw Abort(.internalServerError) }
 
-            @Dependency(\.database.account) var accountDependency
+            @Dependency(\.serverClient.account) var accountDependency
             @Dependency(\.envVars.canonicalHost) var canonicalHost
 
             return try await CoenttbIdentity.Route.response(

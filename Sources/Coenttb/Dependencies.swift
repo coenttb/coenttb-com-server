@@ -11,7 +11,8 @@ import CoenttbNewsletter
 import CoenttbStripe
 import CoenttbStripeLive
 import Mailgun
-import ServerDatabase
+import ServerClient
+import ServerClientLive
 import ServerDependencies
 import ServerModels
 import ServerRouter
@@ -25,7 +26,7 @@ extension BlogKey: @retroactive DependencyKey {
         getAll: {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
-
+            
             return [CoenttbBlog.Blog.Post].all
                 .filter {
                     appEnv == .production
@@ -54,15 +55,15 @@ extension BlogKey: @retroactive DependencyKey {
 }
 
 extension DatabaseClientKey: DependencyKey {
-    public static let liveValue: ServerDatabase.Client = {
+    public static let liveValue: ServerClient.Client = {
         @Dependency(\.request?.db) var database
-
+        
         guard
             let database
         else {
-            return ServerDatabase.Client.noop
+            return ServerClient.Client.previewValue
         }
-
+        
         return .live(database: database)
     }()
 }
@@ -71,7 +72,7 @@ extension PreviewPostKey: DependencyKey {
     public static let liveValue: @Sendable () -> [CoenttbBlog.Blog.Post] = {
         @Dependency(\.envVars.appEnv) var appEnv
         @Dependency(\.date.now) var now
-
+        
         return [CoenttbBlog.Blog.Post].preview
             .filter {
                 appEnv == .production
@@ -98,12 +99,22 @@ extension ServerRouterKey: DependencyKey {
     }()
 }
 
+extension ProjectRootKey: @retroactive DependencyKey {
+    public static var liveValue: URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
+}
+
+
 extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
     public static var liveValue: SQLPostgresConfiguration {
-
+        
         @Dependency(\.envVars.emergencyMode) var emergencyMode
         @Dependency(\.envVars.postgres.databaseUrl) var postgresDatabaseUrl
-
+        
         return .liveValue(
             emergencyMode: emergencyMode,
             postgresDatabaseUrl: postgresDatabaseUrl)
@@ -114,7 +125,7 @@ extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
     public static var liveValue: EventLoopGroupConnectionPool<PostgresConnectionSource> {
         @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
         @Dependency(\.sqlConfiguration) var sqlConfiguration
-
+        
         return .init(
             source: PostgresConnectionSource(sqlConfiguration: sqlConfiguration),
             on: mainEventLoopGroup
@@ -123,7 +134,7 @@ extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
 }
 
 extension Logger: @retroactive DependencyKey {
-    public static let liveValue: Self = {
+    public static let liveValue: Logger = {
         @Dependency(\.envVars) var envVars
         var logger = Logger(label: ProcessInfo.processInfo.processName) { _ in
             CoenttbLogHandler(label: "coenttb", logLevel: envVars.logLevel ?? .trace, metadataProvider: nil)
@@ -135,7 +146,7 @@ extension Logger: @retroactive DependencyKey {
 extension Mailgun.Client: @retroactive DependencyKey {
     public static var liveValue: Mailgun.Client? {
         @Dependency(\.envVars) var envVars
-
+        
         guard
             let baseUrl = envVars.mailgun?.baseUrl,
             let apiKey = envVars.mailgun?.apiKey,
@@ -143,7 +154,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         else {
             return nil
         }
-
+        
         return Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: .init(string: baseUrl) ?? URL.mailgun_eu_baseUrl,
@@ -157,13 +168,13 @@ extension StripeClientKey: @retroactive DependencyKey {
     public static var liveValue: CoenttbStripe.Client? {
         @Dependency(\.envVars) var envVars
         @Dependency(\.httpClient) var httpClient
-
+        
         guard
             let stripeSecretKey = envVars.stripe?.secretKey
         else {
             return nil
         }
-
+        
         return CoenttbStripe.Client.live(
             stripeSecretKey: stripeSecretKey,
             httpClient: httpClient

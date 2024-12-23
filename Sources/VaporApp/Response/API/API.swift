@@ -10,6 +10,7 @@ import CoenttbSyndication
 import Mailgun
 import ServerModels
 import ServerRouter
+import ServerClient
 
 extension ServerRouterAPI {
     static func response(
@@ -22,7 +23,7 @@ extension ServerRouterAPI {
             switch v1 {
             case .newsletter(let newsletter):
 
-                @Dependency(\.database.newsletter) var client
+                @Dependency(\.serverClient.newsletter) var client
 
                 return try await CoenttbNewsletter.API.response(
                     client: client,
@@ -33,7 +34,7 @@ extension ServerRouterAPI {
 
             case .account(let account):
 
-                @Dependency(\.database.account) var database
+                @Dependency(\.serverClient.account) var database
 
                 return try await CoenttbIdentity.API.response(
                     api: account,
@@ -41,7 +42,7 @@ extension ServerRouterAPI {
                     userInit: ServerModels.User.init(update:),
                     reauthenticateForEmailChange: { password in
                         @Dependency(\.currentUser) var currentUser
-                        @Dependency(\.database.account) var database
+                        @Dependency(\.serverClient.account) var database
                         @Dependency(\.request?.db) var db
 
                         guard
@@ -60,7 +61,7 @@ extension ServerRouterAPI {
                     },
                     reauthenticateForPasswordChange: { password in
                         @Dependency(\.currentUser) var currentUser
-                        @Dependency(\.database.account) var database
+                        @Dependency(\.serverClient.account) var database
                         @Dependency(\.request?.db) var db
 
                         guard
@@ -104,7 +105,7 @@ extension ServerRouterAPI {
 //                    },
 //                    updateUser: { newStripeCustomerId in
 //                        @Dependency(\.currentUser) var currentUser
-//                        @Dependency(\.database.account) var database
+//                        @Dependency(\.serverClient.account) var database
 //                        var updatedUser = currentUser
 //                        updatedUser?.stripe?.customerId = newStripeCustomerId
 //                        _ = try await database.update(updatedUser)

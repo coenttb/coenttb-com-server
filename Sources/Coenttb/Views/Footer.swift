@@ -121,7 +121,6 @@ extension CoenttbFooter {
                 .linkColor(.coenttbPrimaryColor)
                 
             }
-            
         }
     }
 }

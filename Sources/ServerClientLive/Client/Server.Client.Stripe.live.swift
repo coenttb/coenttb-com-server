@@ -13,8 +13,9 @@ import EmailAddress
 import ServerModels
 import StripeKit
 import CoenttbWeb
+import ServerClient
 
-extension ServerDatabase.Client.Stripe {
+extension ServerClient.Client.Stripe {
     static func live(
         stripeClient: StripeKit.StripeClient
     ) -> Self {
@@ -35,7 +36,7 @@ extension ServerDatabase.Client.Stripe {
                 do {
                     guard
                         let database,
-                        let user: ServerDatabase.User = try await ServerDatabase.User.query(on: database)
+                        let user: ServerClientLive.User = try await ServerClientLive.User.query(on: database)
                         .filter(\.$stripe.$customerId == stripeCustomerId)
                         .with(\.$identity)
                         .first()

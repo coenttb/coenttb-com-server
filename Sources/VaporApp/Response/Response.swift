@@ -6,18 +6,13 @@
 //
 
 import Coenttb
-import CoenttbVapor
+import CoenttbWeb
 import CoenttbBlog
-import CoenttbWebDependencies
-import CoenttbWebHTML
 import CoenttbSyndication
-import Dependencies
 import ServerEnvVars
-import Languages
 import ServerModels
 import ServerRouter
-import Sitemap
-import Vapor
+import ServerDependencies
 
 extension ServerRoute {
     static func response(
@@ -25,7 +20,7 @@ extension ServerRoute {
         route: ServerRoute
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.logger) var logger
-        @Dependency(\.database.account.currentUser) var currentUser
+        @Dependency(\.serverClient.account.currentUser) var currentUser
 
         return try await withDependencies {
             $0.envVars = .liveValue

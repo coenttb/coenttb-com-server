@@ -17,6 +17,7 @@ import Fluent
 import Foundation
 import EmailAddress
 
+
 extension [any Fluent.Migration] {
     public static var coenttb: Self {
         var migrations: [any Fluent.Migration] = [
@@ -41,8 +42,8 @@ extension [any Fluent.Migration] {
 //                return migration
 //            }(),
             {
-                var migration = ServerDatabase.User.CreateMigration()
-                migration.name = "ServerDatabase.User.Migration.Create"
+                var migration = ServerClientLive.User.CreateMigration()
+                migration.name = "ServerClientLive.User.Migration.Create"
                 return migration
             }(),
             {
@@ -106,7 +107,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
 
         try await identity.save(on: database)
 
-        let user = ServerDatabase.User(
+        let user = ServerClientLive.User(
             identityID: try identity.requireID(),
             dateOfBirth: nil,
             newsletterConsent: true
@@ -148,7 +149,7 @@ public struct CreateDemoUserMigration: AsyncMigration {
             return
         }
 
-        try await ServerDatabase.User.query(on: database)
+        try await ServerClientLive.User.query(on: database)
             .filter(\.$identity.$id == identity.id!)
             .delete()
 

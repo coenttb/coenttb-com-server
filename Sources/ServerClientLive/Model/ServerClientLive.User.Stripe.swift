@@ -14,7 +14,7 @@ import Foundation
 import MemberwiseInit
 import Tagged
 
-extension ServerDatabase.User {
+extension ServerClientLive.User {
     final class Stripe: Fields, @unchecked Sendable {
         @Field(key: FieldKeys.customerId)
         var customerId: String?
