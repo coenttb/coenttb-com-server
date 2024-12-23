@@ -4,25 +4,17 @@
 
 Read more about me in my [introductory post on coenttb.com](https://www.coenttb.com/blog/1-from-broke-to-building-in-public-open-sourcing-coenttb-com).
 
-## About the project
-
-Building a website in Swift? It’s *fun*. It’s *clean*. It’s also *painful*. 
-
-As a lawyer who writes code, I’ve spent years experimenting with rules as code and have a lot to share. But I didn’t want to be limited to iOS apps—I wanted to reuse my existing Swift code for the web. Building a website in Swift? It’s *fun*. It’s *clean*. It’s *painful*, but also: incredibly rewarding. Writing this site entirely in Swift, powered by PointFree & Vapor, forced me to push boundaries, embrace functional programming, and rethink how web development could work.
-
 ### Key Features
-- **Built entirely in Swift**: No JavaScript frameworks, no CSS hacks. Just cross platform Swift and Vapor.
-- **Functional elegance**: Clean architecture inspired by PointFree's best practices.
+- **Built entirely in Swift**: Approachable for newcomers and powerful for experts. It is fast, modern, safe, and a joy to write. 
+- **Fully type safe**: Every interaction, from request to response, is statically checked at compile time, ensuring runtime reliability and minimizing bugs.
 - **Hypermodular**: Each module integrates only the parts that it needs.
 
 ## Why open source?
 
-Building in Swift for the web is both rewarding and frustrating. I’ve made mistakes, learned from them, and found ways to overcome challenges unique to Swift web development. By open-sourcing this project, I hope to:
-1. Show how to structure a Swift Vapor website *elegantly*.
-2. Save you the trial-and-error grind.
-3. Get feedback to make it even better.  
-
-Plus, I feel like I owe it to the PointFree guys.
+Building in Swift for the web is worth it, but the ecosystem is not yet mature. By open-sourcing this project, I hope to:
+1. Show you how to structure a Swift website *elegantly*.
+2. Inspire you to try it or yourself.
+2. Get feedback to make the ecosystem even better.  
 
 ## Getting started
 
