@@ -14,6 +14,7 @@ extension String {
     static let server: Self = "Server"
     static let serverClient: Self = "ServerClient"
     static let serverClientLive: Self = "ServerClientLive"
+    static let serverDatabase: Self = "ServerDatabase"
 }
 
 extension Target.Dependency {
@@ -26,15 +27,16 @@ extension Target.Dependency {
     static var vaporApp: Self { .target(name: .vaporApp) }
     static var serverClient: Self { .target(name: .serverClient) }
     static var serverClientLive: Self { .target(name: .serverClientLive) }
+    static var serverDatabase: Self { .target(name: .serverDatabase) }
 }
 
 extension Target.Dependency {
     static var coenttbIdentity: Self { .product(name: "CoenttbIdentity", package: "coenttb-identity") }
     static var coenttbIdentityFluent: Self { .product(name: "CoenttbIdentityFluent", package: "coenttb-identity") }
     static var coenttbSyndication: Self { .product(name: "CoenttbSyndication", package: "coenttb-syndication") }
-    static var blog: Self { .product(name: "CoenttbBlog", package: "coenttb-blog") }
-    static var newsletter: Self { .product(name: "CoenttbNewsletter", package: "coenttb-newsletter") }
-    static var newsletterFluent: Self { .product(name: "CoenttbNewsletterFluent", package: "coenttb-newsletter") }
+    static var coenttbBlog: Self { .product(name: "CoenttbBlog", package: "coenttb-blog") }
+    static var coenttbNewsletter: Self { .product(name: "CoenttbNewsletter", package: "coenttb-newsletter") }
+    static var coenttbNewsletterFluent: Self { .product(name: "CoenttbNewsletterFluent", package: "coenttb-newsletter") }
     static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
     static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
     static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-google-analytics") }
@@ -60,7 +62,8 @@ let package = Package(
         .library(name: .coenttb, targets: [.coenttb]),
         .library(name: .vaporApp, targets: [.vaporApp]),
         .library(name: .serverClient, targets: [.serverClient]),
-        .library(name: .serverClientLive, targets: [.serverClientLive])
+        .library(name: .serverClientLive, targets: [.serverClientLive]),
+        .library(name: .serverDatabase, targets: [.serverDatabase])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb-web.git", branch: "main"),
@@ -100,7 +103,7 @@ let package = Package(
                 .coenttbWeb,
                 .coenttbIdentity,
                 .mailgun,
-                .newsletter,
+                .coenttbNewsletter,
             ]
         ),
         .target(
@@ -108,15 +111,29 @@ let package = Package(
             dependencies: [
                 .serverClient,
                 .serverDependencies,
+                .serverDatabase,
                 .serverEnvVars,
                 .serverRouter,
                 .dependenciesMacros,
+                .queuesFluentDriver,
                 .coenttbWeb,
                 .coenttbIdentity,
                 .coenttbIdentityFluent,
-                .newsletter,
-                .newsletterFluent,
+                .coenttbNewsletter,
+                .coenttbNewsletterFluent,
                 .mailgun,
+            ]
+        ),
+        .target(
+            name: .serverDatabase,
+            dependencies: [
+                .serverDependencies,
+                .serverEnvVars,
+                .dependenciesMacros,
+                .coenttbWeb,
+                .stripe,
+                .coenttbIdentityFluent,
+                .coenttbNewsletterFluent,
             ]
         ),
         .target(
@@ -141,11 +158,11 @@ let package = Package(
                 .serverDependencies,
                 .serverTranslations,
                 .coenttbWeb,
-                .blog,
+                .coenttbBlog,
                 .coenttbIdentity,
                 .coenttbSyndication,
                 .stripe,
-                .newsletter,
+                .coenttbNewsletter,
             ]
         ),
         .target(
@@ -181,8 +198,8 @@ let package = Package(
                 .serverDependencies,
                 .coenttbWeb,
                 .coenttb,
-                .newsletter,
-                .blog,
+                .coenttbNewsletter,
+                .coenttbBlog,
                 .queuesFluentDriver,
             ]
 //            swiftSettings: [

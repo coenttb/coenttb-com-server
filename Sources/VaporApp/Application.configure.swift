@@ -33,9 +33,9 @@ extension Application {
             as: .psql
         )
 
-        [any Migration].coenttb.forEach { app.migrations.add($0) }
+        [any Migration].allCases.forEach { app.migrations.add($0) }
 
-        [any AsyncCommand].coenttb.forEach { app.asyncCommands.use($0.0, as: $0.1) }
+        [any AsyncCommand].allCases.forEach { app.asyncCommands.use($0.0, as: $0.1) }
 
         app.migrations.add(JobMetadataMigrate())
 

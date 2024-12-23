@@ -5,15 +5,14 @@
 //  Created by Coen ten Thije Boonkkamp on 16/10/2024.
 //
 
+import CoenttbWeb
 import CoenttbIdentity
-import CoenttbWebDatabase
 import CoenttbNewsletter
 import CoenttbStripe
-import EmailAddress
 import ServerModels
 import StripeKit
-import CoenttbWeb
 import ServerClient
+import ServerDatabase
 
 extension ServerClient.Client.Stripe {
     static func live(
@@ -36,7 +35,7 @@ extension ServerClient.Client.Stripe {
                 do {
                     guard
                         let database,
-                        let user: ServerClientLive.User = try await ServerClientLive.User.query(on: database)
+                        let user: ServerDatabase.User = try await ServerDatabase.User.query(on: database)
                         .filter(\.$stripe.$customerId == stripeCustomerId)
                         .with(\.$identity)
                         .first()

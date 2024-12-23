@@ -11,9 +11,13 @@ import CoenttbWebModels
 import Foundation
 import ServerModels
 import ServerClient
+import ServerDatabase
 
 extension ServerModels.User {
-    init(_ identity: Identity, user: ServerClientLive.User) throws {
+    init(
+        _ identity: CoenttbIdentityFluent.Identity,
+        user: ServerDatabase.User
+    ) throws {
         self = .init(
             id: .init(identity.id!),
             email: try .init(identity.email),

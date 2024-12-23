@@ -1,49 +1,45 @@
-import Fluent
+import Foundation
 import Dependencies
+import Fluent
+import ServerModels
 import CoenttbIdentity
 import CoenttbIdentityFluent
-import CoenttbWebDatabase
-import EmailAddress
-import Foundation
-import MemberwiseInit
-import Queues
-import ServerModels
-import Tagged
+@preconcurrency import CoenttbStripe
 
-final class User: Model, @unchecked Sendable {
-    static let schema = "coenttb_users"
+
+public final class User: Model, @unchecked Sendable {
+    public static let schema = "coenttb_users"
 
     @ID(key: .id)
-    var id: UUID?
+    public var id: UUID?
 
     @Parent(key: FieldKeys.identityId)
-    var identity: CoenttbIdentityFluent.Identity
+    public var identity: CoenttbIdentityFluent.Identity
 
     @OptionalField(key: FieldKeys.dateOfBirth)
-    var dateOfBirth: Date?
+    public var dateOfBirth: Date?
 
     @OptionalField(key: FieldKeys.newsletterConsent)
-    var newsletterConsent: Bool?
+    public var newsletterConsent: Bool?
 
     @Group(key: FieldKeys.stripe)
-    var stripe: Stripe
+    public var stripe: User.Stripe
 
     @Timestamp(key: FieldKeys.createdAt, on: .create)
-    var createdAt: Date?
+    public var createdAt: Date?
 
     @Timestamp(key: FieldKeys.updatedAt, on: .update)
-    var updatedAt: Date?
+    public var updatedAt: Date?
 
     @OptionalField(key: FieldKeys.deletionState)
-    var deletionState: DeletionState?
+    public var deletionState: DeletionState?
 
-    // The time when the deletion was requested, relevant if the deletionState is pending
     @OptionalField(key: FieldKeys.deletionRequestedAt)
-    var deletionRequestedAt: Date?
+    public var deletionRequestedAt: Date?
 
-    init() {}
+    public init() {}
 
-    init(
+    public init(
         id: UUID? = nil,
         identityID: CoenttbIdentityFluent.Identity.IDValue,
         dateOfBirth: Date? = nil,
@@ -68,19 +64,19 @@ final class User: Model, @unchecked Sendable {
         static let deletionRequestedAt: FieldKey = "deletion_requested_at"
     }
 
-    enum DeletionState: String, Codable {
+    public enum DeletionState: String, Codable, Sendable {
         case pending
         case deleted
     }
 }
 
-extension ServerClientLive.User {
+extension ServerDatabase.User {
     struct CreateMigration: AsyncMigration {
         
-        var name: String = "ServerClientLive.User.CreateMigration"
+        var name: String = "ServerDatabase.User.CreateMigration"
         
         func prepare(on database: Fluent.Database) async throws {
-            try await database.schema(ServerClientLive.User.schema)
+            try await database.schema(ServerDatabase.User.schema)
                 .id()
                 .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentityFluent.Identity.schema, .id))
                 .field(FieldKeys.dateOfBirth, .date)
@@ -99,47 +95,8 @@ extension ServerClientLive.User {
         }
 
         func revert(on database: Fluent.Database) async throws {
-            try await database.schema(ServerClientLive.User.schema).delete()
+            try await database.schema(ServerDatabase.User.schema).delete()
         }
     }
 }
 
-public struct ConfirmDeleteUserJob: AsyncScheduledJob {
-
-    @Dependency(\.logger) var logger
-
-    public init() {}
-
-    // The payload here is the user's email (optional since this is a scheduled job)
-    typealias Payload = String
-
-    // Scheduled job execution
-    public func run(context: QueueContext) async throws {
-        let db = context.application.db
-        let currentTime = Date.now
-        let gracePeriodDuration: TimeInterval = 7 * 24 * 60 * 60 // 7 days
-
-        let usersPendingDeletion = try await ServerClientLive.User.query(on: db)
-            .filter(\.$deletionState == .pending)
-            .all()
-
-        for user in usersPendingDeletion {
-            if let requestedAt = user.deletionRequestedAt {
-                let elapsedTime = currentTime.timeIntervalSince(requestedAt)
-
-                // If the grace period has passed, delete the user
-                if elapsedTime >= gracePeriodDuration {
-                    user.deletionState = .deleted
-                    user.deletionRequestedAt = nil // No longer needed after deletion
-                    try await user.save(on: db)
-
-                    // Log the deletion
-                    logger.info("ServerClientLive.User \(user.id?.uuidString ?? "unknown") has been permanently deleted.")
-                } else {
-                    // Log that the user is still within the grace period
-                    logger.info("ServerClientLive.User \(user.id?.uuidString ?? "unknown") is still within the grace period.")
-                }
-            }
-        }
-    }
-}
