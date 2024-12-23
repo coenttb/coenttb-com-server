@@ -17,15 +17,15 @@ import StripeKit
 
 extension ServerClient.Client {
     @DependencyClient
-    public struct Stripe: @unchecked Sendable {
+    package struct Stripe: @unchecked Sendable {
         @DependencyEndpoint
-        public var readSubscriptionStatus: (_ stripeCustomerId: String) async throws -> SubscriptionStatus?
+        package var readSubscriptionStatus: (_ stripeCustomerId: String) async throws -> SubscriptionStatus?
 
         @DependencyEndpoint
-        public var delete: (_ stripeCustomerId: String) async throws -> ServerModels.User?
+        package var delete: (_ stripeCustomerId: String) async throws -> ServerModels.User?
     }
 }
 
 extension ServerClient.Client.Stripe: TestDependencyKey {
-    public static var testValue: Self { .init() }
+    package static var testValue: Self { .init() }
 }

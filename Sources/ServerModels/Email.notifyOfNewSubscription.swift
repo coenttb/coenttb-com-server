@@ -10,7 +10,7 @@ import Mailgun
 import ServerEnvVars
 
 extension Email {
-    public static func notifyOfNewSubscription(
+    package static func notifyOfNewSubscription(
         companyName: String,
         to: EmailAddress,
         companyEmail: EmailAddress,
@@ -28,7 +28,7 @@ extension Email {
 }
 
 extension Email {
-    public static func notifyOfNewSubscription(
+    package static func notifyOfNewSubscription(
         from: EmailAddress,
         to: EmailAddress,
         subscriberEmail: EmailAddress,
@@ -46,7 +46,7 @@ extension Email {
 }
 
 extension Email {
-    public static func notifyOfNewSubscription(
+    package static func notifyOfNewSubscription(
         from: EmailAddress,
         subscriberEmail: EmailAddress,
         companyEmail: EmailAddress,

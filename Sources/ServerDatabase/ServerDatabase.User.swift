@@ -7,39 +7,39 @@ import CoenttbIdentityFluent
 @preconcurrency import CoenttbStripe
 
 
-public final class User: Model, @unchecked Sendable {
-    public static let schema = "coenttb_users"
+package final class User: Model, @unchecked Sendable {
+    package static let schema = "coenttb_users"
 
     @ID(key: .id)
-    public var id: UUID?
+    package var id: UUID?
 
     @Parent(key: FieldKeys.identityId)
-    public var identity: CoenttbIdentityFluent.Identity
+    package var identity: CoenttbIdentityFluent.Identity
 
     @OptionalField(key: FieldKeys.dateOfBirth)
-    public var dateOfBirth: Date?
+    package var dateOfBirth: Date?
 
     @OptionalField(key: FieldKeys.newsletterConsent)
-    public var newsletterConsent: Bool?
+    package var newsletterConsent: Bool?
 
     @Group(key: FieldKeys.stripe)
-    public var stripe: User.Stripe
+    package var stripe: User.Stripe
 
     @Timestamp(key: FieldKeys.createdAt, on: .create)
-    public var createdAt: Date?
+    package var createdAt: Date?
 
     @Timestamp(key: FieldKeys.updatedAt, on: .update)
-    public var updatedAt: Date?
+    package var updatedAt: Date?
 
     @OptionalField(key: FieldKeys.deletionState)
-    public var deletionState: DeletionState?
+    package var deletionState: DeletionState?
 
     @OptionalField(key: FieldKeys.deletionRequestedAt)
-    public var deletionRequestedAt: Date?
+    package var deletionRequestedAt: Date?
 
-    public init() {}
+    package init() {}
 
-    public init(
+    package init(
         id: UUID? = nil,
         identityID: CoenttbIdentityFluent.Identity.IDValue,
         dateOfBirth: Date? = nil,
@@ -64,7 +64,7 @@ public final class User: Model, @unchecked Sendable {
         static let deletionRequestedAt: FieldKey = "deletion_requested_at"
     }
 
-    public enum DeletionState: String, Codable, Sendable {
+    package enum DeletionState: String, Codable, Sendable {
         case pending
         case deleted
     }

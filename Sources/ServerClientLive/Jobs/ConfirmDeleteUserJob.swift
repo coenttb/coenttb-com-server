@@ -9,15 +9,15 @@ import ServerDatabase
 import CoenttbWeb
 import Queues
 
-public struct ConfirmDeleteUserJob: AsyncScheduledJob {
+package struct ConfirmDeleteUserJob: AsyncScheduledJob {
 
     @Dependency(\.logger) var logger
 
-    public init() {}
+    package init() {}
 
     typealias Payload = String
 
-    public func run(context: QueueContext) async throws {
+    package func run(context: QueueContext) async throws {
         let db = context.application.db
         let currentTime = Date.now
         let gracePeriodDuration: TimeInterval = 7 * 24 * 60 * 60 // 7 days

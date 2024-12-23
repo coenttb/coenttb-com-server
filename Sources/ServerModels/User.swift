@@ -14,20 +14,20 @@ import Foundation
 import MemberwiseInit
 import Tagged
 
-@MemberwiseInit(.public)
-public struct User: Codable, Hashable, Sendable {
-    public typealias ID = Tagged<Self, UUID>
-    @Init(default: nil) public var id: ID?
-    @Init(default: nil) public var email: EmailAddress?
-    @Init(default: nil) public var name: String?
-    @Init(default: false) public var authenticated: Bool
-    @Init(default: nil) public var isAdmin: Bool?
-    @Init(default: nil) public var isEmailVerified: Bool?
-    @Init(default: nil) public var dateOfBirth: Date?
-    @Init(default: nil) public var newsletterSubscribed: Bool?
-    @Init(default: nil) public var stripe: User.Stripe?
+@MemberwiseInit(.package)
+package struct User: Codable, Hashable, Sendable {
+    package typealias ID = Tagged<Self, UUID>
+    @Init(default: nil) package var id: ID?
+    @Init(default: nil) package var email: EmailAddress?
+    @Init(default: nil) package var name: String?
+    @Init(default: false) package var authenticated: Bool
+    @Init(default: nil) package var isAdmin: Bool?
+    @Init(default: nil) package var isEmailVerified: Bool?
+    @Init(default: nil) package var dateOfBirth: Date?
+    @Init(default: nil) package var newsletterSubscribed: Bool?
+    @Init(default: nil) package var stripe: User.Stripe?
 
-    public enum CodingKeys: String, CodingKey {
+    package enum CodingKeys: String, CodingKey {
         case id
         case email
         case name
@@ -39,18 +39,18 @@ public struct User: Codable, Hashable, Sendable {
         case stripe = "stripe"
     }
 
-    public struct Stripe: Sendable, Codable, Hashable, Content {
-        public var customerId: String
+    package struct Stripe: Sendable, Codable, Hashable, Content {
+        package var customerId: String
 
-        public typealias SubscriptionStatus = StripeKit.SubscriptionStatus
-        public var subscriptionStatus: SubscriptionStatus?
+        package typealias SubscriptionStatus = StripeKit.SubscriptionStatus
+        package var subscriptionStatus: SubscriptionStatus?
 
-        public enum CodingKeys: String, CodingKey {
+        package enum CodingKeys: String, CodingKey {
             case customerId = "customer_id"
             case subscriptionStatus = "subscription_status"
         }
 
-        public init(customerId: String, subscriptionStatus: SubscriptionStatus? = nil) {
+        package init(customerId: String, subscriptionStatus: SubscriptionStatus? = nil) {
             self.customerId = customerId
             self.subscriptionStatus = subscriptionStatus
         }
@@ -60,7 +60,7 @@ public struct User: Codable, Hashable, Sendable {
 extension User.Stripe.SubscriptionStatus: @retroactive @unchecked Sendable {}
 
 extension User {
-    public var accessToBlog: Bool {
+    package var accessToBlog: Bool {
         switch self.stripe?.subscriptionStatus {
         case .trialing, .pastDue, .active:  true
         case .none, .canceled, .unpaid, .incomplete, .incompleteExpired, .paused:  false
@@ -68,18 +68,18 @@ extension User {
     }
 }
 extension User {
-    public var age: Int? {
+    package var age: Int? {
         guard let dateOfBirth = dateOfBirth else { return nil }
         @Dependency(\.calendar) var calendar
         return calendar.dateComponents([.year], from: dateOfBirth, to: Date()).year
     }
 
-    public var isAdult: Bool? {
+    package var isAdult: Bool? {
         guard let age = age else { return nil }
         return age >= 18
     }
 
-    public func withoutSensitiveInfo() -> Self {
+    package func withoutSensitiveInfo() -> Self {
         var dto = self
         dto.dateOfBirth = nil
         return dto
@@ -87,5 +87,5 @@ extension User {
 }
 
 extension String {
-    public static let newsletterSubscribed: String = "coenttb_newsletter_subscribed"
+    package static let newsletterSubscribed: String = "coenttb_newsletter_subscribed"
 }

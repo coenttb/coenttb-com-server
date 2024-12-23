@@ -11,13 +11,13 @@ import Foundation
 import ServerRouter
 
 extension Link {
-    public init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
+    package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
         @Dependency(\.serverRouter) var serverRouter
         @Dependency(\.language) var language
         self.init(href: serverRouter.path(for: .website(.init(language: language, page: destination))), label: label)
     }
 
-    public init(
+    package init(
         destination: WebsitePage,
         _ title: String
     ) where Label == HTMLText {

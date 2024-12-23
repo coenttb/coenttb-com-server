@@ -8,12 +8,12 @@ import EmailAddress
 import ServerModels
 
 @DependencyClient
-public struct Client: Sendable {
-    public let newsletter: CoenttbNewsletter.Client
-    public let account: CoenttbIdentity.Client<ServerModels.User>
-    public let stripe: ServerClient.Client.Stripe?
+package struct Client: Sendable {
+    package let newsletter: CoenttbNewsletter.Client
+    package let account: CoenttbIdentity.Client<ServerModels.User>
+    package let stripe: ServerClient.Client.Stripe?
     
-    public init(
+    package init(
         newsletter: CoenttbNewsletter.Client,
         account: CoenttbIdentity.Client<ServerModels.User>,
         stripe: ServerClient.Client.Stripe?
@@ -25,13 +25,13 @@ public struct Client: Sendable {
 }
 
 extension Client {
-    public static let previewValue: Self = .init(newsletter: .previewValue, account: .previewValue, stripe: .previewValue)
+    package static let previewValue: Self = .init(newsletter: .previewValue, account: .previewValue, stripe: .previewValue)
 }
 
-public enum DatabaseClientKey {}
+package enum DatabaseClientKey {}
 
 extension DatabaseClientKey: TestDependencyKey {
-    public static let testValue = ServerClient.Client(
+    package static let testValue = ServerClient.Client(
         newsletter: .testValue,
         account: .testValue,
         stripe: .testValue
@@ -39,14 +39,14 @@ extension DatabaseClientKey: TestDependencyKey {
 }
 
 extension DependencyValues {
-    public var serverClient: ServerClient.Client {
+    package var serverClient: ServerClient.Client {
         get { self[DatabaseClientKey.self] }
         set { self[DatabaseClientKey.self] = newValue }
     }
 }
 
 extension ServerClient.Client {
-    public func deleteCustomerIdFromUser(stripeCustomerId: String) async throws -> ServerModels.User? {
+    package func deleteCustomerIdFromUser(stripeCustomerId: String) async throws -> ServerModels.User? {
         return try await self.stripe?.delete(stripeCustomerId: stripeCustomerId)
     }
 }

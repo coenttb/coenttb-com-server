@@ -9,12 +9,12 @@ import Dependencies
 import Foundation
 import ServerModels
 
-public enum CurrentUserKey: TestDependencyKey {
-    public static let testValue: ServerModels.User? = nil
+package enum CurrentUserKey: TestDependencyKey {
+    package static let testValue: ServerModels.User? = nil
 }
 
 extension DependencyValues {
-    public var currentUser: ServerModels.User? {
+    package var currentUser: ServerModels.User? {
         get { self[CurrentUserKey.self] }
         set { self[CurrentUserKey.self] = newValue }
     }

@@ -33,7 +33,7 @@ extension HTML {
     }
 }
 
-public struct CoenttbFooter: HTML {
+package struct CoenttbFooter: HTML {
 
     @Dependency(\.serverRouter) var serverRouter
     @Dependency(\.blog.getAll) var blogPosts
@@ -41,9 +41,9 @@ public struct CoenttbFooter: HTML {
 
     @Dependency(\.currentUser?.newsletterSubscribed) var newsletterSubscribed
 
-    public init() {}
+    package init() {}
 
-    public var body: some HTML {
+    package var body: some HTML {
 
         let posts = blogPosts()
         Footer(

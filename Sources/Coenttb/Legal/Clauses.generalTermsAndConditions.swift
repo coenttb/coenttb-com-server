@@ -15,7 +15,7 @@ import ServerRouter
 
 extension Clauses {
     nonisolated(unsafe)
-    public static let generalTermsAndConditions: Translated<Self> = {
+    package static let generalTermsAndConditions: Translated<Self> = {
 
         @Dependency(\.serverRouter) var serverRouter
 

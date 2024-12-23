@@ -12,7 +12,7 @@ import ServerRouter
 
 extension Favicons {
     nonisolated(unsafe)
-    public static let coenttb: Self = {
+    package static let coenttb: Self = {
 
         @Dependency(\.serverRouter) var serverRouter
 

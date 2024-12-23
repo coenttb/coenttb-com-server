@@ -13,7 +13,7 @@ import Languages
 
 extension Clauses {
     nonisolated(unsafe)
-    public static let termsOfUse: Translated<Self> = {
+    package static let termsOfUse: Translated<Self> = {
         return .init { language in
             withDependencies {
                 $0.language = language

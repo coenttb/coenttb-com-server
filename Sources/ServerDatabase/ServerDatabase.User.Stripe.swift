@@ -10,35 +10,35 @@ import Fluent
 import Foundation
 
 extension ServerDatabase.User {
-    public final class Stripe: Fields, @unchecked Sendable {
+    package final class Stripe: Fields, @unchecked Sendable {
         @Field(key: FieldKeys.customerId)
-        public var customerId: String?
+        package var customerId: String?
 
         @Group(key: FieldKeys.subscription)
-        public var subscription: Subscription
+        package var subscription: Subscription
 
         enum FieldKeys {
             static let customerId: FieldKey = "customer_id"
             static let subscription: FieldKey = "subscription"
         }
 
-        public init() {}
+        package init() {}
 
-        public final class Subscription: Fields, @unchecked Sendable {
+        package final class Subscription: Fields, @unchecked Sendable {
             @Field(key: FieldKeys.id)
-            public var id: String?
+            package var id: String?
 
             @Field(key: FieldKeys.status)
-            public var status: User.Stripe.Subscription.Status?
+            package var status: User.Stripe.Subscription.Status?
 
             @Field(key: FieldKeys.currentPeriodEnd)
-            public var currentPeriodEnd: Date?
+            package var currentPeriodEnd: Date?
 
             @Field(key: FieldKeys.paymentMethodId)
-            public var paymentMethodId: String?
+            package var paymentMethodId: String?
 
             @Field(key: FieldKeys.plan)
-            public var plan: String?
+            package var plan: String?
 
             enum FieldKeys {
                 static let id: FieldKey = "id"
@@ -48,9 +48,9 @@ extension ServerDatabase.User {
                 static let plan: FieldKey = "plan"
             }
 
-            public init() {}
+            package init() {}
 
-            public typealias Status = StripeKit.SubscriptionStatus
+            package typealias Status = StripeKit.SubscriptionStatus
         }
     }
 }
