@@ -18,7 +18,7 @@ But there's an interesting tension here. If both the library code and the public
 
 The two layers are the Library code as the Foundation, and the public interface that developers will actually use.
 
-Let's look at how we can solve this, with my [coenttb-mailgun](https://github.com/coenttb/coenttb-mailgun) library as an example. The approach is surprisingly straightforward:
+Let's look at at a real life example, with [coenttb-mailgun](https://github.com/coenttb/coenttb-mailgun).
 
 ## Layer 1: Library code
 
@@ -27,7 +27,7 @@ Let's peek under the hood of our [Mailgun Messages API implementation](https://g
 ```swift:3,4,5
 extension Mailgun.API {
     public enum Messages: Equatable, Sendable {
-        case send(domain: String, request: Mailgun.Messages.Send.Request)
+        case send(domain: String, request: Mailgun.Email)
         case sendMime(domain: String, request: Mailgun.Messages.Send.Mime.Request)
         case retrieve(domain: String, storageKey: String)
         // ...
@@ -56,7 +56,7 @@ extension Mailgun.API.Messages {
                     Path { "v3" }
                     Path { Parse(.string) }
                     Path { "messages" }
-                    Body(.form(Mailgun.Messages.Send.Request.self))
+                    Body(.form(Mailgun.Email.self))
                 }
                 
                 // GET /v3/domains/{domain}/messages/{key}
@@ -102,7 +102,7 @@ func testSendMessageURL() throws {
 
 Our layered approach really shines when adding authentication. Just as we built routing on top of our API model, we can layer in authentication cleanly:
 
-```swift
+```swift: 4,5,6
 import BasicAuth
 
 extension Mailgun.API {
@@ -184,7 +184,7 @@ Now for the part that makes developers smile:
 @DependencyClient
 public struct Messages: Sendable {
     @DependencyEndpoint
-    public var send: @Sendable (_ request: Mailgun.Messages.Send.Request) async throws -> Mailgun.Messages.Send.Response
+    public var send: @Sendable (_ request: Mailgun.Email) async throws -> Mailgun.Messages.Send.Response
     
     @DependencyEndpoint
     public var sendMime: @Sendable (_ request: Mailgun.Messages.Send.Mime.Request) async throws -> Mailgun.Messages.Send.Response
@@ -289,7 +289,7 @@ The proof is in the testing - look how clean this is:
 func testSendEmail() async throws {
     @Dependency(\.mailgunClient) var mailgunClient
     
-    let request = Mailgun.Messages.Send.Request(
+    let request = Mailgun.Email(
         from: try EmailAddress("info@coenttb.com"),
         to: [try EmailAddress("coen@coenttb.com")],
         subject: "Test Email",

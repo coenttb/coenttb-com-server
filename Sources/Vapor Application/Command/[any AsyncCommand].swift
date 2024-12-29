@@ -18,6 +18,10 @@ extension [any AsyncCommand] {
             (
                 ResendVerificationEmailsCommand(),
                 "resend-verification-emails"
+            ),
+            (
+                GetMailingListCommand(),
+                "get-coenttb-mailing-list"
             )
         ]
     }
