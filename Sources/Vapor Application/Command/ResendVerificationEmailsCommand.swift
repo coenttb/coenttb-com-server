@@ -92,7 +92,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
                             verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
                             businessName: companyName,
                             supportEmail: supportEmail,
-                            from: .init(name: companyName, localPart: "postmaster", domain: domain.rawValue),
+                            from: .init(displayName: companyName, localPart: "postmaster", domain: domain.rawValue),
                             to: (name: nil, email: .init(subscription.email)),
                             primaryColor: .green550.withDarkColor(.green600)
                         )

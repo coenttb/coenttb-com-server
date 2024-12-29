@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4b8d40d1a8e081fbd35a6d619ee082258914255e"
+        "revision" : "4a789747edc94bb752bf91406df1acc18df0fa24"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "649e7eb9b59868c6a24a0239364f85f584da4a98"
+        "revision" : "afe30011df3d5857e5eb2fb7b6823807f2a10bad"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c5d333167324e58ab3a674f83e64aa68a5010692"
+        "revision" : "bff8d35f83df5131074463889d071bacb10fde67"
       }
     },
     {
@@ -115,7 +115,7 @@
       "location" : "https://github.com/coenttb/coenttb-syndication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "5c4e7ed85b236b5ff5bb8f792bd3e7725ed8bade"
+        "revision" : "5f004a93ff0f1e4883c5f4fc325c38478ed29350"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f236cda8d160c1d446585217c18e66e918cc0d64"
+        "revision" : "a4184cc35c1e4576ae011150bbc5144cac077aed"
       }
     },
     {
@@ -141,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "9fa31f4403da54855f1e2aeaeff478f4f0e40b13",
-        "version" : "1.0.2"
+        "revision" : "5928286acce13def418ec36d05a001a9641086f2",
+        "version" : "1.0.3"
       }
     },
     {
@@ -339,8 +339,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-clocks",
       "state" : {
-        "revision" : "b9b24b69e2adda099a1fa381cda1eeec272d5b53",
-        "version" : "1.0.5"
+        "revision" : "cc46202b53476d64e824e0b6612da09d84ffde8e",
+        "version" : "1.0.6"
       }
     },
     {
@@ -391,10 +391,10 @@
     {
       "identity" : "swift-date",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-date.git",
+      "location" : "https://github.com/coenttb/swift-date",
       "state" : {
         "branch" : "main",
-        "revision" : "b13f34f8475e2cbece64a840bb03f65fa6ef681f"
+        "revision" : "8f433af24df277c79c2cc7d1e01b9719fbff3fe2"
       }
     },
     {
@@ -402,8 +402,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "revision" : "5526c8a27675dc7b18d6fa643abfb64bcb200b77",
-        "version" : "1.6.2"
+        "revision" : "85f89f5d0ce5a18945f65371d40ca997da85a41a",
+        "version" : "1.6.3"
       }
     },
     {
@@ -421,7 +421,7 @@
       "location" : "https://github.com/coenttb/swift-environment-variables.git",
       "state" : {
         "branch" : "main",
-        "revision" : "d9413bf1dac21f03536d21b4877aea32700b3307"
+        "revision" : "8755643cb24d770fa2291da61881ff35ca2f4421"
       }
     },
     {
@@ -484,7 +484,7 @@
       "location" : "https://github.com/stackotter/swift-macro-toolkit",
       "state" : {
         "branch" : "main",
-        "revision" : "e706aa98bc28f82677923f7b8f560bba6f90fac2"
+        "revision" : "569627091e1fbb8745d691aeeb008e7247dedb7c"
       }
     },
     {
@@ -646,7 +646,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "d8f6b42e1e551f34529c9ee463e394ed2cc12d35"
+        "revision" : "7cde70656765ae3128b5258bca6de1717d8be504"
       }
     },
     {
@@ -654,8 +654,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "1f29415ed888a942bb23486ca9e422123a07e70f",
-        "version" : "4.110.0"
+        "revision" : "73dfe634f04945285054b261369cd93f5100b44c",
+        "version" : "4.110.2"
       }
     },
     {

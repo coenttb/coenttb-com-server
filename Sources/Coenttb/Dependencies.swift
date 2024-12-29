@@ -16,6 +16,7 @@ import Server_Client_Live
 import Server_Dependencies
 import Server_Models
 import Server_Router
+import Authenticated
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -139,7 +140,7 @@ extension Logger: @retroactive DependencyKey {
 }
 
 extension Mailgun.Client: @retroactive DependencyKey {
-    public static var liveValue: Mailgun.Client? {
+    public static var liveValue: Mailgun.AuthenticatedClient? {
         @Dependency(\.envVars) var envVars
         
         guard
@@ -153,7 +154,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         return Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: baseURL,
-            domain: domain.rawValue,
+            domain: domain,
             session: { try await URLSession.shared.data(for: $0) }
         )
     }

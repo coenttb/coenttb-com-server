@@ -5,6 +5,7 @@ import CoenttbIdentityFluent
 import CoenttbNewsletter
 import Server_EnvVars
 import Mailgun
+import Messages
 import Server_Dependencies
 import Server_Database
 import Server_Models
@@ -53,7 +54,38 @@ extension Server_Client.Client {
                     
                     return { email in try await sendEmail(email) }
                 }(),
-                sendVerificationEmail: CoenttbNewsletter.Client.sendVerificationEmail
+                sendVerificationEmail: CoenttbNewsletter.Client.sendVerificationEmail,
+                onSuccessfullyVerified: { email in
+                    @Dependency(\.mailgunClient) var mailgunClient
+                    @Dependency(\.envVars.newsletterAddress) var listAddress
+                    
+                    guard
+                        let listAddress,
+                        let response = try await mailgunClient?.mailingLists.addMember(
+                        listAddress: listAddress,
+                        request: .init(
+                            address: email
+                        )
+                    )
+                    else {
+                        return
+                    }
+                    
+                    logger.info("\(response)")
+                },
+                onUnsubscribed: { email in
+                    @Dependency(\.mailgunClient) var mailgunClient
+                    @Dependency(\.envVars.newsletterAddress) var listAddress
+                    
+                    guard
+                        let listAddress,
+                        let response = try await mailgunClient?.mailingLists.deleteMember(listAddress: listAddress, memberAddress: email)
+                    else {
+                        return
+                    }
+                    
+                    logger.info("\(response)")
+                }
             ),
             account: CoenttbIdentity.Client.live(
                 database: database,
@@ -343,7 +375,7 @@ extension BusinessDetails {
 }
 
 extension CoenttbNewsletter.Client {
-    package static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Mailgun.Messages.Send.Response {
+    package static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Messages.Send.Response {
         @Dependencies.Dependency(\.mailgunClient!.messages.send) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget
         @Dependencies.Dependency(\.serverRouter) var serverRouter

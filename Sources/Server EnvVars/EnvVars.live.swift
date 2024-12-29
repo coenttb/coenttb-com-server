@@ -47,8 +47,8 @@ extension EnvVars {
 
         return .init(
             baseURL: baseURL,
-            apiKey: .init(apiKey),
-            domain: .init(domain)
+            apiKey: .init(rawValue: apiKey),
+            domain: try! .init(domain)
         )
     }
 
@@ -89,7 +89,7 @@ extension EnvVars {
 
 extension EnvVars {
     public var mailgunCompanyEmail: EmailAddress? {
-        try? self["MAILGUN_COMPANY_EMAIL"].map(EmailAddress.init)
+        self["MAILGUN_COMPANY_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 }
 extension EnvVars {
@@ -98,7 +98,7 @@ extension EnvVars {
     }
 
     public var demoEmail: EmailAddress? {
-        try? self["DEMO_EMAIL"].map(EmailAddress.init)
+        self["DEMO_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 
     public var demoPassword: String? {
@@ -106,7 +106,7 @@ extension EnvVars {
     }
 
     public var demoNewsletterEmail: EmailAddress? {
-        try? self["DEMO_NEWSLETTER_EMAIL"].map(EmailAddress.init)
+        self["DEMO_NEWSLETTER_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 
     public var demoStripeCustomerId: String? {
@@ -120,13 +120,17 @@ extension EnvVars {
     public var monthlyBlogSubscriptionPriceLookupKey: String? {
         self["MONTHLY_BLOG_SUBSCRIPTION_PRICE_LOOKUP_KEY"]
     }
+    
+    public var newsletterAddress: EmailAddress? {
+        self["NEWSLETTER_ADDRESS"].flatMap(EmailAddress.init(rawValue:))
+    }
 
     public var companyName: String? {
         self["COMPANY_NAME"]
     }
 
     public var companyInfoEmailAddress: EmailAddress? {
-        try? self["COMPANY_INFO_EMAIL_ADDRESS"].map(EmailAddress.init)
+        self["COMPANY_INFO_EMAIL_ADDRESS"].flatMap(EmailAddress.init(rawValue:))
     }
 
     public var companyXComHandle: String? {

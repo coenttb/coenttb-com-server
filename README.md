@@ -13,7 +13,7 @@ Read more about me in my [introductory post on coenttb.com](https://www.coenttb.
 
 Building in Swift for the web is worth it, but the ecosystem is not yet mature. By open-sourcing this project, I hope to:
 1. Show you how to structure a Swift website *elegantly*.
-2. Inspire you to try it or yourself.
+2. Inspire you to try it for yourself.
 2. Get feedback to make the ecosystem even better.  
 
 ## Getting started
