@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "be917c5640adf54b22cc1598ffe3b3487969c068"
+        "revision" : "9b9d2995113685ca59c0ff0a5f11541859c83b94"
       }
     },
     {
@@ -466,7 +466,7 @@
       "location" : "https://github.com/coenttb/swift-language.git",
       "state" : {
         "branch" : "main",
-        "revision" : "d01ca3bafea825c8562fee17363d69642213bcf2"
+        "revision" : "63b455da4844a701663dd91bb681bf05a536c92f"
       }
     },
     {
