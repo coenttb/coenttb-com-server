@@ -6,12 +6,12 @@
 //
 
 import CoenttbMarkdown
-import CoenttbWebHTML
-import CoenttbWebLegal
 import Dependencies
 import Foundation
 import Languages
-import Server_Router
+import Coenttb_Server_Router
+import Coenttb_Server_HTML
+import Coenttb_Server_Legal
 
 extension Clauses {
     nonisolated(unsafe)

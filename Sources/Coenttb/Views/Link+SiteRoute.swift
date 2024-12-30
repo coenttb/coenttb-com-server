@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 16/08/2024.
 //
 
-import CoenttbWebHTML
+import Coenttb_Server_HTML
 import Dependencies
 import Foundation
 import Server_Router

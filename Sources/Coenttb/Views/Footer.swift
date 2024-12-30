@@ -7,8 +7,8 @@
 
 import CoenttbHTML
 import CoenttbMarkdown
-import CoenttbWebHTML
-import CoenttbWebTranslations
+import Coenttb_Server_HTML
+import Coenttb_Server_Translations
 import Dependencies
 import Foundation
 import Server_Router

@@ -2,9 +2,9 @@ import Foundation
 import Dependencies
 import Fluent
 import Server_Models
-import CoenttbIdentity
-import CoenttbIdentityFluent
-@preconcurrency import CoenttbStripe
+import Coenttb_Identity
+import Coenttb_Identity_Fluent
+@preconcurrency import Coenttb_Stripe
 
 
 package final class User: Model, @unchecked Sendable {
@@ -14,7 +14,7 @@ package final class User: Model, @unchecked Sendable {
     package var id: UUID?
 
     @Parent(key: FieldKeys.identityId)
-    package var identity: CoenttbIdentityFluent.Identity
+    package var identity: Coenttb_Identity_Fluent.Identity
 
     @OptionalField(key: FieldKeys.dateOfBirth)
     package var dateOfBirth: Date?
@@ -41,7 +41,7 @@ package final class User: Model, @unchecked Sendable {
 
     package init(
         id: UUID? = nil,
-        identityID: CoenttbIdentityFluent.Identity.IDValue,
+        identityID: Coenttb_Identity_Fluent.Identity.IDValue,
         dateOfBirth: Date? = nil,
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
@@ -78,7 +78,7 @@ extension Server_Database.User {
         func prepare(on database: Fluent.Database) async throws {
             try await database.schema(Server_Database.User.schema)
                 .id()
-                .field(FieldKeys.identityId, .uuid, .required, .references(CoenttbIdentityFluent.Identity.schema, .id))
+                .field(FieldKeys.identityId, .uuid, .required, .references(Coenttb_Identity_Fluent.Identity.schema, .id))
                 .field(FieldKeys.dateOfBirth, .date)
                 .field(FieldKeys.newsletterConsent, .bool)
                 .field([FieldKeys.stripe, Stripe.FieldKeys.customerId], .string)

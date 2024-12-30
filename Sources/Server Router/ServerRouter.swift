@@ -1,8 +1,7 @@
-import CasePaths
-@_exported @preconcurrency import CoenttbServerRouter
-import Dependencies
-import Foundation
-import Languages
+import Coenttb_Web
+import Coenttb_Server
+
+@_exported @preconcurrency import Coenttb_Server_Router
 @preconcurrency import URLRouting
 
 public typealias Server_Router = ServerRoute.Router<

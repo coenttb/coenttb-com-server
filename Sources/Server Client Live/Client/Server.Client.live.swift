@@ -1,8 +1,8 @@
-import CoenttbWeb
-import CoenttbIdentity
-import CoenttbIdentityLive
-import CoenttbIdentityFluent
-import CoenttbNewsletter
+import Coenttb_Server
+import Coenttb_Identity
+import Coenttb_Identity_Live
+import Coenttb_Identity_Fluent
+import Coenttb_Newsletter
 import Server_EnvVars
 import Mailgun
 import Messages
@@ -21,7 +21,7 @@ extension Server_Client.Client {
         @Dependencies.Dependency(\.stripe?.client) var stripeClient
         
         return .init(
-            newsletter: CoenttbNewsletter.Client.live(
+            newsletter: Coenttb_Newsletter.Client.live(
                 database: database,
                 logger: logger,
                 notifyOfNewSubscriptionEmail: {
@@ -54,7 +54,7 @@ extension Server_Client.Client {
                     
                     return { email in try await sendEmail(email) }
                 }(),
-                sendVerificationEmail: CoenttbNewsletter.Client.sendVerificationEmail,
+                sendVerificationEmail: Coenttb_Newsletter.Client.sendVerificationEmail,
                 onSuccessfullyVerified: { email in
                     @Dependency(\.mailgunClient) var mailgunClient
                     @Dependency(\.envVars.newsletterAddress) var listAddress
@@ -87,7 +87,7 @@ extension Server_Client.Client {
                     logger.info("\(response)")
                 }
             ),
-            account: CoenttbIdentity.Client.live(
+            account: Coenttb_Identity.Client.live(
                 database: database,
                 logger: logger,
                 getDatabaseUser: (
@@ -374,7 +374,7 @@ extension BusinessDetails {
     }()
 }
 
-extension CoenttbNewsletter.Client {
+extension Coenttb_Newsletter.Client {
     package static func sendVerificationEmail(email: EmailAddress, token: String) async throws -> Messages.Send.Response {
         @Dependencies.Dependency(\.mailgunClient!.messages.send) var sendEmail
         @Dependencies.Dependency(\.fireAndForget) var fireAndForget

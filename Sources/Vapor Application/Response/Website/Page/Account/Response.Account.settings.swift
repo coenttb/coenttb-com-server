@@ -6,10 +6,10 @@
 //
 
 import Coenttb
-import CoenttbIdentity
-import CoenttbWebHTML
-import CoenttbStripe
-import CoenttbWebTranslations
+import Coenttb_Identity
+import Coenttb_Server_HTML
+import Coenttb_Stripe
+import Coenttb_Server_Translations
 import Foundation
 import Server_Router
 import Vapor
@@ -181,7 +181,7 @@ public struct EmailChangeRequestButton: HTML {
 
     public var body: some HTML {
         HStack {
-            Input.default(CoenttbIdentity.API.Verify.CodingKeys.email)
+            Input.default(Coenttb_Identity.API.Verify.CodingKeys.email)
                 .type(.email)
                 .placeholder("Email")
                 .value(currentUser?.email?.rawValue ?? "")
@@ -214,7 +214,7 @@ public struct NameChangeForm: HTML {
     public var body: some HTML {
         form {
             VStack {
-                Input.default(CoenttbIdentity.API.Update.CodingKeys.name)
+                Input.default(Coenttb_Identity.API.Update.CodingKeys.name)
                     .type(.text)
                     .placeholder("Name")
                     .value(currentUser?.name ?? "")
@@ -226,7 +226,7 @@ public struct NameChangeForm: HTML {
 
         LiveInputScript(
             formID: form_identity_id,
-            inputID: CoenttbIdentity.API.Update.CodingKeys.name.rawValue
+            inputID: Coenttb_Identity.API.Update.CodingKeys.name.rawValue
         )
     }
 }

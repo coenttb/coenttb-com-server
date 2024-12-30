@@ -5,11 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 04-01-2024.
 //
 
-import CoenttbWeb
-import CoenttbBlog
-import CoenttbNewsletter
-import CoenttbStripe
-import CoenttbStripeLive
+import Coenttb_Server
+import Coenttb_Blog
+import Coenttb_Newsletter
+import Coenttb_Stripe
+import Coenttb_Stripe_Live
 import Mailgun
 import Server_Client
 import Server_Client_Live
@@ -23,12 +23,12 @@ import FoundationNetworking
 #endif
 
 extension BlogKey: @retroactive DependencyKey {
-    public static let liveValue: CoenttbBlog.Client = .init(
+    public static let liveValue: Coenttb_Blog.Client = .init(
         getAll: {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
             
-            return [CoenttbBlog.Blog.Post].allCases
+            return [Coenttb_Blog.Blog.Post].allCases
                 .filter {
                     appEnv == .production
                     ? $0.publishedAt <= now
@@ -160,7 +160,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
 }
 
 extension StripeClientKey: @retroactive DependencyKey {
-    public static var liveValue: CoenttbStripe.Client? {
+    public static var liveValue: Coenttb_Stripe.Client? {
         @Dependency(\.envVars) var envVars
         @Dependency(\.httpClient) var httpClient
         
@@ -170,7 +170,7 @@ extension StripeClientKey: @retroactive DependencyKey {
             return nil
         }
         
-        return CoenttbStripe.Client.live(
+        return Coenttb_Stripe.Client.live(
             stripeSecretKey: stripeSecretKey,
             httpClient: httpClient
         )

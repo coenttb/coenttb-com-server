@@ -6,7 +6,7 @@
 //
 
 import CoenttbHTML
-import CoenttbWebTranslations
+import Coenttb_Server_Translations
 import Foundation
 import Languages
 

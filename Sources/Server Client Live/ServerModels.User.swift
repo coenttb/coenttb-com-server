@@ -5,9 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
-import CoenttbIdentity
-import CoenttbIdentityFluent
-import CoenttbWebModels
+import Coenttb_Identity
+import Coenttb_Identity_Fluent
+import Coenttb_Server_Models
 import Foundation
 import Server_Models
 import Server_Client
@@ -15,7 +15,7 @@ import Server_Database
 
 extension Server_Models.User {
     init(
-        _ identity: CoenttbIdentityFluent.Identity,
+        _ identity: Coenttb_Identity_Fluent.Identity,
         user: Server_Database.User
     ) throws {
         self = .init(

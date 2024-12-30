@@ -6,10 +6,10 @@
 //
 
 import Coenttb
-import CoenttbBlog
-import CoenttbWebHTML
-import CoenttbWebModels
-import CoenttbNewsletter
+import Coenttb_Blog
+import Coenttb_Server_HTML
+import Coenttb_Server_Models
+import Coenttb_Newsletter
 import Date
 import Dependencies
 import Foundation
@@ -56,7 +56,7 @@ extension WebsitePage {
 
                 if !posts.isEmpty {
                     div {
-                        CoenttbBlog.Blog.FeaturedModule(
+                        Coenttb_Blog.Blog.FeaturedModule(
                             posts: posts,
                             seeAllURL: serverRouter.url(for: .blog(.index))
                         )

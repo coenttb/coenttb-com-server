@@ -1,12 +1,12 @@
 import Coenttb
-import CoenttbWeb
-import CoenttbIdentity
-import CoenttbIdentityLive
-import CoenttbIdentityFluent
-import CoenttbNewsletter
-import CoenttbStripe
-import CoenttbStripeLive
-import CoenttbSyndication
+import Coenttb_Server
+import Coenttb_Identity
+import Coenttb_Identity_Live
+import Coenttb_Identity_Fluent
+import Coenttb_Newsletter
+import Coenttb_Stripe
+import Coenttb_Stripe_Live
+import Coenttb_Syndication
 import Mailgun
 import Server_Models
 import Server_Router
@@ -25,7 +25,7 @@ extension Server_RouterAPI {
 
                 @Dependency(\.serverClient.newsletter) var client
 
-                return try await CoenttbNewsletter.API.response(
+                return try await Coenttb_Newsletter.API.response(
                     client: client,
                     logger: logger,
                     cookieId: String.newsletterSubscribed,
@@ -36,7 +36,7 @@ extension Server_RouterAPI {
 
                 @Dependency(\.serverClient.account) var database
 
-                return try await CoenttbIdentity.API.response(
+                return try await Coenttb_Identity.API.response(
                     api: account,
                     client: database,
                     userInit: Server_Models.User.init(update:),
@@ -87,7 +87,7 @@ extension Server_RouterAPI {
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey
 //
-//                return try await CoenttbStripe.API.response(
+//                return try await Coenttb_Stripe.API.response(
 //                    stripe: stripe,
 //                    publishableKey: publishableKey,
 //                    productLookupKeys: Coenttb.Stripe.monthlyBlogSubscriptionPriceLookupKey,
@@ -142,7 +142,7 @@ extension Server_RouterAPI {
 }
 
 extension Server_Models.User {
-    init?(update: CoenttbIdentity.API.Update) {
+    init?(update: Coenttb_Identity.API.Update) {
         @Dependency(\.currentUser) var currentUser
 
         guard var user = currentUser else {

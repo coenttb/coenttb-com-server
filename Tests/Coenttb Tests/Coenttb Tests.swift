@@ -7,9 +7,9 @@
 
 import Foundation
 import Testing
-import CoenttbWeb
+import Coenttb_Server
 import DependenciesTestSupport
-import CoenttbBlog
+import Coenttb_Blog
 @testable import Coenttb
 
 @Suite("Blog Post Tests")

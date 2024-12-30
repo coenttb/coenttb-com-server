@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 16/10/2024.
 //
 
-import CoenttbWeb
-import CoenttbIdentity
-import CoenttbNewsletter
-import CoenttbStripe
+import Coenttb_Server
+import Coenttb_Identity
+import Coenttb_Newsletter
+import Coenttb_Stripe
 import Server_Models
 import StripeKit
 import Server_Client

@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 04/09/2024.
 //
 
-import CoenttbWeb
+import Coenttb_Server
 import Mailgun
 import Server_EnvVars
 

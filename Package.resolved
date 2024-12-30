@@ -1,5 +1,5 @@
 {
-  "originHash" : "bc6342d86ef55abc944906b93818108455d5430a12df9efe090dd669414da78a",
+  "originHash" : "f11d649ed10e2361926393d4e09ddac6794ac6b75656fd84d419c334060fde9a",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "56d6e195c0f4a0ea92ac6c6f8ed5e7ab9d2c7c16"
+        "revision" : "98aa4df3f419cfbd261ac7403dee123c4272cd91"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-google-analytics.git",
       "state" : {
         "branch" : "main",
-        "revision" : "9ba02f1ce3b2e5ee99a5278c52cd9b84d95436b0"
+        "revision" : "c68be47c9b93613b77c3c45a9614e9a7df5c1455"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-hotjar.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ad78b2db654f3cfa855b962825aa914a77c5b6d3"
+        "revision" : "4f76d3011b05c39633c4fe6f47c76197b3d292a5"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4a789747edc94bb752bf91406df1acc18df0fa24"
+        "revision" : "c7621750d0380b87a790b42aedcb15007ab0c09a"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "d74929af800d2d8fc22d75f04d5b03aa84b2af8e"
+        "revision" : "8ab5d111e43bdef40b12354df68d51cb6fbdc0a5"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "bff8d35f83df5131074463889d071bacb10fde67"
+        "revision" : "051f26084daf018f33452d83cd262d5fd19ad98e"
       }
     },
     {
@@ -101,12 +101,21 @@
       }
     },
     {
+      "identity" : "coenttb-server",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-server.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "68a7ed5cb2cd1c781056522f2cf7589ec71ab4c6"
+      }
+    },
+    {
       "identity" : "coenttb-stripe",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/coenttb-stripe.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f97ad6a07872e23b5d377aa09cf9e3158b3b49fb"
+        "revision" : "556cbd4400c0cb52411f06bb549a3a8ce2009b77"
       }
     },
     {
@@ -115,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-syndication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "5f004a93ff0f1e4883c5f4fc325c38478ed29350"
+        "revision" : "4ccebbefd9430aaac3786ab8b2f22480a4635fcc"
       }
     },
     {
@@ -133,7 +142,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "9b9d2995113685ca59c0ff0a5f11541859c83b94"
+        "revision" : "4118318ead4ebe6b629e3d1f8550f93df43147e3"
       }
     },
     {
@@ -179,15 +188,6 @@
       "state" : {
         "revision" : "fd57101e426d3edf66a32ba63a7d0b8ced4d7499",
         "version" : "2.10.0"
-      }
-    },
-    {
-      "identity" : "macro-codable-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/macro-codable-kit.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "fe50f6cf17ad8bee13fd34daa1b8d81718fec4d9"
       }
     },
     {
@@ -278,15 +278,6 @@
       "state" : {
         "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
         "version" : "1.2.0"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser.git",
-      "state" : {
-        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
-        "version" : "1.5.0"
       }
     },
     {
@@ -425,15 +416,6 @@
       }
     },
     {
-      "identity" : "swift-format",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-format.git",
-      "state" : {
-        "revision" : "65f9da9aad84adb7e2028eb32ca95164aa590e3b",
-        "version" : "600.0.0"
-      }
-    },
-    {
       "identity" : "swift-html",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-html",
@@ -479,30 +461,12 @@
       }
     },
     {
-      "identity" : "swift-macro-toolkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/stackotter/swift-macro-toolkit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "569627091e1fbb8745d691aeeb008e7247dedb7c"
-      }
-    },
-    {
       "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-markdown.git",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
         "revision" : "8f79cb175981458a0a27e76cb42fee8e17b1a993",
         "version" : "0.5.0"
-      }
-    },
-    {
-      "identity" : "swift-memberwise-init-macro",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gohanlon/swift-memberwise-init-macro",
-      "state" : {
-        "revision" : "21ca6d8c8f9e4ce27e92f82da294e0d91953b8b6",
-        "version" : "0.5.1"
       }
     },
     {
@@ -654,8 +618,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "73dfe634f04945285054b261369cd93f5100b44c",
-        "version" : "4.110.2"
+        "revision" : "4d7456c0d4b33ef82783a90ecfeae33a52a3972a",
+        "version" : "4.111.0"
       }
     },
     {

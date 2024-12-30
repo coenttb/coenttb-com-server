@@ -6,9 +6,9 @@
 //
 
 import Coenttb
-import CoenttbWeb
-import CoenttbBlog
-import CoenttbNewsletter
+import Coenttb_Server
+import Coenttb_Blog
+import Coenttb_Newsletter
 import Server_EnvVars
 import Server_Router
 
@@ -30,7 +30,7 @@ extension WebsitePage {
 
                 let localPosts = blogPosts()
 
-                return try await CoenttbBlog.Route.response(
+                return try await Coenttb_Blog.Route.response(
                     route: route,
                     blurb: Coenttb.oneliner,
                     companyXComHandle: companyXComHandle,
@@ -47,7 +47,7 @@ extension WebsitePage {
                         @Dependency(\.serverRouter) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
-                        return CoenttbNewsletter.Route.Subscribe.Overlay (
+                        return Coenttb_Newsletter.Route.Subscribe.Overlay (
                             image: Image.coenttbGreenSuit,
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
@@ -86,7 +86,7 @@ extension WebsitePage {
 
                 @Dependency(\.serverRouter) var serverRouter
 
-                return try await CoenttbNewsletter.Route.response(
+                return try await Coenttb_Newsletter.Route.response(
                     newsletter: newsletter,
                     htmlDocument: { html in
                         Coenttb.DefaultHTMLDocument.init {
