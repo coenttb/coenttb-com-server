@@ -14,15 +14,29 @@ public typealias Server_Router = ServerRoute.Router<
 
 public enum Server_RouterKey: TestDependencyKey {
     public static let testValue: Server_Router = {
-        @Dependency(\.envVars) var envVars
-        return Server_Router(
-            baseURL: envVars.baseUrl,
-            apiRouter: API.Router.shared,
-            webhookRouter: Webhook.Router.shared,
-            publicRouter: Public.Router.shared,
-            pageRouter: WebsitePage.Router.shared
-        )
+        withDependencies {
+            $0.envVars = try! .live(localDevelopment: .projectRoot.appendingPathComponent(".env.development"))
+        } operation: {
+            @Dependency(\.envVars) var envVars
+            return Server_Router(
+                baseURL: envVars.baseUrl,
+                apiRouter: API.Router.shared,
+                webhookRouter: Webhook.Router.shared,
+                publicRouter: Public.Router.shared,
+                pageRouter: WebsitePage.Router.shared
+            )
+        }
+
     }()
+}
+
+extension URL {
+    static var projectRoot: URL {
+        return .init(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
 }
 
 extension DependencyValues {
