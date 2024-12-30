@@ -87,9 +87,6 @@ extension Application {
     static func preloadStaticResources() {
         _ = Clauses.privacyStatement
         _ = Clauses.generalTermsAndConditions
-        _ = Clauses.generalTermsAndConditions2
-        _ = Clauses.generalTermsAndConditions3
-        _ = Clauses.generalTermsAndConditions4
         _ = Clauses.termsOfUse
     }
 }

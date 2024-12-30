@@ -36,7 +36,6 @@ extension BlogKey: @retroactive DependencyKey {
                 }
         },
         filenameToResourceUrl: { fileName in
-            print(fileName)
             return Bundle.module.url(forResource: fileName, withExtension: "md")
         },
         postToRoute: { post in
