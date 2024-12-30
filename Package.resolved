@@ -1,5 +1,5 @@
 {
-  "originHash" : "ecaba7b8489c19773e7caf68d0811060f0e36d49ddaf4c278c4ef7057e05ed0e",
+  "originHash" : "bc6342d86ef55abc944906b93818108455d5430a12df9efe090dd669414da78a",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1d1666474540aef37951d1e778d5cd455c6d891b"
+        "revision" : "56d6e195c0f4a0ea92ac6c6f8ed5e7ab9d2c7c16"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a4184cc35c1e4576ae011150bbc5144cac077aed"
+        "revision" : "be917c5640adf54b22cc1598ffe3b3487969c068"
       }
     },
     {
@@ -205,7 +205,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3d56e6c42029c62d6913f6b623ab3036d9f30092"
+        "revision" : "517a823ffb482d588fbd46c2606a87dc8f35f3ec"
       }
     },
     {
@@ -439,7 +439,7 @@
       "location" : "https://github.com/coenttb/swift-html",
       "state" : {
         "branch" : "main",
-        "revision" : "bfbea2b2edf6b9c8106263784181c29734c3750c"
+        "revision" : "cb8d1b8fe55fd827df971a2982f09aa096394796"
       }
     },
     {
