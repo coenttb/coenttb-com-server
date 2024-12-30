@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 20/09/2024.
 //
 
-import CoenttbWebHTML
+import Coenttb_Server_HTML
 import Foundation
 
 extension PageModule.Theme {

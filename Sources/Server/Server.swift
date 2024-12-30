@@ -1,4 +1,4 @@
-import CoenttbWeb
+import Coenttb_Server
 import Vapor_Application
 
 @main
@@ -21,7 +21,7 @@ struct Server {
             do {
                 let configure: @Sendable (Application) async throws -> Void = Application.configure
 
-                try await CoenttbVapor.Application.main(
+                try await Coenttb_Vapor.Application.main(
                     application: application,
                     environment: environment,
                     logLevel: logLevel,

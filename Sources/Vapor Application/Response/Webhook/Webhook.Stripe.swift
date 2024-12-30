@@ -5,8 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 //
 
-import CoenttbWebHTML
-import CoenttbStripe
+import Coenttb_Server_HTML
+import Coenttb_Stripe
+import Coenttb_Stripe_Live
 import Dependencies
 import Fluent
 import Foundation
@@ -16,7 +17,7 @@ import Prelude
 import Server_Dependencies
 import Vapor
 
-extension CoenttbStripe.Client {
+extension Coenttb_Stripe.Client {
     static func webhook(
         request: Vapor.Request
     ) async throws -> any AsyncResponseEncodable {
@@ -97,7 +98,7 @@ extension CoenttbStripe.Client {
                 _ = try await database.deleteCustomerIdFromUser(stripeCustomerId: customer.id)
 
             } catch {
-                logger.log(.warning, "Stripe Webhook received .customerDeleted, but couldn't find User with that CoenttbStripe.customerId. This suggests that the synchronization between Stripe and the Database is not working correctly.")
+                logger.log(.warning, "Stripe Webhook received .customerDeleted, but couldn't find User with that Coenttb_Stripe.customerId. This suggests that the synchronization between Stripe and the Database is not working correctly.")
                 throw Abort(.internalServerError, reason: "Unknown customer id")
             }
         case (.paymentMethodAttached, .paymentMethod(_)):

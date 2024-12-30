@@ -6,13 +6,11 @@
 //
 
 import CasePaths
-import CoenttbServerRouter
-import CoenttbIdentity
+import Coenttb_Server_Router
+import Coenttb_Identity
 import Dependencies
 import Foundation
 import Languages
-import MacroCodableKit
-import MemberwiseInit
 import Server_Translations
 import URLRouting
 
@@ -21,12 +19,12 @@ extension WebsitePage {
     public enum Account: Codable, Hashable, Sendable {
         case index
         case settings(WebsitePage.Account.Settings)
-        case create(CoenttbIdentity.Route.Create)
+        case create(Coenttb_Identity.Route.Create)
         case delete
         case login
         case logout
-        case password(CoenttbIdentity.Route.Password)
-        case emailChange(CoenttbIdentity.Route.EmailChange)
+        case password(Coenttb_Identity.Route.Password)
+        case emailChange(Coenttb_Identity.Route.EmailChange)
     }
 }
 
@@ -38,10 +36,10 @@ extension WebsitePage.Account {
                 Route(
                     .convert(
                         apply: WebsitePage.Account.init,
-                        unapply: CoenttbIdentity.Route.init
+                        unapply: Coenttb_Identity.Route.init
                     )
                 ) {
-                    CoenttbIdentity.Route.Router()
+                    Coenttb_Identity.Route.Router()
                 }
 
                 Route(.case(WebsitePage.Account.settings)) {
@@ -56,7 +54,7 @@ extension WebsitePage.Account {
 }
 
 extension WebsitePage.Account {
-    fileprivate init(_ accountRoute: CoenttbIdentity.Route) {
+    fileprivate init(_ accountRoute: Coenttb_Identity.Route) {
         switch accountRoute {
         case .create(let create):
             self = .create(create)
@@ -74,7 +72,7 @@ extension WebsitePage.Account {
     }
 }
 
-extension CoenttbIdentity.Route {
+extension Coenttb_Identity.Route {
     package init?(_ accountRoute: WebsitePage.Account) {
         switch accountRoute {
         case .create(let create):

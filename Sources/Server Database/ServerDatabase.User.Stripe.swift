@@ -6,7 +6,7 @@
 //
 
 import Fluent
-@preconcurrency import CoenttbStripe
+@preconcurrency import Coenttb_Stripe
 import Foundation
 
 extension Server_Database.User {

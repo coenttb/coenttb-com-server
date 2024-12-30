@@ -5,5 +5,5 @@
 //  Created by Coen ten Thije Boonkkamp on 04-01-2024.
 //
 
-@_exported import CoenttbIdentity
-@_exported import CoenttbWebModels
+@_exported import Coenttb_Identity
+@_exported import Coenttb_Server_Models

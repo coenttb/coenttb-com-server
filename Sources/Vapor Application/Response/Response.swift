@@ -6,9 +6,9 @@
 //
 
 import Coenttb
-import CoenttbWeb
-import CoenttbBlog
-import CoenttbSyndication
+import Coenttb_Server
+import Coenttb_Blog
+import Coenttb_Syndication
 import Server_EnvVars
 import Server_Models
 import Server_Router

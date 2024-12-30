@@ -5,27 +5,27 @@
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-import CoenttbWeb
-import CoenttbIdentityFluent
-import CoenttbNewsletterFluent
-import CoenttbStripe
+import Coenttb_Server
+import Coenttb_Identity_Fluent
+import Coenttb_Newsletter_Fluent
+import Coenttb_Stripe
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {
         var migrations: [any Fluent.Migration] = [
             {
-                var migration = CoenttbIdentityFluent.Identity.Migration.Create()
-                migration.name = "CoenttbIdentity.Identity.Migration.Create"
+                var migration = Coenttb_Identity_Fluent.Identity.Migration.Create()
+                migration.name = "Coenttb_Identity.Identity.Migration.Create"
                 return migration
             }(),
             {
-                var migration = CoenttbIdentityFluent.Identity.Token.Migration()
-                migration.name = "CoenttbIdentity.Identity.Token.Migration.Create"
+                var migration = Coenttb_Identity_Fluent.Identity.Token.Migration()
+                migration.name = "Coenttb_Identity.Identity.Token.Migration.Create"
                 return migration
             }(),
             {
-                var migration = CoenttbIdentityFluent.EmailChangeRequest.Migration()
-                migration.name = "CoenttbIdentity.EmailChangeRequest.Migration.Create"
+                var migration = Coenttb_Identity_Fluent.EmailChangeRequest.Migration()
+                migration.name = "Coenttb_Identity.EmailChangeRequest.Migration.Create"
                 return migration
             }(),
             {
@@ -35,27 +35,27 @@ extension [any Fluent.Migration] {
             }(),
             {
                 var migration = Newsletter.Migration.Create()
-                migration.name = "CoenttbNewsletter.Newsletter.Migration.Create"
+                migration.name = "Coenttb_Newsletter.Newsletter.Migration.Create"
                 return migration
             }(),
             {
-                var migration = CoenttbNewsletterFluent.Newsletter.Token.Migration.Create()
-                migration.name = "CoenttbNewsletter.Newsletter.Token.Migration.Create"
+                var migration = Coenttb_Newsletter_Fluent.Newsletter.Token.Migration.Create()
+                migration.name = "Coenttb_Newsletter.Newsletter.Token.Migration.Create"
                 return migration
             }(),
             {
-                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_1_AddUpdatedAt()
-                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_1_AddUpdatedAt"
+                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_1_AddUpdatedAt()
+                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_1_AddUpdatedAt"
                 return migration
             }(),
             {
-                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_2_AddEmailVerification()
-                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_2_AddEmailVerification"
+                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_2_AddEmailVerification()
+                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_2_AddEmailVerification"
                 return migration
             }(),
             {
-                var migration = CoenttbNewsletterFluent.Newsletter.Migration.STEP_3_AddLastEmailMessageId()
-                migration.name = "CoenttbNewsletter.Newsletter.Migration.STEP_3_AddLastEmailMessageId"
+                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_3_AddLastEmailMessageId()
+                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_3_AddLastEmailMessageId"
                 return migration
             }(),
         ]

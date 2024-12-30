@@ -5,18 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 18-12-2023.
 //
 
-import CasePaths
-import CoenttbIdentity
-import CoenttbNewsletter
-import CoenttbStripe
-import CoenttbSyndication
-import Dependencies
-import EmailAddress
-import Foundation
-import Languages
-import MacroCodableKit
-import MemberwiseInit
-import URLRouting
+import Coenttb_Web
+import Coenttb_Identity
+import Coenttb_Newsletter
+import Coenttb_Stripe
+import Coenttb_Syndication
 
 public typealias Server_RouterAPI = API
 public enum API: Equatable, Sendable {
@@ -41,9 +34,9 @@ extension API {
 
 extension API {
     public enum Version1: Equatable, Sendable {
-        case newsletter(CoenttbNewsletter.API)
-        case account(CoenttbIdentity.API)
-        case rss(CoenttbSyndication.API)
+        case newsletter(Coenttb_Newsletter.API)
+        case account(Coenttb_Identity.API)
+        case rss(Coenttb_Syndication.API)
     }
 }
 
@@ -53,22 +46,22 @@ extension API.Version1 {
             OneOf {
                 URLRouting.Route(.case(API.Version1.newsletter)) {
                     Path { "newsletter" }
-                    CoenttbNewsletter.API.Router()
+                    Coenttb_Newsletter.API.Router()
                 }
 
 //                URLRouting.Route(.case(API.Version1.stripe)) {
 //                    Path { "stripe" }
-//                    CoenttbStripe.API.Router()
+//                    Coenttb_Stripe.API.Router()
 //                }
 
                 URLRouting.Route(.case(API.Version1.account)) {
                     Path { "account" }
-                    CoenttbIdentity.API.Router()
+                    Coenttb_Identity.API.Router()
                 }
 
                 URLRouting.Route(.case(API.Version1.rss)) {
                     Path { "rss" }
-                    CoenttbSyndication.API.Router()
+                    Coenttb_Syndication.API.Router()
                 }
             }
         }

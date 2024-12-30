@@ -5,28 +5,48 @@
 //  Created by Coen ten Thije Boonkkamp on 25/08/2024.
 //
 
-import CoenttbVapor
-import CoenttbWebModels
-@preconcurrency import CoenttbStripe
+import Coenttb_Vapor
+import Coenttb_Server_Models
+@preconcurrency import Coenttb_Stripe
 import Dependencies
 import EmailAddress
 import Foundation
-import MemberwiseInit
 import Tagged
 
-@MemberwiseInit(.package)
 package struct User: Codable, Hashable, Sendable {
     package typealias ID = Tagged<Self, UUID>
-    @Init(default: nil) package var id: ID?
-    @Init(default: nil) package var email: EmailAddress?
-    @Init(default: nil) package var name: String?
-    @Init(default: false) package var authenticated: Bool
-    @Init(default: nil) package var isAdmin: Bool?
-    @Init(default: nil) package var isEmailVerified: Bool?
-    @Init(default: nil) package var dateOfBirth: Date?
-    @Init(default: nil) package var newsletterSubscribed: Bool?
-    @Init(default: nil) package var stripe: User.Stripe?
+    package var id: ID?
+    package var email: EmailAddress?
+    package var name: String?
+    package var authenticated: Bool
+    package var isAdmin: Bool?
+    package var isEmailVerified: Bool?
+    package var dateOfBirth: Date?
+    package var newsletterSubscribed: Bool?
+    package var stripe: User.Stripe?
 
+    package init(
+        id: ID? = nil,
+        email: EmailAddress? = nil,
+        name: String? = nil,
+        authenticated: Bool = false,
+        isAdmin: Bool? = nil,
+        isEmailVerified: Bool? = nil,
+        dateOfBirth: Date? = nil,
+        newsletterSubscribed: Bool? = nil,
+        stripe: User.Stripe? = nil
+    ) {
+        self.id = id
+        self.email = email
+        self.name = name
+        self.authenticated = authenticated
+        self.isAdmin = isAdmin
+        self.isEmailVerified = isEmailVerified
+        self.dateOfBirth = dateOfBirth
+        self.newsletterSubscribed = newsletterSubscribed
+        self.stripe = stripe
+    }
+    
     package enum CodingKeys: String, CodingKey {
         case id
         case email

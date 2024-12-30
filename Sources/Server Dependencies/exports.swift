@@ -6,4 +6,4 @@
 ////
 //
 
-@_exported import CoenttbWebDependencies
+@_exported import Coenttb_Server_Dependencies

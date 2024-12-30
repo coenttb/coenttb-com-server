@@ -7,26 +7,26 @@
 
 import CoenttbHTML
 import CoenttbMarkdown
-import CoenttbBlog
-import CoenttbWebHTML
+import Coenttb_Blog
+import Coenttb_Server_HTML
 import Date
 import Dependencies
 import Foundation
 import Languages
 
-extension [CoenttbBlog.Blog.Post] {
-    package static var allCases: [CoenttbBlog.Blog.Post] {
+extension [Coenttb_Blog.Blog.Post] {
+    package static var allCases: [Coenttb_Blog.Blog.Post] {
         [
-            [CoenttbBlog.Blog.Post].general,
-            [CoenttbBlog.Blog.Post].domain_modeling,
+            [Coenttb_Blog.Blog.Post].general,
+            [Coenttb_Blog.Blog.Post].domain_modeling,
         ]
             .flatMap{ $0 }
             .sorted(by: { $0.publishedAt < $1.publishedAt })
     }
 }
 
-extension [CoenttbBlog.Blog.Post] {
-    package static var general: [CoenttbBlog.Blog.Post] {
+extension [Coenttb_Blog.Blog.Post] {
+    package static var general: [Coenttb_Blog.Blog.Post] {
         process { category, index in
             [
                 .init(
@@ -72,8 +72,8 @@ extension [CoenttbBlog.Blog.Post] {
     }
 }
 
-extension [CoenttbBlog.Blog.Post] {
-    package static var domain_modeling: [CoenttbBlog.Blog.Post] {
+extension [Coenttb_Blog.Blog.Post] {
+    package static var domain_modeling: [Coenttb_Blog.Blog.Post] {
         process("domain-modeling") {
             category,
             index in
@@ -115,8 +115,8 @@ extension [CoenttbBlog.Blog.Post] {
 
 fileprivate func process(
     _ category: TranslatedString? = nil,
-    _ closure: (_ category: TranslatedString?, _ index: () -> Int) -> [CoenttbBlog.Blog.Post]
-) -> [CoenttbBlog.Blog.Post] {
+    _ closure: (_ category: TranslatedString?, _ index: () -> Int) -> [Coenttb_Blog.Blog.Post]
+) -> [Coenttb_Blog.Blog.Post] {
     var counter = 0
     let incrementingIndex: () -> Int = {
         counter += 1

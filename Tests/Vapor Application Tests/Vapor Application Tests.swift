@@ -4,8 +4,8 @@ import Vapor
 import VaporTesting
 import Dependencies
 import Coenttb
-import CoenttbWeb
-import CoenttbIdentityFluent
+import Coenttb_Server
+import Coenttb_Identity_Fluent
 import Server_EnvVars
 import Fluent
 import FluentPostgresDriver

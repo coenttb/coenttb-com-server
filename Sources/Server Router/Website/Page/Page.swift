@@ -6,20 +6,18 @@
 //
 
 import CasePaths
-import CoenttbServerRouter
-import CoenttbBlog
-import CoenttbNewsletter
+import Coenttb_Server_Router
+import Coenttb_Blog
+import Coenttb_Newsletter
 import Dependencies
 import Foundation
 import Languages
-import MacroCodableKit
-import MemberwiseInit
 import Server_Translations
 import URLRouting
 
 public enum WebsitePage: Codable, Hashable, Sendable {
-    case blog(CoenttbBlog.Route = .index)
-    case newsletter(CoenttbNewsletter.Route)
+    case blog(Coenttb_Blog.Route = .index)
+    case newsletter(Coenttb_Newsletter.Route)
     case choose_country_region
     case contact
     case home
@@ -45,12 +43,12 @@ extension WebsitePage {
 
                 URLRouting.Route(.case(WebsitePage.blog)) {
                     Path { String.blog.slug() }
-                    CoenttbBlog.Route.Router()
+                    Coenttb_Blog.Route.Router()
                 }
 
                 URLRouting.Route(.case(WebsitePage.newsletter)) {
                     Path { String.newsletter.slug() }
-                    CoenttbNewsletter.Route.Router()
+                    Coenttb_Newsletter.Route.Router()
                 }
 
                 URLRouting.Route(.case(WebsitePage.choose_country_region)) {

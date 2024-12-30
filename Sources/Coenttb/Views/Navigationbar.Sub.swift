@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 07-02-2024.
 //
 
-import CoenttbWebHTML
-import CoenttbWebModels
+import Coenttb_Server_HTML
+import Coenttb_Server_Models
 import Dependencies
 import Foundation
 import Languages

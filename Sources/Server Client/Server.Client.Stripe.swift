@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 16/10/2024.
 //
 
-import CoenttbIdentity
-import CoenttbWebDatabase
-import CoenttbNewsletter
-import CoenttbStripe
+import Coenttb_Identity
+import Coenttb_Database
+import Coenttb_Newsletter
+import Coenttb_Stripe
 import Dependencies
 import DependenciesMacros
 import EmailAddress

@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17/09/2024.
 //
 
-@preconcurrency import CoenttbWebHTML
+@preconcurrency import Coenttb_Server_HTML
 import Foundation
 import Languages
 

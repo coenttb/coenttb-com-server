@@ -5,9 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 30/08/2024.
 //
 
-import CoenttbWeb
+import Coenttb_Server
 import EnvironmentVariables
-import CoenttbStripe
+import Coenttb_Stripe
 import GoogleAnalytics
 import Hotjar
 import Mailgun
@@ -52,7 +52,7 @@ extension EnvVars {
         )
     }
 
-    public var stripe: CoenttbStripe.Client.EnvVars? {
+    public var stripe: Coenttb_Stripe.Client.EnvVars? {
         guard
             let endpointSecret = self["STRIPE_ENDPOINT_SECRET"],
             let publishableKey = self["STRIPE_PUBLISHABLE_KEY"],

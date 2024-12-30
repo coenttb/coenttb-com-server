@@ -1,6 +1,6 @@
 import Coenttb
-import CoenttbWeb
-import CoenttbIdentityFluent
+import Coenttb_Server
+import Coenttb_Identity_Fluent
 import Server_EnvVars
 import Fluent
 import FluentPostgresDriver
@@ -48,7 +48,7 @@ extension Application {
         app.queues.use(.fluent())
         try app.queues.startInProcessJobs(on: .default)
 
-        try await CoenttbVapor.Application.configure(
+        try await Coenttb_Vapor.Application.configure(
             app: app,
             httpsRedirect: envVars.httpsRedirect,
             canonicalHost: envVars.canonicalHost,

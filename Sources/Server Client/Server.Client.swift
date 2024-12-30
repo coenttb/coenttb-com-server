@@ -1,7 +1,7 @@
-import CoenttbIdentity
-import CoenttbWebDatabase
-import CoenttbNewsletter
-import CoenttbStripe
+import Coenttb_Identity
+import Coenttb_Database
+import Coenttb_Newsletter
+import Coenttb_Stripe
 import Dependencies
 import DependenciesMacros
 import EmailAddress
@@ -9,13 +9,13 @@ import Server_Models
 
 @DependencyClient
 package struct Client: Sendable {
-    package let newsletter: CoenttbNewsletter.Client
-    package let account: CoenttbIdentity.Client<Server_Models.User>
+    package let newsletter: Coenttb_Newsletter.Client
+    package let account: Coenttb_Identity.Client<Server_Models.User>
     package let stripe: Server_Client.Client.Stripe?
     
     package init(
-        newsletter: CoenttbNewsletter.Client,
-        account: CoenttbIdentity.Client<Server_Models.User>,
+        newsletter: Coenttb_Newsletter.Client,
+        account: Coenttb_Identity.Client<Server_Models.User>,
         stripe: Server_Client.Client.Stripe?
     ) {
         self.newsletter = newsletter
