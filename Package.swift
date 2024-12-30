@@ -49,6 +49,7 @@ extension Target.Dependency {
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
+    static var vaporTesting: Self { .product(name: "VaporTesting", package: "vapor") }
 }
 
 let package = Package(
@@ -82,6 +83,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.6.0"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2"),
         
         // TIP: Ensure that any non-public dependency of a dependency requiring authentication is explicitly listed here to enable successful linking on Heroku.
     ],
@@ -221,6 +223,23 @@ let package = Package(
 //                .linkedLibrary("gd")
 //            ]
         ),
+        .testTarget(
+            name: .vaporApp.tests,
+            dependencies: [
+                .vaporApp,
+                .vaporTesting,
+                
+                .serverEnvVars,
+                .serverClient,
+                .serverDependencies,
+                .coenttbWeb,
+                .coenttb,
+                .coenttbNewsletter,
+                .coenttbBlog,
+                .queuesFluentDriver,
+                .dependenciesTestSupport,
+            ]
+        ),
         .executableTarget(
             name: .server,
             dependencies: [
@@ -234,7 +253,7 @@ let package = Package(
                 .coenttbWeb,
                 .coenttbBlog,
                 .coenttb,
-                .dependenciesTestSupport,
+                .dependenciesTestSupport
             ]
         )
     ],
