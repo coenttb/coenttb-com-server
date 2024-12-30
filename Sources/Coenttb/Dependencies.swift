@@ -58,9 +58,9 @@ extension BlogKey: @retroactive DependencyKey {
 }
 
 extension LanguagesKey: @retroactive DependencyKey {
-    public static let liveValue: [Language] = {
+    public static let liveValue: Set<Language> = {
         @Dependency(\.envVars.languages) var languages
-        return languages ?? [.english]
+        return languages.map(Set.init) ?? .allCases
     }()
 }
 

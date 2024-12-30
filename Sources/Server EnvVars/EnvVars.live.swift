@@ -16,10 +16,12 @@ import Postgres
 extension EnvVars: @retroactive DependencyKey {
     public static var liveValue: Self {
         let localDevelopment: URL? = {
-
+#if DEBUG
             @Dependency(\.projectRoot) var projectRoot
             return projectRoot.appendingPathComponent(".env.development")
-
+#else
+            return nil
+#endif
         }()
         return try! EnvVars.live(
             localDevelopment: localDevelopment
