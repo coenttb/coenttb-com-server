@@ -33,7 +33,7 @@ package struct CoenttbFooter: HTML {
                 title: "coenttb",
                 href: serverRouter.href(for: .home),
                 content: Paragraph {
-                    HTMLText("\(Coenttb.oneliner) \(String.with) ")
+                    HTMLText("\(Coenttb.oneliner) \(String.with.capitalizingFirstLetter()) ")
                     Link("coenttb", href: "https://x.com/coenttb")
                     "."
                 }
