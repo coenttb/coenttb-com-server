@@ -82,9 +82,9 @@ extension CurrentUserKey: DependencyKey {
 }
 
 extension Server_RouterKey: DependencyKey {
-    public static let liveValue: Server_Router = {
+    public static let liveValue: ServerRouter = {
         @Dependency(\.envVars) var envVars
-        return Server_Router(
+        return ServerRouter(
             baseURL: envVars.baseUrl,
             apiRouter: API.Router.shared,
             webhookRouter: Webhook.Router.shared,
