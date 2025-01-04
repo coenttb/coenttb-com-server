@@ -26,12 +26,12 @@ extension Server_Models.User {
             isAdmin: identity.isAdmin,
             isEmailVerified: identity.emailVerificationStatus == .verified,
             dateOfBirth: user.dateOfBirth,
-            newsletterSubscribed: user.newsletterConsent,
-            stripe: user.stripe.customerId.map { customerId in
-                user.stripe.subscription.status.map { subscriptionStatus in
-                        .init(customerId: customerId, subscriptionStatus: subscriptionStatus)
-                } ?? .init(customerId: customerId, subscriptionStatus: .none)
-            }
+            newsletterSubscribed: user.newsletterConsent
+//            stripe: user.stripe.customerId.map { customerId in
+//                user.stripe.subscription.status.map { subscriptionStatus in
+//                        .init(customerId: customerId, subscriptionStatus: subscriptionStatus)
+//                } ?? .init(customerId: customerId, subscriptionStatus: .none)
+//            }
         )
     }
 }

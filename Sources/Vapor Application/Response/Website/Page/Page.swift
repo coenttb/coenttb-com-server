@@ -7,10 +7,11 @@
 
 import Coenttb
 import Coenttb_Server
-import Coenttb_Blog
+import Coenttb_Blog_Vapor
 import Coenttb_Newsletter
 import Server_EnvVars
 import Server_Router
+import Vapor
 
 extension WebsitePage {
     static func response(

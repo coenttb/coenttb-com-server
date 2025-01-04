@@ -11,7 +11,6 @@ import Server_EnvVars
 import Foundation
 import Languages
 import Mailgun
-import Tagged
 
 extension Email {
     public static func generalContact(

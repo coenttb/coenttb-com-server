@@ -8,8 +8,6 @@
 import Coenttb_Server
 import Coenttb_Blog
 import Coenttb_Newsletter
-import Coenttb_Stripe
-import Coenttb_Stripe_Live
 import Mailgun
 import Server_Client
 import Server_Client_Live
@@ -17,6 +15,9 @@ import Server_Dependencies
 import Server_Models
 import Server_Router
 import Authenticated
+//import Coenttb_Stripe
+//import Coenttb_Stripe_Live
+
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -159,23 +160,23 @@ extension Mailgun.Client: @retroactive DependencyKey {
     }
 }
 
-extension StripeClientKey: @retroactive DependencyKey {
-    public static var liveValue: Coenttb_Stripe.Client? {
-        @Dependency(\.envVars) var envVars
-        @Dependency(\.httpClient) var httpClient
-        
-        guard
-            let stripeSecretKey = envVars.stripe?.secretKey
-        else {
-            return nil
-        }
-        
-        return Coenttb_Stripe.Client.live(
-            stripeSecretKey: stripeSecretKey,
-            httpClient: httpClient
-        )
-    }
-}
+//extension StripeClientKey: @retroactive DependencyKey {
+//    public static var liveValue: Coenttb_Stripe.Client? {
+//        @Dependency(\.envVars) var envVars
+//        @Dependency(\.httpClient) var httpClient
+//        
+//        guard
+//            let stripeSecretKey = envVars.stripe?.secretKey
+//        else {
+//            return nil
+//        }
+//        
+//        return Coenttb_Stripe.Client.live(
+//            stripeSecretKey: stripeSecretKey,
+//            httpClient: httpClient
+//        )
+//    }
+//}
 
 extension DatabaseConfigurationKey: @retroactive DependencyKey {
     public static let liveValue = DatabaseConfiguration(

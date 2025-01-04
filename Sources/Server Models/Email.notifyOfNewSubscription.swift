@@ -6,8 +6,8 @@
 //
 
 import Coenttb_Server
-import Mailgun
 import Server_EnvVars
+import Mailgun
 
 extension Email {
     package static func notifyOfNewSubscription(

@@ -4,13 +4,14 @@ import Coenttb_Identity
 import Coenttb_Identity_Live
 import Coenttb_Identity_Fluent
 import Coenttb_Newsletter
-import Coenttb_Stripe
-import Coenttb_Stripe_Live
-import Coenttb_Syndication
+import Coenttb_Syndication_Vapor
 import Mailgun
 import Server_Models
 import Server_Router
 import Server_Client
+import Vapor
+//import Coenttb_Stripe
+//import Coenttb_Stripe_Live
 
 extension Server_RouterAPI {
     static func response(
@@ -47,7 +48,7 @@ extension Server_RouterAPI {
 
                         guard
                             let email = currentUser?.email,
-                            let id = currentUser?.id?.rawValue,
+                            let id = currentUser?.id,
                             let db
                         else { throw Abort(.internalServerError) }
 
@@ -66,7 +67,7 @@ extension Server_RouterAPI {
 
                         guard
                             let email = currentUser?.email,
-                            let id = currentUser?.id?.rawValue,
+                            let id = currentUser?.id,
                             let db
                         else { throw Abort(.internalServerError) }
 

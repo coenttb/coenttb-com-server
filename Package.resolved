@@ -1,5 +1,5 @@
 {
-  "originHash" : "f11d649ed10e2361926393d4e09ddac6794ac6b75656fd84d419c334060fde9a",
+  "originHash" : "9fce85792eee699b72f4e542794e5f3986a52cb97a25721aac9ea3a898a624e0",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -20,12 +20,12 @@
       }
     },
     {
-      "identity" : "bluecryptor",
+      "identity" : "coenttb",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/IBM-Swift/BlueCryptor.git",
+      "location" : "https://github.com/coenttb/coenttb.git",
       "state" : {
-        "revision" : "ee5880e031da4c609f372cf7472476ab51d5dd19",
-        "version" : "1.0.200"
+        "branch" : "main",
+        "revision" : "f938213ee947b07f16a5c6d9df3513335916e7e3"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "98aa4df3f419cfbd261ac7403dee123c4272cd91"
+        "revision" : "0eedcaa80706b8f2ad23b850add6df39c3ec522e"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c7621750d0380b87a790b42aedcb15007ab0c09a"
+        "revision" : "18ef02b6bbdadc663f0348922df3e38f974843a8"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "8ab5d111e43bdef40b12354df68d51cb6fbdc0a5"
+        "revision" : "0fb862deb6ad89bd558043983649384e51909d0b"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "051f26084daf018f33452d83cd262d5fd19ad98e"
+        "revision" : "0e79c1387afeaa5b6919fd0dd0ab958210649c56"
       }
     },
     {
@@ -106,16 +106,16 @@
       "location" : "https://github.com/coenttb/coenttb-server.git",
       "state" : {
         "branch" : "main",
-        "revision" : "68a7ed5cb2cd1c781056522f2cf7589ec71ab4c6"
+        "revision" : "f4ed5c4cb1994ae678db7efe6e9f1d8c724464a4"
       }
     },
     {
-      "identity" : "coenttb-stripe",
+      "identity" : "coenttb-server-vapor",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/coenttb-stripe.git",
+      "location" : "https://github.com/coenttb/coenttb-server-vapor.git",
       "state" : {
         "branch" : "main",
-        "revision" : "556cbd4400c0cb52411f06bb549a3a8ce2009b77"
+        "revision" : "90da24ec7e31d0fc32486d326b1b73b3de337e4b"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-syndication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4ccebbefd9430aaac3786ab8b2f22480a4635fcc"
+        "revision" : "e118aa06fa1776d3c659237b2068121f0ecb4f79"
       }
     },
     {
@@ -142,7 +142,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4118318ead4ebe6b629e3d1f8550f93df43147e3"
+        "revision" : "ef423775cac868b1f6a859fb4ac74453bf4eb590"
       }
     },
     {
@@ -209,12 +209,21 @@
       }
     },
     {
+      "identity" : "pointfree-server",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/pointfree-server.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "859ea03f998e59e3073db317962f1c4bd00914a7"
+      }
+    },
+    {
       "identity" : "pointfree-web",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/pointfree-web",
       "state" : {
         "branch" : "main",
-        "revision" : "5994fff00e459c2bc4277cfa57ed7a184b3c51ad"
+        "revision" : "7f6bd15f23cc4495efc441327416217442c4fb09"
       }
     },
     {
@@ -263,15 +272,6 @@
       }
     },
     {
-      "identity" : "stripe-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor-community/stripe-kit.git",
-      "state" : {
-        "revision" : "46c9f95a1b39c5fcb121605453911a605760c2b7",
-        "version" : "25.1.1"
-      }
-    },
-    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",
@@ -310,10 +310,10 @@
     {
       "identity" : "swift-authentication",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-authentication.git",
+      "location" : "https://github.com/coenttb/swift-authentication",
       "state" : {
         "branch" : "main",
-        "revision" : "5d6ac084ad384dbd0e6d73843f735c32a7c07ed9"
+        "revision" : "adc22192f6fbbebd63dde5a9da83290dedf53ca1"
       }
     },
     {
@@ -564,8 +564,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-service-lifecycle.git",
       "state" : {
-        "revision" : "f70b838872863396a25694d8b19fe58bcd0b7903",
-        "version" : "2.6.2"
+        "revision" : "c2e97cf6f81510f2d6b4a69453861db65d478560",
+        "version" : "2.6.3"
       }
     },
     {
@@ -587,15 +587,6 @@
       }
     },
     {
-      "identity" : "swift-tagged",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-tagged.git",
-      "state" : {
-        "revision" : "3907a9438f5b57d317001dc99f3f11b46882272b",
-        "version" : "0.10.0"
-      }
-    },
-    {
       "identity" : "swift-url-routing",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-url-routing",
@@ -610,7 +601,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "7cde70656765ae3128b5258bca6de1717d8be504"
+        "revision" : "ae73a0a6cef75805a91750a29787693959cbe521"
       }
     },
     {

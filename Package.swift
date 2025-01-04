@@ -32,19 +32,23 @@ extension Target.Dependency {
 
 extension Target.Dependency {
     static var coenttbServer: Self { .product(name: "Coenttb Server", package: "coenttb-server") }
+    static var coenttbServerVapor: Self { .product(name: "Coenttb Vapor", package: "coenttb-server-vapor") }
+    static var coenttbServerFluent: Self { .product(name: "Coenttb Fluent", package: "coenttb-server-vapor") }
     static var coenttbBlog: Self { .product(name: "Coenttb Blog", package: "coenttb-blog") }
+    static var coenttbBlogVapor: Self { .product(name: "Coenttb Blog Vapor", package: "coenttb-blog") }
     static var coenttbIdentity: Self { .product(name: "Coenttb Identity", package: "coenttb-identity") }
     static var coenttbIdentityFluent: Self { .product(name: "Coenttb Identity Fluent", package: "coenttb-identity") }
     static var coenttbNewsletter: Self { .product(name: "Coenttb Newsletter", package: "coenttb-newsletter") }
     static var coenttbNewsletterFluent: Self { .product(name: "Coenttb Newsletter Fluent", package: "coenttb-newsletter") }
     static var coenttbSyndication: Self { .product(name: "Coenttb Syndication", package: "coenttb-syndication") }
-    
+    static var coenttbSyndicationVapor: Self { .product(name: "Coenttb Syndication Vapor", package: "coenttb-syndication") }
+    static var coenttbLegalDocuments: Self { .product(name: "Coenttb Legal Documents", package: "coenttb") }
     static var googleAnalytics: Self { .product(name: "GoogleAnalytics", package: "coenttb-google-analytics") }
     static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
     static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
     static var postgres: Self { .product(name: "Postgres", package: "coenttb-postgres") }
-    static var stripe: Self { .product(name: "Coenttb Stripe", package: "coenttb-stripe") }
-    static var stripeLive: Self { .product(name: "Coenttb Stripe Live", package: "coenttb-stripe") }
+//    static var stripe: Self { .product(name: "Coenttb Stripe", package: "coenttb-stripe") }
+//    static var stripeLive: Self { .product(name: "Coenttb Stripe Live", package: "coenttb-stripe") }
 
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
@@ -71,7 +75,9 @@ let package = Package(
         .executable(name: .server, targets: [.server])
     ],
     dependencies: [
+        .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-server.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-server-vapor.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-blog.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-identity.git", branch: "main"),
@@ -79,7 +85,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-postgres.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-hotjar.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-mailgun.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-stripe.git", branch: "main"),
+//        .package(url: "https://github.com/coenttb/coenttb-stripe.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.6.0"),
@@ -101,7 +107,8 @@ let package = Package(
                 .googleAnalytics,
                 .hotjar,
                 .mailgun,
-                .stripeLive,
+                .coenttbLegalDocuments,
+//                .stripeLive,
             ],
             resources: [
                 .process("Blog/Posts")
@@ -141,13 +148,14 @@ let package = Package(
         .target(
             name: .serverDatabase,
             dependencies: [
+                .coenttbServer,
+                .coenttbServerFluent,
+                .coenttbIdentityFluent,
+                .coenttbNewsletterFluent,
                 .serverDependencies,
                 .serverEnvVars,
                 .dependenciesMacros,
-                .coenttbServer,
-                .stripe,
-                .coenttbIdentityFluent,
-                .coenttbNewsletterFluent,
+//                .stripe,
             ]
         ),
         .target(
@@ -165,7 +173,7 @@ let package = Package(
                 .mailgun,
                 .googleAnalytics,
                 .postgres,
-                .stripe,
+//                .stripe,
             ]
         ),
         .target(
@@ -174,7 +182,7 @@ let package = Package(
                 .serverEnvVars,
                 .coenttbServer,
                 .coenttbIdentity,
-                .stripe,
+//                .stripe,
             ]
         ),
         .target(
@@ -186,7 +194,7 @@ let package = Package(
                 .coenttbBlog,
                 .coenttbIdentity,
                 .coenttbSyndication,
-                .stripe,
+//                .stripe,
                 .coenttbNewsletter,
             ]
         ),
@@ -199,14 +207,17 @@ let package = Package(
         .target(
             name: .vaporApp,
             dependencies: [
+                .coenttbServer,
+                .coenttbServerVapor,
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,
                 .coenttbServer,
                 .coenttb,
                 .coenttbNewsletter,
-                .coenttbBlog,
                 .queuesFluentDriver,
+                .coenttbSyndicationVapor,
+                .coenttbBlogVapor,
             ]
 //            swiftSettings: [
 //                .unsafeFlags(
@@ -228,7 +239,6 @@ let package = Package(
             dependencies: [
                 .vaporApp,
                 .vaporTesting,
-                
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,

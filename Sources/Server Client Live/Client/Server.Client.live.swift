@@ -1,3 +1,5 @@
+import Fluent
+import Vapor
 import Coenttb_Server
 import Coenttb_Identity
 import Coenttb_Identity_Live
@@ -18,7 +20,7 @@ extension Server_Client.Client {
     ) -> Self {
         @Dependencies.Dependency(\.envVars.appEnv) var appEnv
         @Dependencies.Dependency(\.logger) var logger
-        @Dependencies.Dependency(\.stripe?.client) var stripeClient
+//        @Dependencies.Dependency(\.stripe?.client) var stripeClient
         
         return .init(
             newsletter: Coenttb_Newsletter.Client.live(
@@ -119,16 +121,16 @@ extension Server_Client.Client {
                         user.stripe.customerId = stripeCustomerId
                     }
                     
-                    if let stripe = update.stripe {
-                        user.stripe.customerId = stripe.customerId
-                        user.stripe.subscription.status = stripe.subscriptionStatus
-                    }
+//                    if let stripe = update.stripe {
+//                        user.stripe.customerId = stripe.customerId
+//                        user.stripe.subscription.status = stripe.subscriptionStatus
+//                    }
                 },
                 createDatabaseUser: { identityId in
                     return Server_Database.User(id: nil, identityID: identityId, dateOfBirth: nil, newsletterConsent: true)
                 },
                 currentUserId: {
-                    @Dependencies.Dependency(\.currentUser?.id?.rawValue) var currentUserId
+                    @Dependencies.Dependency(\.currentUser?.id) var currentUserId
                     return currentUserId
                 },
                 currentUserEmail: {
@@ -272,7 +274,7 @@ extension Server_Client.Client {
                     @Dependencies.Dependency(\.currentUser?.name) var currentUserName
                     @Dependencies.Dependency(\.currentUser?.stripe?.customerId) var stripeCustomerId
                     @Dependencies.Dependency(\.serverRouter) var serverRouter
-                    @Dependencies.Dependency(\.stripe) var stripe
+//                    @Dependencies.Dependency(\.stripe) var stripe
                     @Dependencies.Dependency(\.logger) var logger
                     
                     try await database.transaction { database in
@@ -298,11 +300,11 @@ extension Server_Client.Client {
                                 return
                             }
                             
-                            _ = try await stripe?.customers.update(
-                                customer: customerId,
-                                email: newEmail.rawValue
-                            )
-                            logger.info("Successfully updated Stripe customer \(customerId) email to \(newEmail)")
+//                            _ = try await stripe?.customers.update(
+//                                customer: customerId,
+//                                email: newEmail.rawValue
+//                            )
+//                            logger.info("Successfully updated Stripe customer \(customerId) email to \(newEmail)")
                         } catch {
                             logger.error("Failed to update Stripe customer email: \(error.localizedDescription)")
                         }
@@ -351,8 +353,8 @@ extension Server_Client.Client {
                         }
                     }
                 }
-            ),
-            stripe: stripeClient.map(Server_Client.Client.Stripe.live(stripeClient:))
+            )
+//            stripe: stripeClient.map(Server_Client.Client.Stripe.live(stripeClient:))
         )
     }
 }

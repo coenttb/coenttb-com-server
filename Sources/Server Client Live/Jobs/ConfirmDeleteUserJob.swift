@@ -23,7 +23,7 @@ package struct ConfirmDeleteUserJob: AsyncScheduledJob {
         let gracePeriodDuration: TimeInterval = 7 * 24 * 60 * 60 // 7 days
 
         let usersPendingDeletion = try await Server_Database.User.query(on: db)
-            .filter(\.$deletionState == .pending)
+            .filter(\.$deletionState, .equal, .pending)
             .all()
 
         for user in usersPendingDeletion {

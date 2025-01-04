@@ -1,5 +1,6 @@
 import Coenttb
 import Coenttb_Server
+import Coenttb_Identity_Live
 import Coenttb_Identity_Fluent
 import Server_EnvVars
 import Fluent
@@ -10,6 +11,7 @@ import Server_Client
 import Server_Client_Live
 import Server_Models
 import Server_Router
+import Coenttb_Vapor
 
 extension Application {
     package static func configure(app: Vapor.Application) async throws {

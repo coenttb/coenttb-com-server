@@ -8,7 +8,7 @@
 import Coenttb_Web
 import Coenttb_Identity
 import Coenttb_Newsletter
-import Coenttb_Stripe
+//import Coenttb_Stripe
 import Coenttb_Syndication
 
 public typealias Server_RouterAPI = API

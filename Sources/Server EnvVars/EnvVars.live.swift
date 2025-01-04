@@ -7,11 +7,11 @@
 
 import Coenttb_Server
 import EnvironmentVariables
-import Coenttb_Stripe
 import GoogleAnalytics
 import Hotjar
 import Mailgun
 import Postgres
+//import Coenttb_Stripe
 
 extension EnvVars: @retroactive DependencyKey {
     public static var liveValue: Self {
@@ -52,21 +52,21 @@ extension EnvVars {
         )
     }
 
-    public var stripe: Coenttb_Stripe.Client.EnvVars? {
-        guard
-            let endpointSecret = self["STRIPE_ENDPOINT_SECRET"],
-            let publishableKey = self["STRIPE_PUBLISHABLE_KEY"],
-            let secretKey = self["STRIPE_SECRET_KEY"]
-        else {
-            return nil
-        }
-
-        return .init(
-            endpointSecret: endpointSecret,
-            publishableKey: publishableKey,
-            secretKey: secretKey
-        )
-    }
+//    public var stripe: Coenttb_Stripe.Client.EnvVars? {
+//        guard
+//            let endpointSecret = self["STRIPE_ENDPOINT_SECRET"],
+//            let publishableKey = self["STRIPE_PUBLISHABLE_KEY"],
+//            let secretKey = self["STRIPE_SECRET_KEY"]
+//        else {
+//            return nil
+//        }
+//
+//        return .init(
+//            endpointSecret: endpointSecret,
+//            publishableKey: publishableKey,
+//            secretKey: secretKey
+//        )
+//    }
 
     public var googleAnalytics: GoogleAnalytics.Client.EnvVars? {
         guard let id = self["GOOGLE_ANALYTICS_ID"]
