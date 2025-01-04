@@ -1,6 +1,5 @@
-import Fluent
-import Vapor
-import Coenttb_Server
+import Coenttb_Vapor
+import Coenttb_Fluent
 import Coenttb_Identity
 import Coenttb_Identity_Live
 import Coenttb_Identity_Fluent

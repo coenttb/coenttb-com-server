@@ -5,14 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 20/09/2024.
 //
 
-import Coenttb
+import Coenttb_Vapor
 import Coenttb_Identity
 import Coenttb_Identity_Live
-import Coenttb_Server_HTML
-import Coenttb_Server_Translations
-import Foundation
+import Coenttb
 import Server_Router
-import Vapor
 //import Coenttb_Stripe
 
 func settings(

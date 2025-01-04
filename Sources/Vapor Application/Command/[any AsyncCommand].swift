@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Vapor
+import Coenttb_Vapor
 
 extension [any AsyncCommand] {
     static var allCases: [(any AsyncCommand, String)] {

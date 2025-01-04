@@ -5,18 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 30/05/2022.
 //
 
+import Coenttb_Vapor
 import Coenttb
 import Coenttb_Blog
-import Coenttb_Server_HTML
-import Coenttb_Server_Models
 import Coenttb_Newsletter
-import Date
-import Dependencies
-import Foundation
-import Languages
 import Server_Router
 import Server_Translations
-import Vapor
 
 extension WebsitePage {
     public static func home() async throws -> any AsyncResponseEncodable {

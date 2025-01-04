@@ -11,7 +11,7 @@ import Dependencies
 import EmailAddress
 import Fluent
 import Mailgun
-import Vapor
+import Coenttb_Vapor
 
 struct GetMailingListCommand: AsyncCommand {
     struct Signature: CommandSignature {

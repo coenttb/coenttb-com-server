@@ -146,3 +146,6 @@ extension RSS.Feed.Item {
         )
     }
 }
+
+
+extension Coenttb.DefaultHTMLDocument: AsyncResponseEncodable {}

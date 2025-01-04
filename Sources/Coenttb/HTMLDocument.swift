@@ -14,7 +14,6 @@ import GoogleAnalytics
 import Hotjar
 import Languages
 import Server_Router
-import Vapor
 
 package struct DefaultHTMLDocument<
     Styles: HTML,
@@ -90,8 +89,6 @@ package struct DefaultHTMLDocument<
         .linkColor(.coenttbPrimaryColor)
     }
 }
-
-extension DefaultHTMLDocument: AsyncResponseEncodable {}
 
 package struct CoenttbHTMLDocumentHeader<
     Styles: HTML,
