@@ -6,9 +6,10 @@
 //
 
 import Coenttb_Server
+import Fluent
 import Coenttb_Identity_Fluent
 import Coenttb_Newsletter_Fluent
-import Coenttb_Stripe
+//import Coenttb_Stripe
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {
@@ -103,21 +104,21 @@ package struct CreateDemoUserMigration: AsyncMigration {
         user.stripe = .init()
         user.stripe.customerId = stripeCustomerId
 
-        @Dependencies.Dependency(\.stripe) var stripe
+//        @Dependencies.Dependency(\.stripe) var stripe
 
-        do {
-            _ = try await stripe?.customers.update(
-                customer: stripeCustomerId,
-                email: email.address
-            )
-        } catch {
-            logger.log(.warning, "\(error)")
-            logger.log(.warning, """
-            Couldn't create stripe customer.
-
-            Most likely the customerId is wrong, or you didn't forward events to your (local) webhook. Example: stripe listen --forward-to localhost:8080/webhook/stripe
-            """)
-        }
+//        do {
+//            _ = try await stripe?.customers.update(
+//                customer: stripeCustomerId,
+//                email: email.address
+//            )
+//        } catch {
+//            logger.log(.warning, "\(error)")
+//            logger.log(.warning, """
+//            Couldn't create stripe customer.
+//
+//            Most likely the customerId is wrong, or you didn't forward events to your (local) webhook. Example: stripe listen --forward-to localhost:8080/webhook/stripe
+//            """)
+//        }
 
         try await user.save(on: database)
     }

@@ -7,12 +7,13 @@
 
 import Coenttb
 import Coenttb_Identity
+import Coenttb_Identity_Live
 import Coenttb_Server_HTML
-import Coenttb_Stripe
 import Coenttb_Server_Translations
 import Foundation
 import Server_Router
 import Vapor
+//import Coenttb_Stripe
 
 func settings(
     settings: WebsitePage.Account.Settings,

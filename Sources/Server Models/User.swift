@@ -5,16 +5,15 @@
 //  Created by Coen ten Thije Boonkkamp on 25/08/2024.
 //
 
-import Coenttb_Vapor
+//import Coenttb_Vapor
 import Coenttb_Server_Models
-@preconcurrency import Coenttb_Stripe
+//@preconcurrency import Coenttb_Stripe
 import Dependencies
 import EmailAddress
 import Foundation
-import Tagged
 
 package struct User: Codable, Hashable, Sendable {
-    package typealias ID = Tagged<Self, UUID>
+    package typealias ID = UUID
     package var id: ID?
     package var email: EmailAddress?
     package var name: String?
@@ -59,10 +58,20 @@ package struct User: Codable, Hashable, Sendable {
         case stripe = "stripe"
     }
 
-    package struct Stripe: Sendable, Codable, Hashable, Content {
+    package struct Stripe: Sendable, Codable, Hashable {
         package var customerId: String
 
-        package typealias SubscriptionStatus = StripeKit.SubscriptionStatus
+//        package typealias SubscriptionStatus = StripeKit.SubscriptionStatus
+        package enum SubscriptionStatus: String, Codable, Hashable, Sendable {
+            case trialing
+            case pastDue
+            case active
+            case canceled
+            case unpaid
+            case incomplete
+            case incompleteExpired
+            case paused
+        }
         package var subscriptionStatus: SubscriptionStatus?
 
         package enum CodingKeys: String, CodingKey {
@@ -76,8 +85,6 @@ package struct User: Codable, Hashable, Sendable {
         }
     }
 }
-
-extension User.Stripe.SubscriptionStatus: @retroactive @unchecked Sendable {}
 
 extension User {
     package var accessToBlog: Bool {

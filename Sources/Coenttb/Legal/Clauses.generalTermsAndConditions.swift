@@ -11,7 +11,7 @@ import Foundation
 import Languages
 import Coenttb_Server_Router
 import Coenttb_Server_HTML
-import Coenttb_Server_Legal
+import Coenttb_Legal_Documents
 
 extension Clauses {
     nonisolated(unsafe)

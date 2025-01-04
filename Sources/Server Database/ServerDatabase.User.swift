@@ -4,7 +4,7 @@ import Fluent
 import Server_Models
 import Coenttb_Identity
 import Coenttb_Identity_Fluent
-@preconcurrency import Coenttb_Stripe
+//@preconcurrency import Coenttb_Stripe
 
 
 package final class User: Model, @unchecked Sendable {
@@ -64,7 +64,7 @@ package final class User: Model, @unchecked Sendable {
         static let deletionRequestedAt: FieldKey = "deletion_requested_at"
     }
 
-    package enum DeletionState: String, Codable, Sendable {
+    package enum DeletionState: String, Codable, Sendable, Hashable {
         case pending
         case deleted
     }

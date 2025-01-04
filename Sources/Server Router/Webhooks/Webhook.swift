@@ -6,17 +6,17 @@
 //
 
 import CasePaths
-import Coenttb_Stripe
 import Dependencies
 import Either
 import Foundation
 import Languages
 import Prelude
 import URLRouting
+//import Coenttb_Stripe
 
 public enum Webhook: Equatable, Sendable {
     case mailgun
-    case stripe
+//    case stripe
 }
 
 extension Webhook {
@@ -31,10 +31,10 @@ extension Webhook {
                     Path { "mailgun" }
                 }
 
-                URLRouting.Route(.case(Webhook.stripe)) {
-                    Method.post
-                    Path { "stripe" }
-                }
+//                URLRouting.Route(.case(Webhook.stripe)) {
+//                    Method.post
+//                    Path { "stripe" }
+//                }
             }
         }
     }

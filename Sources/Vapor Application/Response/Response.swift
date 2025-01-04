@@ -8,7 +8,7 @@
 import Coenttb
 import Coenttb_Server
 import Coenttb_Blog
-import Coenttb_Syndication
+import Coenttb_Syndication_Vapor
 import Server_EnvVars
 import Server_Models
 import Server_Router
