@@ -101,13 +101,13 @@ let package = Package(
                 .serverTranslations,
                 .serverRouter,
                 .serverClientLive,
-                .coenttbServer,
                 .coenttbIdentity,
                 .coenttbIdentityFluent,
                 .googleAnalytics,
                 .hotjar,
                 .mailgun,
                 .coenttbLegalDocuments,
+                .coenttbServer,
 //                .stripeLive,
             ],
             resources: [
@@ -238,6 +238,7 @@ let package = Package(
             name: .vaporApp.tests,
             dependencies: [
                 .vaporApp,
+                .coenttbServerVapor,
                 .vaporTesting,
                 .serverEnvVars,
                 .serverClient,

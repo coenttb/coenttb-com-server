@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 //
 
-import Coenttb_Server_HTML
+import Coenttb_Vapor
 import Dependencies
 import Fluent
 import Foundation
@@ -14,7 +14,6 @@ import Mailgun
 import Prelude
 import Server_Dependencies
 import Server_Router
-import Vapor
 //import Coenttb_Stripe
 
 extension Webhook {

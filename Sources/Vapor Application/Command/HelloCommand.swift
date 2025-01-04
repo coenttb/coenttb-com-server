@@ -10,7 +10,7 @@ import Dependencies
 import EmailAddress
 import Fluent
 import Foundation
-import Vapor
+import Coenttb_Vapor
 
 struct HelloCommand: AsyncCommand {
     struct Signature: CommandSignature { }
