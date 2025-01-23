@@ -29,6 +29,15 @@
       }
     },
     {
+      "identity" : "coenttb-authentication",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-authentication",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9c4a0e59c5f562ef0fb33adc87e2bd79f0a41041"
+      }
+    },
+    {
       "identity" : "coenttb-blog",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/coenttb-blog.git",
@@ -70,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-identity.git",
       "state" : {
         "branch" : "main",
-        "revision" : "18ef02b6bbdadc663f0348922df3e38f974843a8"
+        "revision" : "e78d66693c67122ad2a58519d9fb7ebdcb08ef47"
       }
     },
     {
@@ -79,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "431f842f53bc5b4f9534e553e81d0c34ba9b1d9a"
+        "revision" : "ae9bb05e794e988f29dbe6247a7311f01d03736b"
       }
     },
     {
@@ -142,7 +151,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6aa9550cb4e7e8f31dbf47c324b08873347fb6aa"
+        "revision" : "c55cd5a155a4343d4cbe620c1fc1d95d97c8d33a"
       }
     },
     {
@@ -313,7 +322,7 @@
       "location" : "https://github.com/coenttb/swift-authentication",
       "state" : {
         "branch" : "main",
-        "revision" : "2801f5db0a0842648ff0387f6af0ed4e169691dc"
+        "revision" : "868552f07d847cdd3920314969ef09ce04f1403c"
       }
     },
     {
@@ -421,7 +430,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "be86a6e0a5f59f2581d3eda7dda053e757485b51"
+        "revision" : "23bd43704174c2cab50f01e8c04263427e59f088"
       }
     },
     {
@@ -610,7 +619,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "7f75b19ca943d7994574028c8d6c2b9730dd10b3"
+        "revision" : "7a4ae07c1d6c2bcb3fb8ceae27fd8b16aa4b98f0"
       }
     },
     {
@@ -618,8 +627,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "eafbca78d0ced81a127c94f3703fc3fc76827963",
-        "version" : "4.111.1"
+        "revision" : "8589cb562feab069f2563bdcdeb8f9608a07a2c7",
+        "version" : "4.112.0"
       }
     },
     {

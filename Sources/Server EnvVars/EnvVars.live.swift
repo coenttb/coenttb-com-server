@@ -46,7 +46,7 @@ extension EnvVars {
         }
 
         return .init(
-            baseURL: baseURL,
+            baseUrl: baseURL,
             apiKey: .init(rawValue: apiKey),
             domain: try! .init(domain)
         )

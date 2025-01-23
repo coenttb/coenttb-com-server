@@ -39,7 +39,7 @@ extension WebsitePage.Account {
                 logo: .coenttb,
                 canonicalHref: serverRouter.url(for: .account(account)),
                 favicons: .coenttb,
-                hreflang: { _, language in serverRouter.url(for: .init(language: language, page: .account(account))) },
+                hreflang: { serverRouter.url(for: .init(language: $1, page: .account(account))) },
                 termsOfUse: serverRouter.url(for: .terms_of_use),
                 privacyStatement: serverRouter.url(for: .privacy_statement),
                 dependency: accountDependency,
@@ -53,7 +53,10 @@ extension WebsitePage.Account {
                 verificationSuccessRedirect: serverRouter.url(for: .account(.login)),
                 passwordResetHref: serverRouter.url(for: .account(.password(.reset(.request)))),
                 loginFormAction: serverRouter.url(for: .api(.v1(.account(.login(.init()))))),
-                logout: { try await accountDependency.logout() },
+                logout: {
+                    @Dependency(\.serverClient.account) var accountDependency
+                    try await accountDependency.logout()
+                },
                 passwordChangeRequestAction: serverRouter.url(for: .api(.v1(.account(.password(.change(.request(change: .init()))))))),
                 passwordResetAction: serverRouter.url(for: .api(.v1(.account(.password(.reset(.request(.init()))))))),
                 passwordResetConfirmAction: serverRouter.url(for: .api(.v1(.account(.password(.reset(.confirm(.init()))))))),

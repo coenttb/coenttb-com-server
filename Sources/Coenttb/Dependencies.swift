@@ -14,7 +14,7 @@ import Server_Client_Live
 import Server_Dependencies
 import Server_Models
 import Server_Router
-import Authenticated
+
 //import Coenttb_Stripe
 //import Coenttb_Stripe_Live
 
@@ -144,7 +144,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         @Dependency(\.envVars) var envVars
         
         guard
-            let baseURL = envVars.mailgun?.baseURL,
+            let baseURL = envVars.mailgun?.baseUrl,
             let apiKey = envVars.mailgun?.apiKey,
             let domain = envVars.mailgun?.domain
         else {
@@ -154,8 +154,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         return Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: baseURL,
-            domain: domain,
-            session: { try await URLSession.shared.data(for: $0) }
+            domain: domain
         )
     }
 }
