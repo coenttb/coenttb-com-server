@@ -8,12 +8,12 @@
 import CoenttbHTML
 import Dependencies
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
 
 extension Image {
     nonisolated(unsafe)
     package static let coenttbGreenSuit: Image = {
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
         return Image(source: serverRouter.href(for: .asset(.image("coenttb-halftone.png"))), description: "coenttb avatar")
     }()
 }

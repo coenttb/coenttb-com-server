@@ -11,11 +11,11 @@ import Coenttb_Server_HTML
 import Coenttb_Server_Translations
 import Dependencies
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
 
 package struct CoenttbFooter: HTML {
 
-    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.coenttb.website.router) var serverRouter
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.envVars) var envVars
 

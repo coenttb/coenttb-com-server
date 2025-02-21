@@ -6,8 +6,7 @@
 ////
 //
 //import Coenttb_Server
-//import Coenttb_Identity
-//import Coenttb_Newsletter
+////import Coenttb_Newsletter
 //import Coenttb_Stripe
 //import Server_Models
 //import Server_Client

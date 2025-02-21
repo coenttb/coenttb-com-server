@@ -1,7 +1,5 @@
 import Coenttb
 import Coenttb_Server
-import Coenttb_Identity_Live
-import Coenttb_Identity_Fluent
 import Server_EnvVars
 import Fluent
 import FluentPostgresDriver
@@ -10,30 +8,21 @@ import QueuesFluentDriver
 import Server_Client
 import Server_Client_Live
 import Server_Models
-import Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Com_Router
 import Coenttb_Vapor
+import Coenttb_Identity_Consumer
 
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
 
-        Application.preloadStaticResources()
+//        Application.preloadStaticResources()
 
-        @Dependency(\.serverRouter) var serverRouter
-        @Dependency(\.sqlConfiguration) var sqlConfiguration
         @Dependency(\.envVars) var envVars
-        @Dependency(\.logger) var logger
-        @Dependency(\.databaseConfiguration) var databaseConfiguration
 
         app.environment = .init(envVarsEnvironment: envVars.appEnv)
 
-        app.databases.use(
-            .postgres(
-                configuration: sqlConfiguration,
-                maxConnectionsPerEventLoop: databaseConfiguration.maxConnectionsPerEventLoop,
-                connectionPoolTimeout: databaseConfiguration.connectionPoolTimeout
-            ),
-            as: .psql
-        )
+        app.databases.use(.postgres, as: .psql )
 
         [any Migration].allCases.forEach { app.migrations.add($0) }
 
@@ -58,30 +47,14 @@ extension Application {
             baseUrl: envVars.baseUrl
         )
 
-        app.middleware.use(
-            SessionsMiddleware.secure(
-                driver: app.sessions.driver,
-                cookieName: envVars.sessionCookieName
-                ?? envVars.canonicalHost.map { "\($0)-session".replacingOccurrences(of: ".", with: "-") }
-                ?? "default-session-id",
-                isSecure: envVars.appEnv == .production || envVars.appEnv == .staging ? true : false
-            )
-        )
-
-        app.middleware.use(Identity.SessionAuthenticator())
-
-        switch envVars.appEnv {
-        case .development: app.sessions.use(.memory)
-        case .testing: app.sessions.use(.memory)
-        case .staging: app.sessions.use(.fluent)
-        case .production: app.sessions.use(.fluent)
-        }
-
         app.queues.schedule(ConfirmDeleteUserJob())
             .daily()
             .at(.midnight)
+        
+        app.middleware.use(Identity.Consumer.Middleware())
 
-        app.mount(serverRouter, use: ServerRoute.response)
+        @Dependency(\.coenttb.website.router) var router
+        app.mount(router, use: Coenttb_Com_Router.Route.response)
     }
 }
 
@@ -90,17 +63,5 @@ extension Application {
         _ = Clauses.privacyStatement
         _ = Clauses.generalTermsAndConditions
         _ = Clauses.termsOfUse
-    }
-}
-
-extension Vapor.Environment {
-    package init(envVarsEnvironment: EnvVars.AppEnv) {
-        self =
-        switch envVarsEnvironment {
-        case .development: .development
-        case .production: .production
-        case .staging: .staging
-        case .testing: .testing
-        }
     }
 }

@@ -8,8 +8,9 @@
 import Coenttb_Blog
 import Dependencies
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
 import Sitemap
+import Coenttb_Com_Router
 
 extension [WebsitePage: SiteMap.URL.MetaData] {
     static func `default`() async throws -> Self {
@@ -55,8 +56,8 @@ extension [SiteMap.URL] {
     init(
         dictionary: [WebsitePage: SiteMap.URL.MetaData]
     ) {
-        @Dependency(\.serverRouter) var siteRouter
-        self = .init(router: siteRouter.url(for:), dictionary)
+        @Dependency(\.coenttb.website.router) var serverRouter
+        self = .init(router: serverRouter.url(for:), dictionary)
     }
 }
 

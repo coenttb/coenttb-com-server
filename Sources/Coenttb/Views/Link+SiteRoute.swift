@@ -8,11 +8,12 @@
 import Coenttb_Server_HTML
 import Dependencies
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Com_Router
 
 extension Link {
     package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language
         self.init(href: serverRouter.path(for: .website(.init(language: language, page: destination))), label: label)
     }
@@ -21,7 +22,7 @@ extension Link {
         destination: WebsitePage,
         _ title: String
     ) where Label == HTMLText {
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language
         self.init(title, href: serverRouter.path(for: .website(.init(language: language, page: destination))))
     }

@@ -8,19 +8,19 @@
 import Coenttb_Server_HTML
 import Dependencies
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
 
 package struct CoenttbNavigationBar: HTML {
 
     package init() {}
 
-    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.coenttb.website.router) var serverRouter
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.currentUser) var currentUser
 
     private var blog: String { serverRouter.href(for: .blog(.index)) }
-    private var loginHref: String { serverRouter.href(for: .account(.login)) }
-    private var signupHref: String { serverRouter.href(for: .account(.create(.request))) }
+    private var loginHref: String { serverRouter.href(for: .identity(.login)) }
+    private var signupHref: String { serverRouter.href(for: .identity(.create(.request))) }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
     package var body: some HTML {
@@ -28,7 +28,7 @@ package struct CoenttbNavigationBar: HTML {
         let posts = blogPosts()
 
         let loginButton = Link(
-            destination: .account(.login),
+            destination: .identity(.login),
             String.login.capitalizingFirstLetter().description
         )
             .linkColor(.coenttbPrimaryColor)
@@ -45,7 +45,7 @@ package struct CoenttbNavigationBar: HTML {
                 .fontWeight(.medium)
         }
             .color(.primary.reverse())
-            .href(serverRouter.href(for: .account(.create(.request))))
+            .href(serverRouter.href(for: .identity(.create(.request))))
 
         NavigationBar(
             logo: {
@@ -143,7 +143,7 @@ package struct CoenttbNavigationBar: HTML {
 extension CoenttbNavigationBar {
     package struct CoenttbLogo: HTML {
 
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
 
         package init() {}
 

@@ -6,17 +6,17 @@
 //
 
 import Coenttb_Vapor
-import Coenttb_Identity
-import Coenttb_Identity_Live
 import Coenttb
-import Server_Router
-//import Coenttb_Stripe
+import Coenttb_Com_Shared
+import Coenttb_Com_Router
+import Coenttb_Identity_Consumer
+
 
 func settings(
     settings: WebsitePage.Account.Settings,
     create_customer_portal_session_return_url: URL
 ) async throws -> AsyncResponseEncodable {
-    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.coenttb.website.router) var serverRouter
 
     switch settings {
     case .index:
@@ -122,10 +122,10 @@ func settings(
                                     String.identity.capitalizingFirstLetter()
                                 }
 
-                                NameChangeForm()
-                                    .width(100.percent)
-                                    .maxWidth(20.rem, media: .desktop)
-                                    .maxWidth(24.rem, media: .mobile)
+//                                NameChangeForm()
+//                                    .width(100.percent)
+//                                    .maxWidth(20.rem, media: .desktop)
+//                                    .maxWidth(24.rem, media: .mobile)
 
                                 EmailChangeRequestButton()
 
@@ -135,7 +135,7 @@ func settings(
                                     String.logout.capitalizingFirstLetter()
                                 }
                                 .color(.primary)
-                                .href(serverRouter.url(for: .account(.logout)).absoluteString)
+                                .href(serverRouter.url(for: .identity(.logout)).absoluteString)
 
                             }
                         }
@@ -158,7 +158,7 @@ func settings(
 }
 
 public struct PasswordChangeRequestButton: HTML {
-    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.coenttb.website.router) var serverRouter
 
     public var body: some HTML {
         form {
@@ -168,18 +168,18 @@ public struct PasswordChangeRequestButton: HTML {
                 String.change_your_password.capitalizingFirstLetter()
             }
             .color(.primary)
-            .href(serverRouter.url(for: .account(.password(.change(.request)))).absoluteString)
+            .href(serverRouter.url(for: .identity(.password(.change(.request)))).absoluteString)
         }
     }
 }
 
 public struct EmailChangeRequestButton: HTML {
-    @Dependency(\.serverRouter) var serverRouter
+    @Dependency(\.coenttb.website.router) var serverRouter
     @Dependency(\.currentUser) var currentUser
 
     public var body: some HTML {
         HStack {
-            Input.default(Coenttb_Identity.API.Verify.CodingKeys.email)
+            Input.default(Identity.Email.Change.Request.CodingKeys.newEmail)
                 .type(.email)
                 .placeholder("Email")
                 .value(currentUser?.email?.rawValue ?? "")
@@ -198,33 +198,33 @@ public struct EmailChangeRequestButton: HTML {
                 }
             )
             .width(50.px)
-            .href(serverRouter.url(for: .account(.emailChange(.request))).absoluteString)
+            .href(serverRouter.url(for: .identity(.email(.change(.request)))).absoluteString)
         }
     }
 }
 
-public struct NameChangeForm: HTML {
-    @Dependency(\.serverRouter) var serverRouter
-    @Dependency(\.currentUser) var currentUser
-
-    let form_identity_id: String = "form_identity_id-name-change-form"
-
-    public var body: some HTML {
-        form {
-            VStack {
-                Input.default(Coenttb_Identity.API.Update.CodingKeys.name)
-                    .type(.text)
-                    .placeholder("Name")
-                    .value(currentUser?.name ?? "")
-            }
-        }
-        .id(form_identity_id)
-        .method(.post)
-        .action(serverRouter.url(for: .api(.v1(.account(.update(.init()))))).absoluteString)
-
-        LiveInputScript(
-            formID: form_identity_id,
-            inputID: Coenttb_Identity.API.Update.CodingKeys.name.rawValue
-        )
-    }
-}
+//public struct NameChangeForm: HTML {
+//    @Dependency(\.coenttb.website.router) var serverRouter
+//    @Dependency(\.currentUser) var currentUser
+//
+//    let form_identity_id: String = "form_identity_id-name-change-form"
+//
+//    public var body: some HTML {
+//        form {
+//            VStack {
+//                Input.default(Coenttb_Identity.API.Update.CodingKeys.name)
+//                    .type(.text)
+//                    .placeholder("Name")
+//                    .value(currentUser?.name ?? "")
+//            }
+//        }
+//        .id(form_identity_id)
+//        .method(.post)
+////        .action(serverRouter.url(for: .api(.identity(.update(.init())))).absoluteString)
+//
+//        LiveInputScript(
+//            formID: form_identity_id,
+//            inputID: Coenttb_Identity.API.Update.CodingKeys.name.rawValue
+//        )
+//    }
+//}

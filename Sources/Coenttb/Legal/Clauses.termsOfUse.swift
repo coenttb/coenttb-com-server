@@ -10,6 +10,7 @@ import Coenttb_Server_HTML
 import Dependencies
 import Foundation
 import Languages
+import Coenttb_Legal_Documents
 
 extension Clauses {
     nonisolated(unsafe)

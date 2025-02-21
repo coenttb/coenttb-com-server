@@ -12,7 +12,6 @@ extension String {
     static let serverDependencies: Self = "Server Dependencies"
     static let serverEnvVars: Self = "Server EnvVars"
     static let serverModels: Self = "Server Models"
-    static let serverRouter: Self = "Server Router"
     static let serverTranslations: Self = "Server Translations"
     static let vaporApp: Self = "Vapor Application"
 }
@@ -25,19 +24,18 @@ extension Target.Dependency {
     static var serverEnvVars: Self { .target(name: .serverEnvVars) }
     static var serverDependencies: Self { .target(name: .serverDependencies) }
     static var serverModels: Self { .target(name: .serverModels) }
-    static var serverRouter: Self { .target(name: .serverRouter) }
     static var serverTranslations: Self { .target(name: .serverTranslations) }
     static var vaporApp: Self { .target(name: .vaporApp) }
 }
 
 extension Target.Dependency {
+    static var coenttbComShared: Self { .product(name: "Coenttb Com Shared", package: "coenttb-com-shared") }
     static var coenttbServer: Self { .product(name: "Coenttb Server", package: "coenttb-server") }
     static var coenttbServerVapor: Self { .product(name: "Coenttb Vapor", package: "coenttb-server-vapor") }
     static var coenttbServerFluent: Self { .product(name: "Coenttb Fluent", package: "coenttb-server-vapor") }
     static var coenttbBlog: Self { .product(name: "Coenttb Blog", package: "coenttb-blog") }
     static var coenttbBlogVapor: Self { .product(name: "Coenttb Blog Vapor", package: "coenttb-blog") }
-    static var coenttbIdentity: Self { .product(name: "Coenttb Identity", package: "coenttb-identity") }
-    static var coenttbIdentityFluent: Self { .product(name: "Coenttb Identity Fluent", package: "coenttb-identity") }
+    static var coenttbIdentityConsumer: Self { .product(name: "Coenttb Identity Consumer", package: "coenttb-identities") }
     static var coenttbNewsletter: Self { .product(name: "Coenttb Newsletter", package: "coenttb-newsletter") }
     static var coenttbNewsletterFluent: Self { .product(name: "Coenttb Newsletter Fluent", package: "coenttb-newsletter") }
     static var coenttbSyndication: Self { .product(name: "Coenttb Syndication", package: "coenttb-syndication") }
@@ -65,7 +63,6 @@ let package = Package(
         .library(name: .serverEnvVars, targets: [.serverEnvVars]),
         .library(name: .serverDependencies, targets: [.serverDependencies]),
         .library(name: .serverModels, targets: [.serverModels]),
-        .library(name: .serverRouter, targets: [.serverRouter]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
         .library(name: .coenttb, targets: [.coenttb]),
         .library(name: .vaporApp, targets: [.vaporApp]),
@@ -77,10 +74,11 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-server.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-com-shared.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-server-vapor.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-blog.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-identity.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-identities.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-newsletter.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-postgres.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-hotjar.git", branch: "main"),
@@ -99,15 +97,14 @@ let package = Package(
             dependencies: [
                 .serverEnvVars,
                 .serverTranslations,
-                .serverRouter,
                 .serverClientLive,
-                .coenttbIdentity,
-                .coenttbIdentityFluent,
+                .coenttbIdentityConsumer,
                 .googleAnalytics,
                 .hotjar,
                 .mailgun,
                 .coenttbLegalDocuments,
                 .coenttbServer,
+                .coenttbComShared,
 //                .stripeLive,
             ],
             resources: [
@@ -119,12 +116,12 @@ let package = Package(
             dependencies: [
                 .serverEnvVars,
                 .serverDependencies,
-                .serverRouter,
                 .dependenciesMacros,
                 .coenttbServer,
-                .coenttbIdentity,
+                .coenttbIdentityConsumer,
                 .mailgun,
                 .coenttbNewsletter,
+                .coenttbComShared,
             ]
         ),
         .target(
@@ -134,15 +131,14 @@ let package = Package(
                 .serverDependencies,
                 .serverDatabase,
                 .serverEnvVars,
-                .serverRouter,
                 .dependenciesMacros,
                 .queuesFluentDriver,
                 .coenttbServer,
-                .coenttbIdentity,
-                .coenttbIdentityFluent,
+                .coenttbIdentityConsumer,
                 .coenttbNewsletter,
                 .coenttbNewsletterFluent,
                 .mailgun,
+                .coenttbComShared,
             ]
         ),
         .target(
@@ -150,7 +146,7 @@ let package = Package(
             dependencies: [
                 .coenttbServer,
                 .coenttbServerFluent,
-                .coenttbIdentityFluent,
+                .coenttbIdentityConsumer,
                 .coenttbNewsletterFluent,
                 .serverDependencies,
                 .serverEnvVars,
@@ -163,6 +159,7 @@ let package = Package(
             dependencies: [
                 .coenttbServer,
                 .serverModels,
+                .coenttbComShared,
             ]
         ),
         .target(
@@ -181,21 +178,6 @@ let package = Package(
             dependencies: [
                 .serverEnvVars,
                 .coenttbServer,
-                .coenttbIdentity,
-//                .stripe,
-            ]
-        ),
-        .target(
-            name: .serverRouter,
-            dependencies: [
-                .serverDependencies,
-                .serverTranslations,
-                .coenttbServer,
-                .coenttbBlog,
-                .coenttbIdentity,
-                .coenttbSyndication,
-//                .stripe,
-                .coenttbNewsletter,
             ]
         ),
         .target(
@@ -218,21 +200,8 @@ let package = Package(
                 .queuesFluentDriver,
                 .coenttbSyndicationVapor,
                 .coenttbBlogVapor,
+                .coenttbComShared,
             ]
-//            swiftSettings: [
-//                .unsafeFlags(
-//                    {
-//                        #if os(Linux)
-//                        return ["-I/usr/include", "-L/usr/lib"]
-//                        #else
-//                        return ["-I/opt/homebrew/include", "-L/opt/homebrew/lib"]
-//                        #endif
-//                    }()
-//                )
-//            ],
-//            linkerSettings: [
-//                .linkedLibrary("gd")
-//            ]
         ),
         .testTarget(
             name: .vaporApp.tests,

@@ -2,10 +2,6 @@ import Foundation
 import Dependencies
 import Fluent
 import Server_Models
-import Coenttb_Identity
-import Coenttb_Identity_Fluent
-//@preconcurrency import Coenttb_Stripe
-
 
 package final class User: Model, @unchecked Sendable {
     package static let schema = "coenttb_users"
@@ -13,11 +9,16 @@ package final class User: Model, @unchecked Sendable {
     @ID(key: .id)
     package var id: UUID?
 
-    @Parent(key: FieldKeys.identityId)
-    package var identity: Coenttb_Identity_Fluent.Identity
+    package var identityId: UUID
 
+    @OptionalField(key: FieldKeys.name)
+    package var name: String?
+    
     @OptionalField(key: FieldKeys.dateOfBirth)
     package var dateOfBirth: Date?
+    
+    @OptionalField(key: FieldKeys.isAdmin)
+    package var isAdmin: Bool?
 
     @OptionalField(key: FieldKeys.newsletterConsent)
     package var newsletterConsent: Bool?
@@ -37,25 +38,30 @@ package final class User: Model, @unchecked Sendable {
     @OptionalField(key: FieldKeys.deletionRequestedAt)
     package var deletionRequestedAt: Date?
 
-    package init() {}
+    package init() {
+        fatalError()
+    }
 
     package init(
         id: UUID? = nil,
-        identityID: Coenttb_Identity_Fluent.Identity.IDValue,
+        identityID: UUID,
         dateOfBirth: Date? = nil,
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
     ) {
-        self.id = id
-        self.$identity.id = identityID
-        self.dateOfBirth = dateOfBirth
-        self.newsletterConsent = newsletterConsent
-        self.stripe = stripe
+        fatalError()
+//        self.id = id
+//        self.identityId = identityID
+//        self.dateOfBirth = dateOfBirth
+//        self.newsletterConsent = newsletterConsent
+//        self.stripe = stripe
     }
 
     enum FieldKeys {
         static let identityId: FieldKey = "identity_id"
+        static let name: FieldKey = "name"
         static let dateOfBirth: FieldKey = "date_of_birth"
+        static let isAdmin: FieldKey = "is_admin"
         static let newsletterConsent: FieldKey = "newsletter_consent"
         static let stripe: FieldKey = "stripe"
         static let createdAt: FieldKey = "created_at"
@@ -78,8 +84,10 @@ extension Server_Database.User {
         func prepare(on database: Fluent.Database) async throws {
             try await database.schema(Server_Database.User.schema)
                 .id()
-                .field(FieldKeys.identityId, .uuid, .required, .references(Coenttb_Identity_Fluent.Identity.schema, .id))
+                .field(FieldKeys.identityId, .uuid, .required)
+                .field(FieldKeys.name, .string)
                 .field(FieldKeys.dateOfBirth, .date)
+                .field(FieldKeys.isAdmin, .bool)
                 .field(FieldKeys.newsletterConsent, .bool)
                 .field([FieldKeys.stripe, Stripe.FieldKeys.customerId], .string)
                 .field([FieldKeys.stripe, Stripe.FieldKeys.subscription, Stripe.Subscription.FieldKeys.id], .string)

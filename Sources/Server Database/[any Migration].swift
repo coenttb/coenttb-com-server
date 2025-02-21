@@ -7,28 +7,12 @@
 
 import Coenttb_Server
 import Fluent
-import Coenttb_Identity_Fluent
 import Coenttb_Newsletter_Fluent
-//import Coenttb_Stripe
+
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {
         var migrations: [any Fluent.Migration] = [
-            {
-                var migration = Coenttb_Identity_Fluent.Identity.Migration.Create()
-                migration.name = "Coenttb_Identity.Identity.Migration.Create"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Identity_Fluent.Identity.Token.Migration()
-                migration.name = "Coenttb_Identity.Identity.Token.Migration.Create"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Identity_Fluent.EmailChangeRequest.Migration()
-                migration.name = "Coenttb_Identity.EmailChangeRequest.Migration.Create"
-                return migration
-            }(),
             {
                 var migration = Server_Database.User.CreateMigration()
                 migration.name = "Server_Database.User.Migration.Create"
@@ -77,32 +61,36 @@ package struct CreateDemoUserMigration: AsyncMigration {
 
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
+        
+//        fatalError()
 
-        guard
-            let email: EmailAddress = envVars.demoEmail,
-            let name: String = envVars.demoName,
-            let password: String = envVars.demoPassword,
-            let stripeCustomerId: String = envVars.demoStripeCustomerId
-        else { return }
+        
+        
+//        guard
+//            let email: EmailAddress = envVars.demoEmail,
+//            let name: String = envVars.demoName,
+//            let password: String = envVars.demoPassword,
+//            let stripeCustomerId: String = envVars.demoStripeCustomerId
+//        else { return }
+//
+//        let identity = try Database.Identity(
+//            email: email.rawValue,
+//            password: password,
+//            name: name,
+//            isAdmin: false,
+//            emailVerificationStatus: .verified
+//        )
+//
+//        try await identity.save(on: database)
+//
+//        let user = Server_Database.User(
+//            identityID: try identity.requireID(),
+//            dateOfBirth: nil,
+//            newsletterConsent: true
+//        )
 
-        let identity = try Identity(
-            email: email.rawValue,
-            password: password,
-            name: name,
-            isAdmin: false,
-            emailVerificationStatus: .verified
-        )
-
-        try await identity.save(on: database)
-
-        let user = Server_Database.User(
-            identityID: try identity.requireID(),
-            dateOfBirth: nil,
-            newsletterConsent: true
-        )
-
-        user.stripe = .init()
-        user.stripe.customerId = stripeCustomerId
+//        user.stripe = .init()
+//        user.stripe.customerId = stripeCustomerId
 
 //        @Dependencies.Dependency(\.stripe) var stripe
 
@@ -120,28 +108,28 @@ package struct CreateDemoUserMigration: AsyncMigration {
 //            """)
 //        }
 
-        try await user.save(on: database)
+//        try await user.save(on: database)
     }
 
     package func revert(on database: Database) async throws {
 
-        @Dependency(\.envVars) var envVars
-
-        guard
-            let email: EmailAddress = envVars.demoEmail
-        else { return }
-
-        guard let identity = try await Identity.query(on: database)
-            .filter(\.$email == email.rawValue)
-            .first() else {
-            return
-        }
-
-        try await Server_Database.User.query(on: database)
-            .filter(\.$identity.$id == identity.id!)
-            .delete()
-
-        try await identity.delete(on: database)
+//        @Dependency(\.envVars) var envVars
+//
+//        guard
+//            let email: EmailAddress = envVars.demoEmail
+//        else { return }
+//
+//        guard let identity = try await Identity.query(on: database)
+//            .filter(\.$email == email.rawValue)
+//            .first() else {
+//            return
+//        }
+//
+//        try await Server_Database.User.query(on: database)
+//            .filter(\.$identity.$id == identity.id!)
+//            .delete()
+//
+//        try await identity.delete(on: database)
     }
 }
 

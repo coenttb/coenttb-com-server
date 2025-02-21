@@ -9,13 +9,14 @@ import Coenttb_Vapor
 import Coenttb
 import Coenttb_Blog
 import Coenttb_Newsletter
-import Server_Router
+import Coenttb_Com_Shared
 import Server_Translations
+import Coenttb_Com_Router
 
 extension WebsitePage {
     public static func home() async throws -> any AsyncResponseEncodable {
         @Dependency(\.language) var translated
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.blog.getAll) var blogPosts
         @Dependency(\.currentUser) var currentUser
         @Dependency(\.request) var request
@@ -76,7 +77,7 @@ extension WebsitePage {
                                 .textAlign(.center, media: .desktop)
 
                                 NewsletterSubscriptionForm(
-                                    newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
+                                    newsletterSubscribeAction: serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init())))))
                                 )
                                 .width(100.percent)
                             }

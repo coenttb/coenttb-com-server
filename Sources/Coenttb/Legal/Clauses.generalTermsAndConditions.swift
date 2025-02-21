@@ -17,7 +17,7 @@ extension Clauses {
     nonisolated(unsafe)
     package static let generalTermsAndConditions: Translated<Self> = {
 
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
 
         return .init { language in
             return withDependencies {

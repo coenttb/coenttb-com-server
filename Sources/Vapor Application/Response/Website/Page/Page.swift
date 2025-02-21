@@ -10,15 +10,17 @@ import Coenttb_Blog_Vapor
 import Coenttb_Newsletter
 import Coenttb
 import Server_EnvVars
-import Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Com_Router
+import Coenttb_Identity_Consumer
+
 
 extension WebsitePage {
     static func response(
         page: WebsitePage
     ) async throws -> any AsyncResponseEncodable {
         return try await withDependencies {
-            $0.route = .website(
-                .init(language: $0.route.website?.language, page: page))
+            $0.route = .website(.init(language: $0.route?.website?.language, page: page))
         } operation: {
             switch page {
             case let .account(account):
@@ -44,7 +46,7 @@ extension WebsitePage {
                         return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
                     },
                     coenttbWebNewsletter: {
-                        @Dependency(\.serverRouter) var serverRouter
+                        @Dependency(\.coenttb.website.router) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
                         return Coenttb_Newsletter.Route.Subscribe.Overlay (
@@ -52,7 +54,7 @@ extension WebsitePage {
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
                             newsletterSubscribed: currentUser?.newsletterSubscribed == true,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
+                            newsletterSubscribeAction: serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init())))))
                         )
                     },
                     defaultDocument: { closure in
@@ -84,7 +86,7 @@ extension WebsitePage {
 
             case let .newsletter(newsletter):
 
-                @Dependency(\.serverRouter) var serverRouter
+                @Dependency(\.coenttb.website.router) var serverRouter
 
                 return try await Coenttb_Newsletter.Route.response(
                     newsletter: newsletter,
@@ -94,13 +96,16 @@ extension WebsitePage {
                         }
                     },
                     subscribeCaption: { String.subscribe_to_my_newsletter.capitalizingFirstLetter().description },
-                    subscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init())))))) },
-                    verificationAction: { verify in serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.verify(.init(token: verify.token, email: verify.email))))))) },
+                    subscribeAction: { serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init()))))) },
+                    verificationAction: { verify in serverRouter.url(for: .api(.newsletter(.subscribe(.verify(.init(token: verify.token, email: verify.email)))))) },
                     verificationRedirectURL: { serverRouter.url(for: .home) },
-                    newsletterUnsubscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.unsubscribe(.init()))))) },
+                    newsletterUnsubscribeAction: { serverRouter.url(for: .api(.newsletter(.unsubscribe(.init())))) },
                     form_id: { "coenttb-web-newsletter-route-unsubscribe-view" },
                     localStorageKey: { String.newsletterSubscribed }
                 )
+            case .identity(let identity):
+                return try await Identity.Consumer.View.response(view: identity)
+                
             }
         }
     }
@@ -111,7 +116,7 @@ extension WebsitePage {
     -> any AsyncResponseEncodable {
         @Dependency(\.envVars.languages) var languages
         @Dependency(\.language) var language
-        @Dependency(\.serverRouter) var siteRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
 
         throw Abort(.internalServerError)
     }

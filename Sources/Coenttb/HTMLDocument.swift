@@ -13,7 +13,7 @@ import Foundation
 import GoogleAnalytics
 import Hotjar
 import Languages
-import Server_Router
+import Coenttb_Com_Shared
 
 package struct DefaultHTMLDocument<
     Styles: HTML,
@@ -101,10 +101,10 @@ package struct CoenttbHTMLDocumentHeader<
         @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb }
     ) {
 
-        @Dependency(\.serverRouter) var siteRouter
+        @Dependency(\.coenttb.website.router) var router
         @Dependency(\.language) var language
         @Dependency(\.envVars.languages) var languages
-        @Dependency(\.route.website?.page) var page
+        @Dependency(\.route?.website?.page) var page
         @Dependency(\.envVars.hotjarAnalytics?.id) var hotjarAnalyticsId
         @Dependency(\.envVars.googleAnalytics?.id) var googleAnalyticsId
         @Dependency(\.envVars.canonicalHost) var canonicalHost
@@ -117,11 +117,11 @@ package struct CoenttbHTMLDocumentHeader<
             canonicalHost.map { "\(description) - \($0)" } ?? "\(description)"
         }
 
-        let canonicalHref: URL = page.map { siteRouter.url(for: $0) } ?? baseUrl
+        let canonicalHref: URL = page.map { router.url(for: $0) } ?? baseUrl
         let description = page?.description()?.description
         let hreflang: (Languages.Language) -> URL = { language in
             page.map { page in
-                siteRouter.url(for: .init(language: language, page: page))
+                router.url(for: .init(language: language, page: page))
             } ?? baseUrl
         }
 
@@ -148,7 +148,7 @@ package struct CoenttbHTMLDocumentHeader<
             title: title,
             description: description,
             canonicalHref: canonicalHref,
-            rssXml: siteRouter.url(for: .public(.rssXml)),
+            rssXml: router.url(for: .public(.rssXml)),
             themeColor: themeColor,
             language: language,
             hreflang: hreflang,

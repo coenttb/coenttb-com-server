@@ -13,7 +13,8 @@ import Server_Client
 import Server_Client_Live
 import Server_Dependencies
 import Server_Models
-import Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Identity_Consumer
 
 //import Coenttb_Stripe
 //import Coenttb_Stripe_Live
@@ -22,6 +23,61 @@ import Server_Router
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
+
+extension Identity.Consumer.Configuration: @retroactive DependencyKey {
+    public static var liveValue: Self {
+        @Dependency(\.coenttb.website) var consumer
+        @Dependency(\.coenttb.identity.provider) var provider
+        @Dependency(\.coenttb.website.router) var router
+        @Dependency(\.serverClient) var serverClient
+        @Dependency(\.envVars.appEnv) var appEnv
+        
+        let cookies: Identity.CookiesConfiguration = switch appEnv {
+        case .development, .testing: .development
+        case .production, .staging: .live
+        }
+        
+        return .init(
+            provider: .init(
+                baseURL: provider.baseURL,
+                domain: nil,
+                router: provider.router
+            ),
+            consumer: .init(
+                baseURL: consumer.baseURL,
+                domain: nil,
+                cookies: cookies,
+                router: router.identity,
+                client: serverClient.identity,
+                currentUserName: { nil },
+                hreflang: { router.url(for: .init(language: $1, page: .identity($0))) },
+                branding: .init(
+                    logo: .init(
+                        logo: .coenttb(),
+                        href: router.url(for: .home)
+                    ),
+                    primaryColor: .coenttbPrimaryColor,
+                    accentColor: .coenttbAccentColor,
+                    favicons: .coenttb,
+                    termsOfUse: router.url(for: .terms_of_use),
+                    privacyStatement: router.url(for: .privacy_statement)
+                ),
+                navigation: .init(
+                    home: { router.url(for: .home) }
+                ),
+                redirect: .init(
+                    createProtected: { router.url(for: .home) },
+                    createVerificationSuccess: { router.url(for: .identity(.login)) },
+                    loginProtected: { router.url(for: .home) },
+                    logoutSuccess: { router.url(for: .identity(.login)) },
+                    loginSuccess: { router.url(for: .account(.settings(.index))) },
+                    passwordResetSuccess: { router.url(for: .identity(.login)) },
+                    emailChangeConfirmSuccess: { router.url(for: .identity(.login)) }
+                )
+            )
+        )
+    }
+}
 
 extension BlogKey: @retroactive DependencyKey {
     public static let liveValue: Coenttb_Blog.Client = .init(
@@ -40,7 +96,7 @@ extension BlogKey: @retroactive DependencyKey {
             return Bundle.module.url(forResource: fileName, withExtension: "md")
         },
         postToRoute: { post in
-            @Dependency(\.serverRouter) var serverRouter
+            @Dependency(\.coenttb.website.router) var serverRouter
             return serverRouter.url(for: .blog(.post(post)))
         },
         postToFilename: { post in
@@ -58,14 +114,14 @@ extension BlogKey: @retroactive DependencyKey {
 }
 
 extension LanguagesKey: @retroactive DependencyKey {
-    public static let liveValue: Set<Language> = {
+    public static var liveValue: Set<Language> {
         @Dependency(\.envVars.languages) var languages
         return languages.map(Set.init) ?? .allCases
-    }()
+    }
 }
 
 extension DatabaseClientKey: DependencyKey {
-    package static let liveValue: Server_Client.Client = {
+    package static var liveValue: Server_Client.Client {
         @Dependency(\.request?.db) var database
         
         guard
@@ -75,24 +131,7 @@ extension DatabaseClientKey: DependencyKey {
         }
         
         return .live(database: database)
-    }()
-}
-
-extension CurrentUserKey: DependencyKey {
-    package static let liveValue: User? = nil
-}
-
-extension Server_RouterKey: DependencyKey {
-    public static let liveValue: ServerRouter = {
-        @Dependency(\.envVars) var envVars
-        return ServerRouter(
-            baseURL: envVars.baseUrl,
-            apiRouter: API.Router.shared,
-            webhookRouter: Webhook.Router.shared,
-            publicRouter: Public.Router.shared,
-            pageRouter: WebsitePage.Router.shared
-        )
-    }()
+    }
 }
 
 extension ProjectRootKey: @retroactive DependencyKey {
@@ -117,26 +156,14 @@ extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
     }
 }
 
-extension EventLoopGroupConnectionPoolKey: @retroactive DependencyKey {
-    public static var liveValue: EventLoopGroupConnectionPool<PostgresConnectionSource> {
-        @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
-        @Dependency(\.sqlConfiguration) var sqlConfiguration
-        
-        return .init(
-            source: PostgresConnectionSource(sqlConfiguration: sqlConfiguration),
-            on: mainEventLoopGroup
-        )
-    }
-}
-
 extension Logger: @retroactive DependencyKey {
-    public static let liveValue: Logger = {
+    public static var liveValue: Logger {
         @Dependency(\.envVars) var envVars
-        var logger = Logger(label: ProcessInfo.processInfo.processName) { _ in
-            CoenttbLogHandler(label: "coenttb", logLevel: envVars.logLevel ?? .trace, metadataProvider: nil)
+        let logger = Logger(label: ProcessInfo.processInfo.processName) { _ in
+            CoenttbLogHandler(label: "coenttb.com", logLevel: envVars.logLevel ?? .trace, metadataProvider: nil)
         }
         return logger
-    }()
+    }
 }
 
 extension Mailgun.Client: @retroactive DependencyKey {
@@ -177,9 +204,9 @@ extension Mailgun.Client: @retroactive DependencyKey {
 //    }
 //}
 
-extension DatabaseConfigurationKey: @retroactive DependencyKey {
-    public static let liveValue = DatabaseConfiguration(
-        maxConnectionsPerEventLoop: 1,
-        connectionPoolTimeout: .seconds(10)
-    )
-}
+//extension DatabaseConfigurationKey: @retroactive DependencyKey {
+//    public static var liveValue = DatabaseConfiguration(
+//        maxConnectionsPerEventLoop: 1,
+//        connectionPoolTimeout: .seconds(10)
+//    )
+//}

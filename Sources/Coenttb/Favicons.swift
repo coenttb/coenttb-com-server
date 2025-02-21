@@ -8,13 +8,13 @@
 import Dependencies
 import Favicon
 import Foundation
-import Server_Router
+import Coenttb_Com_Shared
 
 extension Favicons {
     nonisolated(unsafe)
     package static let coenttb: Self = {
 
-        @Dependency(\.serverRouter) var serverRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
 
         return .init(
             icon: .init(
