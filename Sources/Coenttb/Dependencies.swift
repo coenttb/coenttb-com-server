@@ -67,12 +67,8 @@ extension Identity.Consumer.Configuration: @retroactive DependencyKey {
                 ),
                 redirect: .init(
                     createProtected: { router.url(for: .home) },
-                    createVerificationSuccess: { router.url(for: .identity(.login)) },
                     loginProtected: { router.url(for: .home) },
-                    logoutSuccess: { router.url(for: .identity(.login)) },
-                    loginSuccess: { router.url(for: .account(.settings(.index))) },
-                    passwordResetSuccess: { router.url(for: .identity(.login)) },
-                    emailChangeConfirmSuccess: { router.url(for: .identity(.login)) }
+                    loginSuccess: { router.url(for: .account(.settings(.index))) }
                 )
             )
         )

@@ -12,6 +12,7 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Vapor
 import Coenttb_Identity_Consumer
+import JWT
 
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
@@ -50,6 +51,8 @@ extension Application {
         app.queues.schedule(ConfirmDeleteUserJob())
             .daily()
             .at(.midnight)
+        
+        try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: envVars["JWT_PUBLIC_KEY"]!))
         
         app.middleware.use(Identity.Consumer.Middleware())
 

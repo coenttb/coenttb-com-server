@@ -4,6 +4,12 @@ import Vapor_Application
 @main
 struct Server {
     static func main() async throws {
+#if DEBUG
+        prepareDependencies {
+            $0.coenttb = .testValue
+        }
+#endif
+        
         @Dependency(\.envVars) var envVars
         @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
 

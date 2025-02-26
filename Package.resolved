@@ -1,5 +1,5 @@
 {
-  "originHash" : "aae5cb32ed73fe9bb8966edb657fd8662a1b62c747462185bdddda13a69f48a3",
+  "originHash" : "da873c184eed7d5a757d9149c42f4c1ad288eeaee8c216ddcc7f8f69b8bdb363",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-com-shared.git",
       "state" : {
         "branch" : "main",
-        "revision" : "91755a228006d51041c8466fae7490d9e0b64012"
+        "revision" : "149a37ea2a5aca9cb4e93cd2b15d1c4b68e71c2c"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "015401fad4f148f1658db76b9bbb252aae633939"
+        "revision" : "ad5bec0e35f154e17df722b8e796b508574500c1"
       }
     },
     {
@@ -438,8 +438,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
-        "revision" : "52b5e1a09dc016e64ce253e19ab3124b7fae9ac9",
-        "version" : "1.7.0"
+        "revision" : "121a428c505c01c4ce02d5ada1c8fc3da93afce9",
+        "version" : "1.8.0"
       }
     },
     {
@@ -502,7 +502,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "fba1f11a36404dfef9f6e65c4baf518f696181ea"
+        "revision" : "7a7af3762d77466cae029b3fc73556dab92a619c"
       }
     },
     {
@@ -726,8 +726,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "b444594f79844b0d6d76d70fbfb3f7f71728f938",
-        "version" : "1.5.1"
+        "revision" : "39de59b2d47f7ef3ca88a039dff3084688fe27f4",
+        "version" : "1.5.2"
       }
     }
   ],

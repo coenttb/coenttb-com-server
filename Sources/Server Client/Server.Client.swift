@@ -5,7 +5,7 @@ import Dependencies
 import DependenciesMacros
 import EmailAddress
 import Server_Models
-import Identity_Consumer
+import Coenttb_Identity_Consumer
 
 @DependencyClient
 package struct Client: Sendable {
