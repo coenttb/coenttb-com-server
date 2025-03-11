@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-com-shared.git",
       "state" : {
         "branch" : "main",
-        "revision" : "149a37ea2a5aca9cb4e93cd2b15d1c4b68e71c2c"
+        "revision" : "951b72bd1e1a8428605ba4172d4e82577e01d4a8"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "3896deb56cba616c3465eca7030f7818981d3659"
+        "revision" : "091bf9130f516607e8d3bb3b1e91b86c21c6695a"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ad5bec0e35f154e17df722b8e796b508574500c1"
+        "revision" : "a3b16a17dc8e2f9dc4dc5e15cfc45d8cbcc84deb"
       }
     },
     {
@@ -106,7 +106,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0e79c1387afeaa5b6919fd0dd0ab958210649c56"
+        "revision" : "33c2c827ef32a89bb7aee212fde507513cfac67f"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e8a1068a873ec3d47b8360a67981d5c67ad9b36b"
+        "revision" : "b319c75d2d9ef2455e613849bf88361b32a0595d"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-server-vapor.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c27b60e2e154ff5e33c6934596960ce4423e921b"
+        "revision" : "229df5d046ab14bb8edbd7e0cd772a4bebb1fbfa"
       }
     },
     {
@@ -151,7 +151,7 @@
       "location" : "https://github.com/coenttb/coenttb-utils.git",
       "state" : {
         "branch" : "main",
-        "revision" : "03cdc7f28e600db96b9f3e4bc70b1a79b52a95fd"
+        "revision" : "7858da2acbb76e77a68db8d14e4df1157c3fed17"
       }
     },
     {
@@ -411,8 +411,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",
       "state" : {
-        "revision" : "45305d32cfb830faebcaa9a7aea66ad342637518",
-        "version" : "3.11.1"
+        "revision" : "a98e4be0dd9f0377a818f2198a2bc87bbd2bfcea",
+        "version" : "3.11.2"
       }
     },
     {
@@ -438,8 +438,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
-        "revision" : "121a428c505c01c4ce02d5ada1c8fc3da93afce9",
-        "version" : "1.8.0"
+        "revision" : "ec2862d1364536fc22ec56a3094e7a034bbc7da8",
+        "version" : "1.8.1"
       }
     },
     {
@@ -475,7 +475,7 @@
       "location" : "https://github.com/coenttb/swift-html-to-pdf.git",
       "state" : {
         "branch" : "main",
-        "revision" : "142d9e9d7cb817e73f691428e00c6f465b821b21"
+        "revision" : "445d920c28b4b62d3208763511794253fd7c9e15"
       }
     },
     {
@@ -502,7 +502,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "7a7af3762d77466cae029b3fc73556dab92a619c"
+        "revision" : "aa6585f768a49ab4a72853d18368a2f919d48370"
       }
     },
     {
@@ -511,7 +511,7 @@
       "location" : "https://github.com/coenttb/swift-language.git",
       "state" : {
         "branch" : "main",
-        "revision" : "63b455da4844a701663dd91bb681bf05a536c92f"
+        "revision" : "c47dab7ce0d7c678f699d48ce0bb623bc6138ee8"
       }
     },
     {
@@ -591,8 +591,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
-        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
-        "version" : "1.0.2"
+        "revision" : "e0ec0f5f3af6f3e4d5e7a19d2af26b481acb6ba8",
+        "version" : "1.0.3"
       }
     },
     {
@@ -673,7 +673,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "61de91893ba32cd9edaecc978484004c92314e6f"
+        "revision" : "d1e02124fd0f1324001ba0667ba4422f1a9bb15c"
       }
     },
     {

@@ -2,6 +2,7 @@ import Foundation
 import Dependencies
 import Fluent
 import Server_Models
+import IssueReporting
 
 package final class User: Model, @unchecked Sendable {
     package static let schema = "coenttb_users"
@@ -32,14 +33,9 @@ package final class User: Model, @unchecked Sendable {
     @Timestamp(key: FieldKeys.updatedAt, on: .update)
     package var updatedAt: Date?
 
-    @OptionalField(key: FieldKeys.deletionState)
-    package var deletionState: DeletionState?
-
-    @OptionalField(key: FieldKeys.deletionRequestedAt)
-    package var deletionRequestedAt: Date?
-
     package init() {
-        fatalError()
+        reportIssue("User.init was called directly, but this generates a random UUID instead of an actual identity's id.")
+        self.identityId = .init()
     }
 
     package init(
@@ -49,12 +45,12 @@ package final class User: Model, @unchecked Sendable {
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
     ) {
-        fatalError()
-//        self.id = id
-//        self.identityId = identityID
-//        self.dateOfBirth = dateOfBirth
-//        self.newsletterConsent = newsletterConsent
-//        self.stripe = stripe
+    
+        self.identityId = identityID
+        self.dateOfBirth = dateOfBirth
+        self.newsletterConsent = newsletterConsent
+        self.stripe = stripe
+        self.id = id
     }
 
     enum FieldKeys {
@@ -66,13 +62,6 @@ package final class User: Model, @unchecked Sendable {
         static let stripe: FieldKey = "stripe"
         static let createdAt: FieldKey = "created_at"
         static let updatedAt: FieldKey = "updated_at"
-        static let deletionState: FieldKey = "deletion_state"
-        static let deletionRequestedAt: FieldKey = "deletion_requested_at"
-    }
-
-    package enum DeletionState: String, Codable, Sendable, Hashable {
-        case pending
-        case deleted
     }
 }
 
@@ -97,8 +86,6 @@ extension Server_Database.User {
                 .field([FieldKeys.stripe, Stripe.FieldKeys.subscription, Stripe.Subscription.FieldKeys.plan], .string)
                 .field(FieldKeys.createdAt, .datetime)
                 .field(FieldKeys.updatedAt, .datetime)
-                .field(FieldKeys.deletionState, .string)
-                .field(FieldKeys.deletionRequestedAt, .datetime)
                 .create()
         }
 

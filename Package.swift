@@ -7,7 +7,6 @@ extension String {
     static let coenttb: Self = "Coenttb"
     static let server: Self = "Server"
     static let serverClient: Self = "Server Client"
-    static let serverClientLive: Self = "Server Client Live"
     static let serverDatabase: Self = "Server Database"
     static let serverDependencies: Self = "Server Dependencies"
     static let serverEnvVars: Self = "Server EnvVars"
@@ -19,7 +18,6 @@ extension String {
 extension Target.Dependency {
     static var coenttb: Self { .target(name: .coenttb) }
     static var serverClient: Self { .target(name: .serverClient) }
-    static var serverClientLive: Self { .target(name: .serverClientLive) }
     static var serverDatabase: Self { .target(name: .serverDatabase) }
     static var serverEnvVars: Self { .target(name: .serverEnvVars) }
     static var serverDependencies: Self { .target(name: .serverDependencies) }
@@ -67,7 +65,6 @@ let package = Package(
         .library(name: .coenttb, targets: [.coenttb]),
         .library(name: .vaporApp, targets: [.vaporApp]),
         .library(name: .serverClient, targets: [.serverClient]),
-        .library(name: .serverClientLive, targets: [.serverClientLive]),
         .library(name: .serverDatabase, targets: [.serverDatabase]),
         .executable(name: .server, targets: [.server])
     ],
@@ -97,7 +94,7 @@ let package = Package(
             dependencies: [
                 .serverEnvVars,
                 .serverTranslations,
-                .serverClientLive,
+                .serverClient,
                 .coenttbIdentityConsumer,
                 .googleAnalytics,
                 .hotjar,
@@ -105,10 +102,18 @@ let package = Package(
                 .coenttbLegalDocuments,
                 .coenttbServer,
                 .coenttbComShared,
-//                .stripeLive,
             ],
             resources: [
                 .process("Blog/Posts")
+            ]
+        ),
+        .testTarget(
+            name: .coenttb.tests,
+            dependencies: [
+                .coenttbServer,
+                .coenttbBlog,
+                .coenttb,
+                .dependenciesTestSupport
             ]
         ),
         .target(
@@ -122,23 +127,14 @@ let package = Package(
                 .mailgun,
                 .coenttbNewsletter,
                 .coenttbComShared,
+                .serverDatabase,
             ]
         ),
-        .target(
-            name: .serverClientLive,
+        .testTarget(
+            name: .serverClient.tests,
             dependencies: [
                 .serverClient,
-                .serverDependencies,
-                .serverDatabase,
-                .serverEnvVars,
-                .dependenciesMacros,
-                .queuesFluentDriver,
-                .coenttbServer,
-                .coenttbIdentityConsumer,
-                .coenttbNewsletter,
-                .coenttbNewsletterFluent,
-                .mailgun,
-                .coenttbComShared,
+                .dependenciesTestSupport
             ]
         ),
         .target(
@@ -154,12 +150,26 @@ let package = Package(
 //                .stripe,
             ]
         ),
+        .testTarget(
+            name: .serverDatabase.tests,
+            dependencies: [
+                .serverClient,
+                .dependenciesTestSupport
+            ]
+        ),
         .target(
             name: .serverDependencies,
             dependencies: [
                 .coenttbServer,
                 .serverModels,
                 .coenttbComShared,
+            ]
+        ),
+        .testTarget(
+            name: .serverDependencies.tests,
+            dependencies: [
+                .serverClient,
+                .dependenciesTestSupport
             ]
         ),
         .target(
@@ -173,11 +183,25 @@ let package = Package(
 //                .stripe,
             ]
         ),
+        .testTarget(
+            name: .serverEnvVars.tests,
+            dependencies: [
+                .serverClient,
+                .dependenciesTestSupport
+            ]
+        ),
         .target(
             name: .serverModels,
             dependencies: [
                 .serverEnvVars,
                 .coenttbServer,
+            ]
+        ),
+        .testTarget(
+            name: .serverModels.tests,
+            dependencies: [
+                .serverClient,
+                .dependenciesTestSupport
             ]
         ),
         .target(
@@ -194,7 +218,6 @@ let package = Package(
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,
-                .coenttbServer,
                 .coenttb,
                 .coenttbNewsletter,
                 .queuesFluentDriver,
@@ -228,14 +251,12 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: .coenttb.tests,
+            name: .server.tests,
             dependencies: [
-                .coenttbServer,
-                .coenttbBlog,
-                .coenttb,
+                .serverClient,
                 .dependenciesTestSupport
             ]
-        )
+        ),
     ],
     swiftLanguageModes: [.v6]
 )

@@ -22,12 +22,7 @@ extension Coenttb_Com_Router.Route.API {
 
                 @Dependency(\.serverClient.newsletter) var client
 
-                return try await Coenttb_Newsletter.API.response(
-                    client: client,
-                    logger: logger,
-                    cookieId: "String.newsletterSubscribed",
-                    newsletter: newsletter
-                )
+                return try await Coenttb_Newsletter.API.response(newsletter: newsletter)
 
             case .identity(let identity):
             return try await Coenttb_Identity_Consumer.Identity.Consumer.API.response(api: identity)

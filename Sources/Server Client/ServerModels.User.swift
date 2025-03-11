@@ -7,11 +7,10 @@
 
 import Coenttb_Server_Models
 import Foundation
-import Server_Models
-import Server_Client
 import Server_Database
 import Coenttb_Identity_Consumer
 import SwiftWeb
+import Server_Models
 
 extension Server_Models.User {
     init(
@@ -20,7 +19,7 @@ extension Server_Models.User {
     ) throws {
         self = .init(
             id: accessToken.identityId,
-            email: accessToken.email,
+            email: accessToken.emailAddress,
             name: user.name,
             authenticated: true,
             isAdmin: user.isAdmin,

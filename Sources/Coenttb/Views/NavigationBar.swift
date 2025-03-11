@@ -60,39 +60,40 @@ package struct CoenttbNavigationBar: HTML {
                 )
             },
             trailingNavItems: {
-                ul {
-                    HTMLGroup {
-                        if currentUser?.authenticated == true {
-                            li {
-                                CircleIconButton(
-                                    icon: .init(icon: "cog", size: .large),
-                                    color: .coenttbPrimaryColor,
-                                    href: serverRouter.href(for: .account(.settings(.index))),
-                                    buttonSize: 2.5.rem
-                                )
-                            }
-
-                        } else {
-                            li {
-                                div {
-                                    loginButton
-                                }
-                                .display(.inlineBlock)
-                            }
-
-                            li {
-                                div {
-                                    signupButton
-                                }
-                                .display(.inlineBlock)
-                            }
-                        }
-                    }
-                    .display(.inline)
-                    .padding(left: 1.rem, pseudo: .not(.firstChild))
-                }
-                .listStyle(.reset)
-                .display(.none, media: .mobile)
+                p{ "" }
+//                ul {
+//                    HTMLGroup {
+//                        if currentUser?.authenticated == true {
+//                            li {
+//                                CircleIconButton(
+//                                    icon: .init(icon: "cog", size: .large),
+//                                    color: .coenttbPrimaryColor,
+//                                    href: serverRouter.href(for: .account(.settings(.index))),
+//                                    buttonSize: 2.5.rem
+//                                )
+//                            }
+//
+//                        } else {
+//                            li {
+//                                div {
+//                                    loginButton
+//                                }
+//                                .display(.inlineBlock)
+//                            }
+//
+//                            li {
+//                                div {
+//                                    signupButton
+//                                }
+//                                .display(.inlineBlock)
+//                            }
+//                        }
+//                    }
+//                    .display(.inline)
+//                    .padding(left: 1.rem, pseudo: .not(.firstChild))
+//                }
+//                .listStyle(.reset)
+//                .display(.none, media: .mobile)
             },
             mobileNavItems: {
                 ul {

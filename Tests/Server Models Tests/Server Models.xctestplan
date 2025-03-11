@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BA9EB0E3-84A4-4B23-ABAD-E7D4D89EAAC1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Server Models Tests",
+        "name" : "Server Models Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -11,8 +11,7 @@ import Foundation
 import Coenttb_Com_Shared
 
 extension Favicons {
-    nonisolated(unsafe)
-    package static let coenttb: Self = {
+    package static var coenttb: Self {
 
         @Dependency(\.coenttb.website.router) var serverRouter
 
@@ -25,5 +24,5 @@ extension Favicons {
             manifest: "",
             maskIcon: ""
         )
-    }()
+    }
 }

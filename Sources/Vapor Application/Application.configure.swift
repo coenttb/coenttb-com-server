@@ -6,7 +6,6 @@ import FluentPostgresDriver
 import Queues
 import QueuesFluentDriver
 import Server_Client
-import Server_Client_Live
 import Server_Models
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
@@ -17,7 +16,7 @@ import JWT
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
 
-//        Application.preloadStaticResources()
+        Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
 
@@ -47,10 +46,6 @@ extension Application {
             allowedInsecureHosts: envVars.allowedInsecureHosts,
             baseUrl: envVars.baseUrl
         )
-
-        app.queues.schedule(ConfirmDeleteUserJob())
-            .daily()
-            .at(.midnight)
         
         try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: envVars["JWT_PUBLIC_KEY"]!))
         

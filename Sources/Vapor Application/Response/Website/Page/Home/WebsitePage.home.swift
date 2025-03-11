@@ -76,8 +76,10 @@ extension WebsitePage {
                                 }
                                 .textAlign(.center, media: .desktop)
 
+                                @Dependency(\.newsletter.subscribeAction) var subscribeAction
+                                
                                 NewsletterSubscriptionForm(
-                                    newsletterSubscribeAction: serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init())))))
+                                    subscribeAction: subscribeAction()
                                 )
                                 .width(100.percent)
                             }

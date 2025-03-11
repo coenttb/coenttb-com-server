@@ -11,15 +11,18 @@ import Coenttb_Identity_Consumer
 package struct Client: Sendable {
     package let newsletter: Coenttb_Newsletter.Client
     package let identity: Identity.Consumer.Client
+    package let user: Client.User
 //    package let stripe: Server_Client.Client.Stripe?
     
     package init(
         newsletter: Coenttb_Newsletter.Client,
-        identity: Identity.Consumer.Client
+        identity: Identity.Consumer.Client,
+        user: Client.User
 //        stripe: Server_Client.Client.Stripe?
     ) {
         self.newsletter = newsletter
         self.identity = identity
+        self.user = user
 //        self.stripe = stripe
     }
 }
@@ -27,25 +30,26 @@ package struct Client: Sendable {
 extension Client {
     package static let previewValue: Self = .init(
         newsletter: .previewValue,
-        identity: .previewValue
+        identity: .previewValue,
+        user: .previewValue
 //        stripe: .previewValue
     )
 }
 
-package enum DatabaseClientKey {}
 
-extension DatabaseClientKey: TestDependencyKey {
-    package static let testValue = Server_Client.Client(
+extension Server_Client.Client: TestDependencyKey {
+    package static let testValue: Self = .init(
         newsletter: .testValue,
-        identity: .testValue
+        identity: .testValue,
+        user: .testValue
 //        stripe: .testValue
     )
 }
 
 extension DependencyValues {
     package var serverClient: Server_Client.Client {
-        get { self[DatabaseClientKey.self] }
-        set { self[DatabaseClientKey.self] = newValue }
+        get { self[Server_Client.Client.self] }
+        set { self[Server_Client.Client.self] = newValue }
     }
 }
 

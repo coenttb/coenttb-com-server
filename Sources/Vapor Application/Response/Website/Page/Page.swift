@@ -49,12 +49,11 @@ extension WebsitePage {
                         @Dependency(\.coenttb.website.router) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
-                        return Coenttb_Newsletter.Route.Subscribe.Overlay (
+                        return Coenttb_Newsletter.View.Subscribe.Overlay (
                             image: Image.coenttbGreenSuit,
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
-                            newsletterSubscribed: currentUser?.newsletterSubscribed == true,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init())))))
+                            newsletterSubscribed: currentUser?.newsletterSubscribed == true
                         )
                     },
                     defaultDocument: { closure in
@@ -85,27 +84,16 @@ extension WebsitePage {
                 return try await WebsitePage.termsOfUse()
 
             case let .newsletter(newsletter):
-
-                @Dependency(\.coenttb.website.router) var serverRouter
-
-                return try await Coenttb_Newsletter.Route.response(
+                return try await Coenttb_Newsletter.View.response(
                     newsletter: newsletter,
                     htmlDocument: { html in
                         Coenttb.DefaultHTMLDocument.init {
                             AnyHTML(html)
                         }
-                    },
-                    subscribeCaption: { String.subscribe_to_my_newsletter.capitalizingFirstLetter().description },
-                    subscribeAction: { serverRouter.url(for: .api(.newsletter(.subscribe(.request(.init()))))) },
-                    verificationAction: { verify in serverRouter.url(for: .api(.newsletter(.subscribe(.verify(.init(token: verify.token, email: verify.email)))))) },
-                    verificationRedirectURL: { serverRouter.url(for: .home) },
-                    newsletterUnsubscribeAction: { serverRouter.url(for: .api(.newsletter(.unsubscribe(.init())))) },
-                    form_id: { "coenttb-web-newsletter-route-unsubscribe-view" },
-                    localStorageKey: { String.newsletterSubscribed }
+                    }
                 )
             case .identity(let identity):
                 return try await Identity.Consumer.View.response(view: identity)
-                
             }
         }
     }

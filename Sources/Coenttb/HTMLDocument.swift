@@ -15,37 +15,28 @@ import Hotjar
 import Languages
 import Coenttb_Com_Shared
 
-package struct DefaultHTMLDocument<
-    Styles: HTML,
-    Scripts: HTML,
-    Body: HTML,
-    SideBar: HTML,
-    NavigationBar: HTML,
-    Footer: HTML
->: HTMLDocument {
+package struct DefaultHTMLDocument: HTMLDocument {
     let themeColor: HTMLColor
-    let styles: Styles
-    let scripts: Scripts
+    let styles: any HTML
+    let scripts: any HTML
+    let navigationBar: any HTML
+    let _body: any HTML
+    let footer: any HTML
     let favicons: Favicons
-    let _sideBar: SideBar
-    let _navigationBar: NavigationBar
-    let _body: Body
-    let _footer: Footer
 
     package init(
         themeColor: HTMLColor = .coenttbAccentColor,
-        @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
-        @HTMLBuilder scripts: () -> Scripts = {
+        @HTMLBuilder styles: () -> any HTML = { HTMLEmpty() },
+        @HTMLBuilder scripts: () -> any HTML = {
             HTMLGroup {
                 PrismJSHead(languages: ["swift"])
                 fontAwesomeScript
             }
         },
         @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb },
-        @HTMLBuilder sideBar: () -> SideBar = { HTMLEmpty() },
-        @HTMLBuilder navigationBar: () -> NavigationBar = { CoenttbNavigationBar() },
-        @HTMLBuilder body: () -> Body,
-        @HTMLBuilder footer: () -> Footer = {
+        @HTMLBuilder navigationBar: () -> any HTML = { CoenttbNavigationBar() },
+        @HTMLBuilder body: () -> any HTML,
+        @HTMLBuilder footer: () -> any HTML = {
             CoenttbFooter()
                 .gradient(bottom: .coenttbAccentColor, middle: .white.withDarkColor(.black), top: .white.withDarkColor(.black))
                 .linkColor(.primary)
@@ -55,10 +46,9 @@ package struct DefaultHTMLDocument<
         self.styles = styles()
         self.scripts = scripts()
         self.favicons = favicons()
-        self._sideBar = sideBar()
-        self._navigationBar = navigationBar()
+        self.navigationBar = navigationBar()
         self._body = body()
-        self._footer = footer()
+        self.footer = footer()
     }
 
     @Dependency(\.languages) var languages
@@ -66,8 +56,8 @@ package struct DefaultHTMLDocument<
     package var head: some HTML {
         CoenttbHTMLDocumentHeader(
             themeColor: themeColor,
-            styles: { styles },
-            scripts: { scripts },
+            styles: { AnyHTML(styles) },
+            scripts: { AnyHTML(scripts) },
             favicons: { favicons }
         )
     }
@@ -77,12 +67,12 @@ package struct DefaultHTMLDocument<
     package var body: some HTML {
         HTMLGroup {
 
-            _navigationBar
+            AnyHTML(navigationBar)
                 .backgroundColor(themeColor)
 
-            _body
+            AnyHTML(_body)
 
-            _footer
+            AnyHTML(footer)
 
         }
         .dependency(\.language, language)
