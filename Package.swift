@@ -1,4 +1,4 @@
-// swift-tools-version:6.0.3
+// swift-tools-version:6.0
 
 import Foundation
 import PackageDescription
@@ -76,6 +76,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-blog.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-identities.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/swift-identities.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-newsletter.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-postgres.git", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-hotjar.git", branch: "main"),

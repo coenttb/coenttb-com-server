@@ -1,5 +1,5 @@
 {
-  "originHash" : "73c75fc8276e1073a60f38455c013ffc1ace56eb3c5da824d9395d2928138e7b",
+  "originHash" : "d0307c8569e18b2e3303796d1c0b437e62a9f2eca37a31935de9da4a94c7146c",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "da0ccc40da9e8c71f4ac54de808a58322e4f1a3a"
+        "revision" : "1a67aee10f73f41fd0009ace6c6383a55b612fad"
       }
     },
     {
@@ -151,7 +151,7 @@
       "location" : "https://github.com/coenttb/coenttb-utils.git",
       "state" : {
         "branch" : "main",
-        "revision" : "7858da2acbb76e77a68db8d14e4df1157c3fed17"
+        "revision" : "87e5d018e4a2be4bda3cf11bed4c48eded9f31c8"
       }
     },
     {
@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-certificates.git",
       "state" : {
-        "revision" : "274f8668d3ec5d2892904d8465635c5ea659f767",
-        "version" : "1.7.0"
+        "revision" : "bd5987524cb24e2cdd6bee2add5dd26b9387824b",
+        "version" : "1.8.0"
       }
     },
     {
@@ -411,8 +411,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",
       "state" : {
-        "revision" : "a8a02ac79a2791b270de758ed36e596f9f6b971f",
-        "version" : "3.12.0"
+        "revision" : "67e54ae1db7966bd8cfa8d685eb5784269186ebe",
+        "version" : "3.12.1"
       }
     },
     {
@@ -502,7 +502,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "24e3c66eb1d3d079e0d58d342437f308b1449d0f"
+        "revision" : "11d5a4bfbea4992b17804ba047087e6aa469055a"
       }
     },
     {
