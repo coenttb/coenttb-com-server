@@ -1,4 +1,4 @@
-FROM swift:6.0.1-jammy as runtime
+FROM swift:6.0.3-jammy as runtime
 WORKDIR /app
 COPY Server ./Server
 COPY Public ./Public
