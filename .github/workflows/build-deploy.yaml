@@ -1,0 +1,54 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ production ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+        - main
+        - production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "${{ secrets.GH_USER }}"
+          git config --global url."https://${{ secrets.GH_PAT }}@github.com/".insteadOf "https://github.com/"
+            
+      - name: Build Release in Docker
+        run: |
+          docker build -f Dockerfile.build -t swift-builder --build-arg GH_PAT=${{ secrets.GH_PAT }} .
+          docker run --rm -v $(pwd):/app swift-builder
+          test -f Server || exit 1
+          mkdir -p Public Resources
+          
+      - name: Install Heroku CLI
+        if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+        
+      - name: Update Heroku CLI
+        if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
+        run: heroku update
+
+      - name: Deploy to Heroku
+        if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          usedocker: true
+          docker_heroku_process_type: web
+          stack: container
