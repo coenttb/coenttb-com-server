@@ -21,7 +21,6 @@ extension Coenttb_Com_Router.Route {
         route: Coenttb_Com_Router.Route
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.logger) var logger
-        /*@Dependency(\.serverClient.account.currentUser) */var currentUser = ""
         
         return try await withDependencies {
             $0.envVars = .liveValue
