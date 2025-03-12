@@ -1,5 +1,5 @@
 {
-  "originHash" : "0bd9e8c34f0cd7e1e48dc22a72361f252d73d4058306582810a862023836b42b",
+  "originHash" : "d58400ace6f3d085ec3a80dabcc6ca3e6306a1d55a2beb5768e40499960bff7f",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -241,7 +241,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f9f34189a23da8c443f311ab56c8f7c8c384aa07"
+        "revision" : "3fe023a050d2661bd43bf516815f16867de1cf42"
       }
     },
     {
@@ -502,7 +502,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "aa6585f768a49ab4a72853d18368a2f919d48370"
+        "revision" : "24e3c66eb1d3d079e0d58d342437f308b1449d0f"
       }
     },
     {
