@@ -1,0 +1,9 @@
+FROM swift:6.0.1-jammy
+ARG GH_PAT
+RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/"
+WORKDIR /app
+COPY [ "./Package.*", "." ]
+RUN --mount=type=cache,target=/app/.build [ "swift", "package", "resolve" ]
+COPY [ ".", "./" ]
+RUN --mount=type=cache,target=/app/.build [ "swift", "build", "-c", "release" ] && \
+    cp .build/release/Server ./Server
