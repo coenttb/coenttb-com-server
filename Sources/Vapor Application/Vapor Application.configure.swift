@@ -1,4 +1,4 @@
-import Coenttb
+import Server_Application
 import Coenttb_Server
 import Server_EnvVars
 import Fluent
@@ -16,6 +16,13 @@ import JWT
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
 
+        prepareDependencies {
+            $0.color.branding.primary = .green550.withDarkColor(.green600)
+            $0.color.branding.accent = .green850
+            $0.color.text.link = .green550.withDarkColor(.green600)
+            $0.color.background.secondary = .offWhite.withDarkColor(.offBlack)
+        }
+        
         Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars

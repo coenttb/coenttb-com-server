@@ -25,7 +25,7 @@ package struct DefaultHTMLDocument: HTMLDocument {
     let favicons: Favicons
 
     package init(
-        themeColor: HTMLColor = .coenttbAccentColor,
+        themeColor: HTMLColor = .branding.accent,
         @HTMLBuilder styles: () -> any HTML = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> any HTML = {
             HTMLGroup {
@@ -34,12 +34,13 @@ package struct DefaultHTMLDocument: HTMLDocument {
             }
         },
         @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb },
-        @HTMLBuilder navigationBar: () -> any HTML = { CoenttbNavigationBar() },
+        @HTMLBuilder navigationBar: () -> any HTML = {
+            CoenttbNavigationBar()
+        },
         @HTMLBuilder body: () -> any HTML,
         @HTMLBuilder footer: () -> any HTML = {
             CoenttbFooter()
-                .gradient(bottom: .coenttbAccentColor, middle: .white.withDarkColor(.black), top: .white.withDarkColor(.black))
-                .linkColor(.primary)
+                .gradient(bottom: .branding.accent, middle: .white.withDarkColor(.black), top: .white.withDarkColor(.black))
         }
     ) {
         self.themeColor = themeColor
@@ -76,7 +77,7 @@ package struct DefaultHTMLDocument: HTMLDocument {
 
         }
         .dependency(\.language, language)
-        .linkColor(.coenttbPrimaryColor)
+//        .linkColor(.text.link)
     }
 }
 
@@ -85,7 +86,7 @@ package struct CoenttbHTMLDocumentHeader<
     Scripts: HTML
 >: HTML {
     package init(
-        themeColor: HTMLColor = .coenttbAccentColor,
+        themeColor: HTMLColor = .branding.accent,
         @HTMLBuilder styles: () -> Styles = { HTMLEmpty() },
         @HTMLBuilder scripts: () -> Scripts = { HTMLEmpty() },
         @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb }

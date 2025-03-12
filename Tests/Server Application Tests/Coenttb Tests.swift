@@ -10,7 +10,7 @@ import Testing
 import Coenttb_Server
 import DependenciesTestSupport
 import Coenttb_Blog
-@testable import Coenttb
+@testable import Server_Application
 
 @Suite("Blog Post Tests")
 struct BlogPostTests {

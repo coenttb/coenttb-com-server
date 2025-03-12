@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 28/06/2022.
 //
 
-import Coenttb
+import Server_Application
 import Coenttb_Server
 import Coenttb_Blog
 import Coenttb_Syndication_Vapor
@@ -123,7 +123,7 @@ extension RSS.Feed {
             metadata: .init(
                 title: companyName ?? "RSS",
                 link: baseUrl,
-                description: Coenttb.oneliner.english,
+                description: String.oneliner.english,
                 imageURL: serverRouter.url(for: .public(.asset(.logo(.favicon_dark))))
             ),
             items: posts.map { RSS.Feed.Item(from: $0, author: companyName ?? "Author") }
@@ -149,53 +149,6 @@ extension RSS.Feed.Item {
 }
 
 
-extension Coenttb.DefaultHTMLDocument: AsyncResponseEncodable {}
+extension Server_Application.DefaultHTMLDocument: AsyncResponseEncodable {}
 
 
-
-//case .create, .delete, .login, .logout, .password, .emailChange:
-//    guard let route = Coenttb_Identity.Route(account) else { throw Abort(.internalServerError) }
-//
-//    @Dependency(\.serverClient.account) var accountDependency
-//    @Dependency(\.envVars.canonicalHost) var canonicalHost
-//
-//    return try await Coenttb_Identity.Route.response(
-//        route: route,
-//        logo: .coenttb,
-//        canonicalHref: serverRouter.url(for: .account(account)),
-//        favicons: .coenttb,
-//        hreflang: { serverRouter.url(for: .init(language: $1, page: .account(account))) },
-//        termsOfUse: serverRouter.url(for: .terms_of_use),
-//        privacyStatement: serverRouter.url(for: .privacy_statement),
-//        dependency: accountDependency,
-//        primaryColor: .coenttbPrimaryColor,
-//        accentColor: .coenttbAccentColor,
-//        homeHref: serverRouter.url(for: .home),
-//        loginHref: serverRouter.url(for: .account(.login)),
-//        accountCreateHref: serverRouter.url(for: .identity(.create(.request))),
-//        createFormAction: serverRouter.url(for: .api(.v1(.identity(.create(.request(.init())))))),
-//        verificationAction: serverRouter.url(for: .api(.v1(.identity(.create(.verify(.init())))))),
-//        verificationSuccessRedirect: serverRouter.url(for: .account(.login)),
-//        passwordResetHref: serverRouter.url(for: .account(.password(.reset(.request)))),
-//        loginFormAction: serverRouter.url(for: .api(.v1(.account(.login(.init()))))),
-//        logout: {
-//            @Dependency(\.serverClient.account) var accountDependency
-//            try await accountDependency.logout()
-//        },
-//        passwordChangeRequestAction: serverRouter.url(for: .api(.v1(.account(.password(.change(.request(change: .init()))))))),
-//        passwordResetAction: serverRouter.url(for: .api(.v1(.account(.password(.reset(.request(.init()))))))),
-//        passwordResetConfirmAction: serverRouter.url(for: .api(.v1(.account(.password(.reset(.confirm(.init()))))))),
-//        passwordResetSuccessRedirect: serverRouter.url(for: .account(.login)),
-//        currentUserName: {
-//            @Dependency(\.currentUser?.name) var name
-//            return name
-//        },
-//        currentUserIsAuthenticated: {
-//            @Dependency(\.currentUser?.authenticated) var authenticated
-//            return authenticated
-//        },
-//        emailChangeReauthorizationAction: serverRouter.url(for: .api(.v1(.account(.emailChange(.reauthorization(.init())))))),
-//        emailChangeReauthorizationSuccessRedirect: serverRouter.url(for: .account(.emailChange(.request))),
-//        requestEmailChangeAction: serverRouter.url(for: .api(.v1(.account(.emailChange(.request(.init())))))),
-//        confirmEmailChangeSuccessRedirect: serverRouter.url(for: .account(.login))
-//    )

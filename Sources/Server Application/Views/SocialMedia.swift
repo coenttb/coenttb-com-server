@@ -12,5 +12,5 @@ public var x_com_light_background: some HTML {
     div()
         .height(500.px)
         .width(1500.px)
-        .gradient(bottom: .white.withDarkColor(.black), middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .coenttbAccentColor)!, top: .coenttbAccentColor)
+        .gradient(bottom: .white.withDarkColor(.black), middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .branding.accent)!, top: .branding.accent)
 }

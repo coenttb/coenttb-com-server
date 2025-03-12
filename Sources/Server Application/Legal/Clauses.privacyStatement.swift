@@ -8,8 +8,11 @@
 import CoenttbMarkdown
 import Coenttb_Server_HTML
 import Dependencies
-import Foundation
 import Languages
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 extension Clauses {
     nonisolated(unsafe)

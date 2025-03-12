@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Vapor
-import Coenttb
+import Server_Application
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Identity_Consumer
@@ -20,7 +20,7 @@ func settings(
 
     switch settings {
     case .index:
-        return Coenttb.DefaultHTMLDocument(
+        return Server_Application.DefaultHTMLDocument(
             scripts: {
                 fontAwesomeScript
             },
@@ -28,7 +28,7 @@ func settings(
             body: {
                 StripeContainer(
                     sidebar: .init(
-                        background: .coenttbAccentColor,
+                        background: .branding.accent,
                         content: {
                             PageModule(theme: .sidebarContent) {
                                 HTMLEmpty()
@@ -61,7 +61,7 @@ func settings(
                                     icon: .init(icon: "user")
                                 )
                             }
-                            .linkColor(.coenttbPrimaryColor)
+                            .linkColor(.text.link)
 
                         }
                         title: {
@@ -88,7 +88,7 @@ func settings(
             currentUser.authenticated == true
         else { throw Abort(.internalServerError, reason: "Must be logged in to access profile.") }
 
-        return Coenttb.DefaultHTMLDocument(
+        return Server_Application.DefaultHTMLDocument(
             scripts: {
                 fontAwesomeScript
             },
@@ -96,7 +96,7 @@ func settings(
             body: {
                 StripeContainer(
                     sidebar: .init(
-                        background: .coenttbAccentColor,
+                        background: .branding.accent,
                         content: {
                             PageModule(theme: .sidebarContent) {
                                 HTMLEmpty()
@@ -134,7 +134,7 @@ func settings(
                                 Button {
                                     String.logout.capitalizingFirstLetter()
                                 }
-                                .color(.primary)
+                                .color(.text.primary)
                                 .href(serverRouter.url(for: .identity(.logout)).absoluteString)
 
                             }
@@ -167,7 +167,7 @@ public struct PasswordChangeRequestButton: HTML {
             ) {
                 String.change_your_password.capitalizingFirstLetter()
             }
-            .color(.primary)
+            .color(.text.primary)
             .href(serverRouter.url(for: .identity(.password(.change(.request)))).absoluteString)
         }
     }
@@ -190,7 +190,7 @@ public struct EmailChangeRequestButton: HTML {
                 style: .secondary,
                 icon: {
                     span { FontAwesomeIcon(icon: "pencil") }
-                        .color(.secondary)
+                        .color(.text.secondary)
                         .fontWeight(.medium)
                 },
                 label: {

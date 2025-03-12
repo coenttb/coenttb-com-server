@@ -8,9 +8,12 @@
 import Dependencies
 import EmailAddress
 import Server_EnvVars
-import Foundation
 import Languages
 import Mailgun
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 extension Email {
     public static func generalContact(

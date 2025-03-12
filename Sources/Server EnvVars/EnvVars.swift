@@ -13,21 +13,6 @@ import Mailgun
 import Postgres
 //import Coenttb_Stripe
 
-extension EnvVars: @retroactive DependencyKey {
-    public static var liveValue: Self {
-        var localDevelopment: URL? {
-#if DEBUG
-            @Dependency(\.projectRoot) var projectRoot
-            return projectRoot.appendingPathComponent(".env.development")
-#else
-            return nil
-#endif
-        }
-        return try! EnvVars.live(
-            localDevelopment: localDevelopment
-        )
-    }
-}
 
 extension EnvVars {
     public var postgres: Postgres.Client.EnvVars {

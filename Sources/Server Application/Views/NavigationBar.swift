@@ -31,20 +31,19 @@ package struct CoenttbNavigationBar: HTML {
             destination: .identity(.login),
             String.login.capitalizingFirstLetter().description
         )
-            .linkColor(.coenttbPrimaryColor)
             .linkUnderline(false)
             .fontWeight(.medium)
             .fontSize(.secondary)
 
         let signupButton = Button(
             tag: a,
-            background: .coenttbPrimaryColor,
+            background: .branding.primary,
             style: .tertiary
         ) {
             String.signup.capitalizingFirstLetter()
                 .fontWeight(.medium)
         }
-            .color(.primary.reverse())
+            .color(.text.primary.reverse())
             .href(serverRouter.href(for: .identity(.create(.request))))
 
         NavigationBar(
@@ -58,6 +57,8 @@ package struct CoenttbNavigationBar: HTML {
                         !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: blog) : nil
                     ].compactMap { $0 }
                 )
+                .dependency(\.color.text.link, .text.primary)
+                
             },
             trailingNavItems: {
                 p{ "" }
@@ -67,7 +68,7 @@ package struct CoenttbNavigationBar: HTML {
 //                            li {
 //                                CircleIconButton(
 //                                    icon: .init(icon: "cog", size: .large),
-//                                    color: .coenttbPrimaryColor,
+//                                    color: .branding.primary,
 //                                    href: serverRouter.href(for: .account(.settings(.index))),
 //                                    buttonSize: 2.5.rem
 //                                )
@@ -137,7 +138,6 @@ package struct CoenttbNavigationBar: HTML {
                 }
             }
         )
-        .linkColor(.primary)
     }
 }
 
@@ -169,11 +169,12 @@ extension CoenttbNavigationBar {
                         }
                         .display(.flex)
                         .alignItems(.center)
-
+                        
                         Link(href: serverRouter.href(for: .home)) {
                             SVG.coenttb()
                         }
-                        .linkStyle(.init(color: .primary, underline: false))
+                        .linkStyle(.init(underline: false))
+                        .dependency(\.color.text.link, .text.primary)
                         .display(.flex)
                         .alignItems(.center)
                     }

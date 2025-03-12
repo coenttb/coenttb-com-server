@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 extension String {
-    static let coenttb: Self = "Coenttb"
+    static let serverApplication: Self = "Server Application"
     static let server: Self = "Server"
     static let serverClient: Self = "Server Client"
     static let serverDatabase: Self = "Server Database"
@@ -16,7 +16,7 @@ extension String {
 }
 
 extension Target.Dependency {
-    static var coenttb: Self { .target(name: .coenttb) }
+    static var serverApplication: Self { .target(name: .serverApplication) }
     static var serverClient: Self { .target(name: .serverClient) }
     static var serverDatabase: Self { .target(name: .serverDatabase) }
     static var serverEnvVars: Self { .target(name: .serverEnvVars) }
@@ -62,7 +62,7 @@ let package = Package(
         .library(name: .serverDependencies, targets: [.serverDependencies]),
         .library(name: .serverModels, targets: [.serverModels]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
-        .library(name: .coenttb, targets: [.coenttb]),
+        .library(name: .serverApplication, targets: [.serverApplication]),
         .library(name: .vaporApp, targets: [.vaporApp]),
         .library(name: .serverClient, targets: [.serverClient]),
         .library(name: .serverDatabase, targets: [.serverDatabase]),
@@ -90,7 +90,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: .coenttb,
+            name: .serverApplication,
             dependencies: [
                 .serverEnvVars,
                 .serverTranslations,
@@ -108,11 +108,11 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: .coenttb.tests,
+            name: .serverApplication.tests,
             dependencies: [
                 .coenttbServer,
                 .coenttbBlog,
-                .coenttb,
+                .serverApplication,
                 .dependenciesTestSupport
             ]
         ),
@@ -218,7 +218,7 @@ let package = Package(
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,
-                .coenttb,
+                .serverApplication,
                 .coenttbNewsletter,
                 .queuesFluentDriver,
                 .coenttbSyndicationVapor,
@@ -236,7 +236,7 @@ let package = Package(
                 .serverClient,
                 .serverDependencies,
                 .coenttbServer,
-                .coenttb,
+                .serverApplication,
                 .coenttbNewsletter,
                 .coenttbBlog,
                 .queuesFluentDriver,

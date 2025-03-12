@@ -1,5 +1,5 @@
 {
-  "originHash" : "da873c184eed7d5a757d9149c42f4c1ad288eeaee8c216ddcc7f8f69b8bdb363",
+  "originHash" : "0bd9e8c34f0cd7e1e48dc22a72361f252d73d4058306582810a862023836b42b",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0eedcaa80706b8f2ad23b850add6df39c3ec522e"
+        "revision" : "fe92aca923ff949688fa35f5a878b0ba1c4c45d0"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "091bf9130f516607e8d3bb3b1e91b86c21c6695a"
+        "revision" : "533822b2acf7ce2748abf1ec37ddfe21cb1f2e6f"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a3b16a17dc8e2f9dc4dc5e15cfc45d8cbcc84deb"
+        "revision" : "da0ccc40da9e8c71f4ac54de808a58322e4f1a3a"
       }
     },
     {
@@ -106,7 +106,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "33c2c827ef32a89bb7aee212fde507513cfac67f"
+        "revision" : "d17f0ff12b1a38eff9dd5885d5abd98b2537c56b"
       }
     },
     {
@@ -160,7 +160,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "170f62623f2a5537735b30b98fe9731907b1c942"
+        "revision" : "a53700189bbed40f347aec4b9e7fa581657512ca"
       }
     },
     {
@@ -195,8 +195,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/fluent-kit.git",
       "state" : {
-        "revision" : "4f886ebdfc7eb497bd58e622c3eacea6cad893cd",
-        "version" : "1.50.3"
+        "revision" : "f12a66814657abd2e309c273a0825c4f978acebe",
+        "version" : "1.50.4"
       }
     },
     {
@@ -421,7 +421,7 @@
       "location" : "https://github.com/coenttb/swift-css.git",
       "state" : {
         "branch" : "main",
-        "revision" : "29fea42c6b57178e4d3be680ca0e15241df24498"
+        "revision" : "fce32749fbe3ff7d2df9055f0179cd19e25749da"
       }
     },
     {
@@ -466,7 +466,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "977162ee3acb9334c5e0b6ac01a16682c343355f"
+        "revision" : "25a637db445011e909b6451b7e3e4c77416dae7a"
       }
     },
     {

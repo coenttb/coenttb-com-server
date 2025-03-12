@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Vapor
-import Coenttb
+import Server_Application
 import Coenttb_Blog
 import Coenttb_Newsletter
 import Coenttb_Com_Shared
@@ -24,27 +24,27 @@ extension WebsitePage {
         let posts = blogPosts()
         let newsletterSubscribed = currentUser?.newsletterSubscribed == true || (currentUser?.newsletterSubscribed == nil && request?.cookies[.newsletterSubscribed]?.string == "true")
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
                 if currentUser?.authenticated != true {
                     CallToActionModule(
                         title: (
-                            content: "\(Coenttb.oneliner)",
-                            color: .primary
+                            content: "\(String.oneliner)",
+                            color: .text.primary
                         ),
                         blurb: (
                             content: """
                             \(String.hi_my_name_is_Coen_ten_Thije_Boonkkamp.capitalizingFirstLetter()). \(String.website_introduction.capitalizingFirstLetter().period)
                             \((!posts.isEmpty ? " \(String.follow_my_blog_for.capitalizingFirstLetter().period)" : ""))
                             """,
-                            color: .primary
+                            color: .text.primary
                         )
                     )
                     .if(currentUser?.authenticated != true) {
                         $0.gradient(
                             bottom: .white.withDarkColor(.black),
-                            middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .coenttbAccentColor)!,
-                            top: .coenttbAccentColor
+                            middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .branding.accent)!,
+                            top: .branding.accent
                         )
                     }
                 }
@@ -59,12 +59,12 @@ extension WebsitePage {
                     .if(currentUser?.authenticated == true) {
                         $0.gradient(
                             bottom: .white.withDarkColor(.black),
-                            middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .coenttbAccentColor)!,
-                            top: .coenttbAccentColor
+                            middle: .gradientMidpoint(from: .white.withDarkColor(.black), to: .branding.accent)!,
+                            top: .branding.accent
                         )
                     }
 //                    .background(currentUser?.authenticated == true ? .background : .offBackground)
-                    .background(.background)
+                    .background(.background.primary)
                 }
 
                 if newsletterSubscribed != true {
@@ -110,7 +110,7 @@ extension WebsitePage {
                             media: .mobile
                         )
                     }
-                    .background(currentUser?.authenticated == true ? .background : .offBackground)
+                    .background(currentUser?.authenticated == true ? .background.primary : .background.secondary)
                     .width(100.percent)
                     .id("newsletter-signup")
                 }
@@ -121,7 +121,7 @@ extension WebsitePage {
                             dutch: "Ontdek de rol van legal in het succes van life science projecten",
                             english: "Discover the role of legal in the success of life science projects"
                         ).description,
-                        color: .primary
+                        color: .text.primary
                     ),
                     blurb: (
                         content: #"""
@@ -132,7 +132,7 @@ extension WebsitePage {
                             ).period
                         )
                         """#,
-                        color: .primary
+                        color: .text.primary
                     )
                 ) {
                     div {
@@ -143,14 +143,14 @@ extension WebsitePage {
                                 style: .default,
                                 icon: {
                                     span { FontAwesomeIcon(icon: "scale-balanced") }
-                                        .color(.coenttbPrimaryColor)
+                                        .color(.branding.primary)
                                         .fontWeight(.medium)
                                 },
                                 label: {
                                     div {
                                         HTMLText("tenthijeboonkkamp.nl" + " →")
                                     }
-                                    .color(.coenttbPrimaryColor)
+                                    .color(.branding.primary)
                                     .fontWeight(.medium)
 
                                 }
@@ -162,7 +162,7 @@ extension WebsitePage {
                     }
                 }
 //                .background(currentUser?.authenticated == true ? .offBackground : .background)
-                .background(.background)
+                .background(.background.primary)
 
             }
         }

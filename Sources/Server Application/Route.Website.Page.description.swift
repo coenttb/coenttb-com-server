@@ -19,23 +19,23 @@ extension WebsitePage {
 
         let x: TranslatedString? = switch self {
         case .choose_country_region:
-            Coenttb.oneliner
+            String.oneliner
         case .home:
-            Coenttb.oneliner
+            String.oneliner
         case .privacy_statement:
-            Coenttb.oneliner
+            String.oneliner
         case .blog(.index):
-            Coenttb.oneliner
+            String.oneliner
         case .blog(.post):
-            Coenttb.oneliner
+            String.oneliner
         case .terms_of_use:
-            Coenttb.oneliner
+            String.oneliner
         case .general_terms_and_conditions:
-            Coenttb.oneliner
+            String.oneliner
         case .newsletter:
-            Coenttb.oneliner
+            String.oneliner
         case .contact:
-            Coenttb.oneliner
+            String.oneliner
         default: ""
         }
 

@@ -8,7 +8,7 @@
 import Coenttb_Vapor
 import Coenttb_Blog_Vapor
 import Coenttb_Newsletter
-import Coenttb
+import Server_Application
 import Server_EnvVars
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
@@ -34,7 +34,7 @@ extension WebsitePage {
 
                 return try await Coenttb_Blog.Route.response(
                     route: route,
-                    blurb: Coenttb.oneliner,
+                    blurb: String.oneliner,
                     companyXComHandle: companyXComHandle,
                     getCurrentUser: {
                         @Dependency(\.currentUser) var currentUser
@@ -57,7 +57,7 @@ extension WebsitePage {
                         )
                     },
                     defaultDocument: { closure in
-                        return Coenttb.DefaultHTMLDocument(themeColor: .white.withDarkColor(.black)) {
+                        return Server_Application.DefaultHTMLDocument(themeColor: .white.withDarkColor(.black)) {
                             AnyHTML(closure())
                         }
                     },
@@ -87,7 +87,7 @@ extension WebsitePage {
                 return try await Coenttb_Newsletter.View.response(
                     newsletter: newsletter,
                     htmlDocument: { html in
-                        Coenttb.DefaultHTMLDocument.init {
+                        Server_Application.DefaultHTMLDocument.init {
                             AnyHTML(html)
                         }
                     }
@@ -115,7 +115,7 @@ extension WebsitePage {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: "Welcome back"
             ) {
@@ -125,12 +125,11 @@ extension WebsitePage {
                     if let companyXComHandle {
                         Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
                             .linkUnderline(true)
-                            .linkColor(.coenttbLinkColor)
                     }
                 }
                 .color(.gray300.withDarkColor(.gray800))
             }
-            .gradient(bottom: .white.withDarkColor(.black), middle: .coenttbAccentColor, top: .coenttbAccentColor)
+            .gradient(bottom: .white.withDarkColor(.black), middle: .branding.accent, top: .branding.accent)
         }
     }
 }
@@ -140,7 +139,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .privacyStatement.capitalizingFirstLetter().description
             ) {
@@ -162,7 +161,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .terms_of_use.capitalizingFirstLetter().description
             ) {
@@ -185,7 +184,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .general_terms_and_conditions.capitalizingFirstLetter().description
             ) {

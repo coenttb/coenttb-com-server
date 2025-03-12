@@ -10,8 +10,12 @@ import CoenttbMarkdown
 import Coenttb_Server_HTML
 import Coenttb_Server_Translations
 import Dependencies
-import Foundation
 import Coenttb_Com_Shared
+import Foundation
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 package struct CoenttbFooter: HTML {
 
@@ -27,13 +31,13 @@ package struct CoenttbFooter: HTML {
 
         let posts = blogPosts()
         Footer(
-            foregroundColor: .primary,
+            foregroundColor: .text.primary,
             backgroundColor: .offWhite.withDarkColor(.offBlack),
             tagline: .init(
                 title: "coenttb",
                 href: serverRouter.href(for: .home),
                 content: Paragraph {
-                    HTMLText("\(Coenttb.oneliner) \(String.with.capitalizingFirstLetter()) ")
+                    HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
                     Link("coenttb", href: "https://x.com/coenttb")
                     "."
                 }
@@ -110,11 +114,9 @@ extension CoenttbFooter {
                     """
                 ))
                 """}
-                .color(.secondary)
+                .color(.text.secondary)
                 .fontStyle(.body(.small))
-                .padding(top: 2.rem, media: .mobile)
-                .linkColor(.coenttbPrimaryColor)
-                
+                .padding(top: 2.rem, media: .mobile)                
             }
         }
     }
