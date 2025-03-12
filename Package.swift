@@ -4,8 +4,8 @@ import Foundation
 import PackageDescription
 
 extension String {
-    static let serverApplication: Self = "Server Application"
     static let server: Self = "Server"
+    static let serverApplication: Self = "Server Application"
     static let serverClient: Self = "Server Client"
     static let serverDatabase: Self = "Server Database"
     static let serverDependencies: Self = "Server Dependencies"
