@@ -1,11 +1,11 @@
 name: Build and Deploy
 
 on:
-  push:
+    push:
     branches: [ production ]
-  workflow_dispatch:
+    workflow_dispatch:
     inputs:
-      environment:
+        environment:
         description: 'Environment to deploy to'
         required: true
         default: 'main'
@@ -15,20 +15,20 @@ on:
         - production
 
 jobs:
-  build-and-deploy:
+    build-and-deploy:
     runs-on: ubuntu-latest
     environment: coenttb-com-server
     steps:
-      - uses: actions/checkout@v3
+        - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GH_PAT }}
-      
-      - name: Configure Git
+            token: ${{ secrets.GH_PAT }}
+        
+        - name: Configure Git
         run: |
           git config --global user.name "${{ secrets.GH_USER }}"
           git config --global url."https://${{ secrets.GH_PAT }}@github.com/".insteadOf "https://github.com/"
-            
-      - name: Build Release in Docker
+        
+        - name: Build Release in Docker
         run: |
           docker build -f Dockerfile.build -t swift-builder --build-arg GH_PAT=${{ secrets.GH_PAT }} .
           # Create a container from the image but don't run it
@@ -40,22 +40,28 @@ jobs:
           # Verify the Server binary exists
           test -f Server || exit 1
           mkdir -p Public Resources
-          
-      - name: Install Heroku CLI
+        
+        - name: Install Heroku CLI
         if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
         run: curl https://cli-assets.heroku.com/install.sh | sh
         
-      - name: Update Heroku CLI
+        - name: Update Heroku CLI
         if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
         run: heroku update
-
-      - name: Deploy to Heroku
+        
+        - name: Set Heroku Stack to Container
+        if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
+        run: |
+          echo "Setting Heroku stack to container"
+          HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} heroku stack:set container --app ${{ secrets.HEROKU_APP_NAME }}
+        
+        - name: Deploy to Heroku
         if: github.ref == 'refs/heads/production' || github.event.inputs.environment == 'production'
         uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
-          docker_heroku_process_type: web
-          stack: container
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+            heroku_email: ${{ secrets.HEROKU_EMAIL }}
+            usedocker: true
+            docker_heroku_process_type: web
+            stack: container
