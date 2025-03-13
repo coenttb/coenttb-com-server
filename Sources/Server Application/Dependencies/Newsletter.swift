@@ -11,6 +11,7 @@ import Coenttb_Newsletter_Live
 import Server_Client
 import Server_Dependencies
 import Server_Models
+import Mailgun
 import Coenttb_Com_Shared
 
 #if canImport(FoundationNetworking)
@@ -43,11 +44,14 @@ extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
     public static var liveValue: Self {
         Coenttb_Newsletter.Client.live(
             sendVerificationEmail: { email, token in
-                @Dependencies.Dependency(\.mailgunClient!.messages.send) var sendEmail
+                @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                 @Dependencies.Dependency(\.coenttb.website.router) var router
                 @Dependencies.Dependency(\.envVars.companyName!) var businessName
                 @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
                 @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
+                
+                guard let sendEmail
+                else { throw Mailgun.Client.Error.clientIsNil }
                 
                 return try await sendEmail(
                     .requestEmailVerification(
@@ -63,59 +67,58 @@ extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
             onSuccessfullyVerified: { email in
                 @Dependency(\.mailgunClient) var mailgunClient
                 @Dependency(\.envVars.newsletterAddress) var listAddress
-                @Dependency(\.logger ) var logger
-                
-                guard
-                    let listAddress,
-                    let response = try await mailgunClient?.mailingLists.addMember(
-                    listAddress: listAddress,
-                    request: .init(
-                        address: email
-                    )
-                )
-                else {
-                    return
-                }
-                
-                logger.info("\(response)")
-                
+                @Dependency(\.logger) var logger
                 @Dependency(\.envVars.appEnv) var appEnv
                 @Dependency(\.envVars.mailgun?.domain) var domain
                 @Dependency(\.envVars.mailgunCompanyEmail) var mailgunCompanyEmail
                 @Dependency(\.envVars.companyName) var companyName
                 @Dependency(\.envVars) var envVars
                 
-                guard
-                    let mailgunCompanyEmail,
-                    let companyName
-                else { return  }
+                guard let mailgunClient
+                else { throw Mailgun.Client.Error.clientIsNil }
                 
-                guard let send = mailgunClient?.messages.send
-                else { return }
-
-                let response2 = try await send(
-                    Email.notifyOfNewSubscription(
-                        from: mailgunCompanyEmail,
-                        to: mailgunCompanyEmail,
-                        subscriberEmail: email,
-                        companyEmail: mailgunCompanyEmail,
-                        companyName: companyName
+                guard let listAddress else { return }
+                
+                do {
+                    guard
+                        let mailgunCompanyEmail,
+                        let companyName
+                    else { return }
+                    
+                    async let addMemberResponse = mailgunClient.mailingLists.addMember(
+                        listAddress: listAddress,
+                        request: .init(address: email)
                     )
-                )
-                
-                logger.info("\(response2)")
+                    
+                    async let notificationResponse = mailgunClient.messages.send(
+                        Email.notifyOfNewSubscription(
+                            from: mailgunCompanyEmail,
+                            to: mailgunCompanyEmail,
+                            subscriberEmail: email,
+                            companyEmail: mailgunCompanyEmail,
+                            companyName: companyName
+                        )
+                    )
+                    
+                    let (memberResult, messageResult) = try await (addMemberResponse, notificationResponse)
+                    
+                    logger.info("Added member: \(memberResult)")
+                    logger.info("Sent notification: \(messageResult)")
+                } catch {
+                    logger.error("Error processing subscription: \(error)")
+                }
             },
             onUnsubscribed: { email in
                 @Dependency(\.mailgunClient) var mailgunClient
                 @Dependency(\.envVars.newsletterAddress) var listAddress
                 @Dependency(\.logger) var logger
                 
-                guard
-                    let listAddress,
-                    let response = try await mailgunClient?.mailingLists.deleteMember(listAddress: listAddress, memberAddress: email)
-                else {
-                    return
-                }
+                guard let mailgunClient
+                else { throw Mailgun.Client.Error.clientIsNil }
+                
+                guard let listAddress else { return }
+                
+                let response = try await mailgunClient.mailingLists.deleteMember(listAddress: listAddress, memberAddress: email)
                 
                 logger.info("\(response)")
             }

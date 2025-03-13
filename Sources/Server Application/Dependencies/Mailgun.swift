@@ -36,3 +36,8 @@ extension Mailgun.Client: @retroactive DependencyKey {
     }
 }
 
+extension Mailgun.Client {
+    enum Error: Swift.Error {
+        case clientIsNil
+    }
+}
