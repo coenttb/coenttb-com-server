@@ -22,4 +22,3 @@ extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
             postgresDatabaseUrl: postgresDatabaseUrl)
     }
 }
-

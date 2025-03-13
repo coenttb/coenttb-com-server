@@ -31,7 +31,7 @@ jobs:
       - name: Build Release in Docker
         run: |
           docker build -f Dockerfile.build -t swift-builder --build-arg GH_PAT=${{ secrets.GH_PAT }} .
-          docker run --rm -v $(pwd):/app swift-builder cp /app/.build/release/Server /app/
+          docker run --rm -v $(pwd):/app swift-builder
           test -f Server || exit 1
           mkdir -p Public Resources
           
