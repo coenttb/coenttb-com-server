@@ -31,7 +31,13 @@ jobs:
       - name: Build Release in Docker
         run: |
           docker build -f Dockerfile.build -t swift-builder --build-arg GH_PAT=${{ secrets.GH_PAT }} .
-          docker run --rm -v $(pwd):/app swift-builder
+          # Create a container from the image but don't run it
+          CONTAINER_ID=$(docker create swift-builder)
+          # Copy the Server binary from the container to the local filesystem
+          docker cp $CONTAINER_ID:/app/Server ./Server
+          # Remove the container
+          docker rm $CONTAINER_ID
+          # Verify the Server binary exists
           test -f Server || exit 1
           mkdir -p Public Resources
           

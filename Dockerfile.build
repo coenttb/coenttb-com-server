@@ -7,5 +7,3 @@ RUN --mount=type=cache,target=/app/.build [ "swift", "package", "resolve" ]
 COPY [ ".", "./" ]
 RUN --mount=type=cache,target=/app/.build [ "swift", "build", "-c", "release" ] && \
     cp .build/release/Server ./Server
-CMD [ "cp", "./Server", "/app/" ]
-
