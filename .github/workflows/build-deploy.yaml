@@ -35,6 +35,10 @@ jobs:
           CONTAINER_ID=$(docker create swift-builder)
           # Copy the Server binary from the container to the local filesystem
           docker cp $CONTAINER_ID:/app/Server ./Server
+          # Create a directory for resources
+          mkdir -p .build/release
+          # Copy the entire build directory to include resource bundles
+          docker cp $CONTAINER_ID:/app/.build/release/ ./.build/
           # Remove the container
           docker rm $CONTAINER_ID
           # Verify the Server binary exists

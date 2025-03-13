@@ -1,0 +1,7 @@
+FROM swift:6.0.3-jammy
+WORKDIR /app
+COPY tmp/Server ./Server
+COPY Public ./Public
+ENV APP_ENV=production
+EXPOSE 8080
+CMD ./Server serve --hostname 0.0.0.0 --port 8080
