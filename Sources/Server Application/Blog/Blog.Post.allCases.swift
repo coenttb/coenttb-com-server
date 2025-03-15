@@ -19,6 +19,7 @@ extension [Coenttb_Blog.Blog.Post] {
         [
             [Coenttb_Blog.Blog.Post].general,
             [Coenttb_Blog.Blog.Post].domain_modeling,
+            [Coenttb_Blog.Blog.Post].html,
         ]
             .flatMap{ $0 }
             .sorted(by: { $0.publishedAt < $1.publishedAt })
@@ -66,7 +67,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     """,
                     estimatedTimeToComplete: 5.minutes,
                     permission: .free
-                )
+                ),
             ]
         }
     }
@@ -100,6 +101,46 @@ extension [Coenttb_Blog.Blog.Post] {
                             """,
                             english: """
                             Discover how separating your API code into distinct layers—rock-solid foundations and developer-friendly interfaces—can transform complex integrations into maintainable, type-safe Swift code. Through a real-world Mailgun implementation, learn how this approach eliminates bugs while making developers actually enjoy working with this API.
+                            """
+                        )
+                    )
+                    """,
+                    estimatedTimeToComplete: 20.minutes,
+                    permission: .free
+                ),
+            ]
+        }
+    }
+}
+
+extension [Coenttb_Blog.Blog.Post] {
+    package static var html: [Coenttb_Blog.Blog.Post] {
+        process("html") {
+            category,
+            index in
+            [
+                .init(
+                    id: .init(),
+                    index: index(),
+                    category: category,
+                    publishedAt: .init(year: 2025, month: 03, day: 13)!,
+                    image: div {
+                        Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(15.percent))
+                            .inlineStyle("filter", "sepia(1) hue-rotate(-50deg) saturate(5) brightness(1.2)")
+                    }.position(.absolute),
+                    title: TranslatedString(
+                        dutch: "",
+                        english: "Modern HTML DSL in swift: pointfree-html as foundation"
+                    ).description,
+                    hidden: .no,
+                    blurb: """
+                    \(
+                        TranslatedString(
+                            dutch: """
+                            
+                            """,
+                            english: """
+                            Explore the foundations of a modern HTML DSL in swift.
                             """
                         )
                     )
