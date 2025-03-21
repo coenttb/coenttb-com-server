@@ -8,17 +8,19 @@
 import Coenttb_Vapor
 import Coenttb_Blog_Vapor
 import Coenttb_Newsletter
-import Coenttb
+import Server_Application
 import Server_EnvVars
-import Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Com_Router
+import Coenttb_Identity_Consumer
+
 
 extension WebsitePage {
     static func response(
         page: WebsitePage
     ) async throws -> any AsyncResponseEncodable {
         return try await withDependencies {
-            $0.route = .website(
-                .init(language: $0.route.website?.language, page: page))
+            $0.route = .website(.init(language: $0.route?.website?.language, page: page))
         } operation: {
             switch page {
             case let .account(account):
@@ -32,7 +34,7 @@ extension WebsitePage {
 
                 return try await Coenttb_Blog.Route.response(
                     route: route,
-                    blurb: Coenttb.oneliner,
+                    blurb: String.oneliner,
                     companyXComHandle: companyXComHandle,
                     getCurrentUser: {
                         @Dependency(\.currentUser) var currentUser
@@ -44,19 +46,18 @@ extension WebsitePage {
                         return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
                     },
                     coenttbWebNewsletter: {
-                        @Dependency(\.serverRouter) var serverRouter
+                        @Dependency(\.coenttb.website.router) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
-                        return Coenttb_Newsletter.Route.Subscribe.Overlay (
+                        return Coenttb_Newsletter.View.Subscribe.Overlay (
                             image: Image.coenttbGreenSuit,
                             title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                             caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
-                            newsletterSubscribed: currentUser?.newsletterSubscribed == true,
-                            newsletterSubscribeAction: serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init()))))))
+                            newsletterSubscribed: currentUser?.newsletterSubscribed == true
                         )
                     },
                     defaultDocument: { closure in
-                        return Coenttb.DefaultHTMLDocument(themeColor: .white.withDarkColor(.black)) {
+                        return Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
                             AnyHTML(closure())
                         }
                     },
@@ -83,24 +84,16 @@ extension WebsitePage {
                 return try await WebsitePage.termsOfUse()
 
             case let .newsletter(newsletter):
-
-                @Dependency(\.serverRouter) var serverRouter
-
-                return try await Coenttb_Newsletter.Route.response(
+                return try await Coenttb_Newsletter.View.response(
                     newsletter: newsletter,
                     htmlDocument: { html in
-                        Coenttb.DefaultHTMLDocument.init {
+                        Server_Application.DefaultHTMLDocument.init {
                             AnyHTML(html)
                         }
-                    },
-                    subscribeCaption: { String.subscribe_to_my_newsletter.capitalizingFirstLetter().description },
-                    subscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.request(.init())))))) },
-                    verificationAction: { verify in serverRouter.url(for: .api(.v1(.newsletter(.subscribe(.verify(.init(token: verify.token, email: verify.email))))))) },
-                    verificationRedirectURL: { serverRouter.url(for: .home) },
-                    newsletterUnsubscribeAction: { serverRouter.url(for: .api(.v1(.newsletter(.unsubscribe(.init()))))) },
-                    form_id: { "coenttb-web-newsletter-route-unsubscribe-view" },
-                    localStorageKey: { String.newsletterSubscribed }
+                    }
                 )
+            case .identity(let identity):
+                return try await Identity.Consumer.View.response(view: identity)
             }
         }
     }
@@ -111,7 +104,7 @@ extension WebsitePage {
     -> any AsyncResponseEncodable {
         @Dependency(\.envVars.languages) var languages
         @Dependency(\.language) var language
-        @Dependency(\.serverRouter) var siteRouter
+        @Dependency(\.coenttb.website.router) var serverRouter
 
         throw Abort(.internalServerError)
     }
@@ -122,7 +115,7 @@ extension WebsitePage {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: "Welcome back"
             ) {
@@ -132,12 +125,11 @@ extension WebsitePage {
                     if let companyXComHandle {
                         Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
                             .linkUnderline(true)
-                            .linkColor(.coenttbLinkColor)
                     }
                 }
                 .color(.gray300.withDarkColor(.gray800))
             }
-            .gradient(bottom: .white.withDarkColor(.black), middle: .coenttbAccentColor, top: .coenttbAccentColor)
+            .gradient(bottom: .background.primary, middle: .branding.accent, top: .branding.accent)
         }
     }
 }
@@ -147,7 +139,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .privacyStatement.capitalizingFirstLetter().description
             ) {
@@ -169,7 +161,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .terms_of_use.capitalizingFirstLetter().description
             ) {
@@ -184,7 +176,7 @@ extension WebsitePage {
             }
         }
     }
-}
+}   
 
 extension WebsitePage {
     static func general_terms_and_conditions() async throws
@@ -192,7 +184,7 @@ extension WebsitePage {
 
         @Dependency(\.language) var language
 
-        return Coenttb.DefaultHTMLDocument {
+        return Server_Application.DefaultHTMLDocument {
             PageHeader(
                 title: .general_terms_and_conditions.capitalizingFirstLetter().description
             ) {

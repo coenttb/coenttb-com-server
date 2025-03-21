@@ -11,6 +11,13 @@ import Foundation
 import Languages
 
 extension String {
+    public static let oneliner: TranslatedString = .init(
+        dutch: "Rechten. Code. Startups. Successen (en mislukkingen)",
+        english: "Law. Code. Startups. Wins (and failures)"
+    ).period
+}
+
+extension String {
     package static let coenttb_title: TranslatedString = .init(
         dutch: "Rechten. Code. Startups. Successen (en mislukkingen)",
         english: "Law. Code. Startups. Wins (and failures)"

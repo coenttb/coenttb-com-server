@@ -9,8 +9,9 @@ import Dependencies
 import Foundation
 import Server_Models
 
-package enum CurrentUserKey: TestDependencyKey {
-    package static let testValue: Server_Models.User? = nil
+package enum CurrentUserKey: DependencyKey {
+    package static let testValue: Server_Models.User? = liveValue
+    package static let liveValue: Server_Models.User? = nil
 }
 
 extension DependencyValues {
@@ -19,3 +20,4 @@ extension DependencyValues {
         set { self[CurrentUserKey.self] = newValue }
     }
 }
+

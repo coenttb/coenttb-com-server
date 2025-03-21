@@ -1,25 +1,27 @@
-import Coenttb_Identity
 import Coenttb_Database
 import Coenttb_Newsletter
-//import Coenttb_Stripe
 import Dependencies
 import DependenciesMacros
 import EmailAddress
 import Server_Models
+import Coenttb_Identity_Consumer
 
 @DependencyClient
 package struct Client: Sendable {
     package let newsletter: Coenttb_Newsletter.Client
-    package let account: Coenttb_Identity.Client<Server_Models.User>
+    package let identity: Identity.Consumer.Client
+    package let user: Client.User
 //    package let stripe: Server_Client.Client.Stripe?
     
     package init(
         newsletter: Coenttb_Newsletter.Client,
-        account: Coenttb_Identity.Client<Server_Models.User>
+        identity: Identity.Consumer.Client,
+        user: Client.User
 //        stripe: Server_Client.Client.Stripe?
     ) {
         self.newsletter = newsletter
-        self.account = account
+        self.identity = identity
+        self.user = user
 //        self.stripe = stripe
     }
 }
@@ -27,25 +29,26 @@ package struct Client: Sendable {
 extension Client {
     package static let previewValue: Self = .init(
         newsletter: .previewValue,
-        account: .previewValue
+        identity: .previewValue,
+        user: .previewValue
 //        stripe: .previewValue
     )
 }
 
-package enum DatabaseClientKey {}
 
-extension DatabaseClientKey: TestDependencyKey {
-    package static let testValue = Server_Client.Client(
+extension Server_Client.Client: TestDependencyKey {
+    package static let testValue: Self = .init(
         newsletter: .testValue,
-        account: .testValue
+        identity: .testValue,
+        user: .testValue
 //        stripe: .testValue
     )
 }
 
 extension DependencyValues {
     package var serverClient: Server_Client.Client {
-        get { self[DatabaseClientKey.self] }
-        set { self[DatabaseClientKey.self] = newValue }
+        get { self[Server_Client.Client.self] }
+        set { self[Server_Client.Client.self] = newValue }
     }
 }
 

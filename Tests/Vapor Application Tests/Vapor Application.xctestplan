@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "94D98C32-6A47-4E76-A2D8-18D2D18243AA",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Vapor Application Tests",
+        "name" : "Vapor Application Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

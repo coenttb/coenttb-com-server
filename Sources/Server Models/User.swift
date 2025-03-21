@@ -19,7 +19,6 @@ package struct User: Codable, Hashable, Sendable {
     package var name: String?
     package var authenticated: Bool
     package var isAdmin: Bool?
-    package var isEmailVerified: Bool?
     package var dateOfBirth: Date?
     package var newsletterSubscribed: Bool?
     package var stripe: User.Stripe?
@@ -30,7 +29,6 @@ package struct User: Codable, Hashable, Sendable {
         name: String? = nil,
         authenticated: Bool = false,
         isAdmin: Bool? = nil,
-        isEmailVerified: Bool? = nil,
         dateOfBirth: Date? = nil,
         newsletterSubscribed: Bool? = nil,
         stripe: User.Stripe? = nil
@@ -40,7 +38,6 @@ package struct User: Codable, Hashable, Sendable {
         self.name = name
         self.authenticated = authenticated
         self.isAdmin = isAdmin
-        self.isEmailVerified = isEmailVerified
         self.dateOfBirth = dateOfBirth
         self.newsletterSubscribed = newsletterSubscribed
         self.stripe = stripe
@@ -52,7 +49,6 @@ package struct User: Codable, Hashable, Sendable {
         case name
         case authenticated
         case isAdmin = "is_admin"
-        case isEmailVerified = "is_email_verified"
         case dateOfBirth = "date_of_birth"
         case newsletterSubscribed = "newsletter_consent"
         case stripe = "stripe"

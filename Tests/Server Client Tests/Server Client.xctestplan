@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "A6E1B461-138D-4F48-B37A-7046CAD54532",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Server Client Tests",
+        "name" : "Server Client Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

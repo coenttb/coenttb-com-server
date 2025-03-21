@@ -1,13 +1,13 @@
 {
-  "originHash" : "bc7a9e1413e37ce129c83f529f4a5dd65048e260aa805f5fd11eb2e0ed4e5878",
+  "originHash" : "b68846afe80409b5370e9273886375c6d26f7e84272a4b2b9aefe82dd8f12987",
   "pins" : [
     {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/async-http-client",
       "state" : {
-        "revision" : "2119f0d9cc1b334e25447fe43d3693c0e60e6234",
-        "version" : "1.24.0"
+        "revision" : "333f51104b75d1a5b94cb3b99e4c58a3b442c9f7",
+        "version" : "1.25.2"
       }
     },
     {
@@ -29,12 +29,30 @@
       }
     },
     {
+      "identity" : "coenttb-authentication",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-authentication.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4639d811203c02e935d0718c2c6f64d3d65ece39"
+      }
+    },
+    {
       "identity" : "coenttb-blog",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0eedcaa80706b8f2ad23b850add6df39c3ec522e"
+        "revision" : "fe92aca923ff949688fa35f5a878b0ba1c4c45d0"
+      }
+    },
+    {
+      "identity" : "coenttb-com-shared",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/coenttb-com-shared.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "951b72bd1e1a8428605ba4172d4e82577e01d4a8"
       }
     },
     {
@@ -58,19 +76,19 @@
     {
       "identity" : "coenttb-html",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/coenttb-html.git",
+      "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "1ce8153312b4f78e38744858a116cadcb096bbca"
+        "revision" : "17b7c1fb24f3843f94539e8b6466bfbaf610810d"
       }
     },
     {
-      "identity" : "coenttb-identity",
+      "identity" : "coenttb-identities",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/coenttb-identity.git",
+      "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "18ef02b6bbdadc663f0348922df3e38f974843a8"
+        "revision" : "575a8ec0158f43181909ee4d80cf379ddcf172c3"
       }
     },
     {
@@ -79,7 +97,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun.git",
       "state" : {
         "branch" : "main",
-        "revision" : "42d849812e826034ffd8a8439ba3495d867f8faf"
+        "revision" : "75de83fca4b3a77a5584934a79c98eb536c58991"
       }
     },
     {
@@ -88,7 +106,7 @@
       "location" : "https://github.com/coenttb/coenttb-newsletter.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0e79c1387afeaa5b6919fd0dd0ab958210649c56"
+        "revision" : "d17f0ff12b1a38eff9dd5885d5abd98b2537c56b"
       }
     },
     {
@@ -106,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server.git",
       "state" : {
         "branch" : "main",
-        "revision" : "06436f1730e500a5f6d7b79886eac785cbab53b8"
+        "revision" : "b319c75d2d9ef2455e613849bf88361b32a0595d"
       }
     },
     {
@@ -115,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-server-vapor.git",
       "state" : {
         "branch" : "main",
-        "revision" : "47c3ff8f87c661a5f39e12347a36d8c57a77a25c"
+        "revision" : "229df5d046ab14bb8edbd7e0cd772a4bebb1fbfa"
       }
     },
     {
@@ -124,7 +142,7 @@
       "location" : "https://github.com/coenttb/coenttb-syndication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e118aa06fa1776d3c659237b2068121f0ecb4f79"
+        "revision" : "19a5effc3c1682c4c6341d2152f349520dbb4277"
       }
     },
     {
@@ -133,7 +151,7 @@
       "location" : "https://github.com/coenttb/coenttb-utils.git",
       "state" : {
         "branch" : "main",
-        "revision" : "03cdc7f28e600db96b9f3e4bc70b1a79b52a95fd"
+        "revision" : "87e5d018e4a2be4bda3cf11bed4c48eded9f31c8"
       }
     },
     {
@@ -142,7 +160,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "bcf4a6e71807fce390b8699e4ceb4c757813437f"
+        "revision" : "859e0b1a2b30e1c921ccba36f630d95342db6741"
       }
     },
     {
@@ -159,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/console-kit.git",
       "state" : {
-        "revision" : "966d89ae64cd71c652a1e981bc971de59d64f13d",
-        "version" : "4.15.1"
+        "revision" : "742f624a998cba2a9e653d9b1e91ad3f3a5dff6b",
+        "version" : "4.15.2"
       }
     },
     {
@@ -177,8 +195,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/fluent-kit.git",
       "state" : {
-        "revision" : "614d3ec27cdef50cfb9fc3cfd382b6a4d9578cff",
-        "version" : "1.49.0"
+        "revision" : "f12a66814657abd2e309c273a0825c4f978acebe",
+        "version" : "1.50.4"
       }
     },
     {
@@ -188,6 +206,24 @@
       "state" : {
         "revision" : "fd57101e426d3edf66a32ba63a7d0b8ced4d7499",
         "version" : "2.10.0"
+      }
+    },
+    {
+      "identity" : "jwt",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/jwt.git",
+      "state" : {
+        "revision" : "af1c59762d70d1065ddbc0d7902ea9b3dacd1a26",
+        "version" : "5.1.2"
+      }
+    },
+    {
+      "identity" : "jwt-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/jwt-kit.git",
+      "state" : {
+        "revision" : "03f5013f0b547ce43abe45e7e90711303a3e5495",
+        "version" : "5.1.2"
       }
     },
     {
@@ -205,7 +241,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "517a823ffb482d588fbd46c2606a87dc8f35f3ec"
+        "revision" : "54ed5da335a9b904a12148daf17290732aac5334"
       }
     },
     {
@@ -223,7 +259,7 @@
       "location" : "https://github.com/coenttb/pointfree-web",
       "state" : {
         "branch" : "main",
-        "revision" : "95be43da230eaa86aa0408948c592d4100585988"
+        "revision" : "c77bb14402a3112e9c4cca631ad2f8f320c1d4a5"
       }
     },
     {
@@ -231,8 +267,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/postgres-kit",
       "state" : {
-        "revision" : "0b72fa83b1023c4b82072e4049a3db6c29781fff",
-        "version" : "2.13.5"
+        "revision" : "f4d4b9e8db9a907644d67d6a7ecb5f0314eec1ad",
+        "version" : "2.14.0"
       }
     },
     {
@@ -240,8 +276,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/postgres-nio.git",
       "state" : {
-        "revision" : "fd0e415a705c490499f983639b04f491a2ed9d99",
-        "version" : "1.23.0"
+        "revision" : "5d817be55cae8b00003b7458944954558302d006",
+        "version" : "1.25.0"
       }
     },
     {
@@ -249,8 +285,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/queues.git",
       "state" : {
-        "revision" : "7511f2d573f032c4d5e6929d2bc36f5191d1c424",
-        "version" : "1.17.0"
+        "revision" : "acdf38bd352fc6b31e2401c92c05888faf1e86b1",
+        "version" : "1.17.1"
       }
     },
     {
@@ -276,8 +312,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",
       "state" : {
-        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
-        "version" : "1.2.0"
+        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
+        "version" : "1.2.1"
       }
     },
     {
@@ -285,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
       "state" : {
-        "revision" : "7faebca1ea4f9aaf0cda1cef7c43aecd2311ddf6",
-        "version" : "1.3.0"
+        "revision" : "ae33e5941bb88d88538d0a6b19ca0b01e6c76dcf",
+        "version" : "1.3.1"
       }
     },
     {
@@ -313,16 +349,25 @@
       "location" : "https://github.com/coenttb/swift-authentication",
       "state" : {
         "branch" : "main",
-        "revision" : "09636e8fb52d70db027e546440075c31da1e84dc"
+        "revision" : "511c8c145ab78234ea6efbf1f0ff13a80df5287d"
       }
     },
     {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-case-paths.git",
+      "location" : "https://github.com/pointfreeco/swift-case-paths",
       "state" : {
-        "revision" : "bc92c4b27f9a84bfb498cdbfdf35d5a357e9161f",
-        "version" : "1.5.6"
+        "revision" : "19b7263bacb9751f151ec0c93ec816fe1ef67c7b",
+        "version" : "1.6.1"
+      }
+    },
+    {
+      "identity" : "swift-certificates",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-certificates.git",
+      "state" : {
+        "revision" : "d608282ae53b9bf2e14c8a5b67c89927ba5d7afe",
+        "version" : "1.8.1"
       }
     },
     {
@@ -364,10 +409,10 @@
     {
       "identity" : "swift-crypto",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-crypto",
+      "location" : "https://github.com/apple/swift-crypto.git",
       "state" : {
-        "revision" : "ff0f781cf7c6a22d52957e50b104f5768b50c779",
-        "version" : "3.10.0"
+        "revision" : "a6ce32a18b81b04ce7e897d1d98df6eb2da04786",
+        "version" : "3.12.2"
       }
     },
     {
@@ -376,7 +421,7 @@
       "location" : "https://github.com/coenttb/swift-css.git",
       "state" : {
         "branch" : "main",
-        "revision" : "29fea42c6b57178e4d3be680ca0e15241df24498"
+        "revision" : "fce32749fbe3ff7d2df9055f0179cd19e25749da"
       }
     },
     {
@@ -391,10 +436,10 @@
     {
       "identity" : "swift-dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-dependencies",
+      "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
-        "revision" : "85f89f5d0ce5a18945f65371d40ca997da85a41a",
-        "version" : "1.6.3"
+        "revision" : "ec2862d1364536fc22ec56a3094e7a034bbc7da8",
+        "version" : "1.8.1"
       }
     },
     {
@@ -402,8 +447,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-distributed-tracing.git",
       "state" : {
-        "revision" : "6483d340853a944c96dbcc28b27dd10b6c581703",
-        "version" : "1.1.2"
+        "revision" : "a64a0abc2530f767af15dd88dda7f64d5f1ff9de",
+        "version" : "1.2.0"
       }
     },
     {
@@ -421,7 +466,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "186dad2bc33d648bf8cfe9d39fff119fb5752784"
+        "revision" : "be9f6815273daf9203f22dc1a85c6120b2a85ca5"
       }
     },
     {
@@ -430,7 +475,16 @@
       "location" : "https://github.com/coenttb/swift-html-to-pdf.git",
       "state" : {
         "branch" : "main",
-        "revision" : "142d9e9d7cb817e73f691428e00c6f465b821b21"
+        "revision" : "445d920c28b4b62d3208763511794253fd7c9e15"
+      }
+    },
+    {
+      "identity" : "swift-http-structured-headers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-http-structured-headers.git",
+      "state" : {
+        "revision" : "d01361d32e14ae9b70ea5bd308a3794a198a2706",
+        "version" : "1.2.0"
       }
     },
     {
@@ -443,12 +497,21 @@
       }
     },
     {
+      "identity" : "swift-identities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-identities.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "11d5a4bfbea4992b17804ba047087e6aa469055a"
+      }
+    },
+    {
       "identity" : "swift-language",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-language.git",
       "state" : {
         "branch" : "main",
-        "revision" : "63b455da4844a701663dd91bb681bf05a536c92f"
+        "revision" : "c47dab7ce0d7c678f699d48ce0bb623bc6138ee8"
       }
     },
     {
@@ -456,8 +519,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log",
       "state" : {
-        "revision" : "96a2f8a0fa41e9e09af4585e2724c4e825410b91",
-        "version" : "1.6.2"
+        "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
+        "version" : "1.6.3"
       }
     },
     {
@@ -474,8 +537,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-metrics.git",
       "state" : {
-        "revision" : "e0165b53d49b413dd987526b641e05e246782685",
-        "version" : "2.5.0"
+        "revision" : "44491db7cc66774ab930cf15f36324e16b06f425",
+        "version" : "2.6.1"
       }
     },
     {
@@ -483,8 +546,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio",
       "state" : {
-        "revision" : "dca6594f65308c761a9c409e09fbf35f48d50d34",
-        "version" : "2.77.0"
+        "revision" : "c51907a839e63ebf0ba2076bba73dd96436bd1b9",
+        "version" : "2.81.0"
       }
     },
     {
@@ -492,8 +555,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-extras.git",
       "state" : {
-        "revision" : "2e9746cfc57554f70b650b021b6ae4738abef3e6",
-        "version" : "1.24.1"
+        "revision" : "00f3f72d2f9942d0e2dc96057ab50a37ced150d4",
+        "version" : "1.25.0"
       }
     },
     {
@@ -510,8 +573,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-ssl.git",
       "state" : {
-        "revision" : "c7e95421334b1068490b5d41314a50e70bab23d1",
-        "version" : "2.29.0"
+        "revision" : "0cc3528ff48129d64ab9cab0b1cd621634edfc6b",
+        "version" : "2.29.3"
       }
     },
     {
@@ -519,8 +582,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-transport-services.git",
       "state" : {
-        "revision" : "bbd5e63cf949b7db0c9edaf7a21e141c52afe214",
-        "version" : "1.23.0"
+        "revision" : "3c394067c08d1225ba8442e9cffb520ded417b64",
+        "version" : "1.23.1"
       }
     },
     {
@@ -528,17 +591,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
-        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
-        "version" : "1.0.2"
+        "revision" : "e0ec0f5f3af6f3e4d5e7a19d2af26b481acb6ba8",
+        "version" : "1.0.3"
       }
     },
     {
       "identity" : "swift-parsing",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-parsing",
+      "location" : "https://github.com/pointfreeco/swift-parsing.git",
       "state" : {
-        "revision" : "a0e7d73f462c1c38c59dc40a3969ac40cea42950",
-        "version" : "0.13.0"
+        "branch" : "main",
+        "revision" : "3432cb81164dd3d69a75d0d63205be5fbae2c34b"
       }
     },
     {
@@ -555,8 +618,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-service-context.git",
       "state" : {
-        "revision" : "0c62c5b4601d6c125050b5c3a97f20cce881d32b",
-        "version" : "1.1.0"
+        "revision" : "8946c930cae601452149e45d31d8ddfac973c3c7",
+        "version" : "1.2.0"
       }
     },
     {
@@ -564,8 +627,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-service-lifecycle.git",
       "state" : {
-        "revision" : "c2e97cf6f81510f2d6b4a69453861db65d478560",
-        "version" : "2.6.3"
+        "revision" : "7ee57f99fbe0073c3700997186721e74d925b59b",
+        "version" : "2.7.0"
       }
     },
     {
@@ -582,8 +645,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
       "state" : {
-        "revision" : "c8a44d836fe7913603e246acab7c528c2e780168",
-        "version" : "1.4.0"
+        "revision" : "a34201439c74b53f0fd71ef11741af7e7caf01e1",
+        "version" : "1.4.2"
+      }
+    },
+    {
+      "identity" : "swift-tagged",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-tagged",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7061233809f745e2ba6c3e8c6f984a8f36257226"
       }
     },
     {
@@ -601,7 +673,16 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "37f247e616276f51a1ede1d7fe4d1d424c1212a3"
+        "revision" : "d1e02124fd0f1324001ba0667ba4422f1a9bb15c"
+      }
+    },
+    {
+      "identity" : "swift-web-standards",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-web-standards",
+      "state" : {
+        "branch" : "main",
+        "revision" : "06c08d7b6b6f86a8db2cf4ec8b02c42162f3045e"
       }
     },
     {
@@ -609,8 +690,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "4d7456c0d4b33ef82783a90ecfeae33a52a3972a",
-        "version" : "4.111.0"
+        "revision" : "f6459d6417d4968f91979224dd8fd38fa99b042c",
+        "version" : "4.114.0"
       }
     },
     {
@@ -645,8 +726,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "a3f634d1a409c7979cabc0a71b3f26ffa9fc8af1",
-        "version" : "1.4.3"
+        "revision" : "39de59b2d47f7ef3ca88a039dff3084688fe27f4",
+        "version" : "1.5.2"
       }
     }
   ],

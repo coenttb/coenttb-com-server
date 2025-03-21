@@ -5,9 +5,9 @@
 Read more about me in my [introductory post on coenttb.com](https://www.coenttb.com/blog/1-from-broke-to-building-in-public-open-sourcing-coenttb-com).
 
 ### Key Features
-- **Built entirely in Swift**: Approachable for newcomers and powerful for experts. It is fast, modern, safe, and a joy to write. 
-- **Fully type safe**: Every interaction, from request to response, is statically checked at compile time, ensuring runtime reliability and minimizing bugs.
-- **Hypermodular**: Each module integrates only the parts that it needs.
+- **Built entirely in Swift** 
+- **Fully type safe**
+- **Hypermodular**
 
 ## Why open source?
 

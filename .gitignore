@@ -64,3 +64,7 @@ github_token.txt
 # Exclude specific env file
 !.env.example
 .env.development
+
+# Custom
+local-test-build.sh
+local-test-deploy.sh
