@@ -1,0 +1,43 @@
+{
+  "configurations" : [
+    {
+      "id" : "3A809BE3-627F-4F37-A4B5-B603EDB442D1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "hello",
+        "enabled" : false
+      },
+      {
+        "argument" : "get-coenttb-mailing-list",
+        "enabled" : false
+      },
+      {
+        "argument" : "resend-verification-emails",
+        "enabled" : false
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:",
+      "identifier" : "Server",
+      "name" : "Server"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Server Tests",
+        "name" : "Server Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

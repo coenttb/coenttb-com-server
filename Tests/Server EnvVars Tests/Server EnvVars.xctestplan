@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "067F331E-3DFD-4D3E-90BB-B216D9E84B0E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Server EnvVars Tests",
+        "name" : "Server EnvVars Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

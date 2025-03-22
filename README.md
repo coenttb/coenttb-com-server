@@ -4,27 +4,19 @@
 
 Read more about me in my [introductory post on coenttb.com](https://www.coenttb.com/blog/1-from-broke-to-building-in-public-open-sourcing-coenttb-com).
 
-## About the Project
-
-Building a website in Swift? It’s *fun*. It’s *clean*. It’s also *painful*. 
-
-As a lawyer who writes code, I’ve spent years experimenting with rules as code and have a lot to share. But I didn’t want to be limited to iOS apps—I wanted to reuse my existing Swift code for the web. Building a website in Swift? It’s *fun*. It’s *clean*. It’s *painful*, but also: incredibly rewarding. Writing this site entirely in Swift, powered by PointFree & Vapor, forced me to push boundaries, embrace functional programming, and rethink how web development could work.
-
 ### Key Features
-- **Built entirely in Swift**: No JavaScript frameworks, no CSS hacks. Just cross platform Swift and Vapor.
-- **Functional elegance**: Clean architecture inspired by PointFree's best practices.
-- **Hypermodular**: Each module integrates only the parts that it needs.
+- **Built entirely in Swift** 
+- **Fully type safe**
+- **Hypermodular**
 
-## Why Open Source?
+## Why open source?
 
-Building in Swift for the web is both rewarding and frustrating. I’ve made mistakes, learned from them, and found ways to overcome challenges unique to Swift web development. By open-sourcing this project, I hope to:
-1. Show how to structure a Swift Vapor website *elegantly*.
-2. Save you the trial-and-error grind.
-3. Get feedback to make it even better.  
+Building in Swift for the web is worth it, but the ecosystem is not yet mature. By open-sourcing this project, I hope to:
+1. Show you how to structure a Swift website *elegantly*.
+2. Inspire you to try it for yourself.
+2. Get feedback to make the ecosystem even better.  
 
-Plus, I feel like I owe it to the PointFree guys.
-
-## Getting Started
+## Getting started
 
 1. Clone the repo.
 2. Copy the `.env.example` file and rename it `.env.development`.
@@ -32,16 +24,28 @@ Plus, I feel like I owe it to the PointFree guys.
 4. If you want to see the Account system in action, you will need to setup Mailgun. Adjust the `MAILGUN_PRIVATE_API_KEY` and `MAILGUN_DOMAIN` variables with your specific details.
 5. Go to Xcode and run the `Server` executable target.
  
-## Related Projects
+## Related projects
 
-* [coenttb/swift-html](https://www.github.com/coenttb/swift-html): A Swift DSL for HTML and CSS, based on [pointfreeco/swift-html](https://www.github.com/pointfreeco/swift-html), with various extensions and [swift-css](https://www.github.com/coenttb/swift-css) integration.
-* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Extends [coenttb/swift-html](https://www.github.com/coenttb/swift-html) with additional functionality and integrations for HTML, Markdown, Email, and printing HTML to PDF.
-* [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for type-safe, extensible, and transformable CSS styles.
-* [coenttb/swift-web](https://www.github.com/coenttb/swift-web): A modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), providing modular tools to simplify web development in Swift.
-* [coenttb-web](https://www.github.com/coenttb/coenttb-web): Builds on [coenttb/swift-web](https://www.github.com/coenttb/swift-web) with additional features and integrations for Vapor and other frameworks.
+### The coenttb stack
+
+* [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for type-safe CSS.
+* [swift-html](https://www.github.com/coenttb/swift-html): A Swift DSL for type-safe HTML & CSS, integrating [swift-css](https://www.github.com/coenttb/swift-css) and [pointfree-html](https://www.github.com/coenttb/pointfree-html).
+* [swift-web](https://www.github.com/coenttb/swift-web): Foundational tools for web development in Swift.
+* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Builds on [swift-html](https://www.github.com/coenttb/swift-html), and adds functionality for HTML, Markdown, Email, and printing HTML to PDF.
+* [coenttb-web](https://www.github.com/coenttb/coenttb-web): Builds on [swift-web](https://www.github.com/coenttb/swift-web), and adds functionality for web development.
+* [coenttb-server](https://www.github.com/coenttb/coenttb-server): Build fast, modern, and safe servers that are a joy to write. `coenttb-server` builds on [coenttb-web](https://www.github.com/coenttb/coenttb-web), and adds functionality for server development.
+* [coenttb-vapor](https://www.github.com/coenttb/coenttb-server-vapor): `coenttb-server-vapor` builds on [coenttb-server](https://www.github.com/coenttb/coenttb-server), and adds functionality and integrations with Vapor and Fluent.
+* [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server): The backend server for coenttb.com, written entirely in Swift and powered by [coenttb-server-vapor](https://www.github.com/coenttb-server-vapor).
+
+### PointFree foundations
+* [coenttb/pointfree-html](https://www.github.com/coenttb/pointfree-html): A Swift DSL for type-safe HTML, forked from [pointfreeco/swift-html](https://www.github.com/pointfreeco/swift-html) and updated to the version on [pointfreeco/pointfreeco](https://github.com/pointfreeco/pointfreeco).
+* [coenttb/pointfree-web](https://www.github.com/coenttb/pointfree-html): Foundational tools for web development in Swift, forked from  [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web).
+* [coenttb/pointfree-server](https://www.github.com/coenttb/pointfree-html): Foundational tools for server development in Swift, forked from  [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web).
+
+### Other
 * [swift-languages](https://www.github.com/coenttb/swift-languages): A cross-platform translation library written in Swift.
 
-## Feedback is Much Appreciated!
+## Feedback is much appreciated!
   
 If you’re working on your own Swift web project, feel free to learn, fork, and contribute.
 
@@ -55,9 +59,20 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 
 ## License
 
-The source code of this project is licensed under the [CC BY-NC-SA 4.0 License](LICENSE.md).  
-This means you are free to:
-- Share: Copy and redistribute the code for non-commercial purposes.
-- Adapt: Modify and build upon the code, provided you credit the original source and license any derivative works under the same terms.
+The paid content of [coenttb.com](https://coenttb.com), including text, images, and other media, is all rights reserved.
+Unauthorized use, reproduction, or distribution of this content is prohibited without prior permission.
 
-The content of [coenttb.com](https://coenttb.com), including text, images, and other media, is not open source and remains all rights reserved. Unauthorized use, reproduction, or distribution of the content is prohibited without prior permission.
+All other content (such as blog posts, documentation, and media not part of paid content) is licensed under [CC BY-NC-SA 4.0 LICENSE](CC%20BY-NC-SA%204.0%20LICENSE).
+
+This project's source code, excluding content of coenttb.com, is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+You are free to use, modify, and distribute it under the terms of the AGPL-3.0.
+For full details, please refer to the [LICENSE](LICENSE) file.
+
+### Commercial Licensing
+
+A **Commercial License** is available for organizations or individuals who wish to use this project without adhering to the terms of the AGPL-3.0. This option is ideal for:
+- Using the codebase in proprietary software
+- Incorporating it into SaaS products
+- Avoiding the source code sharing requirements of AGPL-3.0
+
+For inquiries about commercial licensing, please contact **info@coenttb.com**.
