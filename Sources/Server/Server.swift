@@ -1,30 +1,46 @@
-import CoenttbVapor
-import Dependencies
-import Foundation
-import Logging
-import VaporApp
+import Coenttb_Vapor
+import Vapor_Application
 
 @main
 struct Server {
     static func main() async throws {
-        @Dependency(\.envVars) var envVars
-        @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
-
-        let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
-        let logLevel = envVars.logLevel ?? .trace
-        let configure: @Sendable (Application) async throws -> Void = Application.configure
-
-        LoggingSystem.bootstrap { _ in
-            CoenttbLogHandler(label: "main", logLevel: logLevel, metadataProvider: nil)
+#if DEBUG
+        prepareDependencies {
+            $0.coenttb = .testValue
         }
+#endif
+        
+        @Dependency(\.envVars) var envVars
+        
+        let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
+        let logLevel = envVars.logLevel ?? .info
 
-        let application = try await Vapor.Application.make(environment, .shared(mainEventLoopGroup))
+        LoggingSystem.bootstrap { CoenttbLogHandler(label: $0, logLevel: logLevel, metadataProvider: nil) }
 
-        try await CoenttbVapor.Application.main(
-            application: application,
-            environment: environment,
-            logLevel: logLevel,
-            configure: configure
-        )
+        @Dependency(\.logger) var logger
+
+        do {
+            @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
+            let application = try await Vapor.Application.make(environment, .shared(mainEventLoopGroup))
+            defer { Task { try? await application.asyncShutdown() } }
+
+            do {
+                let configure: @Sendable (Vapor.Application) async throws -> Void = Application.configure
+
+                try await Application.main(
+                    application: application,
+                    environment: environment,
+                    logLevel: logLevel,
+                    configure: configure
+                )
+            } catch {
+                logger.critical("Application failed to start: \(error.localizedDescription)")
+                throw error
+            }
+            
+        } catch {
+            logger.critical("Critical failure: \(error.localizedDescription)")
+            throw error
+        }
     }
 }

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "93038881-4745-4681-9DB4-DB0C1248F95D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Server Application Tests",
+        "name" : "Server Application Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
