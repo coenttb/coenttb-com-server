@@ -105,7 +105,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: index(),
                     category: category,
                     publishedAt: .init(year: 2025, month: 03, day: 24)!,
-                    image: position(asset: "coenttb-20250327.png")
+                    image: position(asset: "coenttb-20250324.png")
                         .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
                     title: "A Tour of PointFreeHTML",
                     hidden: .no,

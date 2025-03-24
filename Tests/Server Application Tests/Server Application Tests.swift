@@ -40,4 +40,13 @@ struct EmailsTests {
         
         try string.write(toFile: URL.documentsDirectory.appending(path: "newsletter1.html"))
     }
+    
+    @Test("Generate newsletter 2 html")
+    func newsletter2() throws  {
+        let html: some HTML = Email.newsletter2()
+        let bytes: ContiguousArray<UInt8> = html.render()
+        let string: String = String(decoding: bytes, as: UTF8.self)
+        
+        try string.write(toFile: URL.documentsDirectory.appending(path: "newsletter2.html"))
+    }
 }
