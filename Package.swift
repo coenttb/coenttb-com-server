@@ -12,7 +12,7 @@ extension String {
     static let serverEnvVars: Self = "Server EnvVars"
     static let serverModels: Self = "Server Models"
     static let serverTranslations: Self = "Server Translations"
-    static let vaporApp: Self = "Vapor Application"
+    static let vaporApplication: Self = "Vapor Application"
 }
 
 extension Target.Dependency {
@@ -23,7 +23,7 @@ extension Target.Dependency {
     static var serverDependencies: Self { .target(name: .serverDependencies) }
     static var serverModels: Self { .target(name: .serverModels) }
     static var serverTranslations: Self { .target(name: .serverTranslations) }
-    static var vaporApp: Self { .target(name: .vaporApp) }
+    static var vaporApplication: Self { .target(name: .vaporApplication) }
 }
 
 extension Target.Dependency {
@@ -43,9 +43,6 @@ extension Target.Dependency {
     static var hotjar: Self { .product(name: "Hotjar", package: "coenttb-hotjar") }
     static var mailgun: Self { .product(name: "Mailgun", package: "coenttb-mailgun") }
     static var postgres: Self { .product(name: "Postgres", package: "coenttb-postgres") }
-//    static var stripe: Self { .product(name: "Coenttb Stripe", package: "coenttb-stripe") }
-//    static var stripeLive: Self { .product(name: "Coenttb Stripe Live", package: "coenttb-stripe") }
-
     static var queuesFluentDriver: Self { .product(name: "QueuesFluentDriver", package: "vapor-queues-fluent-driver") }
     static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self { .product(name: "DependenciesTestSupport", package: "swift-dependencies") }
@@ -58,15 +55,15 @@ let package = Package(
         .macOS(.v14)
     ],
     products: [
+        .executable(name: .server, targets: [.server]),
+        .library(name: .serverApplication, targets: [.serverApplication]),
         .library(name: .serverEnvVars, targets: [.serverEnvVars]),
         .library(name: .serverDependencies, targets: [.serverDependencies]),
         .library(name: .serverModels, targets: [.serverModels]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
-        .library(name: .serverApplication, targets: [.serverApplication]),
-        .library(name: .vaporApp, targets: [.vaporApp]),
+        .library(name: .vaporApplication, targets: [.vaporApplication]),
         .library(name: .serverClient, targets: [.serverClient]),
         .library(name: .serverDatabase, targets: [.serverDatabase]),
-        .executable(name: .server, targets: [.server])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
@@ -208,7 +205,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: .vaporApp,
+            name: .vaporApplication,
             dependencies: [
                 .coenttbServer,
                 .coenttbServerVapor,
@@ -224,9 +221,9 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: .vaporApp.tests,
+            name: .vaporApplication.tests,
             dependencies: [
-                .vaporApp,
+                .vaporApplication,
                 .coenttbServerVapor,
                 .vaporTesting,
                 .serverEnvVars,
@@ -243,7 +240,7 @@ let package = Package(
         .executableTarget(
             name: .server,
             dependencies: [
-                .vaporApp,
+                .vaporApplication,
                 .coenttbServer,
             ]
         ),
