@@ -36,7 +36,8 @@ extension Email {
                             div {
                                 div {
                                     Image.init(
-                                        base64EncodedFromURL: serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))),
+//                                        base64EncodedFromURL: serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))),
+                                        source: serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))).absoluteString,
                                         description: "coenttb image"
                                     )
                                     .inlineStyle("filter", "sepia(1) hue-rotate(-25deg) saturate(5) brightness(1.2)")

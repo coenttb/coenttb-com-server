@@ -36,10 +36,10 @@ extension Email {
                             div {
                                 div {
                                     Image.init(
-                                        base64EncodedFromURL: serverRouter.url(for: .public(.asset(.image("coenttb-20250324.png")))),
+                                        source: serverRouter.url(for: .public(.asset(.image("coenttb-20250324.png")))).absoluteString,
                                         description: "coenttb image"
                                     )
-                                    .inlineStyle("filter", "sepia(1) hue-rotate(-25deg) saturate(5) brightness(1.2)")
+                                    .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)")
                                 }
                                 .position(.absolute, top: 0, right: 0, bottom: 0, left: 0)
                             }
