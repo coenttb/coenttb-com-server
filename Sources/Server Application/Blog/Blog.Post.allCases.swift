@@ -15,26 +15,12 @@ import Foundation
 import Languages
 
 extension [Coenttb_Blog.Blog.Post] {
-    package static var allCases: [Coenttb_Blog.Blog.Post] {
+    package static var allCases: [Coenttb_Blog.Blog.Post] {        
         Array {
             [Coenttb_Blog.Blog.Post].general
             //            [Coenttb_Blog.Blog.Post].html,
             //            [Coenttb_Blog.Blog.Post].domain_modeling,
         }
-        
-
-            .filter {
-                @Dependency(\.date.now) var now
-                @Dependency(\.envVars.appEnv) var env
-                
-                return switch env {
-                case .production, .staging:
-                    $0.publishedAt <= now
-                case .development, .testing:
-                    true
-                }
-            }
-            .sorted(by: { $0.publishedAt < $1.publishedAt })
     }
 }
 
@@ -50,8 +36,9 @@ extension [Coenttb_Blog.Blog.Post] {
                     category: category,
                     publishedAt: .init(year: 2024, month: 12, day: 16)!,
                     image: div {
-                        Image.coenttbGreenSuit
-                            .dependency(\.objectStyle.position, .y(15.percent))
+                        HTMLElementTypes.Image.coenttbGreenSuit
+                            .objectPosition(.y(.percentage(15)))
+//                            .dependency(\.objectStyle.position, .y(.percent(15)))
                     }.position(.absolute),
                     title: TranslatedString(
                         dutch: "Van blut naar build in public: open source coenttb.com",
@@ -139,23 +126,26 @@ extension [Coenttb_Blog.Blog.Post] {
 @HTMLBuilder
 func position(
     asset: String,
-    x: Length = 50.percent,
-    y: Length = 50.percent
+    x: LengthPercentage = .percent(50),
+    y: LengthPercentage = .percent(50)
     
 ) -> some HTML {
     div {
         @Dependency(\.coenttb.website.router) var serverRouter
         div {
             Image(
-                source: serverRouter.href(for: .asset(.image(.init(stringLiteral: asset)))),
-                description: "coenttb avatar"
+                src: .init(serverRouter.href(for: .asset(.image(.init(stringLiteral: asset))))),
+                alt: "coenttb avatar",
+                loading: .lazy
             )
             .objectFit(.cover)
-            .width(100.percent)
-            .height(100.percent)
-            .objectPosition(x: x, y: y)
+            .width(.percent(100))
+            .height(.percent(100))
+//            .objectPosition(x: x, y: y)
         }
-        .size(width: 100.percent, height: 100.percent)
+//        .size(width: .percent(100), height: .percent(100))
+        .width(.percent(100))
+        .height(.percent(100))
         .position(.absolute)
     }
 }
@@ -170,7 +160,8 @@ extension [Coenttb_Blog.Blog.Post] {
                     category: category,
                     publishedAt: .init(year: 2024, month: 12, day: 23)!,
                     image: div {
-                        Image.coenttbGreenSuit.dependency(\.objectStyle.position, .y(15.percent))
+                        Image.coenttbGreenSuit
+//                            .dependency(\.objectStyle.position, .y(.percent(15)))
                             .inlineStyle("filter", "sepia(1) hue-rotate(-50deg) saturate(5) brightness(1.2)")
                     }.position(.absolute),
                     title: TranslatedString(

@@ -33,28 +33,34 @@ package struct CoenttbNavigationBar: HTML {
         )
             .linkUnderline(false)
             .fontWeight(.medium)
-            .fontSize(.secondary)
+            .font(.body(.small))
 
-        let signupButton = Button(
-            tag: a,
-            background: .branding.primary,
-            style: .tertiary
-        ) {
+//        let signupButton = Button(
+//            tag: a,
+//            background: .branding.primary,
+//            style: .tertiary
+//        ) {
+//            String.signup.capitalizingFirstLetter()
+//                .fontWeight(.medium)
+//        }
+//            .color(.text.primary.reverse())
+//            .href(serverRouter.href(for: .identity(.create(.request))))
+        
+        let signupButton = Link(href: .init(serverRouter.href(for: .identity(.create(.request))))) {
             String.signup.capitalizingFirstLetter()
                 .fontWeight(.medium)
         }
             .color(.text.primary.reverse())
-            .href(serverRouter.href(for: .identity(.create(.request))))
 
         NavigationBar(
             logo: {
                 CoenttbLogo()
-                .height(100.percent)
+                .height(.percent(100))
             },
             centeredNavItems: {
                 NavigationBarCenteredNavItems(
                     items: [
-                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: blog) : nil
+                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil
                     ].compactMap { $0 }
                 )
                 .dependency(\.color.text.link, .text.primary)
@@ -70,7 +76,7 @@ package struct CoenttbNavigationBar: HTML {
 //                                    icon: .init(icon: "cog", size: .large),
 //                                    color: .branding.primary,
 //                                    href: serverRouter.href(for: .account(.settings(.index))),
-//                                    buttonSize: 2.5.rem
+//                                    buttonSize: .rem(2.5)
 //                                )
 //                            }
 //
@@ -91,7 +97,7 @@ package struct CoenttbNavigationBar: HTML {
 //                        }
 //                    }
 //                    .display(.inline)
-//                    .padding(left: 1.rem, pseudo: .not(.firstChild))
+//                    .padding(left: .rem(1), pseudo: .not(.firstChild))
 //                }
 //                .listStyle(.reset)
 //                .display(.none, media: .mobile)
@@ -100,7 +106,7 @@ package struct CoenttbNavigationBar: HTML {
                 ul {
                     HTMLGroup {
                         HTMLForEach([
-                            !posts.isEmpty ? NavigationBarMobileNavItems.NavListItem("Blog", href: blog) : nil
+                            !posts.isEmpty ? NavigationBarMobileNavItems.NavListItem("Blog", href: .init(blog)) : nil
                         ].compactMap { $0 }) { item in
                             li {
                                 item
@@ -116,7 +122,7 @@ package struct CoenttbNavigationBar: HTML {
 //                                    href: serverRouter.href(for: .account(.settings(.index)))
 //                                )
 //                            }
-//                            .padding(top: 1.5.rem)
+//                            .padding(top: .rem(1.5))
 //
 //                        case false:
 //                            li {
@@ -124,17 +130,17 @@ package struct CoenttbNavigationBar: HTML {
 //                                    .textAlign(.center)
 //                                    .display(.block)
 //                            }
-//                            .padding(top: 1.5.rem)
+//                            .padding(top: .rem(1.5))
 //
 //                            li {
 //                                signupButton
 //                                    .textAlign(.center)
 //                                    .display(.block)
 //                            }
-//                            .padding(top: 1.5.rem)
+//                            .padding(top: .rem(1.5))
 //                        }
                     }
-                    .padding(top: 1.5.rem)
+                    .padding(top: .rem(1.5))
                 }
             }
         )
@@ -157,20 +163,26 @@ extension CoenttbNavigationBar {
                                 div {
                                     AnyHTML(
                                         Image.coenttbGreenSuit
-                                            .dependency(\.objectStyle.position, .y(30.percent))
-                                            .loading(.lazy)
+//                                            .dependency(\.objectStyle.position, .y(.percent(30)))
+//                                            .loading(.lazy)
                                     )
-                                    .position(.absolute, top: 0, right: 0, bottom: 0, left: 0)
+                                    .position(
+                                        .absolute,
+                                        top: .zero,
+                                        right: .zero,
+                                        bottom: .zero,
+                                        left: .zero
+                                    )
                                 }
-                                .clipPath(.circle(50.percent))
+                                .clipPath(.circle(.percent(50)))
                                 .position(.relative)
-                                .size(1.75.rem)
+                                .size(.rem(1.75))
                             }
                         }
                         .display(.flex)
                         .alignItems(.center)
                         
-                        Link(href: serverRouter.href(for: .home)) {
+                        Link(href: .init(serverRouter.href(for: .home))) {
                             SVG.coenttb()
                         }
                         .linkStyle(.init(underline: false))
@@ -179,9 +191,9 @@ extension CoenttbNavigationBar {
                         .alignItems(.center)
                     }
                     .alignItems(.center)
-                    .height(100.percent)
+                    .height(.percent(100))
                 }
-                .height(100.percent)
+                .height(.percent(100))
             }
         }
     }

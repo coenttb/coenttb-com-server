@@ -10,10 +10,12 @@ import Dependencies
 import Foundation
 import Coenttb_Com_Shared
 
-extension Image {
-    nonisolated(unsafe)
-    package static let coenttbGreenSuit: Image = {
+extension HTMLElementTypes.Image {
+    package static let coenttbGreenSuit: HTMLElementTypes.Image = {
         @Dependency(\.coenttb.website.router) var serverRouter
-        return Image(source: serverRouter.href(for: .asset(.image("coenttb-halftone.png"))), description: "coenttb avatar")
+        return Image(
+            src: .init(serverRouter.href(for: .asset(.image("coenttb-halftone.png")))),
+            alt: "coenttb avatar"
+        )
     }()
 }

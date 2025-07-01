@@ -15,7 +15,7 @@ import Coenttb_Vapor
 
 struct ResendVerificationEmailsCommand: AsyncCommand {
     struct Signature: CommandSignature {
-        @Option(name: "delay", short: "d", help: "Delay in milliseconds between each email")
+        @Vapor.Option(name: "delay", short: "d", help: "Delay in milliseconds between each email")
         var delayMs: Int?
 
         init() { }

@@ -31,7 +31,6 @@ extension WebsitePage {
                 @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
                 let localPosts = blogPosts()
-
                 return try await Coenttb_Blog.Route.response(
                     route: route,
                     blurb: String.oneliner,
@@ -57,7 +56,7 @@ extension WebsitePage {
                         )
                     },
                     defaultDocument: { closure in
-                        return Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
+                        Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
                             AnyHTML(closure())
                         }
                     },
@@ -123,7 +122,9 @@ extension WebsitePage {
                     span { "Want to see what’s coming up next? " }
 
                     if let companyXComHandle {
-                        Link("Follow me on Twitter.", href: "https://x.com/\(companyXComHandle)")
+                        Link(href: .init("https://x.com/\(companyXComHandle)")) {
+                            "Follow me on Twitter."
+                        }
                             .linkUnderline(true)
                     }
                 }

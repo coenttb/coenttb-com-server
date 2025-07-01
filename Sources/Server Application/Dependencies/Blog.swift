@@ -24,10 +24,14 @@ extension BlogKey: @retroactive DependencyKey {
             
             return [Coenttb_Blog.Blog.Post].allCases
                 .filter {
-                    appEnv == .production
-                    ? $0.publishedAt <= now
-                    : true
+                    switch appEnv {
+                    case .production, .staging:
+                        return $0.publishedAt <= now
+                    case .development, .testing:
+                        return true
+                    }
                 }
+                .sorted(by: { $0.publishedAt < $1.publishedAt })
         },
         filenameToResourceUrl: { fileName in
             Bundle.module.url(forResource: fileName, withExtension: "md")

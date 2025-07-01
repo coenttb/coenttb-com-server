@@ -34,7 +34,7 @@ func settings(
                                 HTMLEmpty()
                             } title: {
                                 CoenttbNavigationBar.CoenttbLogo()
-                                    .height(100.percent)
+                                    .height(.percent(100))
 
                                 Header(3) {
                                     Link(
@@ -68,7 +68,7 @@ func settings(
                             Header(4) {
                                 String.settings.capitalizingFirstLetter().description
                             }
-                            .padding(bottom: 1.5.rem)
+                            .padding(bottom: .rem(1.5))
 
                         }
                     },
@@ -102,7 +102,7 @@ func settings(
                                 HTMLEmpty()
                             } title: {
                                 CoenttbNavigationBar.CoenttbLogo()
-                                    .height(100.percent)
+                                    .height(.percent(100))
 
                                 Header(3) {
                                     Link(
@@ -123,9 +123,9 @@ func settings(
                                 }
 
 //                                NameChangeForm()
-//                                    .width(100.percent)
-//                                    .maxWidth(20.rem, media: .desktop)
-//                                    .maxWidth(24.rem, media: .mobile)
+//                                    .width(.percent(100))
+//                                    .maxWidth(.rem(20), media: .desktop)
+//                                    .maxWidth(.rem(24), media: .mobile)
 
                                 EmailChangeRequestButton()
 
@@ -143,7 +143,7 @@ func settings(
                             Header(4) {
                                 String.profile.capitalizingFirstLetter()
                             }
-                            .padding(bottom: 1.5.rem)
+                            .padding(bottom: .rem(1.5))
 
                         }
                     },
@@ -162,13 +162,18 @@ public struct PasswordChangeRequestButton: HTML {
 
     public var body: some HTML {
         form {
-            Button(
-                tag: a
-            ) {
+            Link(href: .init(serverRouter.url(for: .identity(.password(.change(.request)))).absoluteString)) {
                 String.change_your_password.capitalizingFirstLetter()
             }
             .color(.text.primary)
-            .href(serverRouter.url(for: .identity(.password(.change(.request)))).absoluteString)
+            
+//            Button(
+//                tag: a
+//            ) {
+//                String.change_your_password.capitalizingFirstLetter()
+//            }
+//            .color(.text.primary)
+//            .href(serverRouter.url(for: .identity(.password(.change(.request)))).absoluteString)
         }
     }
 }
@@ -179,26 +184,49 @@ public struct EmailChangeRequestButton: HTML {
 
     public var body: some HTML {
         HStack {
-            Input.default(Identity.Email.Change.Request.CodingKeys.newEmail)
-                .type(.email)
-                .placeholder("Email")
-                .value(currentUser?.email?.rawValue ?? "")
-                .disabled(true)
+            Input(
+                codingKey: Identity.Email.Change.Request.CodingKeys.newEmail,
+                disabled: true,
+                type: .email(
+                    .init(
+                        value: .init(currentUser?.email?.rawValue ?? ""),
+                        placeholder: "Email"
+                    )
+                )
+            )
+//            Input.default(Identity.Email.Change.Request.CodingKeys.newEmail)
+//                .type(.email)
+//                .placeholder("Email")
+//                .value(currentUser?.email?.rawValue ?? "")
+//                .disabled(true)
 
-            Button(
-                tag: a,
-                style: .secondary,
-                icon: {
+            
+            Link(href: .init(serverRouter.url(for: .identity(.email(.change(.request)))).absoluteString)) {
+                Label {
+                    HTMLEmpty()
+                } title: {
                     span { FontAwesomeIcon(icon: "pencil") }
                         .color(.text.secondary)
                         .fontWeight(.medium)
-                },
-                label: {
-                    HTMLEmpty()
                 }
-            )
-            .width(50.px)
-            .href(serverRouter.url(for: .identity(.email(.change(.request)))).absoluteString)
+
+            }
+            .width(.px(50))
+//            Button(
+
+//                tag: a,
+//                style: .secondary,
+//                icon: {
+                    span { FontAwesomeIcon(icon: "pencil") }
+                        .color(.text.secondary)
+                        .fontWeight(.medium)
+//                },
+//                label: {
+//                    HTMLEmpty()
+//                }
+//            )
+//            .width(50.px)
+//            .href(serverRouter.url(for: .identity(.email(.change(.request)))).absoluteString)
         }
     }
 }

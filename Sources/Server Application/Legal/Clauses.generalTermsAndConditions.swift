@@ -459,7 +459,7 @@ extension Clauses {
                             dutch: "Marketing",
                             english: "Marketing"
                         ).description,
-                        content: Paragraph {
+                        content: CoenttbHTML.Paragraph {
                             TranslatedString(
                                 dutch: "coenttb mag de naam en het logo van opdrachtgever gebruiken met een korte omschrijving van de dienstverlening van coenttb in algemene bewoordingen voor marketing doeleinden van coenttb.",
                                 english: "coenttb may use the name and logo of the client with a brief description of the services provided by coenttb in general terms for coenttb’s marketing purposes."
@@ -500,7 +500,7 @@ extension Clauses {
                             dutch: "Taal",
                             english: "Language"
                         ).description,
-                        content: Paragraph {
+                        content: CoenttbHTML.Paragraph {
                             TranslatedString(
                                 dutch: "Deze Algemene Voorwaarden zijn in de Nederlandse en Engelse taal gesteld. Ingeval van geschil over inhoud of strekking van deze Algemene Voorwaarden, zal de Nederlandse tekst bindend zijn.",
                                 english: "These General Terms and Conditions are available in the Dutch and English language. In the case of any discrepancy or inconsistencies as to the contents and purport of these conditions, the Dutch text shall prevail."

@@ -9,4 +9,4 @@ import Coenttb_Vapor
 import Server_Models
 import Coenttb_Com_Shared
 
-extension Server_Models.User: Content {}
+extension Server_Models.User: Vapor.Content {}

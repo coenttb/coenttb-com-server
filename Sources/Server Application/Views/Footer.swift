@@ -20,7 +20,7 @@ import FoundationNetworking
 package struct CoenttbFooter: HTML {
 
     @Dependency(\.coenttb.website.router) var serverRouter
-    @Dependency(\.blog.getAll) var blogPosts
+//    @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.envVars) var envVars
 
     @Dependency(\.currentUser?.newsletterSubscribed) var newsletterSubscribed
@@ -28,53 +28,54 @@ package struct CoenttbFooter: HTML {
     package init() {}
 
     package var body: some HTML {
+        HTMLEmpty()
 
-        let posts = blogPosts()
-        Footer(
-            foregroundColor: .text.primary,
-            backgroundColor: .offWhite.withDarkColor(.offBlack),
-            tagline: .init(
-                title: "coenttb",
-                href: serverRouter.href(for: .home),
-                content: Paragraph {
-                    HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
-                    Link("coenttb", href: "https://x.com/coenttb")
-                    "."
-                }
-            ),
-            copyrightSection: Licences(),
-            columns: [
-                (
-                    title: "Content",
-                    links: [
-                        !posts.isEmpty ? (label: .blog.capitalizingFirstLetter().description, href: serverRouter.href(for: .blog(.index))) : nil
-                    ].compactMap { $0 }
-                ),
-                (
-                    title: "\(String.more.capitalizingFirstLetter())",
-                    links: [
-                        envVars.companyXComHandle.map { handle in
-                            (label: "X/Twitter", href: "https://www.x.com/\(handle)")
-                        },
-                        envVars.companyGitHubHandle.map { handle in
-                            (label: "Github", href: "https://github.com/\(handle)")
-                        },
-                        envVars.companyLinkedInHandle.map { handle in
-                            (label: "LinkedIn", href: "https://www.linkedin.com/in/\(handle)")
-                        },
-                        (label: "\(String.contact_me.capitalizingFirstLetter())", href: serverRouter.href(for: .contact)),
-                        (label: "\(String.privacyStatement.capitalizingFirstLetter())", href: serverRouter.href(for: .privacy_statement)),
-                        (label: "\(String.general_terms_and_conditions.capitalizingFirstLetter())", href: serverRouter.href(for: .general_terms_and_conditions)),
-                        (label: "\(String.terms_of_use.capitalizingFirstLetter())", href: serverRouter.href(for: .terms_of_use)),
-                        newsletterSubscribed == true
-                        ? (label: "\(String.unsubscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.unsubscribe)))
-                        : (label: "\(String.subscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.subscribe(.request)))),
-                        (label: "RSS", href: serverRouter.href(for: .rssXml))
-                    ]
-                        .compactMap { $0 }
-                )
-            ]
-        )
+//        let posts = blogPosts()
+//        Footer(
+//            foregroundColor: .text.primary,
+//            backgroundColor: .offWhite.withDarkColor(.offBlack),
+//            tagline: .init(
+//                title: "coenttb",
+//                href: serverRouter.href(for: .home),
+//                content: CoenttbHTML.Paragraph {
+//                    HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
+//                    Link("coenttb", href: "https://x.com/coenttb")
+//                    "."
+//                }
+//            ),
+//            copyrightSection: Licences(),
+//            columns: [
+//                (
+//                    title: "Content",
+//                    links: [
+//                        !posts.isEmpty ? (label: .blog.capitalizingFirstLetter().description, href: serverRouter.href(for: .blog(.index))) : nil
+//                    ].compactMap { $0 }
+//                ),
+//                (
+//                    title: "\(String.more.capitalizingFirstLetter())",
+//                    links: [
+//                        envVars.companyXComHandle.map { handle in
+//                            (label: "X/Twitter", href: "https://www.x.com/\(handle)")
+//                        },
+//                        envVars.companyGitHubHandle.map { handle in
+//                            (label: "Github", href: "https://github.com/\(handle)")
+//                        },
+//                        envVars.companyLinkedInHandle.map { handle in
+//                            (label: "LinkedIn", href: "https://www.linkedin.com/in/\(handle)")
+//                        },
+//                        (label: "\(String.contact_me.capitalizingFirstLetter())", href: serverRouter.href(for: .contact)),
+//                        (label: "\(String.privacyStatement.capitalizingFirstLetter())", href: serverRouter.href(for: .privacy_statement)),
+//                        (label: "\(String.general_terms_and_conditions.capitalizingFirstLetter())", href: serverRouter.href(for: .general_terms_and_conditions)),
+//                        (label: "\(String.terms_of_use.capitalizingFirstLetter())", href: serverRouter.href(for: .terms_of_use)),
+//                        newsletterSubscribed == true
+//                        ? (label: "\(String.unsubscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.unsubscribe)))
+//                        : (label: "\(String.subscribe.capitalizingFirstLetter())", href: serverRouter.href(for: .newsletter(.subscribe(.request)))),
+//                        (label: "RSS", href: serverRouter.href(for: .rssXml))
+//                    ]
+//                        .compactMap { $0 }
+//                )
+//            ]
+//        )
     }
 }
 
@@ -115,8 +116,8 @@ extension CoenttbFooter {
                 ))
                 """}
                 .color(.text.secondary)
-                .fontStyle(.body(.small))
-                .padding(top: 2.rem, media: .mobile)                
+                .font(.body(.small))
+                .padding(top: .rem(2), media: .mobile)                
             }
         }
     }

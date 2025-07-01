@@ -11,10 +11,10 @@ import Foundation
 extension PageModule.Theme {
     public static var mainContent: Self {
         Self(
-            topMargin: 4.rem,
-            bottomMargin: 4.rem,
-            leftRightMargin: 2.rem,
-            leftRightMarginDesktop: 5.rem
+            topMargin: .rem(4),
+            bottomMargin: .rem(4),
+            leftRightMargin: .rem(2),
+            leftRightMarginDesktop: .rem(5)
         )
     }
 }
@@ -22,10 +22,10 @@ extension PageModule.Theme {
 extension PageModule.Theme {
     public static var sidebarContent: Self {
         Self(
-            topMargin: 4.rem,
-            bottomMargin: 4.rem,
-            leftRightMargin: 2.rem,
-            leftRightMarginDesktop: 4.rem
+            topMargin: .rem(4),
+            bottomMargin: .rem(4),
+            leftRightMargin: .rem(2),
+            leftRightMarginDesktop: .rem(4)
         )
     }
 }

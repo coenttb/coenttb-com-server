@@ -15,7 +15,10 @@ extension Link {
     package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language
-        self.init(href: serverRouter.path(for: .website(.init(language: language, page: destination))), label: label)
+        self.init(
+            href: .init(serverRouter.path(for: .website(.init(language: language, page: destination)))),
+            label: label
+        )
     }
 
     package init(
@@ -24,6 +27,9 @@ extension Link {
     ) where Label == HTMLText {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language
-        self.init(title, href: serverRouter.path(for: .website(.init(language: language, page: destination))))
+        self.init(
+            title,
+            href: .init(serverRouter.path(for: .website(.init(language: language, page: destination))))
+        )
     }
 }
