@@ -35,11 +35,10 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: index(),
                     category: category,
                     publishedAt: .init(year: 2024, month: 12, day: 16)!,
-                    image: div {
-                        HTMLElementTypes.Image.coenttbGreenSuit
-                            .objectPosition(.y(.percentage(15)))
-//                            .dependency(\.objectStyle.position, .y(.percent(15)))
-                    }.position(.absolute),
+                    image: position(
+                        asset: "coenttb-halftone.png",
+                        y: .percentage(65)
+                    ),
                     title: TranslatedString(
                         dutch: "Van blut naar build in public: open source coenttb.com",
                         english: "From broke to building in public: open-sourcing coenttb.com"

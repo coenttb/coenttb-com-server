@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "9dbf0a52ffb388e02942b75988007de646067b31"
+        "revision" : "bde99498add4c4c39d230c2b7ec627d6b6807f45"
       }
     },
     {
@@ -241,7 +241,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a3eb8e97cd33ac740304ad5b679b7fca5762c7ca"
+        "revision" : "a78c9135652cb53a57fd6637b5d6ddda47a1ac3a"
       }
     },
     {
@@ -421,7 +421,7 @@
       "location" : "https://github.com/coenttb/swift-css-types.git",
       "state" : {
         "branch" : "main",
-        "revision" : "13cc6204b8dae03342f0f91f34083ea609097288"
+        "revision" : "e9d972ea9825159137a4b156334830eaacd499cd"
       }
     },
     {
@@ -475,7 +475,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a3ead0bf16217c71acc5e50fcbf6f4b2413789f6"
+        "revision" : "f8bc46e64e5122dc9eb47672b8adac1b9870a69f"
       }
     },
     {
@@ -484,7 +484,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0891c0dca8695d13a01d80e6195f92e7caa871f4"
+        "revision" : "92837dafa509ecf1576cefe2c354d42ad930a1fb"
       }
     },
     {
@@ -573,8 +573,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio",
       "state" : {
-        "revision" : "34d486b01cd891297ac615e40d5999536a1e138d",
-        "version" : "2.83.0"
+        "revision" : "ad6b5f17270a7008f60d35ec5378e6144a575162",
+        "version" : "2.84.0"
       }
     },
     {
@@ -591,8 +591,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-http2.git",
       "state" : {
-        "revision" : "4281466512f63d1bd530e33f4aa6993ee7864be0",
-        "version" : "1.36.0"
+        "revision" : "5ca52e2f076c6a24451175f575f390569381d6a1",
+        "version" : "1.37.0"
       }
     },
     {
