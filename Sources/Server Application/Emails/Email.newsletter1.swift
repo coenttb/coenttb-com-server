@@ -66,7 +66,7 @@ extension Email {
                             In today's blog we reflect on my journey creating documents in Swift for the web and the office, and we will solve some pesky (legal) formatting issues once and for all.
                             """}
                             
-                            Link(href: .init(router.url(for: .blog(.post(id: index))).absoluteString)) {
+                            Link(href: .url(router.url(for: .blog(.post(id: index))))) {
                                 "Click here to read post \(title)"
                             }
                             .color(.text.primary.reverse())

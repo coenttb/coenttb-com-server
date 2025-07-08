@@ -117,6 +117,22 @@ extension [Coenttb_Blog.Blog.Post] {
                     estimatedTimeToComplete: 30.minutes,
                     permission: .free
                 ),
+                .init(
+                    id: .init(),
+                    index: 11,
+                    category: category,
+                    publishedAt: .distantFuture,
+                    image: position(asset: "coenttb-20250324.png")
+                        .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
+                    title: "Modern Swift Library Architecture: Composition of Modules",
+                    hidden: .no,
+                    blurb: """
+                        Why are swift-html-types, swift-css-types, swift-html-css-pointfree, and swift-html separate packages instead of one monolithic library? This deep dive into Swift package architecture explores the evolution from single files to multi-target libraries to complete package ecosystems. Learn how thoughtful modularization enables independent versioning, cross-project reuse, and flexible integration strategies—and why the compiler-enforced boundaries of Swift Package Manager make all the difference for maintainable, composable code.
+
+                        """,
+                    estimatedTimeToComplete: 30.minutes,
+                    permission: .free
+                ),
                 
             ]
         }
