@@ -37,7 +37,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     publishedAt: .init(year: 2024, month: 12, day: 16)!,
                     image: position(
                         asset: "coenttb-halftone.png",
-                        y: .percentage(65)
+                        y: .percentage(15)
                     ),
                     title: TranslatedString(
                         dutch: "Van blut naar build in public: open source coenttb.com",
@@ -105,7 +105,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     id: .init(),
                     index: index(),
                     category: category,
-                    publishedAt: .init(year: 2025, month: 04, day: 06)!,
+                    publishedAt: .distantFuture,
                     image: position(asset: "coenttb-20250324.png")
                         .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
                     title: "A Tour of CSS",
@@ -139,15 +139,17 @@ func position(
             )
             .objectFit(.cover)
             .width(.percent(100))
+            .maxWidth(.percent(100))
             .height(.percent(100))
-//            .objectPosition(x: x, y: y)
+            .objectPosition(.twoValues(.init(x), .init(y)))
         }
-//        .size(width: .percent(100), height: .percent(100))
         .width(.percent(100))
         .height(.percent(100))
         .position(.absolute)
     }
 }
+
+
 
 extension [Coenttb_Blog.Blog.Post] {
     package static var domain_modeling: [Coenttb_Blog.Blog.Post] {

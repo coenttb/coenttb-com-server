@@ -31,8 +31,6 @@ package struct CoenttbFooter: HTML {
 
         let posts = blogPosts()
         Footer(
-            foregroundColor: .text.primary,
-            backgroundColor: .offWhite.withDarkColor(.offBlack),
             tagline: .init(
                 title: "coenttb",
                 href: .init(serverRouter.href(for: .home)),

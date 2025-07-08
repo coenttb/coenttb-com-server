@@ -85,11 +85,12 @@ extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
                         let companyName
                     else { return }
                     
+                    @Dependency(\.envVars.appEnv) var appEnv
+                    
                     async let addMemberResponse = mailgunClient.mailingLists.addMember(
                         listAddress: listAddress,
                         request: .init(address: email)
                     )
-                    
                     async let notificationResponse = mailgunClient.messages.send(
                         Email.notifyOfNewSubscription(
                             from: mailgunCompanyEmail,
@@ -99,11 +100,10 @@ extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
                             companyName: companyName
                         )
                     )
-                    
                     let (memberResult, messageResult) = try await (addMemberResponse, notificationResponse)
-                    
                     logger.info("Added member: \(memberResult)")
                     logger.info("Sent notification: \(messageResult)")
+                    
                 } catch {
                     logger.error("Error processing subscription: \(error)")
                 }

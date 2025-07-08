@@ -26,6 +26,7 @@ extension WebsitePage {
 
         return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
+                
                 if currentUser?.authenticated != true {
                     CallToActionModule(
                         title: (

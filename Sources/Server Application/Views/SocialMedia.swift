@@ -9,7 +9,7 @@ import CoenttbHTML
 import Foundation
 
 public var x_com_light_background: some HTML {
-    div() {}
+    div {}
         .height(.px(500))
         .width(.px(1500))
         .gradient(bottom: .background.primary, middle: .gradientMidpoint(from: .background.primary, to: .branding.accent)!, top: .branding.accent)

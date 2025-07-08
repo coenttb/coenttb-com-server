@@ -159,25 +159,16 @@ extension CoenttbNavigationBar {
                 Header(4) {
                     HStack(alignment: .center) {
                         span {
-                            div {
-                                div {
-                                    AnyHTML(
-                                        Image.coenttbGreenSuit
-//                                            .dependency(\.objectStyle.position, .y(.percent(30)))
-//                                            .loading(.lazy)
-                                    )
-                                    .position(
-                                        .absolute,
-                                        top: .zero,
-                                        right: .zero,
-                                        bottom: .zero,
-                                        left: .zero
-                                    )
-                                }
-                                .clipPath(.circle(.percent(50)))
-                                .position(.relative)
-                                .size(.rem(1.75))
+                            Circle(size: .rem(1.75)) {
+                                AnyHTML(Image.coenttbGreenSuit)
+                                    .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                             }
+                            .position(.relative)
+                            .flexContainer(
+                                justification: .center,
+                                itemAlignment: .center
+                            )
+
                         }
                         .display(.flex)
                         .alignItems(.center)
@@ -185,8 +176,8 @@ extension CoenttbNavigationBar {
                         Link(href: .init(serverRouter.href(for: .home))) {
                             SVG.coenttb()
                         }
-                        .linkStyle(.init(underline: false))
                         .dependency(\.color.text.link, .text.primary)
+                        .linkStyle(.init(underline: false))
                         .display(.flex)
                         .alignItems(.center)
                     }
