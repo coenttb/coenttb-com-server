@@ -18,4 +18,12 @@ extension HTMLElementTypes.Image {
             alt: "coenttb avatar"
         )
     }()
+    
+    package static let prehalftone: HTMLElementTypes.Image = {
+        @Dependency(\.coenttb.website.router) var serverRouter
+        return Image(
+            src: .init(serverRouter.href(for: .asset(.image("prehalftone.png")))),
+            alt: "coenttb avatar"
+        )
+    }()
 }

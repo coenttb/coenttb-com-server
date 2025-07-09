@@ -15,7 +15,7 @@ struct Server {
         let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
         let logLevel = envVars.logLevel ?? .info
 
-        LoggingSystem.bootstrap { CoenttbLogHandler(label: $0, logLevel: logLevel, metadataProvider: nil) }
+//        LoggingSystem.bootstrap { CoenttbLogHandler(label: $0, logLevel: logLevel, metadataProvider: nil) }
 
         @Dependency(\.logger) var logger
 

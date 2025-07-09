@@ -27,6 +27,15 @@ extension WebsitePage {
         return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
                 
+                Image.prehalftone
+                    .inlineStyle("filter", "sepia(1) hue-rotate(-50deg) saturate(5) brightness(1.2)")
+                    .halftone(
+                        dotSize: .px(3),
+                        lineColor: .black
+                    )
+                    .height(.px(300))
+                    .width(.px(384))
+                
                 if currentUser?.authenticated != true {
                     CallToActionModule(
                         title: (
