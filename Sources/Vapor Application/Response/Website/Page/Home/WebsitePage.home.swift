@@ -26,16 +26,7 @@ extension WebsitePage {
 
         return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
-                
-                Image.prehalftone
-                    .inlineStyle("filter", "sepia(1) hue-rotate(-50deg) saturate(5) brightness(1.2)")
-                    .halftone(
-                        dotSize: .px(3),
-                        lineColor: .black
-                    )
-                    .height(.px(300))
-                    .width(.px(384))
-                
+                                
                 if currentUser?.authenticated != true {
                     CallToActionModule(
                         title: (
@@ -371,3 +362,29 @@ extension Blog.Post.Card {
         }
     }
 }
+
+
+//                PageModule(theme: .content) {
+//                    div {
+//                        div {
+//                            div {
+//                                Image.prehalftone
+//                                    .inlineStyle("filter", "sepia(0.8) hue-rotate(-260deg) saturate(3) brightness(1.15) contrast(1.2)")
+//                                    .halftone(
+//                                        dotSize: .em(0.3),                    // Smaller dots for more detail
+//                                        lineColor: .black.withDarkColor(.white),
+//                                        lineContrast: 1500,                    // Reduce contrast for smoother gradients
+//                                        photoBrightness: 90,                  // Slight brightness boost
+//                                        photoContrast: 110,                    // Increase contrast for better definition
+//                                        photoBlur: .px(0.5),                   // Less blur to retain detail
+//                                        blendMode: .overlay,                  // Try multiply or overlay for better blending
+//                                        rotationAngle: 15                      // Slightly less rotation
+//                                    )
+//                            }
+//                            .overflow(.hidden)
+//                        }
+//                        .height(.px(300))
+//                        .width(.px(384))
+//                    }
+//                    .position(.relative)
+//                }

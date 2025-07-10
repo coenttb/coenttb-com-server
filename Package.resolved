@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e6d86a2df1ef2152d85d9954d26f927660923a49"
+        "revision" : "751cd6d7876d562de56a5381e02ce180ad2b719b"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "c219ae68ec26cf3412831c54f5015e634f640dc8"
+        "revision" : "68105ac8568d860aa87ed6fe1aa0291e8c88342b"
       }
     },
     {
@@ -475,7 +475,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f8bc46e64e5122dc9eb47672b8adac1b9870a69f"
+        "revision" : "2244c4c7981ed0a0f0f8596c610ab61e57c562b3"
       }
     },
     {
@@ -502,7 +502,7 @@
       "location" : "https://github.com/coenttb/swift-html-types.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ae44d4027ff8b59ebadb19b6f29922be9ebb2ba0"
+        "revision" : "5c8695efb13e587e76dee2a76c2ccc61ee604a45"
       }
     },
     {

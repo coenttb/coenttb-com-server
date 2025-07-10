@@ -32,7 +32,7 @@ extension [Coenttb_Blog.Blog.Post] {
             [
                 .init(
                     id: .init(),
-                    index: index(),
+                    index: 1,
                     category: category,
                     publishedAt: .init(year: 2024, month: 12, day: 16)!,
                     image: position(
@@ -73,7 +73,7 @@ extension [Coenttb_Blog.Blog.Post] {
                 ),
                 .init(
                     id: .init(),
-                    index: index(),
+                    index: 2,
                     category: category,
                     publishedAt: .init(year: 2025, month: 03, day: 21)!,
                     image: position(asset: "coenttb-20250320.png")
@@ -88,7 +88,7 @@ extension [Coenttb_Blog.Blog.Post] {
                 ),
                 .init(
                     id: .init(),
-                    index: index(),
+                    index: 3,
                     category: category,
                     publishedAt: .init(year: 2025, month: 03, day: 24)!,
                     image: position(asset: "coenttb-20250324.png")
@@ -103,37 +103,48 @@ extension [Coenttb_Blog.Blog.Post] {
                 ),
                 .init(
                     id: .init(),
-                    index: index(),
+                    index: 4,
                     category: category,
-                    publishedAt: .distantFuture,
-                    image: position(asset: "coenttb-20250324.png")
-                        .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
-                    title: "A Tour of CSS",
+                    publishedAt: .init(year: 2025, month: 07, day: 10)!,
+                    image: position(asset: "coenttb-20250710.png"),
+                    title: "Modern Swift Library Architecture: The Swift Package",
                     hidden: .no,
                     blurb: """
-                        Swift-css gives you the type safety of Swift for your CSS. No more hunting down styling bugs—catch them at compile time instead. This library models CSS concepts as Swift types, making your styles as reliable as your Swift code.
-                          Perfect for developers who love the safety and tooling of Swift but need to work with CSS styling.
+                        Ever found yourself trapped maintaining a giant Swift monolith? There’s a better way. Discover how modular Swift package design lets you break down complexity, speed up testing, and dramatically simplify maintenance. Let’s explore modern Swift architectures together—one package at a time.
                         """,
                     estimatedTimeToComplete: 30.minutes,
                     permission: .free
                 ),
                 .init(
                     id: .init(),
-                    index: 11,
+                    index: 5,
                     category: category,
-                    publishedAt: .distantFuture,
-                    image: position(asset: "coenttb-20250324.png")
-                        .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
-                    title: "Modern Swift Library Architecture: Composition of Modules",
+                    publishedAt: .init(year: 2025, month: 07, day: 14)!,
+                    image: position(asset: "coenttb-202507102.png"),
+                    title: "Modern Swift Library Architecture: Composition of Packages",
                     hidden: .no,
                     blurb: """
-                        Why are swift-html-types, swift-css-types, swift-html-css-pointfree, and swift-html separate packages instead of one monolithic library? This deep dive into Swift package architecture explores the evolution from single files to multi-target libraries to complete package ecosystems. Learn how thoughtful modularization enables independent versioning, cross-project reuse, and flexible integration strategies—and why the compiler-enforced boundaries of Swift Package Manager make all the difference for maintainable, composable code.
-
+                        When single-package modularity isn't enough, it's time to embrace composition of packages. Discover how to architect Swift library ecosystems that enable independent evolution, flexible integration, and possibilities you haven't imagined yet.
                         """,
                     estimatedTimeToComplete: 30.minutes,
                     permission: .free
                 ),
-                
+//                .init(
+//                    id: .init(),
+//                    index: 5,
+//                    category: category,
+//                    publishedAt: .distantFuture,
+//                    image: position(asset: "coenttb-20250324.png")
+//                        .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
+//                    title: "A Tour of CSS",
+//                    hidden: .no,
+//                    blurb: """
+//                        Swift-css gives you the type safety of Swift for your CSS. No more hunting down styling bugs—catch them at compile time instead. This library models CSS concepts as Swift types, making your styles as reliable as your Swift code.
+//                          Perfect for developers who love the safety and tooling of Swift but need to work with CSS styling.
+//                        """,
+//                    estimatedTimeToComplete: 30.minutes,
+//                    permission: .free
+//                ),
             ]
         }
     }
