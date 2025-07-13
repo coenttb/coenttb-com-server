@@ -11,7 +11,7 @@ import Foundation
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
 
-extension Link {
+extension CoenttbHTML.Link {
     package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language

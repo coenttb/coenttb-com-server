@@ -1,2 +1,0 @@
-# Package.swift and hypermodularity 
-

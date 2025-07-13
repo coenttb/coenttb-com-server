@@ -32,25 +32,12 @@ extension Email {
                             title
                         }
                         
-                        div {
-                            div {
-                                div {
-                                    Image(
-                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
-                                        alt: "coenttb image"
-                                    )
-                                }
-                                .position(
-                                    .absolute,
-                                    top: .zero,
-                                    right: .zero,
-                                    bottom: .zero,
-                                    left: .zero
-                                )
-                            }
-                            .clipPath(.circle(.percent(50)))
-                            .position(.relative)
-                            .size(.rem(10))
+                        Circle {
+                            Image(
+                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
+                                alt: "coenttb image"
+                            )
+                                .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                         }
                         .margin(.auto)
                         .padding(top: .large, bottom: .large)
@@ -79,7 +66,7 @@ extension Email {
                             EmailMarkdown {"""
                             Back in March 2025, I released PointFreeHTML, and immediately realized I could achieve the syntax I wanted through a domain model of HTML and CSS—resulting in a type-safe AND domain-accurate HTML DSL in Swift. The project started as a fork of pointfree-html but evolved into something much more modular and composable as I encountered the limitations of monolithic design. It took waaaay longer than I expected!
 
-                            This project became an exploration of how to architect Swift libraries for maximum modularity and reusability. Instead of building one monolithic package, I created an ecosystem of carefully designed packages that compose together: [swift-html-types](https://github.com/coenttb/swift-html-types) and [swift-css-types](https://github.com/coenttb/swift-css-types) provide standards-compliant Swift APIs, while [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) integrates these domain models with HTML-rendering capabilities. coenttb/swift-html layers on functionality that completes the developer experience at point of use.
+                            This project became an exploration of how to architect Swift libraries for maximum modularity and reusability. Instead of building one monolithic package, I created an ecosystem of carefully designed packages that compose together: [swift-html-types](https://github.com/coenttb/swift-html-types) and [swift-css-types](https://github.com/coenttb/swift-css-types) provide standards-compliant Swift APIs, while [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) integrates these domain models with HTML-rendering capabilities. [swift-html](https://github.com/coenttb/swift-html) layers on functionality that completes the developer experience at point of use.
                             """}
                             
                             CoenttbHTML.Paragraph {

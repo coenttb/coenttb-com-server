@@ -7,4 +7,4 @@ My assumption was, as we do for printing HTML to PDf, that we have to encode the
 
 Experience has taught me to test further, and so I also created a test mailing list to test sending the email with image. I use mailgun to manage my mailing list, and sending the email with image to that test mailing list also returned an email with correctly loaded image. 
 
-Imagine my dissapointment when I sent out the real first newsletter and immediatlty received feedback that the image wasn't loading (fortunately, the rest was loading correctly). 
+Imagine my dissapointment when I sent out the real first newsletter and immediatly received feedback that the image wasn't loading (fortunately, the rest was loading correctly). 
