@@ -49,7 +49,7 @@ extension WebsitePage {
                         @Dependency(\.currentUser) var currentUser
 
                         return HTMLGroup {
-                            if currentUser?.newsletterSubscribed == true {
+                            if currentUser?.newsletterSubscribed != true {
                                 Coenttb_Newsletter.View.Subscribe.Overlay(
                                     title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                                     caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
