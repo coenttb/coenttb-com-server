@@ -108,7 +108,3 @@ extension User {
         return dto
     }
 }
-
-extension String {
-    package static let newsletterSubscribed: String = "coenttb_newsletter_subscribed"
-}

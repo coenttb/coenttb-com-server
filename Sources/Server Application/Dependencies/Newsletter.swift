@@ -40,6 +40,15 @@ extension Newsletter: @retroactive DependencyKey {
     }
 }
 
+extension Newsletter {
+    public var isSubscribed: Bool {
+        @Dependency(\.currentUser) var currentUser
+        @Dependency(\.request) var request
+        
+        return currentUser?.newsletterSubscribed == true || (currentUser?.newsletterSubscribed == nil && request?.cookies[.newsletterSubscribed]?.string == "true")
+    }
+}
+
 extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
     public static var liveValue: Self {
         Coenttb_Newsletter.Client.live(

@@ -19,10 +19,9 @@ extension WebsitePage {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.blog.getAll) var blogPosts
         @Dependency(\.currentUser) var currentUser
-        @Dependency(\.request) var request
-
+        @Dependency(\.newsletter.isSubscribed) var isNewsletterSubscribed
+        
         let posts = blogPosts()
-        let newsletterSubscribed = currentUser?.newsletterSubscribed == true || (currentUser?.newsletterSubscribed == nil && request?.cookies[.newsletterSubscribed]?.string == "true")
 
         return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
@@ -83,7 +82,7 @@ extension WebsitePage {
                     .backgroundColor(.background.primary)
                 }
 
-                if newsletterSubscribed != true {
+                if isNewsletterSubscribed != true {
                     div {
                         PageModule(theme: .newsletterSubscription) {
                             VStack {
