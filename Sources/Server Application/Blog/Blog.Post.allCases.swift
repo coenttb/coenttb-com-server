@@ -120,7 +120,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 5,
                     category: category,
                     publishedAt: .init(year: 2025, month: 07, day: 14)!,
-                    image: position(asset: "coenttb-202507102.png"),
+                    image: position(asset: "coenttb-20250714.png"),
                     title: "Modern Swift Library Architecture: Composition of Packages",
                     hidden: .no,
                     blurb: """

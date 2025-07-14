@@ -10,20 +10,125 @@ import Server_Dependencies
 import Server_Models
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
+import Coenttb_Server_HTML
 
 extension WebsitePage {
     static func contact(
-
+        
     ) async throws -> any AsyncResponseEncodable {
-
+        
         @Dependency(\.language) var translated
-
+        
+        
+        let email = Anchor(
+            href: .mailto(
+                "coen@coenttb.com",
+                subject: "Let's get in touch - coenttb.com",
+                body: "Hi Coen,\n\nI'd love to discuss..."
+            )
+        ) {
+            "coen@coenttb.com"
+        }
+        
+        let linkedIn = Anchor(
+            href: "https://linkedin.com/in/coenttb"
+        ) {
+            "LinkedIn"
+        }
+        
+        let twitter = Anchor(
+            href: "https://x.com/coenttb"
+        ) {
+            "@coenttb"
+        }
+        
+        let github = Anchor(
+            href: "https://github.com/coenttb"
+        ) {
+            "GitHub"
+        }
+        
+        let x = Anchor(
+            href: "https://x.com/coenttb"
+        ) {
+            "X/Twitter: @coenttb"
+        }
+        
+        // Location info
+        let location = "Amsterdam, Netherlands"
+        let timezone = "CET/CEST (UTC+1/+2)"
+        
+        // Response time expectation
+        let responseTime = TranslatedString(
+            dutch: "Ik antwoord meestal binnen 24-48 uren",
+            english: "I typically respond within 24-48 hours"
+        )
+        
         return Server_Application.DefaultHTMLDocument {
-            PageModule(theme: .content) {
+            PageModule(theme: .mainContent) {
+                Header(1) {
+                    "Let's connect"
+                }
+                
+                // Introduction paragraph
                 HTMLMarkdown {
-                    "Reach out to me on [X](https://x.com/coenttb)."
+                    """
+                    I'm always interested in discussing new projects, opportunities, 
+                    or just connecting with fellow entrepreneurs, coders, and lawyers. Whether you're looking to collaborate, have questions about my work, or want to chat about (legal) tech or Swift, I'd love to hear from you.
+                    """
                 }
             }
+            
+            PageModule(theme: .mainContent) {
+                Header(2) {
+                    "Get in touch"
+                }
+                
+                ul {
+                    li {
+                        Label {
+                            FontAwesomeIcon(icon: "envelope")
+                        } title: {
+                            email
+                        }
+                        small { "Best for: Project inquiries, collaborations" }
+                    }
+                    
+                    li {
+                        Label {
+                            FontAwesomeIcon(icon: "linkedin fa-brands")
+                        } title: {
+                            linkedIn
+                        }
+                        small { "Best for: Professional networking" }
+                    }
+                    
+                    li {
+                        Label {
+                            FontAwesomeIcon(icon: "x-twitter fa-brands")
+                        } title: {
+                            x
+                        }
+                        small { "Best for: Quick questions, discussions" }
+                    }
+                    
+                    li {
+                        Label {
+                            FontAwesomeIcon(icon: "github fa-brands")
+                        } title: {
+                            github
+                        }
+                        small { "Best for: code reviews, open source" }
+                    }
+                }
+                .listStyle(.reset)
+            }
         }
+    }
+}
+
+public extension String.StringInterpolation {
+    mutating func appendInterpolation(rawHTML value: some HTML) {
+        try! appendLiteral(String(value))
     }
 }

@@ -55,6 +55,16 @@ package struct CoenttbFooter: HTML {
                 (
                     title: "\(String.more.capitalizingFirstLetter())",
                     links: [
+                        newsletterSubscribed == true
+                        ? (
+                            label: "\(String.unsubscribe.capitalizingFirstLetter())",
+                            href: .init(serverRouter.href(for: .newsletter(.unsubscribe)))
+                        )
+                        : (
+                            label: "\(String.subscribe.capitalizingFirstLetter())",
+                            href: .init(serverRouter.href(for: .newsletter(.subscribe(.request))))
+                        ),
+                        (label: "RSS", href: .init(serverRouter.href(for: .rssXml))),
                         envVars.companyXComHandle.map { handle in
                             (
                                 label: "X/Twitter",
@@ -74,10 +84,6 @@ package struct CoenttbFooter: HTML {
                             )
                         },
                         (
-                            label: "\(String.contact_me.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .contact))
-                        ),
-                        (
                             label: "\(String.privacyStatement.capitalizingFirstLetter())",
                             href: .init(serverRouter.href(for: .privacy_statement))
                         ),
@@ -89,16 +95,10 @@ package struct CoenttbFooter: HTML {
                             label: "\(String.terms_of_use.capitalizingFirstLetter())",
                             href: .init(serverRouter.href(for: .terms_of_use))
                         ),
-                        newsletterSubscribed == true
-                        ? (
-                            label: "\(String.unsubscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.unsubscribe)))
-                        )
-                        : (
-                            label: "\(String.subscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.subscribe(.request))))
+                        (
+                            label: "\(String.contact_me.capitalizingFirstLetter())",
+                            href: .init(serverRouter.href(for: .contact))
                         ),
-                        (label: "RSS", href: .init(serverRouter.href(for: .rssXml)))
                     ]
                         .compactMap { $0
                         }

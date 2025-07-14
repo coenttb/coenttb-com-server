@@ -48,12 +48,21 @@ extension WebsitePage {
                         @Dependency(\.coenttb.website.router) var serverRouter
                         @Dependency(\.currentUser) var currentUser
 
-                        return Coenttb_Newsletter.View.Subscribe.Overlay (
-                            image: Image.coenttbGreenSuit,
-                            title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
-                            caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description,
-                            newsletterSubscribed: currentUser?.newsletterSubscribed == true
-                        )
+                        return HTMLGroup {
+                            if currentUser?.newsletterSubscribed == true {
+                                Coenttb_Newsletter.View.Subscribe.Overlay(
+                                    title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
+                                    caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
+                                ) {
+                                    Circle {
+                                        Image.coenttbGreenSuit
+                                            .objectPosition(.twoValues(.percentage(50), .percentage(50)))
+                                    }
+                                }
+                            } else {
+                                HTMLEmpty()
+                            }
+                        }
                     },
                     defaultDocument: { closure in
                         Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
@@ -82,10 +91,69 @@ extension WebsitePage {
             case .terms_of_use:
                 return try await WebsitePage.termsOfUse()
 
+            case let .newsletter(newsletter) where newsletter == .subscribe(.request):
+                @Dependency(\.coenttb.website.router) var serverRouter
+                return Server_Application.DefaultHTMLDocument {
+                    Circle {
+                        Image.coenttbGreenSuit
+                            .objectPosition(.twoValues(.percentage(50), .percentage(50)))
+                    }
+                    
+                    .position(.relative)
+                    .size(.rem(10))
+                    .padding(top: .length(.large))
+                    .flexContainer(
+                        justification: .center,
+                        itemAlignment: .center
+                    )
+                    
+                    PageModule(theme: .newsletterSubscription) {
+                        
+                        VStack {
+                            CoenttbHTML.Paragraph {
+                                String.periodically_receive_articles_on.capitalizingFirstLetter().period
+                            }
+                            .textAlign(.center, media: .desktop)
+
+                            @Dependency(\.newsletter.subscribeAction) var subscribeAction
+                            
+                            NewsletterSubscriptionForm(
+                                subscribeAction: subscribeAction()
+                            )
+                            .width(.percent(100))
+                        }
+                        .width(.percent(100))
+                        .maxWidth(.rem(30), media: .desktop)
+                        .flexContainer(
+                            direction: .column,
+                            wrap: .wrap,
+                            justification: .center,
+                            itemAlignment: .center,
+                            rowGap: .rem(0.5)
+                        )
+                    }
+                    title: {
+                        Header(2) {
+                            String.subscribe_to_my_newsletter.capitalizingFirstLetter()
+                        }
+                        .padding(top: .medium)
+                    }
+                    .flexContainer(
+                        justification: .center,
+                        itemAlignment: .center,
+                        media: .desktop
+                    )
+                    .flexContainer(
+                        justification: .start,
+                        itemAlignment: .start,
+                        media: .mobile
+                    )
+                }
+                
             case let .newsletter(newsletter):
                 return try await Coenttb_Newsletter.View.response(
                     newsletter: newsletter,
-                    htmlDocument: { html in
+                    htmlDocument: { html in 
                         Server_Application.DefaultHTMLDocument.init {
                             AnyHTML(html)
                         }

@@ -35,22 +35,22 @@ package struct CoenttbNavigationBar: HTML {
             .fontWeight(.medium)
             .font(.body(.small))
 
-//        let signupButton = Button(
-//            tag: a,
-//            background: .branding.primary,
-//            style: .tertiary
-//        ) {
-//            String.signup.capitalizingFirstLetter()
-//                .fontWeight(.medium)
-//        }
-//            .color(.text.primary.reverse())
-//            .href(serverRouter.href(for: .identity(.create(.request))))
+        let signupButton = Link(
+            destination: .identity(.create(.request)),
+            String.signup.capitalizingFirstLetter().description
+        )
+            .linkUnderline(false)
+            .fontWeight(.medium)
+            .font(.body(.small))
         
-        let signupButton = Link(href: .init(serverRouter.href(for: .identity(.create(.request))))) {
-            String.signup.capitalizingFirstLetter()
-                .fontWeight(.medium)
-        }
-            .color(.text.primary.reverse())
+        let subscribeButton = Link(
+            destination: .newsletter(.subscribe(.request)),
+            String.signup.capitalizingFirstLetter().description
+        )
+            .linkUnderline(false)
+            .fontWeight(.medium)
+            .font(.body(.small))
+        
 
         NavigationBar(
             logo: {
@@ -67,40 +67,39 @@ package struct CoenttbNavigationBar: HTML {
                 
             },
             trailingNavItems: {
-                p{ "" }
-//                ul {
-//                    HTMLGroup {
-//                        if currentUser?.authenticated == true {
-//                            li {
-//                                CircleIconButton(
-//                                    icon: .init(icon: "cog", size: .large),
-//                                    color: .branding.primary,
-//                                    href: serverRouter.href(for: .account(.settings(.index))),
-//                                    buttonSize: .rem(2.5)
-//                                )
-//                            }
-//
-//                        } else {
+                ul {
+                    HTMLGroup {
+                        if currentUser?.authenticated == true {
+                            li {
+                                CircleIconButton(
+                                    icon: .init(icon: "cog", size: .large),
+                                    color: .branding.primary,
+                                    href: .init(serverRouter.href(for: .account(.settings(.index)))),
+                                    buttonSize: .rem(2.5)
+                                )
+                            }
+
+                        } else {
 //                            li {
 //                                div {
-//                                    loginButton
+//                                loginButton
 //                                }
 //                                .display(.inlineBlock)
 //                            }
-//
-//                            li {
-//                                div {
-//                                    signupButton
-//                                }
-//                                .display(.inlineBlock)
-//                            }
-//                        }
-//                    }
-//                    .display(.inline)
-//                    .padding(left: .rem(1), pseudo: .not(.firstChild))
-//                }
-//                .listStyle(.reset)
-//                .display(.none, media: .mobile)
+
+                            li {
+                                div {
+                                    subscribeButton
+                                }
+                                .display(.inlineBlock)
+                            }
+                        }
+                    }
+                    .display(.inline)
+                    .padding(left: .rem(1), pseudo: .not(.firstChild))
+                }
+                .listStyle(.reset)
+                .display(Display.none, media: .mobile)
             },
             mobileNavItems: {
                 ul {
