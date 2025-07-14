@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "e76737996e97314cb8795767a5c2be426eae5996"
+        "revision" : "e895c686eedb544ef905be73841f56747d2c75c7"
       }
     },
     {
@@ -726,8 +726,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "4014016aad591a120f244f9b9e8a57252b7e62b4",
-        "version" : "4.115.0"
+        "revision" : "3636f443474769147828a5863e81a31f6f30e92c",
+        "version" : "4.115.1"
       }
     },
     {

@@ -26,8 +26,8 @@ extension WebsitePage {
 
         return Server_Application.DefaultHTMLDocument {
             HTMLGroup {
-                                
                 if currentUser?.authenticated != true {
+                    
                     CallToActionModule(
                         title: (
                             content: "\(String.oneliner)",
@@ -39,26 +39,25 @@ extension WebsitePage {
                             \((!posts.isEmpty ? " \(String.follow_my_blog_for.capitalizingFirstLetter().period)" : ""))
                             """,
                             color: .text.primary
-                        ),
-                        content: {
-                            div {
-                                Link(
-                                    destination: .newsletter(.subscribe(.request)),
-                                    String.subscribe_to_my_newsletter.capitalizingFirstLetter().description
-                                )
-                                .linkColor(.text.primary.reverse())
-                                .linkUnderline(false)
-                                .fontWeight(.normal)
-                                .buttonStyle(background: .branding.primary)
-                                
-                            }
-                            .paddingTop(.medium)
+                        )
+                    ) {
+                        div {
+                            Link(
+                                destination: .newsletter(.subscribe(.request)),
+                                String.subscribe_to_my_newsletter.capitalizingFirstLetter().description
+                            )
+                            .linkColor(.text.primary.reverse())
+                            .linkUnderline(false)
+                            .fontWeight(.normal)
+                            .buttonStyle(background: .branding.primary)
                             
-                            small { "Periodically receive articles on law, code, startups, wins (and failures)." }
-                                .font(.body(.small))
-                                .color(.text.secondary)
                         }
-                    )
+                        .paddingTop(.medium)
+                        
+                        small { "Periodically receive articles on law, code, startups, wins (and failures)." }
+                            .font(.body(.small))
+                            .color(.text.secondary)
+                    }
                     .if(currentUser?.authenticated != true) {
                         $0.gradient(
                             bottom: .background.primary,
