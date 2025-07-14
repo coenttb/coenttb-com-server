@@ -45,7 +45,7 @@ package struct CoenttbNavigationBar: HTML {
         
         let subscribeButton = Link(
             destination: .newsletter(.subscribe(.request)),
-            String.signup.capitalizingFirstLetter().description
+            String.subscribe_to_my_newsletter.capitalizingFirstLetter().description
         )
             .linkUnderline(false)
             .fontWeight(.medium)
