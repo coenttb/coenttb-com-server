@@ -19,9 +19,10 @@ extension Website<WebsitePage> {
         @Dependency(\.request) var request
 
         return try await withDependencies {
-            $0.route = .website(website)
-            $0.locale = request?.locale ?? $0.locale
-            $0.language = website.language ?? (request?.locale).flatMap { Languages.Language(locale: $0) } ?? .english
+            let language = website.language ?? (request?.locale).flatMap { Languages.Language(locale: $0) } ?? .english
+            $0.language = language
+            $0.locale = request?.locale ?? $0.locale            
+            $0.route = .website(.init(language: language, page: website.page))
             $0.languages = [.english, .dutch]
         } operation: {
             return try await WebsitePage.response(page: website.page)

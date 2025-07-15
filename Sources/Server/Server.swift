@@ -25,13 +25,11 @@ struct Server {
             defer { Task { try? await application.asyncShutdown() } }
 
             do {
-                let configure: @Sendable (Vapor.Application) async throws -> Void = Application.configure
-
                 try await Application.main(
                     application: application,
                     environment: environment,
                     logLevel: logLevel,
-                    configure: configure
+                    configure: Application.configure
                 )
             } catch {
                 logger.critical("Application failed to start: \(error.localizedDescription)")

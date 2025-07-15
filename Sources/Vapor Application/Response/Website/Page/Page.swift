@@ -14,154 +14,149 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Identity_Consumer
 
-
 extension WebsitePage {
     static func response(
         page: WebsitePage
     ) async throws -> any AsyncResponseEncodable {
-        return try await withDependencies {
-            $0.route = .website(.init(language: $0.route?.website?.language, page: page))
-        } operation: {
-            switch page {
-            case let .account(account):
-                return try await WebsitePage.Account.response(account: account)
+        switch page {
+        case let .account(account):
+            return try await WebsitePage.Account.response(account: account)
 
-            case let .blog(route):
-                @Dependency(\.blog.getAll) var blogPosts
-                @Dependency(\.envVars.companyXComHandle) var companyXComHandle
+        case let .blog(route):
+            @Dependency(\.blog.getAll) var blogPosts
+            @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-                let localPosts = blogPosts()
-                return try await Coenttb_Blog.Route.response(
-                    route: route,
-                    blurb: String.oneliner,
-                    companyXComHandle: companyXComHandle,
-                    getCurrentUser: {
-                        @Dependency(\.currentUser) var currentUser
-                        guard
-                            let newsletterSubscribed = currentUser?.newsletterSubscribed,
-                            let accessToBlog = currentUser?.accessToBlog
-                        else { return nil }
+            let localPosts = blogPosts()
+            return try await Coenttb_Blog.Route.response(
+                route: route,
+                blurb: String.oneliner,
+                companyXComHandle: companyXComHandle,
+                getCurrentUser: {
+                    @Dependency(\.currentUser) var currentUser
+                    guard
+                        let newsletterSubscribed = currentUser?.newsletterSubscribed,
+                        let accessToBlog = currentUser?.accessToBlog
+                    else { return nil }
 
-                        return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
-                    },
-                    coenttbWebNewsletter: {
-                        @Dependency(\.coenttb.website.router) var serverRouter
-                        @Dependency(\.currentUser) var currentUser
+                    return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
+                },
+                coenttbWebNewsletter: {
+                    @Dependency(\.coenttb.website.router) var serverRouter
+                    @Dependency(\.currentUser) var currentUser
 
-                        return HTMLGroup {
-                            if currentUser?.newsletterSubscribed != true {
-                                Coenttb_Newsletter.View.Subscribe.Overlay(
-                                    title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
-                                    caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
-                                ) {
-                                    Circle {
-                                        Image.coenttbGreenSuit
-                                            .objectPosition(.twoValues(.percentage(50), .percentage(50)))
-                                    }
+                    return HTMLGroup {
+                        if currentUser?.newsletterSubscribed != true {
+                            Coenttb_Newsletter.View.Subscribe.Overlay(
+                                title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
+                                caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
+                            ) {
+                                Circle {
+                                    Image.coenttbGreenSuit
+                                        .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                                 }
-                            } else {
-                                HTMLEmpty()
                             }
+                        } else {
+                            HTMLEmpty()
                         }
-                    },
-                    defaultDocument: { closure in
-                        Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
-                            AnyHTML(closure())
-                        }
-                    },
-                    posts: localPosts
-                )
-
-            case .choose_country_region:
-                return try await WebsitePage.choose_country_region()
-
-            case .contact:
-                return try await WebsitePage.contact()
-
-            case .general_terms_and_conditions:
-                return try await WebsitePage.general_terms_and_conditions()
-
-            case .home:
-                @Dependency(\.currentUser) var currentUser
-                return try await WebsitePage.home()
-
-            case .privacy_statement:
-                return try await WebsitePage.privacy_policy()
-
-            case .terms_of_use:
-                return try await WebsitePage.termsOfUse()
-
-            case let .newsletter(newsletter) where newsletter == .subscribe(.request):
-                @Dependency(\.coenttb.website.router) var serverRouter
-                return Server_Application.DefaultHTMLDocument {
-                    Circle {
-                        Image.coenttbGreenSuit
-                            .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                     }
-                    
-                    .position(.relative)
-                    .size(.rem(10))
-                    .padding(top: .length(.large))
-                    .flexContainer(
-                        justification: .center,
-                        itemAlignment: .center
-                    )
-                    
-                    PageModule(theme: .newsletterSubscription) {
-                        
-                        VStack {
-                            CoenttbHTML.Paragraph {
-                                String.periodically_receive_articles_on.capitalizingFirstLetter().period
-                            }
-                            .textAlign(.center, media: .desktop)
+                },
+                defaultDocument: { closure in
+                    Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
+                        AnyHTML(closure())
+                    }
+                },
+                posts: localPosts
+            )
 
-                            @Dependency(\.newsletter.subscribeAction) var subscribeAction
-                            
-                            NewsletterSubscriptionForm(
-                                subscribeAction: subscribeAction()
-                            )
-                            .width(.percent(100))
-                        }
-                        .width(.percent(100))
-                        .maxWidth(.rem(30), media: .desktop)
-                        .flexContainer(
-                            direction: .column,
-                            wrap: .wrap,
-                            justification: .center,
-                            itemAlignment: .center,
-                            rowGap: .rem(0.5)
-                        )
-                    }
-                    title: {
-                        Header(2) {
-                            String.subscribe_to_my_newsletter.capitalizingFirstLetter()
-                        }
-                        .padding(top: .medium)
-                    }
-                    .flexContainer(
-                        justification: .center,
-                        itemAlignment: .center,
-                        media: .desktop
-                    )
-                    .flexContainer(
-                        justification: .start,
-                        itemAlignment: .start,
-                        media: .mobile
-                    )
+        case .choose_country_region:
+            return try await WebsitePage.choose_country_region()
+
+        case .contact:
+            return try await WebsitePage.contact()
+
+        case .general_terms_and_conditions:
+            return try await WebsitePage.general_terms_and_conditions()
+
+        case .home:
+            @Dependency(\.currentUser) var currentUser
+            return try await WebsitePage.home()
+
+        case .privacy_statement:
+            return try await WebsitePage.privacy_policy()
+
+        case .terms_of_use:
+            return try await WebsitePage.termsOfUse()
+
+        case let .newsletter(newsletter) where newsletter == .subscribe(.request):
+            @Dependency(\.coenttb.website.router) var serverRouter
+            return Server_Application.DefaultHTMLDocument {
+                Circle {
+                    Image.coenttbGreenSuit
+                        .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                 }
                 
-            case let .newsletter(newsletter):
-                return try await Coenttb_Newsletter.View.response(
-                    newsletter: newsletter,
-                    htmlDocument: { html in 
-                        Server_Application.DefaultHTMLDocument.init {
-                            AnyHTML(html)
-                        }
-                    }
+                .position(.relative)
+                .size(.rem(10))
+                .padding(top: .length(.large))
+                .flexContainer(
+                    justification: .center,
+                    itemAlignment: .center
                 )
-            case .identity(let identity):
-                return try await Identity.Consumer.View.response(view: identity)
+                
+                PageModule(theme: .newsletterSubscription) {
+                    
+                    VStack {
+                        CoenttbHTML.Paragraph {
+                            String.periodically_receive_articles_on.capitalizingFirstLetter().period
+                        }
+                        .textAlign(.center, media: .desktop)
+
+                        @Dependency(\.newsletter.subscribeAction) var subscribeAction
+                        
+                        NewsletterSubscriptionForm(
+                            subscribeAction: subscribeAction()
+                        )
+                        .width(.percent(100))
+                    }
+                    .width(.percent(100))
+                    .maxWidth(.rem(30), media: .desktop)
+                    .flexContainer(
+                        direction: .column,
+                        wrap: .wrap,
+                        justification: .center,
+                        itemAlignment: .center,
+                        rowGap: .rem(0.5)
+                    )
+                }
+                title: {
+                    Header(2) {
+                        String.subscribe_to_my_newsletter.capitalizingFirstLetter()
+                    }
+                    .padding(top: .medium)
+                }
+                .flexContainer(
+                    justification: .center,
+                    itemAlignment: .center,
+                    media: .desktop
+                )
+                .flexContainer(
+                    justification: .start,
+                    itemAlignment: .start,
+                    media: .mobile
+                )
             }
+            
+        case let .newsletter(newsletter):
+            return try await Coenttb_Newsletter.View.response(
+                newsletter: newsletter,
+                htmlDocument: { html in
+                    Server_Application.DefaultHTMLDocument.init {
+                        AnyHTML(html)
+                    }
+                }
+            )
+        case .identity(let identity):
+            return try await Identity.Consumer.View.response(view: identity)
         }
     }
 }

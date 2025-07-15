@@ -23,12 +23,13 @@ extension Coenttb_Com_Router.Route {
         @Dependency(\.logger) var logger
         
         return try await withDependencies {
+            $0.request = request
+            $0.route = route
+            // Necessary to get updated envVars on each request
             $0.envVars = .liveValue
         } operation: {
             return try await withDependencies {
                 @Dependency(\.envVars) var envVars
-                $0.request = request
-                $0.route = route
                 $0.logger.logLevel = envVars.logLevel ?? logger.logLevel
             } operation: {
                 return try await withDependencies { _ in
@@ -46,8 +47,8 @@ extension Coenttb_Com_Router.Route {
                     case let .webhook(webhook):
                         return try await Webhook.response(webhook: webhook)
                         
-                    case .website(let page) where page.page == .home:
-                        return try await Website<WebsitePage>.response(website: .init(language: nil, page: .home))
+//                    case .website(let page) where page.page == .home && page.language == nil:
+//                        return try await Website<WebsitePage>.response(website: .init(language: nil, page: .home))
                         
                     case let .website(website):
                         return try await Website<WebsitePage>.response(website: website)
@@ -71,24 +72,22 @@ extension Coenttb_Com_Router.Route {
                         )
                         
                     case .public(.robots):
-                        let disallows = Languages.Language.allCases.map {
+                        return Response.robots(
+                            disallows: Languages.Language.allCases.map {
                         """
                         Disallow: /\($0.rawValue)/account/
                         Disallow: /\($0.rawValue)/checkout/
                         """
-                        }.joined(separator: "\n")
-                        
-                        return Response.robots(
-                            disallows: disallows
+                            }.joined(separator: "\n")
                         )
                         
                     case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
                         @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
-                        if let appleDeveloperMerchantIdDomainAssociation {
-                            return appleDeveloperMerchantIdDomainAssociation
-                        } else {
-                            throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association")
-                        }
+                        
+                        guard let appleDeveloperMerchantIdDomainAssociation
+                        else { throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association") }
+                        
+                        return appleDeveloperMerchantIdDomainAssociation
                         
                     case let .public(.favicon(favicon)):
                         return try await request.fileio.streamFile(at: .favicon(favicon))
