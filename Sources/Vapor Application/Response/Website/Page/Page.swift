@@ -27,7 +27,7 @@ extension Coenttb_Com_Router.Route.Website {
             @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
             let localPosts = blogPosts()
-            return try await Coenttb_Blog.Route.response(
+            return try await Blog.Route.View.response(
                 route: route,
                 blurb: String.oneliner,
                 companyXComHandle: companyXComHandle,

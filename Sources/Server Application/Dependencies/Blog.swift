@@ -16,8 +16,8 @@ import Coenttb_Com_Shared
 import FoundationNetworking
 #endif
 
-extension BlogKey: @retroactive DependencyKey {
-    public static let liveValue: Coenttb_Blog.Client = .init(
+extension Blog.Client: @retroactive DependencyKey {
+    public static let liveValue: Blog.Client = .init(
         getAll: {
             @Dependency(\.envVars.appEnv) var appEnv
             @Dependency(\.date.now) var now
