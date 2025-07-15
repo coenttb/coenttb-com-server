@@ -12,7 +12,7 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Server_HTML
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func contact(
         
     ) async throws -> any AsyncResponseEncodable {

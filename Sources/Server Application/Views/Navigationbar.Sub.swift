@@ -16,7 +16,7 @@ import URLRouting
 import Coenttb_Com_Router
 
 extension [(URL, String)] {
-    init(_ page: WebsitePage) async throws {
+    init(_ page: Coenttb_Com_Router.Route.Website) async throws {
         @Dependency(\.coenttb.website.router) var serverRouter
 
         var urls: Self = []

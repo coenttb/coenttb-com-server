@@ -8,13 +8,13 @@ import Coenttb_Identity_Consumer
 
 @DependencyClient
 package struct Client: Sendable {
-    package let newsletter: Coenttb_Newsletter.Client
+    package let newsletter: Newsletter.Client
     package let identity: Identity.Consumer.Client
     package let user: Client.User
 //    package let stripe: Server_Client.Client.Stripe?
     
     package init(
-        newsletter: Coenttb_Newsletter.Client,
+        newsletter: Newsletter.Client,
         identity: Identity.Consumer.Client,
         user: Client.User
 //        stripe: Server_Client.Client.Stripe?

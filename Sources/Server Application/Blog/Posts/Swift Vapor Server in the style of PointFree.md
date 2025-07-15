@@ -2,9 +2,9 @@
 
 ## Server.main
 
-## Application.main
-
 ## Application.configure
+
+## app.mount(router, use: Route.response)
 
 ## Router
 
@@ -14,10 +14,9 @@
 #### Example: Newsletter
 
 ### Website
-
+#### Language
+#### Page
 
 ### Webhook
 #### Example: Mailgun
 ### Public
-
-

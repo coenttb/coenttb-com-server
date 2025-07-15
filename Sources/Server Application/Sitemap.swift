@@ -12,7 +12,7 @@ import Coenttb_Com_Shared
 import Sitemap
 import Coenttb_Com_Router
 
-extension [WebsitePage: SiteMap.URL.MetaData] {
+extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
     static func `default`() async throws -> Self {
 
         @Dependency(\.blog.getAll) var blogPosts
@@ -31,16 +31,16 @@ extension [WebsitePage: SiteMap.URL.MetaData] {
             .terms_of_use: .empty,
             .general_terms_and_conditions: .empty
         ]
-            .merging([WebsitePage: SiteMap.URL.MetaData](blogPosts: blogPosts())) { current, _ in current }
+            .merging([Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData](blogPosts: blogPosts())) { current, _ in current }
     }
 }
 
-extension [WebsitePage: SiteMap.URL.MetaData] {
+extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
     init(blogPosts: [Coenttb_Blog.Blog.Post]) {
         self = Dictionary(
             uniqueKeysWithValues: blogPosts.enumerated().map { index, post in
                 (
-                    WebsitePage.blog(.post(index)),
+                    Route.Website.blog(.post(index)),
                     SiteMap.URL.MetaData(
                         lastModification: post.publishedAt,
                         changeFrequency: .weekly,
@@ -54,7 +54,7 @@ extension [WebsitePage: SiteMap.URL.MetaData] {
 
 extension [SiteMap.URL] {
     init(
-        dictionary: [WebsitePage: SiteMap.URL.MetaData]
+        dictionary: [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData]
     ) {
         @Dependency(\.coenttb.website.router) var serverRouter
         self = .init(router: serverRouter.url(for:), dictionary)
@@ -63,7 +63,7 @@ extension [SiteMap.URL] {
 
 extension SiteMap {
     init(
-        dictionary: [WebsitePage: SiteMap.URL.MetaData]
+        dictionary: [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData]
     ) {
         self = .init(urls: [SiteMap.URL](dictionary: dictionary))
     }

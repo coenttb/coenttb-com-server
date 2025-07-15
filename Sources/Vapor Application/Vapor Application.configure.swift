@@ -16,6 +16,7 @@ import JWT
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
 
+        // necessary to set here because $0.color has a liveValue default
         prepareDependencies {
             $0.color = .coenttb
         }
@@ -56,7 +57,8 @@ extension Application {
         app.middleware.use(Identity.Consumer.Middleware())
 
         @Dependency(\.coenttb.website.router) var router
-        app.mount(router, use: Coenttb_Com_Router.Route.response)
+        
+        app.mount(router, use: Route.response)
     }
 }
 
@@ -67,4 +69,3 @@ extension Application {
         _ = Clauses.termsOfUse
     }
 }
-

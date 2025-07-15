@@ -49,9 +49,9 @@ extension Newsletter {
     }
 }
 
-extension Coenttb_Newsletter.Client: @retroactive DependencyKey {
+extension Newsletter.Client: @retroactive DependencyKey {
     public static var liveValue: Self {
-        Coenttb_Newsletter.Client.live(
+        Newsletter.Client.live(
             sendVerificationEmail: { email, token in
                 @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
                 @Dependencies.Dependency(\.coenttb.website.router) var router

@@ -15,9 +15,9 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Identity_Consumer
 
-extension WebsitePage.Account {
+extension Coenttb_Com_Router.Route.Website.Account {
     static func response(
-        account: WebsitePage.Account
+        account: Coenttb_Com_Router.Route.Website.Account
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.coenttb.website.router) var serverRouter
         switch account {

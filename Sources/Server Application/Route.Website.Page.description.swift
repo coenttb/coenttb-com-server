@@ -14,7 +14,7 @@ import Server_Translations
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
 
-extension WebsitePage {
+extension Route.Website {
     public func description() -> TranslatedString? {
 
         let x: TranslatedString? = switch self {

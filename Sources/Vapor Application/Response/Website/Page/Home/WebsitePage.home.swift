@@ -13,7 +13,7 @@ import Coenttb_Com_Shared
 import Server_Translations
 import Coenttb_Com_Router
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     public static func home() async throws -> any AsyncResponseEncodable {
         @Dependency(\.language) var translated
         @Dependency(\.coenttb.website.router) var serverRouter

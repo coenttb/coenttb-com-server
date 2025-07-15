@@ -48,10 +48,10 @@ extension Coenttb_Com_Router.Route {
                         return try await Webhook.response(webhook: webhook)
                         
 //                    case .website(let page) where page.page == .home && page.language == nil:
-//                        return try await Website<WebsitePage>.response(website: .init(language: nil, page: .home))
+//                        return try await Website<Route.Website>.response(website: .init(language: nil, page: .home))
                         
                     case let .website(website):
-                        return try await Website<WebsitePage>.response(website: website)
+                        return try await Coenttb_Server.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
                         
                     case .public(.sitemap):
                         return Response(
@@ -103,7 +103,7 @@ extension Coenttb_Com_Router.Route {
 
 
 extension FileIO {
-    func streamFile(at public: Public) async throws -> Vapor.Response {
+    func streamFile(at public: Coenttb_Com_Router.Route.Public) async throws -> Vapor.Response {
         @Dependency(\.coenttb.website.router) var serverRouter
         return try await self.asyncStreamFile(at: serverRouter.url(for: .public(`public`)).absoluteString)
     }

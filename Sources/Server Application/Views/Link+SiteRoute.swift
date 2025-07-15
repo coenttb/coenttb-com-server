@@ -12,7 +12,7 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 
 extension CoenttbHTML.Link {
-    package init(destination: WebsitePage, @HTMLBuilder label: () -> Label) {
+    package init(destination: Coenttb_Com_Router.Route.Website, @HTMLBuilder label: () -> Label) {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.language) var language
         self.init(
@@ -22,7 +22,7 @@ extension CoenttbHTML.Link {
     }
 
     package init(
-        destination: WebsitePage,
+        destination: Coenttb_Com_Router.Route.Website,
         _ title: String
     ) where Label == HTMLText {
         @Dependency(\.coenttb.website.router) var serverRouter

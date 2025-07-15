@@ -13,7 +13,7 @@ import Coenttb_Identity_Consumer
 
 
 func settings(
-    settings: WebsitePage.Account.Settings,
+    settings: Coenttb_Com_Router.Route.Website.Account.Settings,
     create_customer_portal_session_return_url: URL
 ) async throws -> AsyncResponseEncodable {
     @Dependency(\.coenttb.website.router) var serverRouter

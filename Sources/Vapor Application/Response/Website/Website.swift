@@ -10,9 +10,9 @@ import Server_Dependencies
 import Coenttb_Com_Shared
 import Coenttb_Com_Router
 
-extension Website<WebsitePage> {
+extension Website<Coenttb_Com_Router.Route.Website> {
     static func response(
-        website: Website<WebsitePage>
+        website: Website<Coenttb_Com_Router.Route.Website>
     ) async throws -> any AsyncResponseEncodable {
 
         @Dependency(\.envVars.languages) var languages
@@ -21,11 +21,11 @@ extension Website<WebsitePage> {
         return try await withDependencies {
             let language = website.language ?? (request?.locale).flatMap { Languages.Language(locale: $0) } ?? .english
             $0.language = language
-            $0.locale = request?.locale ?? $0.locale            
+            $0.locale = request?.locale ?? $0.locale
             $0.route = .website(.init(language: language, page: website.page))
             $0.languages = [.english, .dutch]
         } operation: {
-            return try await WebsitePage.response(page: website.page)
+            return try await Coenttb_Com_Router.Route.Website.response(page: website.page)
         }
     }
 }

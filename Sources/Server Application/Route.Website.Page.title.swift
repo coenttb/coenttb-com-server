@@ -13,7 +13,7 @@ import Coenttb_Com_Shared
 import Server_Translations
 import Coenttb_Com_Router
 
-extension WebsitePage {
+extension Route.Website {
     public var title: TranslatedString? {
         switch self {
         case .choose_country_region:

@@ -14,13 +14,13 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 import Coenttb_Identity_Consumer
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func response(
-        page: WebsitePage
+        page: Coenttb_Com_Router.Route.Website
     ) async throws -> any AsyncResponseEncodable {
         switch page {
         case let .account(account):
-            return try await WebsitePage.Account.response(account: account)
+            return try await Coenttb_Com_Router.Route.Website.Account.response(account: account)
 
         case let .blog(route):
             @Dependency(\.blog.getAll) var blogPosts
@@ -46,7 +46,7 @@ extension WebsitePage {
 
                     return HTMLGroup {
                         if currentUser?.newsletterSubscribed != true {
-                            Coenttb_Newsletter.View.Subscribe.Overlay(
+                            Newsletter.Route.View.Subscribe.Overlay(
                                 title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
                                 caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
                             ) {
@@ -69,23 +69,23 @@ extension WebsitePage {
             )
 
         case .choose_country_region:
-            return try await WebsitePage.choose_country_region()
+            return try await Coenttb_Com_Router.Route.Website.choose_country_region()
 
         case .contact:
-            return try await WebsitePage.contact()
+            return try await Coenttb_Com_Router.Route.Website.contact()
 
         case .general_terms_and_conditions:
-            return try await WebsitePage.general_terms_and_conditions()
+            return try await Coenttb_Com_Router.Route.Website.general_terms_and_conditions()
 
         case .home:
             @Dependency(\.currentUser) var currentUser
-            return try await WebsitePage.home()
+            return try await Coenttb_Com_Router.Route.Website.home()
 
         case .privacy_statement:
-            return try await WebsitePage.privacy_policy()
+            return try await Coenttb_Com_Router.Route.Website.privacy_policy()
 
         case .terms_of_use:
-            return try await WebsitePage.termsOfUse()
+            return try await Coenttb_Com_Router.Route.Website.termsOfUse()
 
         case let .newsletter(newsletter) where newsletter == .subscribe(.request):
             @Dependency(\.coenttb.website.router) var serverRouter
@@ -147,7 +147,7 @@ extension WebsitePage {
             }
             
         case let .newsletter(newsletter):
-            return try await Coenttb_Newsletter.View.response(
+            return try await Newsletter.Route.View.response(
                 newsletter: newsletter,
                 htmlDocument: { html in
                     Server_Application.DefaultHTMLDocument.init {
@@ -161,7 +161,7 @@ extension WebsitePage {
     }
 }
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func choose_country_region() async throws
     -> any AsyncResponseEncodable {
         @Dependency(\.envVars.languages) var languages
@@ -172,7 +172,7 @@ extension WebsitePage {
     }
 }
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func dashboard() async throws -> any AsyncResponseEncodable {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
@@ -198,7 +198,7 @@ extension WebsitePage {
     }
 }
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func privacy_policy() async throws -> any AsyncResponseEncodable {
 
         @Dependency(\.language) var language
@@ -220,7 +220,7 @@ extension WebsitePage {
     }
 }
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func termsOfUse() async throws -> any AsyncResponseEncodable {
 
         @Dependency(\.language) var language
@@ -242,7 +242,7 @@ extension WebsitePage {
     }
 }   
 
-extension WebsitePage {
+extension Coenttb_Com_Router.Route.Website {
     static func general_terms_and_conditions() async throws
     -> any AsyncResponseEncodable {
 

@@ -17,9 +17,9 @@ import Coenttb_Com_Shared
 import Coenttb_Com_Router
 //import Coenttb_Stripe
 
-extension Coenttb_Com_Router.Webhook {
+extension Coenttb_Com_Router.Route.Webhook {
     static func response(
-        webhook: Webhook
+        webhook: Coenttb_Com_Router.Route.Webhook
     ) async throws -> any AsyncResponseEncodable {
         switch webhook {
         case .mailgun:
