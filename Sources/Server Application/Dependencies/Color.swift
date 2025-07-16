@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 20/03/2025.
 //
 
-import Foundation
 import CoenttbHTML
+import Foundation
 
 extension HTMLColor.Defaults {
     package static var coenttb: Self {
@@ -15,7 +15,7 @@ extension HTMLColor.Defaults {
         color.branding.accent = .green850
         color.text.link = .green550.withDarkColor(.green600)
         color.background.secondary = .offWhite.withDarkColor(.offBlack)
-        
+
         return color
     }
 }

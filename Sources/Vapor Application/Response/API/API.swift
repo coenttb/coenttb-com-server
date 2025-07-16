@@ -1,14 +1,14 @@
-import Server_Application
-import Coenttb_Server
-import Coenttb_Newsletter
-import Coenttb_Syndication_Vapor
-import Mailgun
-import Server_Models
-import Coenttb_Com_Shared
-import Server_Client
-import Coenttb_Vapor
 import Coenttb_Com_Router
+import Coenttb_Com_Shared
 import Coenttb_Identity_Consumer
+import Coenttb_Newsletter
+import Coenttb_Server
+import Coenttb_Syndication_Vapor
+import Coenttb_Vapor
+import Mailgun
+import Server_Application
+import Server_Client
+import Server_Models
 
 extension Coenttb_Com_Router.Route.API {
     static func response(
@@ -17,7 +17,7 @@ extension Coenttb_Com_Router.Route.API {
         @Dependency(\.logger) var logger
 
         switch api {
-            
+
             case .newsletter(let newsletter):
 
                 @Dependency(\.serverClient.newsletter) var client
@@ -27,9 +27,7 @@ extension Coenttb_Com_Router.Route.API {
             case .identity(let identity):
             return try await Coenttb_Identity_Consumer.Identity.Consumer.API.response(api: identity)
 
-                
-
-            case .syndication(_):
+            case .syndication:
 
 //                let width = 400
 //                let height = 500
@@ -47,14 +45,14 @@ extension Coenttb_Com_Router.Route.API {
 //                headers.add(name: .contentType, value: "image/png")
 //
 //                return Response(status: .ok, headers: headers, body: .init(data: pngData))
-                
+
                 return Response.ok
-            
+
         }
     }
 }
 
-//extension Server_Models.User {
+// extension Server_Models.User {
 //    init?(update: Coenttb_Identity.API.Update) {
 //        @Dependency(\.currentUser) var currentUser
 //
@@ -68,9 +66,7 @@ extension Coenttb_Com_Router.Route.API {
 //
 //        self = user
 //    }
-//}
-
-
+// }
 
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey

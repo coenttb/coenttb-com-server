@@ -20,4 +20,3 @@ extension DependencyValues {
         set { self[CurrentUserKey.self] = newValue }
     }
 }
-

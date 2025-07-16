@@ -5,15 +5,15 @@
 //  Created by Coen ten Thije Boonkkamp on 28/06/2022.
 //
 
-import Server_Application
-import Coenttb_Server
 import Coenttb_Blog
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Server
 import Coenttb_Syndication_Vapor
+import Server_Application
+import Server_Dependencies
 import Server_EnvVars
 import Server_Models
-import Coenttb_Com_Shared
-import Server_Dependencies
-import Coenttb_Com_Router
 
 extension Coenttb_Com_Router.Route {
     static func response(
@@ -21,7 +21,7 @@ extension Coenttb_Com_Router.Route {
         route: Coenttb_Com_Router.Route
     ) async throws -> any AsyncResponseEncodable {
         @Dependency(\.logger) var logger
-        
+
         return try await withDependencies {
             $0.request = request
             $0.route = route
@@ -35,34 +35,34 @@ extension Coenttb_Com_Router.Route {
                 return try await withDependencies { _ in
 //                    $0.currentUser = try await currentUser()
                 } operation: {
-                    
+
                     @Dependency(\.uuid) var uuid
                     @Dependency(\.coenttb.website.router) var serverRouter
                     @Dependency(\.currentUser) var currentUser
-                    
+
                     switch route {
                     case let .api(api):
                         return try await API.response(api: api)
-                        
+
                     case let .webhook(webhook):
                         return try await Webhook.response(webhook: webhook)
-                        
+
 //                    case .website(let page) where page.page == .home && page.language == nil:
 //                        return try await Website<Route.Website>.response(website: .init(language: nil, page: .home))
-                        
+
                     case let .website(website):
                         return try await Coenttb_Server.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
-                        
+
                     case .public(.sitemap):
                         return Response(
                             status: .ok,
                             body: .init(stringLiteral: try await SiteMap.default().xml)
                         )
-                        
+
                     case .public(.rssXml):
-                        
+
                         @Dependency(\.blog.getAll) var blogPosts
-                        
+
                         return await RSS.Feed.Response(
                             feed: RSS.Feed.memoized {
                                 RSS.Feed(
@@ -70,7 +70,7 @@ extension Coenttb_Com_Router.Route {
                                 )
                             }
                         )
-                        
+
                     case .public(.robots):
                         return Response.robots(
                             disallows: Languages.Language.allCases.map {
@@ -80,18 +80,18 @@ extension Coenttb_Com_Router.Route {
                         """
                             }.joined(separator: "\n")
                         )
-                        
+
                     case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
                         @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
-                        
+
                         guard let appleDeveloperMerchantIdDomainAssociation
                         else { throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association") }
-                        
+
                         return appleDeveloperMerchantIdDomainAssociation
-                        
+
                     case let .public(.favicon(favicon)):
                         return try await request.fileio.streamFile(at: .favicon(favicon))
-                        
+
                     case let .public(`public`):
                         return try await request.fileio.streamFile(at: `public`)
                     }
@@ -123,7 +123,7 @@ extension RSS.Feed {
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.envVars.baseUrl) var baseUrl
         @Dependency(\.envVars.companyName) var companyName
-        
+
         self = RSS.Feed(
             metadata: .init(
                 title: companyName ?? "RSS",
@@ -152,5 +152,3 @@ extension RSS.Feed.Item {
         )
     }
 }
-
-

@@ -13,10 +13,10 @@ import FoundationNetworking
 
 extension SQLPostgresConfigurationKey: @retroactive DependencyKey {
     public static var liveValue: SQLPostgresConfiguration {
-        
+
         @Dependency(\.envVars.emergencyMode) var emergencyMode
         @Dependency(\.envVars.postgres.databaseUrl) var postgresDatabaseUrl
-        
+
         return .liveValue(
             emergencyMode: emergencyMode,
             postgresDatabaseUrl: postgresDatabaseUrl)

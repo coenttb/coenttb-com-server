@@ -5,13 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
-import Coenttb_Server
 import Coenttb_Blog
+import Coenttb_Com_Shared
+import Coenttb_Newsletter
+import Coenttb_Server
 import Server_Client
 import Server_Dependencies
 import Server_Models
-import Coenttb_Com_Shared
-import Coenttb_Newsletter
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -32,7 +32,7 @@ extension Blog.Client: @retroactive DependencyKey {
             getAll: {
                 @Dependency(\.envVars.appEnv) var appEnv
                 @Dependency(\.date.now) var now
-                
+
                 return [Coenttb_Blog.Blog.Post].allCases
                     .filter {
                         switch appEnv {
@@ -56,11 +56,11 @@ extension Blog.Client: @retroactive DependencyKey {
             postToFilename: { post in
                 return .init { language in
                     [
-                        post.category.map{ $0(language) },
+                        post.category.map { $0(language) },
                         "\(post.index)",
                         language.rawValue
                     ]
-                        .compactMap{ $0 }
+                        .compactMap { $0 }
                         .joined(separator: "-")
                 }
             },
@@ -70,7 +70,7 @@ extension Blog.Client: @retroactive DependencyKey {
                     let newsletterSubscribed = currentUser?.newsletterSubscribed,
                     let accessToBlog = currentUser?.accessToBlog
                 else { return nil }
-                
+
                 return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
             }
         )

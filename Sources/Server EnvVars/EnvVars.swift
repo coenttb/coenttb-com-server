@@ -11,8 +11,7 @@ import GoogleAnalytics
 import Hotjar
 import Mailgun
 import Postgres
-//import Coenttb_Stripe
-
+// import Coenttb_Stripe
 
 extension EnvVars {
     public var postgres: Postgres.Client.EnvVars {
@@ -105,7 +104,7 @@ extension EnvVars {
     public var monthlyBlogSubscriptionPriceLookupKey: String? {
         self["MONTHLY_BLOG_SUBSCRIPTION_PRICE_LOOKUP_KEY"]
     }
-    
+
     public var newsletterAddress: EmailAddress? {
         self["NEWSLETTER_ADDRESS"].flatMap(EmailAddress.init(rawValue:))
     }

@@ -63,7 +63,7 @@ let package = Package(
         .library(name: .serverTranslations, targets: [.serverTranslations]),
         .library(name: .vaporApplication, targets: [.vaporApplication]),
         .library(name: .serverClient, targets: [.serverClient]),
-        .library(name: .serverDatabase, targets: [.serverDatabase]),
+        .library(name: .serverDatabase, targets: [.serverDatabase])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
@@ -80,7 +80,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.2"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2")
     ],
     targets: [
         .target(
@@ -95,7 +95,7 @@ let package = Package(
                 .mailgun,
                 .coenttbLegalDocuments,
                 .coenttbServer,
-                .coenttbComShared,
+                .coenttbComShared
             ],
             resources: [
                 .process("Blog/Posts")
@@ -121,7 +121,7 @@ let package = Package(
                 .mailgun,
                 .coenttbNewsletter,
                 .coenttbComShared,
-                .serverDatabase,
+                .serverDatabase
             ]
         ),
         .testTarget(
@@ -140,7 +140,7 @@ let package = Package(
                 .coenttbNewsletterFluent,
                 .serverDependencies,
                 .serverEnvVars,
-                .dependenciesMacros,
+                .dependenciesMacros
 //                .stripe,
             ]
         ),
@@ -156,7 +156,7 @@ let package = Package(
             dependencies: [
                 .coenttbServer,
                 .serverModels,
-                .coenttbComShared,
+                .coenttbComShared
             ]
         ),
         .testTarget(
@@ -173,7 +173,7 @@ let package = Package(
                 .hotjar,
                 .mailgun,
                 .googleAnalytics,
-                .postgres,
+                .postgres
 //                .stripe,
             ]
         ),
@@ -188,7 +188,7 @@ let package = Package(
             name: .serverModels,
             dependencies: [
                 .serverEnvVars,
-                .coenttbServer,
+                .coenttbServer
             ]
         ),
         .testTarget(
@@ -201,7 +201,7 @@ let package = Package(
         .target(
             name: .serverTranslations,
             dependencies: [
-                .coenttbServer,
+                .coenttbServer
             ]
         ),
         .target(
@@ -217,7 +217,7 @@ let package = Package(
                 .queuesFluentDriver,
                 .coenttbSyndicationVapor,
                 .coenttbBlogVapor,
-                .coenttbComShared,
+                .coenttbComShared
             ]
         ),
         .testTarget(
@@ -234,14 +234,14 @@ let package = Package(
                 .coenttbNewsletter,
                 .coenttbBlog,
                 .queuesFluentDriver,
-                .dependenciesTestSupport,
+                .dependenciesTestSupport
             ]
         ),
         .executableTarget(
             name: .server,
             dependencies: [
                 .vaporApplication,
-                .coenttbServer,
+                .coenttbServer
             ]
         ),
         .testTarget(
@@ -250,7 +250,7 @@ let package = Package(
                 .serverClient,
                 .dependenciesTestSupport
             ]
-        ),
+        )
     ],
     swiftLanguageModes: [.v6]
 )

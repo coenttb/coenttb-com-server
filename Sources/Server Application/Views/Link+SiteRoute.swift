@@ -5,11 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 16/08/2024.
 //
 
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
 import Coenttb_Server_HTML
 import Dependencies
 import Foundation
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
 
 extension CoenttbHTML.Link {
     package init(destination: Coenttb_Com_Router.Route.Website, @HTMLBuilder label: () -> Label) {

@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 01/09/2024.
 //
 
+import Coenttb_Com_Shared
 import CoenttbHTML
 import Dependencies
 import Foundation
-import Coenttb_Com_Shared
 
 extension HTMLElementTypes.Image {
     package static let coenttbGreenSuit: HTMLElementTypes.Image = {
@@ -18,7 +18,7 @@ extension HTMLElementTypes.Image {
             alt: "coenttb avatar"
         )
     }()
-    
+
     package static let prehalftone: HTMLElementTypes.Image = {
         @Dependency(\.coenttb.website.router) var serverRouter
         return Image(

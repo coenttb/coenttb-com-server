@@ -1,8 +1,8 @@
-import Foundation
 import Dependencies
 import Fluent
-import Server_Models
+import Foundation
 import IssueReporting
+import Server_Models
 
 package final class User: Model, @unchecked Sendable {
     package static let schema = "coenttb_users"
@@ -14,10 +14,10 @@ package final class User: Model, @unchecked Sendable {
 
     @OptionalField(key: FieldKeys.name)
     package var name: String?
-    
+
     @OptionalField(key: FieldKeys.dateOfBirth)
     package var dateOfBirth: Date?
-    
+
     @OptionalField(key: FieldKeys.isAdmin)
     package var isAdmin: Bool?
 
@@ -45,7 +45,7 @@ package final class User: Model, @unchecked Sendable {
         stripe: Stripe = Stripe(),
         newsletterConsent: Bool? = nil
     ) {
-    
+
         self.identityId = identityID
         self.dateOfBirth = dateOfBirth
         self.newsletterConsent = newsletterConsent
@@ -67,9 +67,9 @@ package final class User: Model, @unchecked Sendable {
 
 extension Server_Database.User {
     struct CreateMigration: AsyncMigration {
-        
+
         var name: String = "Server_Database.User.CreateMigration"
-        
+
         func prepare(on database: Fluent.Database) async throws {
             try await database.schema(Server_Database.User.schema)
                 .id()
@@ -94,4 +94,3 @@ extension Server_Database.User {
         }
     }
 }
-

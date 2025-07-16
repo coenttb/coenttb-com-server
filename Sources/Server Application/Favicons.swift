@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
+import Coenttb_Com_Shared
 import Dependencies
 import Favicon
 import Foundation
-import Coenttb_Com_Shared
 
 extension Favicons {
     package static var coenttb: Self {

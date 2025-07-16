@@ -9,9 +9,9 @@ struct Server {
             $0.coenttb = .testValue
         }
 #endif
-        
+
         @Dependency(\.envVars) var envVars
-        
+
         let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
         let logLevel = envVars.logLevel ?? .info
 
@@ -35,7 +35,7 @@ struct Server {
                 logger.critical("Application failed to start: \(error.localizedDescription)")
                 throw error
             }
-            
+
         } catch {
             logger.critical("Critical failure: \(error.localizedDescription)")
             throw error

@@ -5,18 +5,18 @@
 ////  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 ////
 //
-//import Coenttb_Server_HTML
-//import Dependencies
-//import Fluent
-//import Foundation
-//import Languages
-//import Prelude
-//import Server_Dependencies
-//import Vapor
-////import Coenttb_Stripe
-////import Coenttb_Stripe_Live
+// import Coenttb_Server_HTML
+// import Dependencies
+// import Fluent
+// import Foundation
+// import Languages
+// import Prelude
+// import Server_Dependencies
+// import Vapor
+//// import Coenttb_Stripe
+//// import Coenttb_Stripe_Live
 //
-//extension Coenttb_Stripe.Client {
+// extension Coenttb_Stripe.Client {
 //    static func webhook(
 //        request: Vapor.Request
 //    ) async throws -> any AsyncResponseEncodable {
@@ -44,9 +44,9 @@
 //            return Response.ok
 //        }
 //
-//#if DEBUG
+// #if DEBUG
 //        logger.log(.info, "\(String.summarize(event: event))")
-//#endif
+// #endif
 //
 //        @Dependency(\.envVars.stripe?.secretKey) var secretKey
 //        @Dependency(\.currentUser) var currentUser
@@ -157,4 +157,4 @@
 //        return Response.ok
 //
 //    }
-//}
+// }

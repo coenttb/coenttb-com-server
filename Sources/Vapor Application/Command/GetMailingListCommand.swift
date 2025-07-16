@@ -7,11 +7,11 @@
 
 import Coenttb_Newsletter
 import Coenttb_Newsletter_Fluent
+import Coenttb_Vapor
 import Dependencies
 import EmailAddress
 import Fluent
 import Mailgun
-import Coenttb_Vapor
 
 struct GetMailingListCommand: AsyncCommand {
     struct Signature: CommandSignature {
@@ -41,12 +41,11 @@ struct GetMailingListCommand: AsyncCommand {
 
             do {
                 let response = try await getList(try .init("coen@mg.coenttb.com"))
-                
+
                 if let description = response.list.description {
                     context.console.success(description)
                 }
-            }
-            catch {
+            } catch {
                 context.console.error(error.localizedDescription)
             }
         }

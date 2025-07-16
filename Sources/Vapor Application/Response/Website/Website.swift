@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 //
 
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
 import Coenttb_Vapor
 import Server_Dependencies
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
 
 extension Website<Coenttb_Com_Router.Route.Website> {
     static func response(

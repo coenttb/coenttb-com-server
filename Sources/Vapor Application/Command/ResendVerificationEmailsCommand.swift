@@ -7,11 +7,11 @@
 
 import Coenttb_Newsletter
 import Coenttb_Newsletter_Fluent
+import Coenttb_Vapor
 import Dependencies
 import EmailAddress
 import Fluent
 import Mailgun
-import Coenttb_Vapor
 
 struct ResendVerificationEmailsCommand: AsyncCommand {
     struct Signature: CommandSignature {

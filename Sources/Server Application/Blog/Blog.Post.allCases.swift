@@ -5,17 +5,17 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
-import Coenttb_Web
-import CoenttbMarkdown
 import Coenttb_Blog
 import Coenttb_Server_HTML
+import Coenttb_Web
+import CoenttbMarkdown
 import Date
 import Dependencies
 import Foundation
 import Languages
 
 extension [Coenttb_Blog.Blog.Post] {
-    package static var allCases: [Coenttb_Blog.Blog.Post] {        
+    package static var allCases: [Coenttb_Blog.Blog.Post] {
         Array {
             [Coenttb_Blog.Blog.Post].general
             //            [Coenttb_Blog.Blog.Post].html,
@@ -28,7 +28,7 @@ extension [Coenttb_Blog.Blog.Post] {
     package static var general: [Coenttb_Blog.Blog.Post] {
         process {
             category,
-            index in
+            _ in
             [
                 .init(
                     id: .init(),
@@ -49,20 +49,20 @@ extension [Coenttb_Blog.Blog.Post] {
                         TranslatedString(
                             dutch: """
                             Start-up gebouwd. Blut gegaan. Ziel verkocht. Nog een startup gebouwd. Bijna weer blut. Toen op reset gedrukt, mezelf opnieuw uitgevonden in de life sciences, en nu bouw ik mijn eigen ding—legal tech in Swift, en ik deel de reis.
-                            
+
                             Ik open-source **coenttb.com**, mijn Swift Vapor-website, omdat van scratch beginnen zwaar overrated is. Swift voor web is *moeilijk*, maar hoeft niet eenzaam te zijn.
-                            
+
                             Volg voor legal tech, Swift-tips en lessen van (bijna) twee keer blut gaan.
-                            
+
                             > 👉 [Nieuwsbrief](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
                             """,
                             english: """
                             Built a startup. Went broke. Sold soul. Built another startup. Almost went broke *again*. Hit reset, leveled up in life sciences, and now I’m doing my own thing—coding legal tech with Swift and sharing the grind.
-                            
+
                             I’m open-sourcing **coenttb.com**, my Swift Vapor website, because starting from scratch is overrated. Swift for web is *hard*, but it doesn’t have to be lonely.
-                            
+
                             Follow for legal tech, Swift tips, and lessons from almost going broke (twice).
-                            
+
                             > 👉 [Newsletter](http://coenttb.com/en/newsletter/subscribe) | [Repo](https://github.com/coenttb/coenttb-com-server) | [X](http://x.com/coenttb)
                             """
                         )
@@ -128,7 +128,7 @@ extension [Coenttb_Blog.Blog.Post] {
                         """,
                     estimatedTimeToComplete: 30.minutes,
                     permission: .free
-                ),
+                )
 //                .init(
 //                    id: .init(),
 //                    index: 5,
@@ -154,7 +154,7 @@ func position(
     asset: String,
     x: LengthPercentage = .percent(50),
     y: LengthPercentage = .percent(50)
-    
+
 ) -> some HTML {
     div {
         @Dependency(\.coenttb.website.router) var serverRouter
@@ -175,8 +175,6 @@ func position(
         .position(.absolute)
     }
 }
-
-
 
 extension [Coenttb_Blog.Blog.Post] {
     package static var domain_modeling: [Coenttb_Blog.Blog.Post] {
@@ -211,13 +209,13 @@ extension [Coenttb_Blog.Blog.Post] {
                     """,
                     estimatedTimeToComplete: 20.minutes,
                     permission: .free
-                ),
+                )
             ]
         }
     }
 }
 
-fileprivate func process(
+private func process(
     _ category: TranslatedString? = nil,
     _ closure: (_ category: TranslatedString?, _ index: () -> Int) -> [Coenttb_Blog.Blog.Post]
 ) -> [Coenttb_Blog.Blog.Post] {
@@ -226,6 +224,6 @@ fileprivate func process(
         counter += 1
         return counter
     }
-    
+
     return closure(category, incrementingIndex)
 }

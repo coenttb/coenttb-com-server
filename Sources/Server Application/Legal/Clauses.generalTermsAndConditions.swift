@@ -5,12 +5,12 @@
 //  Created by Coen coenttb on 20/06/2024.
 //
 
+import Coenttb_Legal_Documents
+import Coenttb_Server_HTML
+import Coenttb_Server_Router
 import CoenttbMarkdown
 import Dependencies
 import Languages
-import Coenttb_Server_Router
-import Coenttb_Server_HTML
-import Coenttb_Legal_Documents
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking

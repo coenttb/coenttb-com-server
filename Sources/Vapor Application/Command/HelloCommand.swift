@@ -6,11 +6,11 @@
 //
 
 import Coenttb_Newsletter
+import Coenttb_Vapor
 import Dependencies
 import EmailAddress
 import Fluent
 import Foundation
-import Coenttb_Vapor
 
 struct HelloCommand: AsyncCommand {
     struct Signature: CommandSignature { }

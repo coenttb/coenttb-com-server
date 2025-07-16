@@ -20,4 +20,3 @@ extension Logger: @retroactive DependencyKey {
         return logger
     }
 }
-

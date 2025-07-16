@@ -1,17 +1,17 @@
-import Server_Application
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Identity_Consumer
 import Coenttb_Server
-import Server_EnvVars
+import Coenttb_Vapor
 import Fluent
 import FluentPostgresDriver
+import JWT
 import Queues
 import QueuesFluentDriver
+import Server_Application
 import Server_Client
+import Server_EnvVars
 import Server_Models
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
-import Coenttb_Vapor
-import Coenttb_Identity_Consumer
-import JWT
 
 extension Application {
     package static func configure(app: Vapor.Application) async throws {
@@ -20,7 +20,7 @@ extension Application {
         prepareDependencies {
             $0.color = .coenttb
         }
-        
+
         Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
@@ -51,13 +51,13 @@ extension Application {
             allowedInsecureHosts: envVars.allowedInsecureHosts,
             baseUrl: envVars.baseUrl
         )
-        
+
         try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: envVars["JWT_PUBLIC_KEY"]!))
-        
+
         app.middleware.use(Identity.Consumer.Middleware())
 
         @Dependency(\.coenttb.website.router) var router
-        
+
         app.mount(router, use: Route.response)
     }
 }

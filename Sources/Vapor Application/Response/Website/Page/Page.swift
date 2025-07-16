@@ -5,14 +5,14 @@
 //  Created by Coen ten Thije Boonkkamp on 31-12-2023.
 //
 
-import Coenttb_Vapor
 import Coenttb_Blog_Vapor
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Identity_Consumer
 import Coenttb_Newsletter
+import Coenttb_Vapor
 import Server_Application
 import Server_EnvVars
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
-import Coenttb_Identity_Consumer
 
 extension Coenttb_Com_Router.Route.Website {
     static func response(
@@ -24,7 +24,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         case let .blog(route):
             let response = try await Blog.Route.View.response(route: route)
-            
+
             return HTMLDocument(themeColor: .background.primary) {
                 AnyHTML(response)
             }
@@ -55,7 +55,7 @@ extension Coenttb_Com_Router.Route.Website {
                     Image.coenttbGreenSuit
                         .objectPosition(.twoValues(.percentage(50), .percentage(50)))
                 }
-                
+
                 .position(.relative)
                 .size(.rem(10))
                 .padding(top: .length(.large))
@@ -63,9 +63,9 @@ extension Coenttb_Com_Router.Route.Website {
                     justification: .center,
                     itemAlignment: .center
                 )
-                
+
                 PageModule(theme: .newsletterSubscription) {
-                    
+
                     VStack {
                         CoenttbHTML.Paragraph {
                             String.periodically_receive_articles_on.capitalizingFirstLetter().period
@@ -73,7 +73,7 @@ extension Coenttb_Com_Router.Route.Website {
                         .textAlign(.center, media: .desktop)
 
                         @Dependency(\.newsletter.subscribeAction) var subscribeAction
-                        
+
                         NewsletterSubscriptionForm(
                             subscribeAction: subscribeAction()
                         )
@@ -106,12 +106,12 @@ extension Coenttb_Com_Router.Route.Website {
                     media: .mobile
                 )
             }
-            
+
         case let .newsletter(newsletter):
             return try await Newsletter.Route.View.response(
                 newsletter: newsletter,
                 htmlDocument: { html in
-                    HTMLDocument.init {
+                    HTMLDocument {
                         AnyHTML(html)
                     }
                 }
@@ -201,7 +201,7 @@ extension Coenttb_Com_Router.Route.Website {
             }
         }
     }
-}   
+}
 
 extension Coenttb_Com_Router.Route.Website {
     static func general_terms_and_conditions() async throws

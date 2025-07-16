@@ -5,13 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 30/05/2022.
 //
 
+import Coenttb_Blog
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Newsletter
 import Coenttb_Vapor
 import Server_Application
-import Coenttb_Blog
-import Coenttb_Newsletter
-import Coenttb_Com_Shared
 import Server_Translations
-import Coenttb_Com_Router
 
 extension Coenttb_Com_Router.Route.Website {
     public static func home() async throws -> any AsyncResponseEncodable {
@@ -20,13 +20,13 @@ extension Coenttb_Com_Router.Route.Website {
         @Dependency(\.blog.getAll) var blogPosts
         @Dependency(\.currentUser) var currentUser
         @Dependency(\.newsletter.isSubscribed) var isNewsletterSubscribed
-        
+
         let posts = blogPosts()
 
         return HTMLDocument {
             HTMLGroup {
                 if currentUser?.authenticated != true {
-                    
+
                     CallToActionModule(
                         title: (
                             content: "\(String.oneliner)",
@@ -49,10 +49,10 @@ extension Coenttb_Com_Router.Route.Website {
                             .linkUnderline(false)
                             .fontWeight(.normal)
                             .buttonStyle(background: .branding.primary)
-                            
+
                         }
                         .paddingTop(.medium)
-                        
+
                         small { "Periodically receive articles on law, code, startups, wins (and failures)." }
                             .font(.body(.small))
                             .color(.text.secondary)
@@ -92,7 +92,7 @@ extension Coenttb_Com_Router.Route.Website {
                                 .textAlign(.center, media: .desktop)
 
                                 @Dependency(\.newsletter.subscribeAction) var subscribeAction
-                                
+
                                 NewsletterSubscriptionForm(
                                     subscribeAction: subscribeAction()
                                 )
@@ -176,4 +176,3 @@ extension Coenttb_Com_Router.Route.Website {
         }
     }
 }
-

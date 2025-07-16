@@ -5,15 +5,15 @@
 //  Created by Coen ten Thije Boonkkamp on 16/08/2024.
 //
 
+import Coenttb_Com_Shared
 import Coenttb_Server_HTML
 import Dependencies
-import Server_EnvVars
 import Favicon
 import Foundation
 import GoogleAnalytics
 import Hotjar
 import Languages
-import Coenttb_Com_Shared
+import Server_EnvVars
 
 package struct HTMLDocument: HTMLDocumentProtocol {
     let themeColor: HTMLColor
@@ -53,7 +53,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
     }
 
     @Dependency(\.languages) var languages
-    
+
     package var head: some HTML {
         CoenttbHTMLDocumentHeader(
             themeColor: themeColor,

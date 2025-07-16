@@ -5,15 +5,15 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
+import Coenttb_Blog
+import Coenttb_Com_Shared
+import Coenttb_Identity_Consumer
 import Coenttb_Server
 import Dependencies
-import Coenttb_Blog
 import Mailgun
 import Server_Client
 import Server_Dependencies
 import Server_Models
-import Coenttb_Com_Shared
-import Coenttb_Identity_Consumer
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -27,14 +27,13 @@ extension Identity.Consumer.Configuration: @retroactive DependencyKey {
         @Dependency(\.coenttb.website.router) var router
         @Dependency(\.serverClient) var serverClient
         @Dependency(\.envVars.appEnv) var appEnv
-        
-        
+
         let provider2: Identity.Consumer.Configuration.Provider = .init(
             baseURL: provider.baseURL,
             domain: provider.baseURL.host(),
             router: provider.router
         )
-        
+
         let consumer2: Identity.Consumer.Configuration.Consumer = .live(
             baseURL: consumer.baseURL,
             domain: consumer.baseURL.host(),
@@ -104,13 +103,12 @@ extension Identity.Consumer.Configuration: @retroactive DependencyKey {
                 )
             )
         )
-    
-        
+
         let config: Identity.Consumer.Configuration = .init(
             provider: provider2,
             consumer: consumer2
         )
-        
+
         return config
     }
 }

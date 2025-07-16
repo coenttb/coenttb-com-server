@@ -5,15 +5,14 @@
 //  Created by Coen ten Thije Boonkkamp on 11/03/2025.
 //
 
-import Foundation
 import Dependencies
 import DependenciesMacros
+import Foundation
 
 extension Client {
     @DependencyClient
     package struct User: Sendable {
 
-        
         package init(
 
         ) {

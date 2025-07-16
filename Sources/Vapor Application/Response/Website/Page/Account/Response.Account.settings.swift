@@ -5,12 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 20/09/2024.
 //
 
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Identity_Consumer
 import Coenttb_Vapor
 import Server_Application
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
-import Coenttb_Identity_Consumer
-
 
 func settings(
     settings: Coenttb_Com_Router.Route.Website.Account.Settings,
@@ -166,7 +165,7 @@ public struct PasswordChangeRequestButton: HTML {
                 String.change_your_password.capitalizingFirstLetter()
             }
             .color(.text.primary)
-            
+
 //            Button(
 //                tag: a
 //            ) {
@@ -200,7 +199,6 @@ public struct EmailChangeRequestButton: HTML {
 //                .value(currentUser?.email?.rawValue ?? "")
 //                .disabled(true)
 
-            
             Link(href: .init(serverRouter.url(for: .identity(.email(.change(.request)))).absoluteString)) {
                 Label {
                     HTMLEmpty()
@@ -231,7 +229,7 @@ public struct EmailChangeRequestButton: HTML {
     }
 }
 
-//public struct NameChangeForm: HTML {
+// public struct NameChangeForm: HTML {
 //    @Dependency(\.coenttb.website.router) var serverRouter
 //    @Dependency(\.currentUser) var currentUser
 //
@@ -255,4 +253,4 @@ public struct EmailChangeRequestButton: HTML {
 //            inputID: Coenttb_Identity.API.Update.CodingKeys.name.rawValue
 //        )
 //    }
-//}
+// }

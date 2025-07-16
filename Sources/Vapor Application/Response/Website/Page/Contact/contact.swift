@@ -4,22 +4,21 @@
 //
 //  Created by Coen ten Thije Boonkkamp on 18-01-2024.
 //
+import Coenttb_Com_Router
+import Coenttb_Com_Shared
+import Coenttb_Server_HTML
 import Coenttb_Vapor
 import Server_Application
 import Server_Dependencies
 import Server_Models
-import Coenttb_Com_Shared
-import Coenttb_Com_Router
-import Coenttb_Server_HTML
 
 extension Coenttb_Com_Router.Route.Website {
     static func contact(
-        
+
     ) async throws -> any AsyncResponseEncodable {
-        
+
         @Dependency(\.language) var translated
-        
-        
+
         let email = Anchor(
             href: .mailto(
                 "coen@coenttb.com",
@@ -29,61 +28,61 @@ extension Coenttb_Com_Router.Route.Website {
         ) {
             "coen@coenttb.com"
         }
-        
+
         let linkedIn = Anchor(
             href: "https://linkedin.com/in/coenttb"
         ) {
             "LinkedIn"
         }
-        
+
         let twitter = Anchor(
             href: "https://x.com/coenttb"
         ) {
             "@coenttb"
         }
-        
+
         let github = Anchor(
             href: "https://github.com/coenttb"
         ) {
             "GitHub"
         }
-        
+
         let x = Anchor(
             href: "https://x.com/coenttb"
         ) {
             "X/Twitter: @coenttb"
         }
-        
+
         // Location info
         let location = "Amsterdam, Netherlands"
         let timezone = "CET/CEST (UTC+1/+2)"
-        
+
         // Response time expectation
         let responseTime = TranslatedString(
             dutch: "Ik antwoord meestal binnen 24-48 uren",
             english: "I typically respond within 24-48 hours"
         )
-        
+
         return HTMLDocument {
             PageModule(theme: .mainContent) {
                 Header(1) {
                     "Let's connect"
                 }
-                
+
                 // Introduction paragraph
                 HTMLMarkdown {
                     """
-                    I'm always interested in discussing new projects, opportunities, 
+                    I'm always interested in discussing new projects, opportunities,
                     or just connecting with fellow entrepreneurs, coders, and lawyers. Whether you're looking to collaborate, have questions about my work, or want to chat about (legal) tech or Swift, I'd love to hear from you.
                     """
                 }
             }
-            
+
             PageModule(theme: .mainContent) {
                 Header(2) {
                     "Get in touch"
                 }
-                
+
                 ul {
                     li {
                         Label {
@@ -93,7 +92,7 @@ extension Coenttb_Com_Router.Route.Website {
                         }
                         small { "Best for: Project inquiries, collaborations" }
                     }
-                    
+
                     li {
                         Label {
                             FontAwesomeIcon(icon: "linkedin fa-brands")
@@ -102,7 +101,7 @@ extension Coenttb_Com_Router.Route.Website {
                         }
                         small { "Best for: Professional networking" }
                     }
-                    
+
                     li {
                         Label {
                             FontAwesomeIcon(icon: "x-twitter fa-brands")
@@ -111,7 +110,7 @@ extension Coenttb_Com_Router.Route.Website {
                         }
                         small { "Best for: Quick questions, discussions" }
                     }
-                    
+
                     li {
                         Label {
                             FontAwesomeIcon(icon: "github fa-brands")

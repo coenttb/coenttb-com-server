@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
+import Coenttb_Com_Shared
 import Coenttb_Server
 import Mailgun
 import Server_Client
 import Server_Dependencies
 import Server_Models
-import Coenttb_Com_Shared
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -19,7 +19,7 @@ import FoundationNetworking
 extension Mailgun.Client: @retroactive DependencyKey {
     public static var liveValue: Mailgun.AuthenticatedClient? {
         @Dependency(\.envVars) var envVars
-        
+
         guard
             let baseURL = envVars.mailgun?.baseUrl,
             let apiKey = envVars.mailgun?.apiKey,
@@ -27,7 +27,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
         else {
             return nil
         }
-        
+
         return Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: baseURL,

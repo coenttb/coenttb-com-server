@@ -5,10 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
+import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import Dependencies
 import Foundation
-import Coenttb_Com_Shared
 
 package struct CoenttbNavigationBar: HTML {
 
@@ -42,7 +42,7 @@ package struct CoenttbNavigationBar: HTML {
             .linkUnderline(false)
             .fontWeight(.medium)
             .font(.body(.small))
-        
+
         let subscribeButton = Link(
             destination: .newsletter(.subscribe(.request)),
             String.subscribe_to_my_newsletter.capitalizingFirstLetter().description
@@ -50,7 +50,6 @@ package struct CoenttbNavigationBar: HTML {
             .linkUnderline(false)
             .fontWeight(.medium)
             .font(.body(.small))
-        
 
         NavigationBar(
             logo: {
@@ -64,7 +63,7 @@ package struct CoenttbNavigationBar: HTML {
                     ].compactMap { $0 }
                 )
                 .dependency(\.color.text.link, .text.primary)
-                
+
             },
             trailingNavItems: {
                 ul {
@@ -171,7 +170,7 @@ extension CoenttbNavigationBar {
                         }
                         .display(.flex)
                         .alignItems(.center)
-                        
+
                         Link(href: .init(serverRouter.href(for: .home))) {
                             SVG.coenttb()
                         }

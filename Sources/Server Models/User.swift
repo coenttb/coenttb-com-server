@@ -5,9 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 25/08/2024.
 //
 
-//import Coenttb_Vapor
+// import Coenttb_Vapor
 import Coenttb_Server_Models
-//@preconcurrency import Coenttb_Stripe
+// @preconcurrency import Coenttb_Stripe
 import Dependencies
 import EmailAddress
 import Foundation
@@ -42,7 +42,7 @@ package struct User: Codable, Hashable, Sendable {
         self.newsletterSubscribed = newsletterSubscribed
         self.stripe = stripe
     }
-    
+
     package enum CodingKeys: String, CodingKey {
         case id
         case email

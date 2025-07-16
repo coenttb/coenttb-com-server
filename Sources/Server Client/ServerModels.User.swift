@@ -5,12 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
+import Coenttb_Identity_Consumer
 import Coenttb_Server_Models
 import Foundation
 import Server_Database
-import Coenttb_Identity_Consumer
-import SwiftWeb
 import Server_Models
+import SwiftWeb
 
 extension Server_Models.User {
     init(

@@ -5,11 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-import Coenttb_Server
-import Server_EnvVars
-import Fluent
 import Coenttb_Newsletter_Fluent
-
+import Coenttb_Server
+import Fluent
+import Server_EnvVars
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {
@@ -43,7 +42,7 @@ extension [any Fluent.Migration] {
                 var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_3_AddLastEmailMessageId()
                 migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_3_AddLastEmailMessageId"
                 return migration
-            }(),
+            }()
         ]
 
 #if DEBUG
@@ -62,11 +61,9 @@ package struct CreateDemoUserMigration: AsyncMigration {
 
         @Dependency(\.envVars) var envVars
         @Dependency(\.logger) var logger
-        
+
 //        fatalError()
 
-        
-        
 //        guard
 //            let email: EmailAddress = envVars.demoEmail,
 //            let name: String = envVars.demoName,
