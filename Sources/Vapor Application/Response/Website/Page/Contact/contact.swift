@@ -64,7 +64,7 @@ extension Coenttb_Com_Router.Route.Website {
             english: "I typically respond within 24-48 hours"
         )
         
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             PageModule(theme: .mainContent) {
                 Header(1) {
                     "Let's connect"

@@ -19,33 +19,9 @@ import FoundationNetworking
 
 extension Blog: @retroactive DependencyKey {
     public static var liveValue: Blog {
-        @Dependency(\.envVars.companyXComHandle) var companyXComHandle
-        return .init(
+        .init(
             client: .liveValue,
-            configuration: .init(
-                titleBlurb: String.oneliner,
-                companyXComHandle: companyXComHandle,
-                newsletterSection: {
-                    @Dependency(\.coenttb.website.router) var serverRouter
-                    @Dependency(\.currentUser) var currentUser
-
-                    return HTMLGroup {
-                        if currentUser?.newsletterSubscribed != true {
-                            Newsletter.Route.View.Subscribe.Overlay(
-                                title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
-                                caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
-                            ) {
-                                Circle {
-                                    Image.coenttbGreenSuit
-                                        .objectPosition(.twoValues(.percentage(50), .percentage(50)))
-                                }
-                            }
-                        } else {
-                            HTMLEmpty()
-                        }
-                    }
-                }
-            )
+            configuration: .liveValue
         )
     }
 }
@@ -96,6 +72,36 @@ extension Blog.Client: @retroactive DependencyKey {
                 else { return nil }
                 
                 return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
+            }
+        )
+    }
+}
+
+extension Blog.Configuration: @retroactive DependencyKey {
+    public static var liveValue: Blog.Configuration {
+        @Dependency(\.envVars.companyXComHandle) var companyXComHandle
+        return .init(
+            titleBlurb: String.oneliner,
+            companyXComHandle: companyXComHandle,
+            newsletterSection: {
+                @Dependency(\.coenttb.website.router) var serverRouter
+                @Dependency(\.currentUser) var currentUser
+
+                return HTMLGroup {
+                    if currentUser?.newsletterSubscribed != true {
+                        Newsletter.Route.View.Subscribe.Overlay(
+                            title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
+                            caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
+                        ) {
+                            Circle {
+                                Image.coenttbGreenSuit
+                                    .objectPosition(.twoValues(.percentage(50), .percentage(50)))
+                            }
+                        }
+                    } else {
+                        HTMLEmpty()
+                    }
+                }
             }
         )
     }

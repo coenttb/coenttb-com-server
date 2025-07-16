@@ -15,7 +15,7 @@ import Hotjar
 import Languages
 import Coenttb_Com_Shared
 
-package struct DefaultHTMLDocument: HTMLDocumentProtocol {
+package struct HTMLDocument: HTMLDocumentProtocol {
     let themeColor: HTMLColor
     let styles: any HTML
     let scripts: any HTML

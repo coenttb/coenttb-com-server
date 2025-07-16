@@ -23,7 +23,7 @@ extension Coenttb_Com_Router.Route.Website {
         
         let posts = blogPosts()
 
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             HTMLGroup {
                 if currentUser?.authenticated != true {
                     

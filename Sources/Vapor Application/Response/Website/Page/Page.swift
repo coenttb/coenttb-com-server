@@ -25,7 +25,7 @@ extension Coenttb_Com_Router.Route.Website {
         case let .blog(route):
             let response = try await Blog.Route.View.response(route: route)
             
-            return Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
+            return HTMLDocument(themeColor: .background.primary) {
                 AnyHTML(response)
             }
 
@@ -50,7 +50,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         case let .newsletter(newsletter) where newsletter == .subscribe(.request):
             @Dependency(\.coenttb.website.router) var serverRouter
-            return Server_Application.DefaultHTMLDocument {
+            return HTMLDocument {
                 Circle {
                     Image.coenttbGreenSuit
                         .objectPosition(.twoValues(.percentage(50), .percentage(50)))
@@ -111,7 +111,7 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Newsletter.Route.View.response(
                 newsletter: newsletter,
                 htmlDocument: { html in
-                    Server_Application.DefaultHTMLDocument.init {
+                    HTMLDocument.init {
                         AnyHTML(html)
                     }
                 }
@@ -138,7 +138,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             PageHeader(
                 title: "Welcome back"
             ) {
@@ -164,7 +164,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             PageHeader(
                 title: .privacyStatement.capitalizingFirstLetter().description
             ) {
@@ -186,7 +186,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             PageHeader(
                 title: .terms_of_use.capitalizingFirstLetter().description
             ) {
@@ -209,7 +209,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return Server_Application.DefaultHTMLDocument {
+        return HTMLDocument {
             PageHeader(
                 title: .general_terms_and_conditions.capitalizingFirstLetter().description
             ) {

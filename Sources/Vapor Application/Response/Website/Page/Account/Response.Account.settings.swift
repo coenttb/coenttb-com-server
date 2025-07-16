@@ -20,7 +20,7 @@ func settings(
 
     switch settings {
     case .index:
-        return Server_Application.DefaultHTMLDocument(
+        return HTMLDocument(
             scripts: {
                 fontAwesomeScript
             },
@@ -88,7 +88,7 @@ func settings(
             currentUser.authenticated == true
         else { throw Abort(.internalServerError, reason: "Must be logged in to access profile.") }
 
-        return Server_Application.DefaultHTMLDocument(
+        return HTMLDocument(
             scripts: {
                 fontAwesomeScript
             },

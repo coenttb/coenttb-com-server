@@ -101,6 +101,13 @@ extension Coenttb_Com_Router.Route {
     }
 }
 
+extension Server_Application.HTMLDocument: AsyncResponseEncodable {
+    package func encodeResponse(for request: Vapor.Request) async throws -> Vapor.Response {
+        var headers = HTTPHeaders()
+        headers.add(name: .contentType, value: "text/html")
+        return try .init(status: .ok, headers: headers, body: .init(string: .init(self)))
+    }
+}
 
 extension FileIO {
     func streamFile(at public: Coenttb_Com_Router.Route.Public) async throws -> Vapor.Response {
@@ -143,17 +150,6 @@ extension RSS.Feed.Item {
             publicationDate: post.publishedAt,
             description: post.blurb
         )
-    }
-}
-
-
-extension Server_Application.DefaultHTMLDocument: AsyncResponseEncodable {
-    package func encodeResponse(for request: Vapor.Request) async throws -> Vapor.Response {
-        var headers = HTTPHeaders()
-        headers.add(name: .contentType, value: "text/html")
-        let bytes: ContiguousArray<UInt8> = self.render()
-        let string: String = String(decoding: bytes, as: UTF8.self)
-        return .init(status: .ok, headers: headers, body: .init(string: string))
     }
 }
 
