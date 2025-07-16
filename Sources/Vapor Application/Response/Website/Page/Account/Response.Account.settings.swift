@@ -9,7 +9,7 @@ import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Coenttb_Identity_Consumer
 import Coenttb_Vapor
-import Server_Application
+import Server_Integration
 
 func settings(
     settings: Coenttb_Com_Router.Route.Website.Account.Settings,

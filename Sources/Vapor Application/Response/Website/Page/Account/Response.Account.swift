@@ -9,7 +9,7 @@ import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Coenttb_Identity_Consumer
 import Coenttb_Vapor
-import Server_Application
+import Server_Integration
 import Server_Client
 import Server_Dependencies
 import Server_EnvVars

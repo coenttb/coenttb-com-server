@@ -69,6 +69,7 @@ extension EnvVars {
             id: id
         )
     }
+    
 }
 
 extension EnvVars {
@@ -76,11 +77,18 @@ extension EnvVars {
         self["MAILGUN_COMPANY_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 }
+
+extension EnvVars {
+    package var jwtPublicKey: String? {
+        self["JWT_PUBLIC_KEY"]!
+    }
+}
+
 extension EnvVars {
     package var demoName: String? {
         self["DEMO_NAME"]
     }
-
+        
     package var demoEmail: EmailAddress? {
         self["DEMO_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }

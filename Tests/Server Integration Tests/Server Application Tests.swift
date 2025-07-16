@@ -11,7 +11,7 @@ import Dependencies
 import DependenciesTestSupport
 import Foundation
 import Mailgun
-@testable import Server_Application
+@testable import Server_Integration
 import Testing
 
 @Suite(

@@ -1,5 +1,5 @@
 {
-  "originHash" : "f090b347c5a34fe39026a0b4d10e151eaa652be0892c6e9853105f2013cfddd6",
+  "originHash" : "8fc5c3c6da549c57d35c9cfad59543302ebb3d1896f3b0b8741d4699973f72ea",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-server-vapor.git",
       "state" : {
         "branch" : "main",
-        "revision" : "32e8e8cc4a7ebca1e80fdeaf5483a306fdf32a88"
+        "revision" : "6befbe17fa40d60486e903b316fcd9a7daf5d76d"
       }
     },
     {

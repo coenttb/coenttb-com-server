@@ -5,23 +5,23 @@ import PackageDescription
 
 extension String {
     static let server: Self = "Server"
-    static let serverApplication: Self = "Server Application"
     static let serverClient: Self = "Server Client"
     static let serverDatabase: Self = "Server Database"
     static let serverDependencies: Self = "Server Dependencies"
     static let serverEnvVars: Self = "Server EnvVars"
     static let serverModels: Self = "Server Models"
+    static let serverIntegration: Self = "Server Integration"
     static let serverTranslations: Self = "Server Translations"
     static let vaporApplication: Self = "Vapor Application"
 }
 
 extension Target.Dependency {
-    static var serverApplication: Self { .target(name: .serverApplication) }
     static var serverClient: Self { .target(name: .serverClient) }
     static var serverDatabase: Self { .target(name: .serverDatabase) }
     static var serverEnvVars: Self { .target(name: .serverEnvVars) }
     static var serverDependencies: Self { .target(name: .serverDependencies) }
     static var serverModels: Self { .target(name: .serverModels) }
+    static var serverIntegration: Self { .target(name: .serverIntegration) }
     static var serverTranslations: Self { .target(name: .serverTranslations) }
     static var vaporApplication: Self { .target(name: .vaporApplication) }
 }
@@ -56,14 +56,14 @@ let package = Package(
     ],
     products: [
         .executable(name: .server, targets: [.server]),
-        .library(name: .serverApplication, targets: [.serverApplication]),
-        .library(name: .serverEnvVars, targets: [.serverEnvVars]),
+        .library(name: .serverClient, targets: [.serverClient]),
+        .library(name: .serverDatabase, targets: [.serverDatabase]),
         .library(name: .serverDependencies, targets: [.serverDependencies]),
+        .library(name: .serverEnvVars, targets: [.serverEnvVars]),
         .library(name: .serverModels, targets: [.serverModels]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
+        .library(name: .serverIntegration, targets: [.serverIntegration]),
         .library(name: .vaporApplication, targets: [.vaporApplication]),
-        .library(name: .serverClient, targets: [.serverClient]),
-        .library(name: .serverDatabase, targets: [.serverDatabase])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
@@ -83,31 +83,11 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2")
     ],
     targets: [
-        .target(
-            name: .serverApplication,
+        .executableTarget(
+            name: .server,
             dependencies: [
-                .serverEnvVars,
-                .serverTranslations,
-                .serverClient,
-                .coenttbIdentityConsumer,
-                .googleAnalytics,
-                .hotjar,
-                .mailgun,
-                .coenttbLegalDocuments,
-                .coenttbServer,
-                .coenttbComShared
-            ],
-            resources: [
-                .process("Blog/Posts")
-            ]
-        ),
-        .testTarget(
-            name: .serverApplication.tests,
-            dependencies: [
-                .coenttbServer,
-                .coenttbBlog,
-                .serverApplication,
-                .dependenciesTestSupport
+                .vaporApplication,
+                .coenttbServer
             ]
         ),
         .target(
@@ -147,7 +127,7 @@ let package = Package(
         .testTarget(
             name: .serverDatabase.tests,
             dependencies: [
-                .serverClient,
+                .serverDatabase,
                 .dependenciesTestSupport
             ]
         ),
@@ -162,7 +142,7 @@ let package = Package(
         .testTarget(
             name: .serverDependencies.tests,
             dependencies: [
-                .serverClient,
+                .serverDependencies,
                 .dependenciesTestSupport
             ]
         ),
@@ -180,7 +160,7 @@ let package = Package(
         .testTarget(
             name: .serverEnvVars.tests,
             dependencies: [
-                .serverClient,
+                .serverEnvVars,
                 .dependenciesTestSupport
             ]
         ),
@@ -194,7 +174,32 @@ let package = Package(
         .testTarget(
             name: .serverModels.tests,
             dependencies: [
+                .serverModels,
+                .dependenciesTestSupport
+            ]
+        ),
+        .target(
+            name: .serverIntegration,
+            dependencies: [
+                .serverEnvVars,
+                .serverTranslations,
                 .serverClient,
+                .coenttbIdentityConsumer,
+                .googleAnalytics,
+                .hotjar,
+                .mailgun,
+                .coenttbLegalDocuments,
+                .coenttbServer,
+                .coenttbComShared
+            ],
+            resources: [
+                .process("Blog/Posts")
+            ]
+        ),
+        .testTarget(
+            name: .serverIntegration.tests,
+            dependencies: [
+                .serverIntegration,
                 .dependenciesTestSupport
             ]
         ),
@@ -212,7 +217,7 @@ let package = Package(
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,
-                .serverApplication,
+                .serverIntegration,
                 .coenttbNewsletter,
                 .queuesFluentDriver,
                 .coenttbSyndicationVapor,
@@ -224,33 +229,10 @@ let package = Package(
             name: .vaporApplication.tests,
             dependencies: [
                 .vaporApplication,
-                .coenttbServerVapor,
                 .vaporTesting,
-                .serverEnvVars,
-                .serverClient,
-                .serverDependencies,
-                .coenttbServer,
-                .serverApplication,
-                .coenttbNewsletter,
-                .coenttbBlog,
-                .queuesFluentDriver,
                 .dependenciesTestSupport
             ]
         ),
-        .executableTarget(
-            name: .server,
-            dependencies: [
-                .vaporApplication,
-                .coenttbServer
-            ]
-        ),
-        .testTarget(
-            name: .server.tests,
-            dependencies: [
-                .serverClient,
-                .dependenciesTestSupport
-            ]
-        )
     ],
     swiftLanguageModes: [.v6]
 )

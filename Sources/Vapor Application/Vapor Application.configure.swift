@@ -8,7 +8,7 @@ import FluentPostgresDriver
 import JWT
 import Queues
 import QueuesFluentDriver
-import Server_Application
+import Server_Integration
 import Server_Client
 import Server_EnvVars
 import Server_Models
@@ -45,14 +45,19 @@ extension Application {
         try app.queues.startInProcessJobs(on: .default)
 
         try await Coenttb_Vapor.Application.configure(
-            app: app,
+            application: app,
             httpsRedirect: envVars.httpsRedirect,
             canonicalHost: envVars.canonicalHost,
             allowedInsecureHosts: envVars.allowedInsecureHosts,
             baseUrl: envVars.baseUrl
         )
 
-        try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: envVars["JWT_PUBLIC_KEY"]!))
+        if let jwtPublicKey = envVars.jwtPublicKey {
+            try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: jwtPublicKey))
+        } else {
+            @Dependency(\.logger) var logger
+            logger.warning("JWT public key not set")
+        }
 
         app.middleware.use(Identity.Consumer.Middleware())
 

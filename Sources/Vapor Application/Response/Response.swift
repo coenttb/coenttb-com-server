@@ -10,7 +10,7 @@ import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Coenttb_Server
 import Coenttb_Syndication_Vapor
-import Server_Application
+import Server_Integration
 import Server_Dependencies
 import Server_EnvVars
 import Server_Models
@@ -101,7 +101,7 @@ extension Coenttb_Com_Router.Route {
     }
 }
 
-extension Server_Application.HTMLDocument: AsyncResponseEncodable {
+extension Server_Integration.HTMLDocument: AsyncResponseEncodable {
     package func encodeResponse(for request: Vapor.Request) async throws -> Vapor.Response {
         var headers = HTTPHeaders()
         headers.add(name: .contentType, value: "text/html")
