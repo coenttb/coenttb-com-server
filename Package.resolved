@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "80094e3891880d1a6317c76b1e9e1cba278c5150"
+        "revision" : "3e7e390ada93c61fc056081f90705a9c6c7ce332"
       }
     },
     {
@@ -151,7 +151,7 @@
       "location" : "https://github.com/coenttb/coenttb-utils.git",
       "state" : {
         "branch" : "main",
-        "revision" : "87e5d018e4a2be4bda3cf11bed4c48eded9f31c8"
+        "revision" : "77fce35cc2465733c0afdc9dfd1ce7d40fe3f644"
       }
     },
     {

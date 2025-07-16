@@ -23,50 +23,11 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Coenttb_Com_Router.Route.Website.Account.response(account: account)
 
         case let .blog(route):
-            @Dependency(\.blog.getAll) var blogPosts
-            @Dependency(\.envVars.companyXComHandle) var companyXComHandle
-
-            let localPosts = blogPosts()
-            return try await Blog.Route.View.response(
-                route: route,
-                blurb: String.oneliner,
-                companyXComHandle: companyXComHandle,
-                getCurrentUser: {
-                    @Dependency(\.currentUser) var currentUser
-                    guard
-                        let newsletterSubscribed = currentUser?.newsletterSubscribed,
-                        let accessToBlog = currentUser?.accessToBlog
-                    else { return nil }
-
-                    return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
-                },
-                coenttbWebNewsletter: {
-                    @Dependency(\.coenttb.website.router) var serverRouter
-                    @Dependency(\.currentUser) var currentUser
-
-                    return HTMLGroup {
-                        if currentUser?.newsletterSubscribed != true {
-                            Newsletter.Route.View.Subscribe.Overlay(
-                                title: String.keep_in_touch_with_Coen.capitalizingFirstLetter().description,
-                                caption: String.you_will_periodically_receive_articles_on.capitalizingFirstLetter().period.description
-                            ) {
-                                Circle {
-                                    Image.coenttbGreenSuit
-                                        .objectPosition(.twoValues(.percentage(50), .percentage(50)))
-                                }
-                            }
-                        } else {
-                            HTMLEmpty()
-                        }
-                    }
-                },
-                defaultDocument: { closure in
-                    Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
-                        AnyHTML(closure())
-                    }
-                },
-                posts: localPosts
-            )
+            let response = try await Blog.Route.View.response(route: route)
+            
+            return Server_Application.DefaultHTMLDocument(themeColor: .background.primary) {
+                AnyHTML(response)
+            }
 
         case .choose_country_region:
             return try await Coenttb_Com_Router.Route.Website.choose_country_region()
