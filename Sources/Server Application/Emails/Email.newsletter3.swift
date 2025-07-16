@@ -11,7 +11,7 @@ import Mailgun
 import Messages
 
 extension Email {
-    public static func newsletter3(
+    package static func newsletter3(
     ) -> some HTML {
 
         @Dependency(\.coenttb.website.router) var router

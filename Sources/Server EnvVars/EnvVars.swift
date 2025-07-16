@@ -14,13 +14,13 @@ import Postgres
 // import Coenttb_Stripe
 
 extension EnvVars {
-    public var postgres: Postgres.Client.EnvVars {
+    package var postgres: Postgres.Client.EnvVars {
         .init(
             databaseUrl: self["DATABASE_URL"]!
         )
     }
 
-    public var mailgun: Mailgun.Client.EnvVars? {
+    package var mailgun: Mailgun.Client.EnvVars? {
         guard
             let baseURL = self.url("MAILGUN_BASE_URL"),
             let apiKey = self["MAILGUN_PRIVATE_API_KEY"],
@@ -36,7 +36,7 @@ extension EnvVars {
         )
     }
 
-//    public var stripe: Coenttb_Stripe.Client.EnvVars? {
+//    package var stripe: Coenttb_Stripe.Client.EnvVars? {
 //        guard
 //            let endpointSecret = self["STRIPE_ENDPOINT_SECRET"],
 //            let publishableKey = self["STRIPE_PUBLISHABLE_KEY"],
@@ -52,7 +52,7 @@ extension EnvVars {
 //        )
 //    }
 
-    public var googleAnalytics: GoogleAnalytics.Client.EnvVars? {
+    package var googleAnalytics: GoogleAnalytics.Client.EnvVars? {
         guard let id = self["GOOGLE_ANALYTICS_ID"]
         else { return nil }
 
@@ -61,7 +61,7 @@ extension EnvVars {
         )
     }
 
-    public var hotjarAnalytics: Hotjar.Client.EnvVars? {
+    package var hotjarAnalytics: Hotjar.Client.EnvVars? {
         guard let id = self["HOTJAR_ANALYTICS_ID"]
         else { return nil }
 
@@ -72,64 +72,64 @@ extension EnvVars {
 }
 
 extension EnvVars {
-    public var mailgunCompanyEmail: EmailAddress? {
+    package var mailgunCompanyEmail: EmailAddress? {
         self["MAILGUN_COMPANY_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 }
 extension EnvVars {
-    public var demoName: String? {
+    package var demoName: String? {
         self["DEMO_NAME"]
     }
 
-    public var demoEmail: EmailAddress? {
+    package var demoEmail: EmailAddress? {
         self["DEMO_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 
-    public var demoPassword: String? {
+    package var demoPassword: String? {
         self["DEMO_PASSWORD"]
     }
 
-    public var demoNewsletterEmail: EmailAddress? {
+    package var demoNewsletterEmail: EmailAddress? {
         self["DEMO_NEWSLETTER_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
 
-    public var demoStripeCustomerId: String? {
+    package var demoStripeCustomerId: String? {
         self["DEMO_STRIPE_CUSTOMER_ID"]
     }
 
-    public var monthlyBlogSubscriptionPriceId: String? {
+    package var monthlyBlogSubscriptionPriceId: String? {
         self["MONTHLY_BLOG_SUBSCRIPTION_PRICE_ID"]
     }
 
-    public var monthlyBlogSubscriptionPriceLookupKey: String? {
+    package var monthlyBlogSubscriptionPriceLookupKey: String? {
         self["MONTHLY_BLOG_SUBSCRIPTION_PRICE_LOOKUP_KEY"]
     }
 
-    public var newsletterAddress: EmailAddress? {
+    package var newsletterAddress: EmailAddress? {
         self["NEWSLETTER_ADDRESS"].flatMap(EmailAddress.init(rawValue:))
     }
 
-    public var companyName: String? {
+    package var companyName: String? {
         self["COMPANY_NAME"]
     }
 
-    public var companyInfoEmailAddress: EmailAddress? {
+    package var companyInfoEmailAddress: EmailAddress? {
         self["COMPANY_INFO_EMAIL_ADDRESS"].flatMap(EmailAddress.init(rawValue:))
     }
 
-    public var companyXComHandle: String? {
+    package var companyXComHandle: String? {
         self["COMPANY_X_COM_HANDLE"]
     }
 
-    public var companyGitHubHandle: String? {
+    package var companyGitHubHandle: String? {
         self["COMPANY_GITHUB_HANDLE"]
     }
 
-    public var companyLinkedInHandle: String? {
+    package var companyLinkedInHandle: String? {
         self["COMPANY_LINKEDIN_HANDLE"]
     }
 
-    public var sessionCookieName: String? {
+    package var sessionCookieName: String? {
         self["SESSION_COOKIE_NAME"]
     }
 }

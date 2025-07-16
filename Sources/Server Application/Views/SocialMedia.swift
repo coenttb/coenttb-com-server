@@ -8,7 +8,7 @@
 import CoenttbHTML
 import Foundation
 
-public var x_com_light_background: some HTML {
+package var x_com_light_background: some HTML {
     div {}
         .height(.px(500))
         .width(.px(1500))

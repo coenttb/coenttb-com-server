@@ -11,7 +11,7 @@ import Foundation
 import Languages
 
 extension String {
-    public static let oneliner: TranslatedString = .init(
+    package static let oneliner: TranslatedString = .init(
         dutch: "Rechten. Code. Startups. Successen (en mislukkingen)",
         english: "Law. Code. Startups. Wins (and failures)"
     ).period

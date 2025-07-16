@@ -9,7 +9,7 @@ import Coenttb_Server_HTML
 import Foundation
 
 extension PageModule.Theme {
-    public static var mainContent: Self {
+    package static var mainContent: Self {
         Self(
             topMargin: .rem(4),
             bottomMargin: .rem(4),
@@ -20,7 +20,7 @@ extension PageModule.Theme {
 }
 
 extension PageModule.Theme {
-    public static var sidebarContent: Self {
+    package static var sidebarContent: Self {
         Self(
             topMargin: .rem(4),
             bottomMargin: .rem(4),

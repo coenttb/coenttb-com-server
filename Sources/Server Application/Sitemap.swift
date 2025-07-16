@@ -70,5 +70,5 @@ extension SiteMap {
 }
 
 extension SiteMap {
-    public static func `default`() async throws -> Self { try await SiteMap(dictionary: .default()) }
+    package static func `default`() async throws -> Self { try await SiteMap(dictionary: .default()) }
 }

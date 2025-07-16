@@ -14,7 +14,7 @@ import Server_Dependencies
 import Server_Translations
 
 extension Route.Website {
-    public var title: TranslatedString? {
+    package var title: TranslatedString? {
         switch self {
         case .choose_country_region:
             return String.choose_country_region

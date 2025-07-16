@@ -16,7 +16,7 @@ import FoundationNetworking
 #endif
 
 extension Email {
-    public static func generalContact(
+    package static func generalContact(
         from: EmailAddress
     ) -> Email {
 

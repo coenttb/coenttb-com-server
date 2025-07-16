@@ -16,13 +16,13 @@ import Languages
 import Server_EnvVars
 
 package struct HTMLDocument: HTMLDocumentProtocol {
-    let themeColor: HTMLColor
-    let styles: any HTML
-    let scripts: any HTML
-    let navigationBar: any HTML
-    let _body: any HTML
-    let footer: any HTML
-    let favicons: Favicons
+    package let themeColor: HTMLColor
+    package let styles: any HTML
+    package let scripts: any HTML
+    package let navigationBar: any HTML
+    package let _body: any HTML
+    package let footer: any HTML
+    package let favicons: Favicons
 
     package init(
         themeColor: HTMLColor = .branding.accent,

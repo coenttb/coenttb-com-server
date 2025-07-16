@@ -10,7 +10,7 @@ import Dependencies
 import Foundation
 
 extension SVG {
-    public static func coenttb() -> Self {
+    package static func coenttb() -> Self {
         let factor = 0.75
 //        <svg width="\(332.962 * factor)" height="\(31.62 * factor)" viewBox="0 0 332.962 31.62" xmlns="http://www.w3.org/2000/svg">
         let svgString = """

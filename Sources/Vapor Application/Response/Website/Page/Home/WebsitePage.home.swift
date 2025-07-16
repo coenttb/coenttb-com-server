@@ -14,7 +14,7 @@ import Server_Application
 import Server_Translations
 
 extension Coenttb_Com_Router.Route.Website {
-    public static func home() async throws -> any AsyncResponseEncodable {
+    package static func home() async throws -> any AsyncResponseEncodable {
         @Dependency(\.language) var translated
         @Dependency(\.coenttb.website.router) var serverRouter
         @Dependency(\.blog.getAll) var blogPosts

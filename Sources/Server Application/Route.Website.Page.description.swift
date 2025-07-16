@@ -14,7 +14,7 @@ import Server_Dependencies
 import Server_Translations
 
 extension Route.Website {
-    public func description() -> TranslatedString? {
+    package func description() -> TranslatedString? {
 
         let x: TranslatedString? = switch self {
         case .choose_country_region:
