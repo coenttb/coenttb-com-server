@@ -1,5 +1,5 @@
 {
-  "originHash" : "8fc5c3c6da549c57d35c9cfad59543302ebb3d1896f3b0b8741d4699973f72ea",
+  "originHash" : "42eca2986779e1758845b84e76bc43c8e0ccbab261227b78e02e75cd0350b19d",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "e895c686eedb544ef905be73841f56747d2c75c7"
+        "revision" : "a2f64ae52dd2f67c2e014f1e66ab4b9e4be6b48f"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3d312bf05718d677b9fb510920a9230b98c626e2"
+        "revision" : "a4f7d79c45cd85799c4787b593315f0b60255037"
       }
     },
     {
@@ -241,7 +241,16 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a78c9135652cb53a57fd6637b5d6ddda47a1ac3a"
+        "revision" : "8df71866c8ee813d71dee438d11ade8d4c2b5318"
+      }
+    },
+    {
+      "identity" : "pointfree-html-to-pdf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/pointfree-html-to-pdf.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3c5b05ac7fde228be63b560a27446a32fbaa9d58"
       }
     },
     {
@@ -445,10 +454,10 @@
     {
       "identity" : "swift-dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-dependencies.git",
+      "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "branch" : "1.9.0",
-        "revision" : "4e6b6a814675daf2c1973514314283448f95f941"
+        "revision" : "4c90d6b2b9bf0911af87b103bb40f41771891596",
+        "version" : "1.9.2"
       }
     },
     {
@@ -475,7 +484,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "93c3d73dffdc0fbded383420cad860cb7130e994"
+        "revision" : "b4d176bc9432403f6509d3475f4be9fe79023a96"
       }
     },
     {
@@ -484,7 +493,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "5e29ea76d5274775f1d58450b4bf540ed9bd6323"
+        "revision" : "0b5f3d7c6c78816facb7e77535263abf216b444f"
       }
     },
     {
@@ -529,7 +538,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6c85b8f49910cfa2a2907a55e8ad348f2d7d3074"
+        "revision" : "b5e0703e638eded7c3be271c60e4d4b1a011d7e7"
       }
     },
     {
@@ -709,7 +718,7 @@
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "9c01cc8c6691ee3b52d6a47cd5955781cfbe9f79"
+        "revision" : "1f3075cc5fbed21162207c8b1b0c8867319ecbf9"
       }
     },
     {
