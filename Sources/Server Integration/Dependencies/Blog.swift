@@ -46,9 +46,7 @@ extension Blog.Client: @retroactive DependencyKey {
                     }
                     .sorted(by: { $0.publishedAt < $1.publishedAt })
             },
-            filenameToResourceUrl: { fileName in
-                Bundle.module.url(forResource: fileName, withExtension: "md")
-            },
+            filenameToResourceUrl: Bundle.blog(fileName:),
             postToRoute: { post in
                 @Dependency(\.coenttb.website.router) var serverRouter
                 return serverRouter.url(for: .blog(.post(post)))
@@ -74,6 +72,12 @@ extension Blog.Client: @retroactive DependencyKey {
                 return (newsletterSubscribed: newsletterSubscribed, accessToBlog: accessToBlog)
             }
         )
+    }
+}
+
+extension Bundle {
+    static func blog(fileName: String) -> URL? {
+        Bundle.module.url(forResource: fileName, withExtension: "md")
     }
 }
 

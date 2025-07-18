@@ -10,8 +10,8 @@ import Foundation
 import Server_Models
 
 package enum CurrentUserKey: DependencyKey {
-    package static let testValue: Server_Models.User? = liveValue
-    package static let liveValue: Server_Models.User? = nil
+    package static var testValue: Server_Models.User? { liveValue }
+    package static var liveValue: Server_Models.User? { nil }
 }
 
 extension DependencyValues {

@@ -11,8 +11,8 @@ import Foundation
 import Server_Models
 
 package enum CurrentRouteKey: DependencyKey {
-    package static let testValue: Coenttb_Com_Router.Route? = nil
-    package static let liveValue: Coenttb_Com_Router.Route? = nil
+    package static var testValue: Coenttb_Com_Router.Route? { nil }
+    package static var liveValue: Coenttb_Com_Router.Route? { nil }
 }
 
 extension DependencyValues {

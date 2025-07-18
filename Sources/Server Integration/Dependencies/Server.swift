@@ -24,7 +24,7 @@ extension Server_Client.Client: DependencyKey {
         .init(
             newsletter: .liveValue,
             identity: .live(),
-            user: .init()
+            user: .liveValue
         )
     }
 }
