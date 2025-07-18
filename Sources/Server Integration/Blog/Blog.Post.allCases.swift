@@ -129,22 +129,6 @@ extension [Coenttb_Blog.Blog.Post] {
                     estimatedTimeToComplete: 30.minutes,
                     permission: .free
                 )
-//                .init(
-//                    id: .init(),
-//                    index: 5,
-//                    category: category,
-//                    publishedAt: .distantFuture,
-//                    image: position(asset: "coenttb-20250324.png")
-//                        .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
-//                    title: "A Tour of CSS",
-//                    hidden: .no,
-//                    blurb: """
-//                        Swift-css gives you the type safety of Swift for your CSS. No more hunting down styling bugs—catch them at compile time instead. This library models CSS concepts as Swift types, making your styles as reliable as your Swift code.
-//                          Perfect for developers who love the safety and tooling of Swift but need to work with CSS styling.
-//                        """,
-//                    estimatedTimeToComplete: 30.minutes,
-//                    permission: .free
-//                ),
             ]
         }
     }
