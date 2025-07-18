@@ -107,7 +107,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     category: category,
                     publishedAt: .init(year: 2025, month: 07, day: 10)!,
                     image: position(asset: "coenttb-20250710.png"),
-                    title: "Modern Swift Library Architecture: The Swift Package",
+                    title: "Modern Swift Library Architecture 1 The Swift Package",
                     hidden: .no,
                     blurb: """
                         Ever found yourself trapped maintaining a giant Swift monolith? There’s a better way. Discover how modular Swift package design lets you break down complexity, speed up testing, and dramatically simplify maintenance. Let’s explore modern Swift architectures together—one package at a time.
@@ -121,7 +121,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     category: category,
                     publishedAt: .init(year: 2025, month: 07, day: 14)!,
                     image: position(asset: "coenttb-20250714.png"),
-                    title: "Modern Swift Library Architecture: Composition of Packages",
+                    title: "Modern Swift Library Architecture 2 Composition of Packages",
                     hidden: .no,
                     blurb: """
                         When single-package modularity isn't enough, it's time to embrace composition of packages. Discover how to architect Swift library ecosystems that enable independent evolution, flexible integration, and possibilities you haven't imagined yet.
@@ -133,12 +133,12 @@ extension [Coenttb_Blog.Blog.Post] {
         }
     }
 }
+
 @HTMLBuilder
 func position(
     asset: String,
     x: LengthPercentage = .percent(50),
     y: LengthPercentage = .percent(50)
-
 ) -> some HTML {
     div {
         @Dependency(\.coenttb.website.router) var serverRouter
@@ -157,45 +157,6 @@ func position(
         .width(.percent(100))
         .height(.percent(100))
         .position(.absolute)
-    }
-}
-
-extension [Coenttb_Blog.Blog.Post] {
-    package static var domain_modeling: [Coenttb_Blog.Blog.Post] {
-        process("domain-modeling") { category, index in
-            [
-                .init(
-                    id: .init(),
-                    index: index(),
-                    category: category,
-                    publishedAt: .init(year: 2024, month: 12, day: 23)!,
-                    image: div {
-                        Image.coenttbGreenSuit
-//                            .dependency(\.objectStyle.position, .y(.percent(15)))
-                            .inlineStyle("filter", "sepia(1) hue-rotate(-50deg) saturate(5) brightness(1.2)")
-                    }.position(.absolute),
-                    title: TranslatedString(
-                        dutch: "Van complexiteit naar helderheid: een gelaagde aanpak voor API domeinmodeling in Swift",
-                        english: "From complexity to clarity: a layered approach to API domain modeling design in Swift"
-                    ).description,
-                    hidden: .no,
-                    blurb: """
-                    \(
-                        TranslatedString(
-                            dutch: """
-                            Ontdek hoe het scheiden van je API-code in verschillende lagen — robuuste funderingen en gebruiksvriendelijke interfaces — complexe integraties kan transformeren naar onderhoudbare, typeveilige Swift-code. Leer aan de hand van een praktische Mailgun-implementatie hoe deze aanpak bugs elimineert en ontwikkelaars daadwerkelijk geeft in het werken met deze API.
-                            """,
-                            english: """
-                            Discover how separating your API code into distinct layers—rock-solid foundations and developer-friendly interfaces—can transform complex integrations into maintainable, type-safe Swift code. Through a real-world Mailgun implementation, learn how this approach eliminates bugs while making developers actually enjoy working with this API.
-                            """
-                        )
-                    )
-                    """,
-                    estimatedTimeToComplete: 20.minutes,
-                    permission: .free
-                )
-            ]
-        }
     }
 }
 

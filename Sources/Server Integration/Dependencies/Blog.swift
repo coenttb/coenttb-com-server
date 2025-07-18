@@ -32,7 +32,7 @@ extension Blog.Client: @retroactive DependencyKey {
             getAll: [Blog.Post].static,
             filenameToResourceUrl: Bundle.blog(fileName:),
             postToRoute: URL.init(post:),
-            postToFilename: Blog.Post.filenameLiteral,
+            postToFilename: Blog.Post.translated,
             getCurrentUser: {
                 @Dependency(\.currentUser) var currentUser
                 guard
@@ -69,12 +69,13 @@ extension [Blog.Post] {
 extension Bundle {
     static func blog(fileName: String) -> URL? {
         Bundle.module.url(forResource: fileName, withExtension: "md")
+        ?? Bundle.module.url(forResource: fileName.replacingOccurrences(of: "-nl-", with: "-en-"), withExtension: "md")
     }
 }
 
 extension Blog.Post {
     static func filenameLiteral(post: Blog.Post) -> TranslatedString {
-        .init(post.title)
+        .init("\(post.index) \(post.title)")
     }
     
     static func translated(post: Blog.Post) -> TranslatedString {
@@ -82,7 +83,8 @@ extension Blog.Post {
             [
                 post.category.map { $0(language) },
                 "\(post.index)",
-                language.rawValue
+                language.rawValue,
+                post.title.replacingOccurrences(of: ":", with: "-")
             ]
                 .compactMap { $0 }
                 .joined(separator: "-")

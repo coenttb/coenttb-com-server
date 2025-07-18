@@ -1,4 +1,4 @@
-# Modern Swift Library Architecture: The Swift Package
+# Modern Swift Library Architecture 1 The Swift Package
 
 ## What are the best, modern practices for architecting your Swift package? 
 
