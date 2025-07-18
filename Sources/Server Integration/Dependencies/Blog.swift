@@ -29,39 +29,10 @@ extension Blog: @retroactive DependencyKey {
 extension Blog.Client: @retroactive DependencyKey {
     public static var liveValue: Blog.Client {
         .init(
-            getAll: {
-                @Dependency(\.envVars.appEnv) var appEnv
-                @Dependency(\.date.now) var now
-
-                return [Coenttb_Blog.Blog.Post].allCases
-                    .filter {
-                        switch appEnv {
-                        case .production,
-                                .staging:
-                            return $0.publishedAt <= now
-                        case .development,
-                                .testing:
-                            return true
-                        }
-                    }
-                    .sorted(by: { $0.publishedAt < $1.publishedAt })
-            },
+            getAll: [Blog.Post].static,
             filenameToResourceUrl: Bundle.blog(fileName:),
-            postToRoute: { post in
-                @Dependency(\.coenttb.website.router) var serverRouter
-                return serverRouter.url(for: .blog(.post(post)))
-            },
-            postToFilename: { post in
-                return .init { language in
-                    [
-                        post.category.map { $0(language) },
-                        "\(post.index)",
-                        language.rawValue
-                    ]
-                        .compactMap { $0 }
-                        .joined(separator: "-")
-                }
-            },
+            postToRoute: URL.init(post:),
+            postToFilename: Blog.Post.filenameLiteral,
             getCurrentUser: {
                 @Dependency(\.currentUser) var currentUser
                 guard
@@ -75,9 +46,54 @@ extension Blog.Client: @retroactive DependencyKey {
     }
 }
 
+extension [Blog.Post] {
+    nonisolated(unsafe) static let `static`: () -> Self = {
+        @Dependency(\.envVars.appEnv) var appEnv
+        @Dependency(\.date.now) var now
+
+        return [Coenttb_Blog.Blog.Post].allCases
+            .filter {
+                switch appEnv {
+                case .production,
+                        .staging:
+                    return $0.publishedAt <= now
+                case .development,
+                        .testing:
+                    return true
+                }
+            }
+            .sorted(by: { $0.publishedAt < $1.publishedAt })
+    }
+}
+
 extension Bundle {
     static func blog(fileName: String) -> URL? {
         Bundle.module.url(forResource: fileName, withExtension: "md")
+    }
+}
+
+extension Blog.Post {
+    static func filenameLiteral(post: Blog.Post) -> TranslatedString {
+        .init(post.title)
+    }
+    
+    static func translated(post: Blog.Post) -> TranslatedString {
+        return .init { language in
+            [
+                post.category.map { $0(language) },
+                "\(post.index)",
+                language.rawValue
+            ]
+                .compactMap { $0 }
+                .joined(separator: "-")
+        }
+    }
+}
+
+extension URL {
+    public init(post: Blog.Post) {
+        @Dependency(\.coenttb.website.router) var serverRouter
+        self = serverRouter.url(for: .blog(.post(post)))
     }
 }
 
