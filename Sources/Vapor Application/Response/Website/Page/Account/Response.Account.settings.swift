@@ -134,7 +134,7 @@ func settings(
                                     String.logout.capitalizingFirstLetter()
                                 }
                                 .color(.text.primary)
-                                .href(serverRouter.url(for: .identity(.logout)).absoluteString)
+                                .href(.init(serverRouter.url(for: .identity(.logout)).absoluteString))
 
                             }
                         }

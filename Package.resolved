@@ -43,7 +43,7 @@
       "location" : "https://github.com/coenttb/coenttb-blog.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3e7e390ada93c61fc056081f90705a9c6c7ce332"
+        "revision" : "cda765831d4c8adee19a0f725972f2238c0918c6"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "a2f64ae52dd2f67c2e014f1e66ab4b9e4be6b48f"
+        "revision" : "53b9a53bff04d461347bbc956e8f07bd25654c9d"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server.git",
       "state" : {
         "branch" : "main",
-        "revision" : "fee9142b78f5d2e960a846eb76a0aa37f90c9229"
+        "revision" : "c4ce48c32d766b976ceb064dc16814f17fa9d412"
       }
     },
     {
@@ -160,7 +160,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "d820c9b06972251c36cce1aabd0307c6ecf29056"
+        "revision" : "1f628a3e84f952cf8aaacd612254b1466cd33c4a"
       }
     },
     {
@@ -241,7 +241,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "8df71866c8ee813d71dee438d11ade8d4c2b5318"
+        "revision" : "371b2bb5b74622b4a47c95ae57fdd4f6dd504a93"
       }
     },
     {
@@ -250,7 +250,7 @@
       "location" : "https://github.com/coenttb/pointfree-html-to-pdf.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3c5b05ac7fde228be63b560a27446a32fbaa9d58"
+        "revision" : "d75ff65951a7b4486375d818f601d92560a6c081"
       }
     },
     {
@@ -430,7 +430,7 @@
       "location" : "https://github.com/coenttb/swift-css-types.git",
       "state" : {
         "branch" : "main",
-        "revision" : "449dc90150c1d567700f18d3997932c8fec6146d"
+        "revision" : "789b155155181034f6e1094c6585fc337b911a8d"
       }
     },
     {
@@ -484,7 +484,7 @@
       "location" : "https://github.com/coenttb/swift-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b4d176bc9432403f6509d3475f4be9fe79023a96"
+        "revision" : "d354cd3be8080ae1ebccc5e6bf70b78cd33190e7"
       }
     },
     {
@@ -493,7 +493,7 @@
       "location" : "https://github.com/coenttb/swift-html-css-pointfree.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0b5f3d7c6c78816facb7e77535263abf216b444f"
+        "revision" : "4e8e1634e978948d7945ab96304fcc4b1f9a1f0e"
       }
     },
     {
@@ -511,7 +511,7 @@
       "location" : "https://github.com/coenttb/swift-html-types.git",
       "state" : {
         "branch" : "main",
-        "revision" : "161e58bc2740f990027d05f701f480f58a3f17ae"
+        "revision" : "bdf8b5655c11861b9dfb245ba97b842ba18d4815"
       }
     },
     {
@@ -672,8 +672,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
       "state" : {
-        "revision" : "37230a37e83f1b7023be08e1b1a2603fcb1567fb",
-        "version" : "1.18.4"
+        "revision" : "b198a568ad24c5a22995c5ff0ecf9667634e860e",
+        "version" : "1.18.5"
       }
     },
     {
@@ -771,8 +771,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "39de59b2d47f7ef3ca88a039dff3084688fe27f4",
-        "version" : "1.5.2"
+        "revision" : "23e3442166b5122f73f9e3e622cd1e4bafeab3b7",
+        "version" : "1.6.0"
       }
     }
   ],
