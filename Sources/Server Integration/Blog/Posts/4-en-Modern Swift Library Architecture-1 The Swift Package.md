@@ -1,4 +1,11 @@
-# Modern Swift Library Architecture 1 The Swift Package
+# Modern Swift Library Architecture 1: The Swift Package
+
+> NOTE: 
+> This is Part 1 in a series exploring modern swift library architecture.
+>  
+> [Click here for part 2](https://coenttb.com/blog/5).
+> 
+> While the ideas in this article are my own, I've used AI to draft it-hope you don't mind the em-dashes (-). 
 
 ## What are the best, modern practices for architecting your Swift package? 
 
@@ -338,5 +345,8 @@ Before we move to multi-package ecosystems, it's crucial to be familiar with com
 
 The techniques we've explored—moving from monoliths to multiple files to multiple targets—form the foundation for everything we'll build in part two. Understanding when and how to break code into focused modules within a package is essential before you can effectively compose multiple packages into cohesive ecosystems.
 
-Next time, we'll see how this foundation enables us to build truly independent packages that compose together seamlessly, each evolving at its own pace while contributing to a unified development experience.
+---
 
+*Next time, we'll see how this foundation enables us to build truly independent packages that compose together seamlessly, each evolving at its own pace while contributing to a unified development experience.*
+
+👉 [Click here for part 2](https://coenttb.com/blog/5).

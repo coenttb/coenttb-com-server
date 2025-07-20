@@ -104,10 +104,10 @@ extension [Coenttb_Blog.Blog.Post] {
                 .init(
                     id: .init(),
                     index: 4,
-                    category: category,
+                    category: "Modern Swift Library Architecture",
                     publishedAt: .init(year: 2025, month: 07, day: 10)!,
                     image: position(asset: "coenttb-20250710.png"),
-                    title: "Modern Swift Library Architecture 1 The Swift Package",
+                    title: "1 The Swift Package",
                     hidden: .no,
                     blurb: """
                         Ever found yourself trapped maintaining a giant Swift monolith? There’s a better way. Discover how modular Swift package design lets you break down complexity, speed up testing, and dramatically simplify maintenance. Let’s explore modern Swift architectures together—one package at a time.
@@ -118,15 +118,29 @@ extension [Coenttb_Blog.Blog.Post] {
                 .init(
                     id: .init(),
                     index: 5,
-                    category: category,
+                    category: "Modern Swift Library Architecture",
                     publishedAt: .init(year: 2025, month: 07, day: 14)!,
                     image: position(asset: "coenttb-20250714.png"),
-                    title: "Modern Swift Library Architecture 2 Composition of Packages",
+                    title: "2 Composition of Packages",
                     hidden: .no,
                     blurb: """
                         When single-package modularity isn't enough, it's time to embrace composition of packages. Discover how to architect Swift library ecosystems that enable independent evolution, flexible integration, and possibilities you haven't imagined yet.
                         """,
                     estimatedTimeToComplete: 30.minutes,
+                    permission: .free
+                ),
+                .init(
+                    id: .init(),
+                    index: 6,
+                    category: "Modern Swift Library Architecture",
+                    publishedAt: .init(year: 2025, month: 07, day: 21)!,
+                    image: position(asset: "coenttb-20250721.png"),
+                    title: "3 Testing a composition of packages",
+                    hidden: .no,
+                    blurb: """
+                        Testing doesn’t have to be a tangled mess. Discover how modular Swift package architecture transforms testing—from brittle and slow to fast, focused, and intuitive. We’ll walk through real-world and show how adding dark mode touched only one test suite in one package. Yes, really.
+                        """,
+                    estimatedTimeToComplete: 20.minutes,
                     permission: .free
                 )
             ]

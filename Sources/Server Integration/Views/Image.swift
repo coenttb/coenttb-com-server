@@ -23,7 +23,7 @@ extension HTMLElementTypes.Image {
         @Dependency(\.coenttb.website.router) var serverRouter
         return Image(
             src: .init(serverRouter.href(for: .asset(.image("prehalftone.png")))),
-            alt: "coenttb avatar"
+            alt: "prehalftone"
         )
     }()
 }

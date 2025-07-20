@@ -81,9 +81,9 @@ extension Blog.Post {
     static func translated(post: Blog.Post) -> TranslatedString {
         return .init { language in
             [
-                post.category.map { $0(language) },
                 "\(post.index)",
                 language.rawValue,
+                post.category.map { $0(language) },
                 post.title.replacingOccurrences(of: ":", with: "-")
             ]
                 .compactMap { $0 }
