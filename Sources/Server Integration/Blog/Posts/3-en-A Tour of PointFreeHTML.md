@@ -1,5 +1,8 @@
 # A Tour of PointFreeHTML
 
+> NOTE: 
+> While the ideas in this article are my own, I've used AI to draft it-hope you don't mind the em-dashes (-). 
+
 In my previous post, we discussed HTML generation in Swift and arrived at [html-pointfree](https://github.com/coenttb/pointfree-html). 
 
 Let's find out what is actually going on behind those pretty APIs.

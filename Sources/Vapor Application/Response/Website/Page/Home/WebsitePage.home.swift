@@ -26,7 +26,6 @@ extension Coenttb_Com_Router.Route.Website {
         return HTMLDocument {
             HTMLGroup {
                 if currentUser?.authenticated != true {
-
                     CallToActionModule(
                         title: (
                             content: "\(String.oneliner)",

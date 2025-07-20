@@ -1,4 +1,11 @@
-# Modern Swift Library Architecture: Composition of Packages
+# Modern Swift Library Architecture 2: Composition of Packages
+
+> NOTE: 
+> This is Part 2 in a series exploring modern swift library architecture. 
+> 
+> [Click here for part 3](https://coenttb.com/blog/6).
+> 
+> While the ideas in this article are my own, I've used AI to draft it-hope you don't mind the em-dashes (-). 
 
 ## When multi-target isn't enough
 
@@ -333,4 +340,6 @@ Start simple, split thoughtfully, and always optimize for the flexibility to be 
 
 ---
 
-*Next in this series: a deep dive into `swift-html-types`, exploring how to model the entire HTML specification as Swift types and why getting the foundation right matters for everything that follows.*
+*Next in this series: Testing across package boundaries—where modular architecture really proves its worth. I'll show you how the right architecture makes tests write themselves, and why adding dark mode to our HTML ecosystem only required changing tests in one package out of five.*
+
+👉 [Click here for part 3](https://coenttb.com/blog/6).
