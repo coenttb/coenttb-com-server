@@ -80,7 +80,8 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.2"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2")
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2"),
+        .package(url: "https://github.com/apple/swift-crypto.git", exact: "3.12.3"),
     ],
     targets: [
         .executableTarget(
