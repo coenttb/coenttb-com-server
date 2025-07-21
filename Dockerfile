@@ -8,8 +8,10 @@ COPY .build* .build/
 
 # Configure git and resolve dependencies
 ARG GH_PAT
-RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/" && \
-    swift package resolve --skip-update
+
+RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/"
+
+RUN swift package resolve --skip-update
 
 # Copy source code
 COPY . .
