@@ -20,7 +20,9 @@ extension Clauses {
         withDependencies {
             $0.language = language
         } operation: {
-            Clauses.privacyStatement(entity: (name: "coenttb", ()))
+            Clauses.privacyStatement(
+                entity: (name: "coenttb", website: "coenttb.com")
+            )
         }
     }
 }
