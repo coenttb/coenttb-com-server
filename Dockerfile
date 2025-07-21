@@ -1,4 +1,4 @@
-FROM swift:6.1.0-jammy as builder
+FROM swift:6.1.2-jammy as builder
 
 WORKDIR /build
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN swift build -c release
 
-FROM swift:6.1.0-jammy as runtime
+FROM swift:6.1.2-jammy as runtime
 
 WORKDIR /app
 
