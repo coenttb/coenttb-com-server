@@ -242,11 +242,14 @@ In a monolithic architecture, this would touch dozens of files, break tests ever
 ```swift
 // In swift-html package
 extension HTML {
-    public func color(light: CSSPropertyTypes.Color, dark: CSSPropertyTypes.Color) -> some HTML {
-        self
-            .color(light)
-            .color(dark, media: .prefersColorScheme(.dark))
-    }
+  public func color(
+    light: CSSPropertyTypes.Color, 
+    dark: CSSPropertyTypes.Color
+  ) -> some HTML {
+    self
+      .color(light)
+      .color(dark, media: .prefersColorScheme(.dark))
+  }
 }
 ```
 
@@ -255,32 +258,32 @@ extension HTML {
 ```swift
 @Suite("Dark Mode Support")
 struct DarkModeTests {
-    @Test("Adaptive colors generate appropriate classes and styles")
-    func adaptiveColorGeneration() {
-        assertInlineSnapshot(
-            of: HTMLDocument {
-                div { "Hello" }.color(light: .blue, dark: .red)
-            },
-            as: .html
-        ) {
-            """
-            <!doctype html>
-            <html>
-              <head>
-                <style>
-                .color-jiDhg4{color:blue}
-                @media (prefers-color-scheme: dark){
-                  .color-dMYaj4{color:red}
-                }
-                </style>
-              </head>
-              <body>
-                <div class="color-jiDhg4 color-dMYaj4">Hello</div>
-              </body>
-            </html>
-            """
-        }
-    }
+  @Test("Adaptive colors generate appropriate classes and styles")
+  func adaptiveColorGeneration() {
+    assertInlineSnapshot(
+      of: HTMLDocument {
+        div { "Hello" }.color(light: .blue, dark: .red)
+      },
+        as: .html
+      ) {
+        """
+         <!doctype html>
+         <html>
+           <head>
+             <style>
+             .color-jiDhg4{color:blue}
+             @media (prefers-color-scheme: dark){
+               .color-dMYaj4{color:red}
+             }
+             </style>
+           </head>
+           <body>
+             <div class="color-jiDhg4 color-dMYaj4">Hello</div>
+           </body>
+         </html>
+         """
+      }
+  }
 }
 ```
 

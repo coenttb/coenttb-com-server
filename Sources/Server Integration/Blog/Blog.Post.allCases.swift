@@ -138,7 +138,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     title: "3 Testing a composition of packages",
                     hidden: .no,
                     blurb: """
-                        When single-package modularity isn't enough, it's time to embrace composition of packages. Discover how to architect Swift library ecosystems that enable independent evolution, flexible integration, and possibilities you haven't imagined yet.
+                        Testing doesn’t have to be a tangled mess. Discover how modular Swift package architecture transforms testing—from brittle and slow to fast, focused, and intuitive. We’ll walk through real-world and show how adding dark mode touched only one test suite in one package. Yes, really.
                         """,
                     estimatedTimeToComplete: 20.minutes,
                     permission: .free
