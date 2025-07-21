@@ -15,8 +15,8 @@ extension Email {
     ) -> some HTML {
 
         @Dependency(\.coenttb.website.router) var router
-        let index = 3
-        let title = "#\(index) A Tour of PointFreeHTML"
+        let index = 2
+        let title = "#\(index) A journey building HTML documents in Swift"
 
         @Dependency(\.coenttb.website.router) var serverRouter
 
@@ -35,10 +35,12 @@ extension Email {
                             div {
                                 div {
                                     Image(
-                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250324.png")))).absoluteString),
-                                        alt: "coenttb image"
+//                                        base64EncodedFromURL: serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))),
+                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))).absoluteString),
+                                        alt: "coenttb image",
+                                        loading: .lazy
                                     )
-                                    .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)")
+                                    .inlineStyle("filter", "sepia(1) hue-rotate(-25deg) saturate(5) brightness(1.2)")
                                 }
                                 .position(
                                     .absolute,
@@ -58,17 +60,16 @@ extension Email {
                         VStack(alignment: .leading) {
 
                             EmailMarkdown {"""
-                            Let’s take a tour through pointfree-html‘s API for generating HTML documents. We will discover how its HTML protocol composes HTML components using recursive rendering and appreciate its handling of attributes and styles—all while delivering blazing-fast performance.
+                            As a lawyer, I've written countless legal documents. But as my coding skills grew, I became increasingly frustrated that I couldn't easily apply these programming skills to my daily legal work, especially for document creation. Of all the approaches I've explored for generating (legal) documents, I prefer the `pointfree-html` Swift library the most, as it makes it genuinely enjoyable to build and maintain documents.
 
-                            This library has made working with HTML much more pleasant for me, both for web content and everyday legal documents. I’m confident you’ll agree with me.
+                            In today's blog we reflect on my journey creating documents in Swift for the web and the office, and we will solve some pesky (legal) formatting issues once and for all.
                             """}
 
-                            Link(href: .init(router.url(for: .blog(.post(id: index))).absoluteString)) {
+                            Link(href: .url(router.url(for: .blog(.post(id: index))))) {
                                 "Click here to read post \(title)"
                             }
                             .color(.text.primary.reverse())
                             .padding(bottom: .medium)
-
 //                            Button(
 //                                tag: a,
 //                                background: .branding.primary
@@ -83,13 +84,6 @@ extension Email {
                             Visit the open-source [GitHub repository](https://github.com/coenttb/pointfree-html), star the project, submit feedback, or even contribute directly—I’d love your input to make this tool even better.
                             """}
 
-                            Header(4) {
-                                "Personal note"
-                            }
-                            EmailMarkdown {"""
-                            I'm thrilled to begin sharing my work with a wider audience. While this journey starts modestly with a tour of PointFreeHTML, my goal is to soon showcase powerful Swift technologies designed to advance new legal tech solutions. I genuinely envision those tools will significantly increase the total legal output globally, resulting in more and better justice for all.
-                            """}
-
                             CoenttbHTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
@@ -98,7 +92,9 @@ extension Email {
                             .linkColor(.text.secondary)
                             .color(.text.secondary)
                             .font(.footnote)
+
                         }
+
                     }
                     .padding(vertical: .small, horizontal: .medium)
                 }

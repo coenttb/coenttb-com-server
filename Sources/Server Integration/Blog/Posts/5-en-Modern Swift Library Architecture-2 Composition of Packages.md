@@ -1,4 +1,4 @@
-# Modern Swift Library Architecture 2: Composition of Packages
+# Modern Swift library architecture 2: composition of packages
 
 > NOTE: 
 > This is Part 2 in a series exploring modern swift library architecture. 

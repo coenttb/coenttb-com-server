@@ -1,4 +1,4 @@
-# Modern Swift Library Architecture 3: Testing a composition of packages
+# Modern Swift library architecture 3: Testing a composition of packages
 
 > NOTE: 
 > This is Part 3 in a series exploring modern swift library architecture. 
@@ -44,12 +44,15 @@ import HTMLAttributeTypes
 struct StringAttributeProtocolTests {
     struct TestAttribute: StringAttribute {
         static let name = "test"
+        let rawValue: String
     }
         
     @Test("String attributes serialize to their string value")
     func basicSerialization() {        
-        let attr = TestAttribute()
+        let attr = TestAttribute("value")
         #expect(attr.name == "test")
+        #expect(attr.description == "value")
+        #expect("\(attr.description)" == "value")
     }
 }
 ```

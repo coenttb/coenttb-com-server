@@ -15,8 +15,8 @@ extension Email {
     ) -> some HTML {
 
         @Dependency(\.coenttb.website.router) var router
-        let index = 4
-        let title = "#\(index) Modern Swift Library Architecture: The Swift Package"
+        let index = 3
+        let title = "#\(index) A Tour of PointFreeHTML"
 
         @Dependency(\.coenttb.website.router) var serverRouter
 
@@ -31,12 +31,26 @@ extension Email {
                             title
                         }
 
-                        Circle {
-                            Image(
-                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
-                                alt: "coenttb image"
-                            )
-                                .objectPosition(.twoValues(.percentage(50), .percentage(50)))
+                        div {
+                            div {
+                                div {
+                                    Image(
+                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250324.png")))).absoluteString),
+                                        alt: "coenttb image"
+                                    )
+                                    .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)")
+                                }
+                                .position(
+                                    .absolute,
+                                    top: .zero,
+                                    right: .zero,
+                                    bottom: .zero,
+                                    left: .zero
+                                )
+                            }
+                            .clipPath(.circle(.percent(50)))
+                            .position(.relative)
+                            .size(.rem(10))
                         }
                         .margin(.auto)
                         .padding(top: .large, bottom: .large)
@@ -44,27 +58,36 @@ extension Email {
                         VStack(alignment: .leading) {
 
                             EmailMarkdown {"""
-                            What are the best, modern practices for Modern Swift Library Architecture? Learn how to break up your Swift package into modules, reduce its complexity, increase code-reuse, and dramatically simplify maintenance.
+                            Let’s take a tour through pointfree-html‘s API for generating HTML documents. We will discover how its HTML protocol composes HTML components using recursive rendering and appreciate its handling of attributes and styles—all while delivering blazing-fast performance.
 
-                            In today's article '\(title)', we build a Swift Package from scratch. By increasing complexity one step at a time, we'll experience when, how, and why to break apart the monolith through modularization and composition.
-
-                            Let's get started.
+                            This library has made working with HTML much more pleasant for me, both for web content and everyday legal documents. I’m confident you’ll agree with me.
                             """}
 
                             Link(href: .init(router.url(for: .blog(.post(id: index))).absoluteString)) {
-                                "Read the full article →"
+                                "Click here to read post \(title)"
                             }
                             .color(.text.primary.reverse())
                             .padding(bottom: .medium)
 
+//                            Button(
+//                                tag: a,
+//                                background: .branding.primary
+//                            ) {
+//                                "Click here to read post \(title)"
+//                            }
+//                            .color(.text.primary.reverse())
+//                            .href(router.url(for: .blog(.post(id: index))).absoluteString)
+//                            .padding(bottom: Length.medium)
+
+                            EmailMarkdown {"""
+                            Visit the open-source [GitHub repository](https://github.com/coenttb/pointfree-html), star the project, submit feedback, or even contribute directly—I’d love your input to make this tool even better.
+                            """}
+
                             Header(4) {
                                 "Personal note"
                             }
-
                             EmailMarkdown {"""
-                            Back in March 2025, I released PointFreeHTML, and immediately realized I could achieve the syntax I wanted through a domain model of HTML and CSS—resulting in a type-safe AND domain-accurate HTML DSL in Swift. The project started as a fork of pointfree-html but evolved into something much more modular and composable as I encountered the limitations of monolithic design. It took waaaay longer than I expected!
-
-                            This project became an exploration of how to architect Swift libraries for maximum modularity and reusability. Instead of building one monolithic package, I created an ecosystem of carefully designed packages that compose together: [swift-html-types](https://github.com/coenttb/swift-html-types) and [swift-css-types](https://github.com/coenttb/swift-css-types) provide standards-compliant Swift APIs, while [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) integrates these domain models with HTML-rendering capabilities. [swift-html](https://github.com/coenttb/swift-html) layers on functionality that completes the developer experience at point of use.
+                            I'm thrilled to begin sharing my work with a wider audience. While this journey starts modestly with a tour of PointFreeHTML, my goal is to soon showcase powerful Swift technologies designed to advance new legal tech solutions. I genuinely envision those tools will significantly increase the total legal output globally, resulting in more and better justice for all.
                             """}
 
                             CoenttbHTML.Paragraph {

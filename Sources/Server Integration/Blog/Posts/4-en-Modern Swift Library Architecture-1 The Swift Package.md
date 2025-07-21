@@ -1,4 +1,4 @@
-# Modern Swift Library Architecture 1: The Swift Package
+# Modern Swift library architecture 1: the Swift package
 
 > NOTE: 
 > This is Part 1 in a series exploring modern swift library architecture.

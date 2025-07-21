@@ -1,4 +1,4 @@
-# A Tour of PointFreeHTML
+# A tour of PointFreeHTML
 
 > NOTE: 
 > While the ideas in this article are my own, I've used AI to draft it-hope you don't mind the em-dashes (-). 
