@@ -15,8 +15,8 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "Server Application Tests",
-        "name" : "Server Application Tests"
+        "identifier" : "Server Integration Tests",
+        "name" : "Server Integration Tests"
       }
     }
   ],

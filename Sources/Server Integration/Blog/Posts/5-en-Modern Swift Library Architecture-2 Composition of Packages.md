@@ -1,4 +1,4 @@
-# Modern Swift Library Architecture 2: Composition of Packages
+# Modern Swift library architecture 2: composition of packages
 
 > NOTE: 
 > This is Part 2 in a series exploring modern swift library architecture. 
@@ -61,7 +61,7 @@ let package = Package(
 )
 ```
 
-> NOTE: our "CSS" target composes together the targets it relies on, exposing them through `@\_exported import` of the underlying targets like CSSPropertyTypes and CSSTypeTypes. This allows consumers to use the re-exported types without importing submodules themselves
+> NOTE: our "CSS" target composes together the targets it relies on, exposing them through `@_exported import` of the underlying targets like CSSPropertyTypes and CSSTypeTypes. This allows consumers to use the re-exported types without importing submodules themselves
 
 But now our package's purpose is muddied. It has both a domain model for HTML, a domain model for CSS, and an HTMLPrinter that works just with these domains. With a single package, every HTMLPrinter update forces consumers to potentially update their HTMLElements dependency too, even if they're not using any new HTMLPrinter features. 
 

@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  Email.newsletter4.swift
 //  coenttb-identities
 //
-//  Created by Coen ten Thije Boonkkamp on 04/10/2024.
+//  Created by Coen ten Thije Boonkkamp on [DATE]
 //
 
 import Coenttb_Web
@@ -11,12 +11,12 @@ import Mailgun
 import Messages
 
 extension Email {
-    package static func newsletter4(
+    package static func newsletter5(
     ) -> some HTML {
 
         @Dependency(\.coenttb.website.router) var router
-        let index = 4
-        let title = "#\(index) Modern Swift Library Architecture: The Swift Package"
+        let index = 5
+        let title = "#\(index) Modern Swift Library Architecture: Composition of Packages"
 
         @Dependency(\.coenttb.website.router) var serverRouter
 
@@ -33,7 +33,7 @@ extension Email {
 
                         Circle {
                             Image(
-                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
+                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250714.png")))).absoluteString),
                                 alt: "coenttb image"
                             )
                                 .objectPosition(.twoValues(.percentage(50), .percentage(50)))
@@ -44,11 +44,11 @@ extension Email {
                         VStack(alignment: .leading) {
 
                             EmailMarkdown {"""
-                            What are the best, modern practices for Modern Swift Library Architecture? Learn how to break up your Swift package into modules, reduce its complexity, increase code-reuse, and dramatically simplify maintenance.
+                            When is breaking apart your Swift package into multiple packages worth the complexity? Discover how to build composable package ecosystems that enable independent evolution, flexible integration, and possibilities you never imagined.
 
-                            In today's article '\(title)', we build a Swift Package from scratch. By increasing complexity one step at a time, we'll experience when, how, and why to break apart the monolith through modularization and composition.
+                            In today's article '\(title)', we explore moving beyond single-package architecture to create truly modular systems. Learn when multi-target isn't enough, how to design for composition, and the principles that make package ecosystems thrive.
 
-                            Let's get started.
+                            Let's keep exploring.
                             """}
 
                             Link(href: .init(router.url(for: .blog(.post(id: index))).absoluteString)) {
@@ -62,9 +62,9 @@ extension Email {
                             }
 
                             EmailMarkdown {"""
-                            Back in March 2025, I released PointFreeHTML, and immediately realized I could achieve the syntax I wanted through a domain model of HTML and CSS—resulting in a type-safe AND domain-accurate HTML DSL in Swift. The project started as a fork of pointfree-html but evolved into something much more modular and composable as I encountered the limitations of monolithic design. It took waaaay longer than I expected!
+                            This article captures the exact architectural evolution I experienced while building the swift-html ecosystem. What started as a simple fork became a deep exploration of how packages should compose together.
 
-                            This project became an exploration of how to architect Swift libraries for maximum modularity and reusability. Instead of building one monolithic package, I created an ecosystem of carefully designed packages that compose together: [swift-html-types](https://github.com/coenttb/swift-html-types) and [swift-css-types](https://github.com/coenttb/swift-css-types) provide standards-compliant Swift APIs, while [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) integrates these domain models with HTML-rendering capabilities. [swift-html](https://github.com/coenttb/swift-html) layers on functionality that completes the developer experience at point of use.
+                            [I invite you to join the discussion on the Swift forums to adopt `swift-html-types` and `swift-css-types` as community packages.](https://forums.swift.org/t/pitch-community-maintained-html-and-css-swift-types).
                             """}
 
                             CoenttbHTML.Paragraph {

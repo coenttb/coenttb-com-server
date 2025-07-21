@@ -1,4 +1,4 @@
-# From Broke to Building in Swift
+# From broke to building in Swift
 
 Welcome to my personal blog. I'm Coen ten Thije Boonkkamp, and this is my digital playground where I share all things law, code, startups, wins—and yes, even failures.
 

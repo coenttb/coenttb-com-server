@@ -15,6 +15,8 @@ extension HTMLColor.Defaults {
         color.branding.accent = .green850
         color.text.link = .green550.withDarkColor(.green600)
         color.background.secondary = .offWhite.withDarkColor(.offBlack)
+        color.text.button = color.text.primary.reverse()
+        color.background.button = color.branding.primary
 
         return color
     }

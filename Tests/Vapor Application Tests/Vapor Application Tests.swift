@@ -1,5 +1,6 @@
 import Coenttb_Com_Shared
 import Coenttb_Vapor
+import Coenttb_Com_Router
 import DependenciesTestSupport
 import FluentPostgresDriver
 import Queues
@@ -26,7 +27,7 @@ struct RouterLoadTests {
                 // Configure your router
                 @Dependency(\.coenttb.website.router) var serverRouter
 
-                app.mount(serverRouter, use: ServerRoute.response)
+                app.mount(serverRouter, use: Coenttb_Com_Router.Route.response)
 
                 // Create test client
                 let client = try app.testing()
@@ -75,7 +76,7 @@ struct RouterLoadTests {
     @Test(.disabled())
     func testDifferentRoutes() async throws {
         try await withApp { app in
-            app.mount(Server_RouterAPI.Router.shared) { _, _, _ in
+            app.mount(Server_Router.API.Router.shared) { _, _, _ in
                 // Your route handling logic
                 return Response(status: .ok)
             }
