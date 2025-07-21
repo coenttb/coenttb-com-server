@@ -63,7 +63,7 @@ let package = Package(
         .library(name: .serverModels, targets: [.serverModels]),
         .library(name: .serverTranslations, targets: [.serverTranslations]),
         .library(name: .serverIntegration, targets: [.serverIntegration]),
-        .library(name: .vaporApplication, targets: [.vaporApplication]),
+        .library(name: .vaporApplication, targets: [.vaporApplication])
     ],
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
@@ -81,7 +81,7 @@ let package = Package(
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.2"),
         .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2"),
-        .package(url: "https://github.com/apple/swift-crypto.git", exact: "3.12.3"),
+        .package(url: "https://github.com/apple/swift-crypto.git", exact: "3.12.3")
     ],
     targets: [
         .executableTarget(
@@ -233,7 +233,7 @@ let package = Package(
                 .vaporTesting,
                 .dependenciesTestSupport
             ]
-        ),
+        )
     ],
     swiftLanguageModes: [.v6]
 )

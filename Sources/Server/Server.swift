@@ -19,9 +19,9 @@ struct Server {
 
         do {
             @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
-            
+
             let application = try await Vapor.Application.make(environment, .shared(mainEventLoopGroup))
-            
+
             defer { Task { try? await application.asyncShutdown() } }
 
             do {
@@ -42,4 +42,3 @@ struct Server {
         }
     }
 }
-

@@ -77,7 +77,7 @@ extension Blog.Post {
     static func filenameLiteral(post: Blog.Post) -> TranslatedString {
         .init("\(post.index) \(post.title)")
     }
-    
+
     static func translated(post: Blog.Post) -> TranslatedString {
         return .init { language in
             [

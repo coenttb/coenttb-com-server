@@ -8,9 +8,9 @@ import FluentPostgresDriver
 import JWT
 import Queues
 import QueuesFluentDriver
-import Server_Integration
 import Server_Client
 import Server_EnvVars
+import Server_Integration
 import Server_Models
 
 extension Application {

@@ -69,7 +69,7 @@ extension EnvVars {
             id: id
         )
     }
-    
+
 }
 
 extension EnvVars {
@@ -88,7 +88,7 @@ extension EnvVars {
     package var demoName: String? {
         self["DEMO_NAME"]
     }
-        
+
     package var demoEmail: EmailAddress? {
         self["DEMO_EMAIL"].flatMap(EmailAddress.init(rawValue:))
     }
