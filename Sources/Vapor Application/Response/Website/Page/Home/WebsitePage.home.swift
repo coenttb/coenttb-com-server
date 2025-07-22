@@ -126,7 +126,6 @@ extension Coenttb_Com_Router.Route.Website {
                     }
 //                    .background(currentUser?.authenticated == true ? .background.primary : .background.secondary)
                     .width(.percent(100))
-                    .id("newsletter-signup")
                 }
 
                 CallToActionModule(
