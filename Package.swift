@@ -1,4 +1,4 @@
-// swift-tools-version:6.1.2
+// swift-tools-version:6.1.0
 
 import Foundation
 import PackageDescription
@@ -66,22 +66,21 @@ let package = Package(
         .library(name: .vaporApplication, targets: [.vaporApplication])
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/coenttb.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-server.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-com-shared.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-server-vapor.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-blog.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-google-analytics.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-identities.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-newsletter.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-postgres.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-hotjar.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-mailgun.git", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-syndication.git", branch: "main"),
-        .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver.git", from: "3.0.0-beta1"),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.2"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.110.2"),
-        .package(url: "https://github.com/apple/swift-crypto.git", exact: "3.12.3")
+        .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-server", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-server-vapor", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-identities", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-postgres", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-hotjar", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-mailgun", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-syndication", branch: "main"),
+        .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
+        .package(url: "https://github.com/vapor/vapor", from: "4.110.2"),
     ],
     targets: [
         .executableTarget(

@@ -51,7 +51,7 @@ extension Email {
                             Let's keep exploring.
                             """}
 
-                            Link(href: .init(router.url(for: .blog(.post(id: index))).absoluteString)) {
+                            Link(href: .url(router.url(for: .blog(.post(id: index))))) {
                                 "Read the full article →"
                             }
                             .color(.text.primary.reverse())
