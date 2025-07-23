@@ -11,6 +11,7 @@ import Coenttb_Vapor
 import Server_Dependencies
 import Server_Integration
 import Server_Models
+import HTMLTypesFoundation
 
 extension Coenttb_Com_Router.Route.Website {
     static func contact(
@@ -20,7 +21,7 @@ extension Coenttb_Com_Router.Route.Website {
         @Dependency(\.language) var translated
 
         let email = Anchor(
-            href: .mailto(
+            href: .email(
                 "coen@coenttb.com",
                 subject: "Let's get in touch - coenttb.com",
                 body: "Hi Coen,\n\nI'd love to discuss..."
@@ -33,12 +34,6 @@ extension Coenttb_Com_Router.Route.Website {
             href: "https://linkedin.com/in/coenttb"
         ) {
             "LinkedIn"
-        }
-
-        let twitter = Anchor(
-            href: "https://x.com/coenttb"
-        ) {
-            "@coenttb"
         }
 
         let github = Anchor(
@@ -74,6 +69,10 @@ extension Coenttb_Com_Router.Route.Website {
                     """
                     I'm always interested in discussing new projects, opportunities,
                     or just connecting with fellow entrepreneurs, coders, and lawyers. Whether you're looking to collaborate, have questions about my work, or want to chat about (legal) tech or Swift, I'd love to hear from you.
+                    
+                    \(responseTime)
+                    
+                    \(location), \(timezone)
                     """
                 }
             }
