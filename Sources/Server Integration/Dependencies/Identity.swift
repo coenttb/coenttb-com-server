@@ -15,10 +15,6 @@ import Server_Client
 import Server_Dependencies
 import Server_Models
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Identity.Consumer.Configuration: @retroactive DependencyKey {
     public static var liveValue: Self {
 

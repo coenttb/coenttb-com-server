@@ -7,7 +7,10 @@
 
 import Dependencies
 import DependenciesMacros
-import Foundation
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 extension Client {
     @DependencyClient

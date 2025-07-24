@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import Foundation
 import Server_Client
 
 extension Client.User: DependencyKey {

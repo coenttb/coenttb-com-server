@@ -6,7 +6,6 @@
 //
 
 import CoenttbHTML
-import Foundation
 
 extension HTMLColor.Defaults {
     package static var coenttb: Self {

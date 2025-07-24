@@ -8,10 +8,6 @@
 import Dependencies
 import Languages
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension LanguagesKey: @retroactive DependencyKey {
     public static var liveValue: Set<Language> {
         @Dependency(\.envVars.languages) var languages
