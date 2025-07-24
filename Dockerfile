@@ -7,9 +7,9 @@ COPY Package.* ./
 ARG GH_PAT
 RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/"
 
-RUN swift package resolve
-
 COPY . .
+
+RUN swift package resolve
 
 RUN swift build -c release --product Server
 
