@@ -15,16 +15,17 @@ import Postgres
 
 extension EnvVars: @retroactive DependencyKey {
     public static var liveValue: Self {
-        var localDevelopment: URL? {
+        var localEnvFile: URL? {
 #if DEBUG
             @Dependency(\.projectRoot) var projectRoot
-            return projectRoot.appendingPathComponent(".env.development")
+            let envFile = projectRoot.appendingPathComponent(".env.development")
+            return FileManager.default.fileExists(atPath: envFile.path) ? envFile : nil
 #else
             return nil
 #endif
         }
         return try! EnvVars.live(
-            localDevelopment: localDevelopment
+            localEnvFile: localEnvFile
         )
     }
 }

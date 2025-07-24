@@ -94,10 +94,10 @@
     {
       "identity" : "coenttb-mailgun",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/coenttb-mailgun.git",
+      "location" : "https://github.com/coenttb/coenttb-mailgun",
       "state" : {
         "branch" : "main",
-        "revision" : "d2b0e3c84cfdc5e7ccb56e55c4152af521382462"
+        "revision" : "236398cc6e2227cb0865a1d708c0978c01e7e75d"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server",
       "state" : {
         "branch" : "main",
-        "revision" : "b26a82fc7f7795ef6ff4c4096c50b491d3b98205"
+        "revision" : "f8cb29c82c5b28a5a103671dce3dd44162501a43"
       }
     },
     {
@@ -463,10 +463,10 @@
     {
       "identity" : "swift-environment-variables",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-environment-variables.git",
+      "location" : "https://github.com/coenttb/swift-environment-variables",
       "state" : {
         "branch" : "main",
-        "revision" : "8755643cb24d770fa2291da61881ff35ca2f4421"
+        "revision" : "db501524815b94b8559e1d302b3bf5728254391f"
       }
     },
     {
