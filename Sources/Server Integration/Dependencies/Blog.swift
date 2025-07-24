@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Blog
-import Languages
+import Translating
 import Coenttb_Web
 import Coenttb_Newsletter
 

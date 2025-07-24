@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-com-shared",
       "state" : {
         "branch" : "main",
-        "revision" : "b5f4194fd23d3748321ae63e2395dd57b092027f"
+        "revision" : "61d1e3fac2597c85bfd9d162b1d497a93c4a20ea"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/coenttb/coenttb-html",
       "state" : {
         "branch" : "main",
-        "revision" : "ae621cca82060f4568fad7e39de3116b3f38e266"
+        "revision" : "383da5795eeff0b76b4dbba8659c57ce9812214f"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities",
       "state" : {
         "branch" : "main",
-        "revision" : "656d25faf7c663c651bd98254560815078357487"
+        "revision" : "52556cbf9a3cf778c45fe403e20d770334c470c2"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server",
       "state" : {
         "branch" : "main",
-        "revision" : "f8cb29c82c5b28a5a103671dce3dd44162501a43"
+        "revision" : "419e10c3d330151d4dcfba409ad6c659872dec71"
       }
     },
     {
@@ -160,7 +160,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6289d45a40dcd9d3606a51b9454dc4731af390c3"
+        "revision" : "90a0a38e956cc34b2edf1690263ce15c8167b321"
       }
     },
     {
@@ -533,15 +533,6 @@
       }
     },
     {
-      "identity" : "swift-language",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-language.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "c47dab7ce0d7c678f699d48ce0bb623bc6138ee8"
-      }
-    },
-    {
       "identity" : "swift-log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log",
@@ -692,6 +683,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "7061233809f745e2ba6c3e8c6f984a8f36257226"
+      }
+    },
+    {
+      "identity" : "swift-translating",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-translating",
+      "state" : {
+        "branch" : "main",
+        "revision" : "00e42232490bc595015fdf62d89b7ccdab4a917c"
       }
     },
     {

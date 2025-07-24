@@ -7,7 +7,7 @@
 
 import CoenttbHTML
 import Foundation
-import Languages
+import Translating
 
 extension String {
     package static let oneliner: TranslatedString = .init(

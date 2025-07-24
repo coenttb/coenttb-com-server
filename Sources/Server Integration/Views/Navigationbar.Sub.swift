@@ -10,7 +10,7 @@ import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import Dependencies
 import Foundation
-import Languages
+import Translating
 import Server_Translations
 import URLRouting
 

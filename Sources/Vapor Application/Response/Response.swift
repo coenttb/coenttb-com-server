@@ -73,7 +73,7 @@ extension Coenttb_Com_Router.Route {
 
                     case .public(.robots):
                         return Response.robots(
-                            disallows: Languages.Language.allCases.map {
+                            disallows: Translating.Language.allCases.map {
                         """
                         Disallow: /\($0.rawValue)/account/
                         Disallow: /\($0.rawValue)/checkout/

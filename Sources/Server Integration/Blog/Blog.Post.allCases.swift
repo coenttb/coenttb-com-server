@@ -12,7 +12,7 @@ import CoenttbMarkdown
 import Date
 import Dependencies
 import Foundation
-import Languages
+import Translating
 
 extension [Coenttb_Blog.Blog.Post] {
     package static var allCases: [Coenttb_Blog.Blog.Post] {

@@ -9,7 +9,7 @@ import Coenttb_Legal_Documents
 import Coenttb_Web_HTML
 import CoenttbMarkdown
 import Dependencies
-import Languages
+import Translating
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking

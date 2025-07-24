@@ -11,7 +11,7 @@ import Coenttb_Vapor
 import Dependencies
 import Fluent
 import Foundation
-import Languages
+import Translating
 import Mailgun
 import Prelude
 import Server_Dependencies

@@ -9,7 +9,7 @@ import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Dependencies
 import Foundation
-import Languages
+import Translating
 import Server_Dependencies
 import Server_Translations
 

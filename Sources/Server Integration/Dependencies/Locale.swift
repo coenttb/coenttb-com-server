@@ -6,7 +6,7 @@
 //
 
 import Dependencies
-import Languages
+import Translating
 
 extension LanguagesKey: @retroactive DependencyKey {
     public static var liveValue: Set<Language> {

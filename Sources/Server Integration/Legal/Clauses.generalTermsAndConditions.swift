@@ -10,7 +10,7 @@ import Coenttb_Web_HTML
 import Coenttb_Server_Router
 import CoenttbMarkdown
 import Dependencies
-import Languages
+import Translating
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
