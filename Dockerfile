@@ -3,10 +3,11 @@ FROM swift:6.1.2-jammy AS builder
 WORKDIR /build
 
 COPY Package.* ./
-COPY .build* .build/
 
 ARG GH_PAT
 RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/"
+
+# Cache bust: 2025-01-24
 
 RUN swift package resolve
 
