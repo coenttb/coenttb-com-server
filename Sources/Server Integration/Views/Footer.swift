@@ -6,8 +6,8 @@
 //
 
 import Coenttb_Com_Shared
-import Coenttb_Server_HTML
-import Coenttb_Server_Translations
+import Coenttb_Web_HTML
+import Coenttb_Web_Translations
 import CoenttbHTML
 import CoenttbMarkdown
 import Dependencies

@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Blog
-import Coenttb_Server_HTML
+import Coenttb_Web_HTML
 import Coenttb_Web
 import CoenttbMarkdown
 import Date

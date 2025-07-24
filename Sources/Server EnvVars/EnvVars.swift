@@ -6,6 +6,7 @@
 //
 
 import Coenttb_Server
+import Coenttb_Web
 import EnvironmentVariables
 import GoogleAnalytics
 import Hotjar

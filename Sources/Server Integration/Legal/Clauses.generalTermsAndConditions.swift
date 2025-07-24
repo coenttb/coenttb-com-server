@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Legal_Documents
-import Coenttb_Server_HTML
+import Coenttb_Web_HTML
 import Coenttb_Server_Router
 import CoenttbMarkdown
 import Dependencies
