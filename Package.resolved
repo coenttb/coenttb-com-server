@@ -40,10 +40,10 @@
     {
       "identity" : "coenttb-blog",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/coenttb-blog.git",
+      "location" : "https://github.com/coenttb/coenttb-blog",
       "state" : {
         "branch" : "main",
-        "revision" : "cda765831d4c8adee19a0f725972f2238c0918c6"
+        "revision" : "9bf65d4a51b50f3cde0498c15e2e26331dc2997c"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-server-vapor",
       "state" : {
         "branch" : "main",
-        "revision" : "932886694ebe1a36f1ae87903cf0a8c26acb1215"
+        "revision" : "cb4e9c8987555d448f5f5b671b0ecaf9c107e064"
       }
     },
     {
