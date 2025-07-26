@@ -1,6 +1,7 @@
 # Swift
 .build/
 .swiftpm
+Package.resolved
 
 # Node artifact files
 node_modules/
