@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-authentication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3334b126340d4a8bc6e82fa442f507c4b033e62b"
+        "revision" : "d674b61fdc256bcc4c3b5b76451db6604db77740"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-com-shared",
       "state" : {
         "branch" : "main",
-        "revision" : "98acf78e3c7751f1e0b1fb82a57a6bfc1f4ccb18"
+        "revision" : "bf395cefd2eb19463d8e32a9ae2ce9a0721c8c3e"
       }
     },
     {
@@ -97,7 +97,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun",
       "state" : {
         "branch" : "main",
-        "revision" : "d44625b8c72af42e18db6a292958be227fe458dc"
+        "revision" : "00590e58e1a0d912bca3ba2ec93d092e49d76fda"
       }
     },
     {
@@ -340,7 +340,7 @@
       "location" : "https://github.com/coenttb/swift-authentication",
       "state" : {
         "branch" : "main",
-        "revision" : "4a6d57fbb2e603fb485180600d26a13d865e3c1a"
+        "revision" : "35332ce1c2ddab3434e1b76c8aa95462897e91b4"
       }
     },
     {
