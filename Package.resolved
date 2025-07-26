@@ -34,7 +34,7 @@
       "location" : "https://github.com/coenttb/coenttb-authentication.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4639d811203c02e935d0718c2c6f64d3d65ece39"
+        "revision" : "cd9a5b81d4604244182342e2f270ae917832417f"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/coenttb/coenttb-com-shared",
       "state" : {
         "branch" : "main",
-        "revision" : "61d1e3fac2597c85bfd9d162b1d497a93c4a20ea"
+        "revision" : "be6362e4a5e92683779e4157699d97af8153c9b9"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/coenttb/coenttb-identities",
       "state" : {
         "branch" : "main",
-        "revision" : "52556cbf9a3cf778c45fe403e20d770334c470c2"
+        "revision" : "d8053962619e7981ef1294869f856a4ffdd32488"
       }
     },
     {
@@ -97,7 +97,7 @@
       "location" : "https://github.com/coenttb/coenttb-mailgun",
       "state" : {
         "branch" : "main",
-        "revision" : "236398cc6e2227cb0865a1d708c0978c01e7e75d"
+        "revision" : "b5d59f12df0296962092d80dc7e4cf0ad59d0d13"
       }
     },
     {
@@ -124,7 +124,7 @@
       "location" : "https://github.com/coenttb/coenttb-server",
       "state" : {
         "branch" : "main",
-        "revision" : "419e10c3d330151d4dcfba409ad6c659872dec71"
+        "revision" : "ea1bf7186570eb7778f5cfbf22c22e2a3528e4a9"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/coenttb/coenttb-server-vapor",
       "state" : {
         "branch" : "main",
-        "revision" : "cb4e9c8987555d448f5f5b671b0ecaf9c107e064"
+        "revision" : "c8a9997376dc96e684b08caba3df313e69995547"
       }
     },
     {
@@ -160,7 +160,7 @@
       "location" : "https://github.com/coenttb/coenttb-web.git",
       "state" : {
         "branch" : "main",
-        "revision" : "90a0a38e956cc34b2edf1690263ce15c8167b321"
+        "revision" : "438be63e1208396a13e3eafdf3014344aaee1769"
       }
     },
     {
@@ -241,7 +241,7 @@
       "location" : "https://github.com/coenttb/pointfree-html.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0600634f64adb80324101d7577203cd31d6308d9"
+        "revision" : "0867cb15127d9db0fe54e53d5a47fb5438d84710"
       }
     },
     {
@@ -349,7 +349,7 @@
       "location" : "https://github.com/coenttb/swift-authentication",
       "state" : {
         "branch" : "main",
-        "revision" : "511c8c145ab78234ea6efbf1f0ff13a80df5287d"
+        "revision" : "f8df238ff2dc62291352286be64cf952f3701b58"
       }
     },
     {
@@ -461,6 +461,24 @@
       }
     },
     {
+      "identity" : "swift-domain-type",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-domain-type",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e0e2116dbe676f50d27de6a49de52aa632bd6d14"
+      }
+    },
+    {
+      "identity" : "swift-emailaddress-type",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-emailaddress-type",
+      "state" : {
+        "branch" : "main",
+        "revision" : "43594e4e569efeb0da7baf93e37f2a8b0a69a707"
+      }
+    },
+    {
       "identity" : "swift-environment-variables",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-environment-variables",
@@ -502,7 +520,7 @@
       "location" : "https://github.com/coenttb/swift-html-types",
       "state" : {
         "branch" : "main",
-        "revision" : "9b22f5bf4d6a591234c546902e2489076935f847"
+        "revision" : "984d22a98253c9b7d110b0c478fdee2c9bef5210"
       }
     },
     {
@@ -529,7 +547,7 @@
       "location" : "https://github.com/coenttb/swift-identities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b5e0703e638eded7c3be271c60e4d4b1a011d7e7"
+        "revision" : "572aeb48012e01428838fe0d5ab067fd66f6faa3"
       }
     },
     {
@@ -537,8 +555,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log",
       "state" : {
-        "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
-        "version" : "1.6.3"
+        "revision" : "ce592ae52f982c847a4efc0dd881cc9eb32d29f2",
+        "version" : "1.6.4"
       }
     },
     {
@@ -623,6 +641,15 @@
       }
     },
     {
+      "identity" : "swift-password-validation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-password-validation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "350c846e1aca8cedaf06534c34ab4a3f5db75eea"
+      }
+    },
+    {
       "identity" : "swift-prelude",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-prelude.git",
@@ -672,8 +699,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
       "state" : {
-        "revision" : "61e4ca4b81b9e09e2ec863b00c340eb13497dac6",
-        "version" : "1.5.0"
+        "revision" : "41daa93a5d229e1548ec86ab527ce4783ca84dda",
+        "version" : "1.6.0"
       }
     },
     {
@@ -691,7 +718,7 @@
       "location" : "https://github.com/coenttb/swift-translating",
       "state" : {
         "branch" : "main",
-        "revision" : "00e42232490bc595015fdf62d89b7ccdab4a917c"
+        "revision" : "bcdace8349ec3c02864deec406af01a891232d6a"
       }
     },
     {
@@ -704,12 +731,21 @@
       }
     },
     {
+      "identity" : "swift-url-routing-translating",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-url-routing-translating",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bccd2705110cd5e0ed514eb9f8282931bdbc9772"
+      }
+    },
+    {
       "identity" : "swift-web",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-web",
       "state" : {
         "branch" : "main",
-        "revision" : "1f3075cc5fbed21162207c8b1b0c8867319ecbf9"
+        "revision" : "cf61346f80eb67fc305ed1291f2700c2f56f49f0"
       }
     },
     {
@@ -718,7 +754,7 @@
       "location" : "https://github.com/coenttb/swift-web-standards",
       "state" : {
         "branch" : "main",
-        "revision" : "06c08d7b6b6f86a8db2cf4ec8b02c42162f3045e"
+        "revision" : "5bf44d734c5f5efce72cd3330b279f040c4281ef"
       }
     },
     {

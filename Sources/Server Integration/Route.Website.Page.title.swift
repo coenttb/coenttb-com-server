@@ -23,9 +23,9 @@ extension Route.Website {
         case .privacy_statement:
             return String.privacyStatement
         case .blog(.index):
-            return String.blog + .space + "Index"
+            return String.blog + String.space + "Index"
         case let .blog(.post(string)):
-            return String.blog + .space + "\(string)"
+            return String.blog + String.space + "\(string)"
         case .terms_of_use:
             return String.terms_of_use
         case .general_terms_and_conditions:

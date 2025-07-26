@@ -9,7 +9,7 @@ import Coenttb_Identity_Consumer
 import Foundation
 import Server_Database
 import Server_Models
-import SwiftWeb
+import Swift_Web
 
 extension Server_Models.User {
     init(
