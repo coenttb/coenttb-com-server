@@ -56,7 +56,7 @@ extension Coenttb_Com_Router.Route {
                     case .public(.sitemap):
                         return Response(
                             status: .ok,
-                            body: .init(stringLiteral: try await SiteMap.default().xml)
+                            body: .init(stringLiteral: try await Sitemap.default().xml)
                         )
 
                     case .public(.rssXml):

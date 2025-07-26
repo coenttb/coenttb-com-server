@@ -9,7 +9,7 @@ import Coenttb_Blog
 import Coenttb_Web_HTML
 import Coenttb_Web
 import CoenttbMarkdown
-import Date
+import DateExtensions
 import Dependencies
 import Foundation
 import Translating
