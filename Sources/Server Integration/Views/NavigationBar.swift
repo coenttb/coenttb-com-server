@@ -59,7 +59,8 @@ package struct CoenttbNavigationBar: HTML {
             centeredNavItems: {
                 NavigationBarCenteredNavItems(
                     items: [
-                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil
+                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil,
+                        .init(String.contact_me.capitalizingFirstLetter().description, href: .init(serverRouter.href(for: .contact)))
                     ].compactMap { $0 }
                 )
                 .dependency(\.color.text.link, .text.primary)
