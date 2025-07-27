@@ -65,24 +65,10 @@ package struct CoenttbFooter: HTML {
                             href: .init(serverRouter.href(for: .newsletter(.subscribe(.request))))
                         ),
                         (label: "RSS", href: .init(serverRouter.href(for: .rssXml))),
-                        envVars.companyXComHandle.map { handle in
-                            (
-                                label: "X/Twitter",
-                                href: .init("https://www.x.com/\(handle)")
-                            )
-                        },
-                        envVars.companyGitHubHandle.map { handle in
-                            (
-                                label: "Github",
-                                href: .init("https://github.com/\(handle)")
-                            )
-                        },
-                        envVars.companyLinkedInHandle.map { handle in
-                            (
-                                label: "LinkedIn",
-                                href: .init("https://www.linkedin.com/in/\(handle)")
-                            )
-                        },
+                        (
+                            label: "\(String.contact.capitalizingFirstLetter())",
+                            href: .init(serverRouter.href(for: .contact))
+                        ),
                         (
                             label: "\(String.privacyStatement.capitalizingFirstLetter())",
                             href: .init(serverRouter.href(for: .privacy_statement))
@@ -94,10 +80,6 @@ package struct CoenttbFooter: HTML {
                         (
                             label: "\(String.terms_of_use.capitalizingFirstLetter())",
                             href: .init(serverRouter.href(for: .terms_of_use))
-                        ),
-                        (
-                            label: "\(String.contact_me.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .contact))
                         )
                     ]
                         .compactMap { $0
