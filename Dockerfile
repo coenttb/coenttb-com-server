@@ -9,7 +9,7 @@ RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://g
 
 COPY . .
 
-RUN swift package resolve
+RUN rm -f Package.resolved && swift package update
 
 RUN swift build -c release --product Server
 
