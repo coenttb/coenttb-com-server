@@ -52,7 +52,7 @@ extension Coenttb_Com_Router.Route.Website {
                         }
                         .paddingTop(.medium)
 
-                        small { "Periodically receive articles on law, code, startups, wins (and failures)." }
+                        small { String.periodically_receive_articles_on }
                             .font(.body(.small))
                             .color(.text.secondary)
                     }
