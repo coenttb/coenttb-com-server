@@ -1,4 +1,4 @@
-FROM swift:6.1.0-jammy AS builder
+FROM swift:6.1.2-jammy AS builder
 
 WORKDIR /build
 
@@ -15,7 +15,7 @@ RUN swift package clean
 RUN rm -rf .build
 RUN swift build --product Server -c release
 
-FROM swift:6.1.0-jammy AS runtime
+FROM swift:6.1.2-jammy AS runtime
 
 WORKDIR /app
 
