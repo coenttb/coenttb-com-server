@@ -26,4 +26,4 @@ COPY --from=builder /build/.build/release/ ./
 COPY --from=builder /build/Public ./Public
 
 EXPOSE 8080
-CMD ["./Server", "serve", "--hostname", "0.0.0.0", "--port", "$PORT"]
+CMD ./Server serve --hostname 0.0.0.0 --port $PORT
