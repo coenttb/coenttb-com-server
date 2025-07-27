@@ -9,9 +9,11 @@ RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://g
 
 COPY . .
 
-RUN rm -f Package.resolved && swift package update
+RUN rm -f Package.resolved && rm -rf .build && swift package update
 
-RUN swift build --product Server -c release
+RUN swift package clean
+RUN rm -rf .build
+RUN swift build --product Server -c release --clean-build
 
 FROM swift:6.1.2-jammy AS runtime
 
