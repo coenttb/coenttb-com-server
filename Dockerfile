@@ -16,8 +16,7 @@ RUN rm -rf .build
 
 # TODO: revert disables at Swift 6.2 launch. 
 RUN swift build --product Server -c release \
-    -Xswiftc -disable-sil-perf-optzns \
-    -Xswiftc -Xfrontend -Xswiftc -sil-verify-all
+    -Xswiftc -disable-sil-perf-optzns
 
 FROM swift:6.1.2-jammy AS runtime
 
