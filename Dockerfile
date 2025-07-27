@@ -13,7 +13,7 @@ RUN rm -f Package.resolved && rm -rf .build && swift package update
 
 RUN swift package clean
 RUN rm -rf .build
-RUN swift build --product Server -c release --clean-build
+RUN swift build --product Server -c release
 
 FROM swift:6.1.2-jammy AS runtime
 
