@@ -28,7 +28,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
             return nil
         }
 
-        return Mailgun.Client.live(
+        return try! Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: baseURL,
             domain: domain
