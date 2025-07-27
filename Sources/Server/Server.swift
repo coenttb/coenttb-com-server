@@ -4,7 +4,7 @@ import Vapor_Application
 @main
 struct Server {
     static func main() async throws {
-#if DEBUG
+#if DEBUG && os(macOS)
         prepareDependencies {
             $0.coenttb = .testValue
         }

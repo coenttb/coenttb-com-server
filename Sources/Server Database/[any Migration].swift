@@ -46,7 +46,7 @@ extension [any Fluent.Migration] {
             }()
         ]
 
-#if DEBUG
+#if DEBUG && os(macOS)
         migrations.append(CreateDemoUserMigration())
         migrations.append(CreateUnverifiedNewsletterMigration())
 #endif

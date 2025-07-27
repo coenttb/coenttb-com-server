@@ -16,7 +16,7 @@ import Postgres
 extension EnvVars: @retroactive DependencyKey {
     public static var liveValue: Self {
         var localEnvFile: URL? {
-#if DEBUG
+#if DEBUG && os(macOS)
             @Dependency(\.projectRoot) var projectRoot
             let envFile = projectRoot.appendingPathComponent(".env.development")
             return FileManager.default.fileExists(atPath: envFile.path) ? envFile : nil

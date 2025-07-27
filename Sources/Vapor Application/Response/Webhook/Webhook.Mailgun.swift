@@ -14,7 +14,7 @@ extension Mailgun.Client {
         request: Vapor.Request
     ) async throws -> any AsyncResponseEncodable {
 
-#if DEBUG
+#if DEBUG && os(macOS)
         @Dependency(\.logger) var logger: Logger
         logger.log(.info, "Mailgun.Client.webhook called")
 #endif
