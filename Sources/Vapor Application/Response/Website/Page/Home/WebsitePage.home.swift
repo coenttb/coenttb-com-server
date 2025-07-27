@@ -52,7 +52,7 @@ extension Coenttb_Com_Router.Route.Website {
                         }
                         .paddingTop(.medium)
 
-                        small { String.periodically_receive_articles_on }
+                        small { String.periodically_receive_articles_on.capitalizingFirstLetter().period }
                             .font(.body(.small))
                             .color(.text.secondary)
                     }
