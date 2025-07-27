@@ -14,13 +14,10 @@ RUN rm -f Package.resolved && rm -rf .build && swift package update
 RUN swift package clean
 RUN rm -rf .build
 
-# Try -Osize first (often avoids crashes)
-RUN swift build --product Server -c release -Xswiftc -Osize
-
-# If above fails, uncomment this fallback:
-# RUN swift build --product Server -c release \
-#     -Xswiftc -disable-sil-perf-optzns \
-#     -Xswiftc -Xfrontend -Xswiftc -sil-verify-all
+# TODO: revert disables at Swift 6.2 launch. 
+RUN swift build --product Server -c release \
+    -Xswiftc -disable-sil-perf-optzns \
+    -Xswiftc -Xfrontend -Xswiftc -sil-verify-all
 
 FROM swift:6.1.2-jammy AS runtime
 
