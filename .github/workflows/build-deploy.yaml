@@ -19,16 +19,48 @@ jobs:
     runs-on: ubuntu-latest
     environment: coenttb-com-server
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
+          clean: true
       
       - name: Configure Git
         run: |
           git config --global user.name "${{ secrets.GH_USER }}"
           git config --global url."https://${{ secrets.GH_PAT }}@github.com/".insteadOf "https://github.com/"
       
-      - name: Build Release in Docker
+      - name: Clean any existing build artifacts
+        run: |
+          rm -rf .build || true
+          docker system prune -f || true
+      
+      - name: Display build configuration
+        run: |
+          echo "=== Build Configuration ==="
+          echo "Package.swift Swift version:"
+          head -1 Package.swift
+          echo ""
+          echo "Dockerfile Swift version:"
+          grep "FROM swift:" Dockerfile
+          echo ""
+          echo "Dockerfile build command:"
+          grep "swift build" Dockerfile
+          echo ""
+          echo "Dockerfile copy path:"
+          grep "\.build/" Dockerfile
+          echo "========================="
+      
+      - name: Verify Dockerfile configuration
+        run: |
+          echo "Checking Dockerfile uses debug build..."
+          if grep -q "swift build --product Server" Dockerfile && grep -q "\.build/debug/" Dockerfile; then
+            echo "✅ Dockerfile correctly configured for debug build"
+          else
+            echo "❌ Dockerfile not configured for debug build"
+            exit 1
+          fi
+      
+      - name: Build in Docker (Debug Mode)
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -40,10 +72,26 @@ jobs:
             registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web:latest
           load: true
           platforms: linux/amd64
+          no-cache: true
       
-      # Quick test
-      - name: Test binary exists
-        run: docker run --rm swift-builder:latest test -f /app/Server || exit 1
+      # Comprehensive testing
+      - name: Test binary exists and validate build
+        run: |
+          echo "Testing if Server binary was built correctly..."
+          docker run --rm swift-builder:latest test -f /app/Server || {
+            echo "❌ Server binary not found in /app/"
+            echo "Contents of /app/:"
+            docker run --rm swift-builder:latest ls -la /app/ || true
+            exit 1
+          }
+          echo "✅ Server binary found"
+          
+          echo "Testing if binary is executable..."
+          docker run --rm swift-builder:latest test -x /app/Server || {
+            echo "❌ Server binary is not executable"
+            exit 1
+          }
+          echo "✅ Server binary is executable"
 
       # Deploy steps only run for production
       - name: Install Heroku CLI

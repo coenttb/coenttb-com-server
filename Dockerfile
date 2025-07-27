@@ -11,13 +11,13 @@ COPY . .
 
 RUN swift package resolve
 
-RUN swift build -c release --product Server
+RUN swift build --product Server
 
 FROM swift:6.1.2-jammy AS runtime
 
 WORKDIR /app
 
-COPY --from=builder /build/.build/release/ ./
+COPY --from=builder /build/.build/debug/ ./
 COPY --from=builder /build/Public ./Public
 
 EXPOSE 8080
