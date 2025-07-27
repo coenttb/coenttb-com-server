@@ -111,7 +111,24 @@ package struct CoenttbNavigationBar: HTML {
                                     .fontWeight(.medium)
                             }
                         }
-
+                        @Dependency(\.currentUser?.newsletterSubscribed) var newsletterSubscribed
+                        
+                        if newsletterSubscribed != true {
+                            li {
+                                Link(
+                                    destination: .newsletter(.subscribe(.request)),
+                                    String.subscribe.capitalizingFirstLetter().description
+                                )
+                            }
+                        }
+                        
+                        li {
+                            Link(
+                                destination: .contact,
+                                String.contact_me.capitalizingFirstLetter().description
+                            )
+                        }
+ 
 //                        switch currentUser?.authenticated == true {
 //                        case true:
 //                            li {
