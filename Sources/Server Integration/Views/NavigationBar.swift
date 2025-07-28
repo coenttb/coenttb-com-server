@@ -49,7 +49,18 @@ package struct CoenttbNavigationBar: HTML {
 
             },
             trailingNavItems: {
-                HTMLEmpty()
+                ul {
+                    li {
+                        div {
+                            subscribeButton
+                        }
+                        .display(.inlineBlock)
+                    }
+                    .display(.inline)
+                    .padding(left: .rem(1), pseudo: .not(.firstChild))
+                }
+                .listStyle(.reset)
+                .display(Display.none, media: .mobile)
             },
             mobileNavItems: {
                 ul {
