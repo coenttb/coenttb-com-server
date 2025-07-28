@@ -1,4 +1,5 @@
 import Coenttb_Database
+import Coenttb_Identity_Consumer
 import Coenttb_Newsletter
 import Dependencies
 import DependenciesMacros
@@ -8,15 +9,18 @@ import Server_Models
 @DependencyClient
 package struct Client: Sendable {
     package let newsletter: Newsletter.Client
+    package let identity: Identity.Consumer.Client
     package let user: Client.User
 //    package let stripe: Server_Client.Client.Stripe?
 
     package init(
         newsletter: Newsletter.Client,
+        identity: Identity.Consumer.Client,
         user: Client.User
 //        stripe: Server_Client.Client.Stripe?
     ) {
         self.newsletter = newsletter
+        self.identity = identity
         self.user = user
 //        self.stripe = stripe
     }
@@ -25,6 +29,7 @@ package struct Client: Sendable {
 extension Client {
     package static let previewValue: Self = .init(
         newsletter: .previewValue,
+        identity: .previewValue,
         user: .previewValue
 //        stripe: .previewValue
     )
@@ -33,6 +38,7 @@ extension Client {
 extension Server_Client.Client: TestDependencyKey {
     package static let testValue: Self = .init(
         newsletter: .testValue,
+        identity: .testValue,
         user: .testValue
 //        stripe: .testValue
     )
