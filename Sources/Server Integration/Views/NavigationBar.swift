@@ -19,29 +19,11 @@ package struct CoenttbNavigationBar: HTML {
     @Dependency(\.currentUser) var currentUser
 
     private var blog: String { serverRouter.href(for: .blog(.index)) }
-    private var loginHref: String { serverRouter.href(for: .identity(.login)) }
-    private var signupHref: String { serverRouter.href(for: .identity(.create(.request))) }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
     package var body: some HTML {
 
         let posts = blogPosts()
-
-        let loginButton = Link(
-            destination: .identity(.login),
-            String.login.capitalizingFirstLetter().description
-        )
-            .linkUnderline(false)
-            .fontWeight(.medium)
-            .font(.body(.small))
-
-        let signupButton = Link(
-            destination: .identity(.create(.request)),
-            String.signup.capitalizingFirstLetter().description
-        )
-            .linkUnderline(false)
-            .fontWeight(.medium)
-            .font(.body(.small))
 
         let subscribeButton = Link(
             destination: .newsletter(.subscribe(.request)),

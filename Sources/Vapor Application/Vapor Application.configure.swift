@@ -1,6 +1,5 @@
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Identity_Consumer
 import Coenttb_Server
 import Coenttb_Vapor
 import Fluent
@@ -58,8 +57,6 @@ extension Application {
             @Dependency(\.logger) var logger
             logger.warning("JWT public key not set")
         }
-
-        app.middleware.use(Identity.Consumer.Middleware())
 
         @Dependency(\.coenttb.website.router) var router
 

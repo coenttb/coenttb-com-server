@@ -1,12 +1,11 @@
 //
 //  File.swift
-//  coenttb-identities
+//  newsletter3
 //
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
 import Coenttb_Web
-import Identities
 import Mailgun
 import Messages
 

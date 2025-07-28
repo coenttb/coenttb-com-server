@@ -33,7 +33,6 @@ extension Target.Dependency {
     static var coenttbServerFluent: Self { .product(name: "Coenttb Fluent", package: "coenttb-server-vapor") }
     static var coenttbBlog: Self { .product(name: "Coenttb Blog", package: "coenttb-blog") }
     static var coenttbBlogVapor: Self { .product(name: "Coenttb Blog Vapor", package: "coenttb-blog") }
-    static var coenttbIdentityConsumer: Self { .product(name: "Coenttb Identity Consumer", package: "coenttb-identities") }
     static var coenttbNewsletter: Self { .product(name: "Coenttb Newsletter", package: "coenttb-newsletter") }
     static var coenttbNewsletterFluent: Self { .product(name: "Coenttb Newsletter Fluent", package: "coenttb-newsletter") }
     static var coenttbSyndication: Self { .product(name: "Coenttb Syndication", package: "coenttb-syndication") }
@@ -72,7 +71,6 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-server-vapor", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-identities", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-postgres", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-hotjar", branch: "main"),
@@ -97,7 +95,6 @@ let package = Package(
                 .serverDependencies,
                 .dependenciesMacros,
                 .coenttbServer,
-                .coenttbIdentityConsumer,
                 .mailgun,
                 .coenttbNewsletter,
                 .coenttbComShared,
@@ -116,12 +113,10 @@ let package = Package(
             dependencies: [
                 .coenttbServer,
                 .coenttbServerFluent,
-                .coenttbIdentityConsumer,
                 .coenttbNewsletterFluent,
                 .serverDependencies,
                 .serverEnvVars,
                 .dependenciesMacros
-//                .stripe,
             ]
         ),
         .testTarget(
@@ -154,7 +149,6 @@ let package = Package(
                 .mailgun,
                 .googleAnalytics,
                 .postgres
-//                .stripe,
             ]
         ),
         .testTarget(
@@ -184,7 +178,6 @@ let package = Package(
                 .serverEnvVars,
                 .serverTranslations,
                 .serverClient,
-                .coenttbIdentityConsumer,
                 .googleAnalytics,
                 .hotjar,
                 .mailgun,
