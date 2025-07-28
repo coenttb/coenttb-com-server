@@ -1,11 +1,10 @@
-//  Email.newsletter5.swift
-//  coenttb-identities
+//  Email.newsletter6.swift
+//  newsletter6
 //
 //  Created by Coen ten Thije Boonkkamp on [DATE]
 //
 
 import Coenttb_Web
-import Identities
 import Mailgun
 import Messages
 

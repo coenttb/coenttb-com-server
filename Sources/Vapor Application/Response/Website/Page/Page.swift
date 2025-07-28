@@ -8,7 +8,6 @@
 import Coenttb_Blog_Vapor
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Identity_Consumer
 import Coenttb_Newsletter
 import Coenttb_Vapor
 import Server_EnvVars
@@ -116,8 +115,6 @@ extension Coenttb_Com_Router.Route.Website {
                     }
                 }
             )
-        case .identity(let identity):
-            return try await Identity.Consumer.View.response(view: identity)
         }
     }
 }

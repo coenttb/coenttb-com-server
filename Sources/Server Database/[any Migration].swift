@@ -47,88 +47,10 @@ extension [any Fluent.Migration] {
         ]
 
 #if DEBUG && os(macOS)
-        migrations.append(CreateDemoUserMigration())
         migrations.append(CreateUnverifiedNewsletterMigration())
 #endif
 
         return migrations
-    }
-}
-
-package struct CreateDemoUserMigration: AsyncMigration {
-    package init() {}
-
-    package func prepare(on database: Database) async throws {
-
-        @Dependency(\.envVars) var envVars
-        @Dependency(\.logger) var logger
-
-//        fatalError()
-
-//        guard
-//            let email: EmailAddress = envVars.demoEmail,
-//            let name: String = envVars.demoName,
-//            let password: String = envVars.demoPassword,
-//            let stripeCustomerId: String = envVars.demoStripeCustomerId
-//        else { return }
-//
-//        let identity = try Database.Identity(
-//            email: email.rawValue,
-//            password: password,
-//            name: name,
-//            isAdmin: false,
-//            emailVerificationStatus: .verified
-//        )
-//
-//        try await identity.save(on: database)
-//
-//        let user = Server_Database.User(
-//            identityID: try identity.requireID(),
-//            dateOfBirth: nil,
-//            newsletterConsent: true
-//        )
-
-//        user.stripe = .init()
-//        user.stripe.customerId = stripeCustomerId
-
-//        @Dependencies.Dependency(\.stripe) var stripe
-
-//        do {
-//            _ = try await stripe?.customers.update(
-//                customer: stripeCustomerId,
-//                email: email.address
-//            )
-//        } catch {
-//            logger.log(.warning, "\(error)")
-//            logger.log(.warning, """
-//            Couldn't create stripe customer.
-//
-//            Most likely the customerId is wrong, or you didn't forward events to your (local) webhook. Example: stripe listen --forward-to localhost:8080/webhook/stripe
-//            """)
-//        }
-
-//        try await user.save(on: database)
-    }
-
-    package func revert(on database: Database) async throws {
-
-//        @Dependency(\.envVars) var envVars
-//
-//        guard
-//            let email: EmailAddress = envVars.demoEmail
-//        else { return }
-//
-//        guard let identity = try await Identity.query(on: database)
-//            .filter(\.$email == email.rawValue)
-//            .first() else {
-//            return
-//        }
-//
-//        try await Server_Database.User.query(on: database)
-//            .filter(\.$identity.$id == identity.id!)
-//            .delete()
-//
-//        try await identity.delete(on: database)
     }
 }
 
