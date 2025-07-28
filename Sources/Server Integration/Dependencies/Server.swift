@@ -22,7 +22,8 @@ import FoundationNetworking
 extension Server_Client.Client: DependencyKey {
     package static var liveValue: Server_Client.Client {
         .init(
-            newsletter: .liveValue
+            newsletter: .liveValue,
+            user: .liveValue
         )
     }
 }
