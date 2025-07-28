@@ -18,9 +18,6 @@ extension Coenttb_Com_Router.Route.Website {
         page: Coenttb_Com_Router.Route.Website
     ) async throws -> any AsyncResponseEncodable {
         switch page {
-        case let .account(account):
-            return try await Coenttb_Com_Router.Route.Website.Account.response(account: account)
-
         case let .blog(route):
             let response = try await Blog.Route.View.response(route: route)
 
