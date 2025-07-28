@@ -68,7 +68,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-server", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "main"),
+        .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "feature/identities"),
         .package(url: "https://github.com/coenttb/coenttb-server-vapor", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
