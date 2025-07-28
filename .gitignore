@@ -68,3 +68,4 @@ github_token.txt
 # Custom
 local-test-build.sh
 local-test-deploy.sh.claude
+CLAUDE.md
