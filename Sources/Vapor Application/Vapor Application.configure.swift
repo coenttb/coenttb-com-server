@@ -4,7 +4,6 @@ import Coenttb_Server
 import Coenttb_Vapor
 import Fluent
 import FluentPostgresDriver
-import JWT
 import Queues
 import QueuesFluentDriver
 import Server_Client
@@ -50,13 +49,6 @@ extension Application {
             allowedInsecureHosts: envVars.allowedInsecureHosts,
             baseUrl: envVars.baseUrl
         )
-
-        if let jwtPublicKey = envVars.jwtPublicKey {
-            try await app.jwt.keys.add(ecdsa: ES256PublicKey(pem: jwtPublicKey))
-        } else {
-            @Dependency(\.logger) var logger
-            logger.warning("JWT public key not set")
-        }
 
         @Dependency(\.coenttb.website.router) var router
 
