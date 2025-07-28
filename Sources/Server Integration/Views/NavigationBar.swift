@@ -49,39 +49,7 @@ package struct CoenttbNavigationBar: HTML {
 
             },
             trailingNavItems: {
-                ul {
-                    HTMLGroup {
-                        if currentUser?.authenticated == true {
-                            li {
-                                CircleIconButton(
-                                    icon: .init(icon: "cog", size: .large),
-                                    color: .branding.primary,
-                                    href: .init(serverRouter.href(for: .account(.settings(.index)))),
-                                    buttonSize: .rem(2.5)
-                                )
-                            }
-
-                        } else {
-//                            li {
-//                                div {
-//                                loginButton
-//                                }
-//                                .display(.inlineBlock)
-//                            }
-
-                            li {
-                                div {
-                                    subscribeButton
-                                }
-                                .display(.inlineBlock)
-                            }
-                        }
-                    }
-                    .display(.inline)
-                    .padding(left: .rem(1), pseudo: .not(.firstChild))
-                }
-                .listStyle(.reset)
-                .display(Display.none, media: .mobile)
+                HTMLEmpty()
             },
             mobileNavItems: {
                 ul {
