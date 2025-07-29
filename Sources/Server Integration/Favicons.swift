@@ -7,7 +7,7 @@
 
 import Coenttb_Com_Shared
 import Dependencies
-import Favicon
+import Coenttb_Web_HTML
 import Foundation
 
 extension Favicons {

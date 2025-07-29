@@ -105,7 +105,7 @@ extension Server_Integration.HTMLDocument: AsyncResponseEncodable {
     package func encodeResponse(for request: Vapor.Request) async throws -> Vapor.Response {
         var headers = HTTPHeaders()
         headers.add(name: .contentType, value: "text/html")
-        return try .init(status: .ok, headers: headers, body: .init(string: .init(self)))
+        return .init(status: .ok, headers: headers, body: .init(data: Data(self.render())))
     }
 }
 

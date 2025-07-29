@@ -8,7 +8,7 @@
 import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import Dependencies
-import Favicon
+import Coenttb_Web_HTML
 import Foundation
 import GoogleAnalytics
 import Hotjar
@@ -22,7 +22,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
     package let navigationBar: any HTML
     package let _body: any HTML
     package let footer: any HTML
-    package let favicons: Favicons
+    package let favicons: Coenttb_Web_HTML.Favicons
 
     package init(
         themeColor: HTMLColor = .branding.accent,
@@ -33,7 +33,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
                 fontAwesomeScript
             }
         },
-        @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb },
+        @HTMLBuilder favicons: () -> Coenttb_Web_HTML.Favicons = { Coenttb_Web_HTML.Favicons.coenttb },
         @HTMLBuilder navigationBar: () -> any HTML = {
             CoenttbNavigationBar()
         },
