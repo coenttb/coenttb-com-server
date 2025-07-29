@@ -119,8 +119,8 @@ This server is built on a comprehensive Swift web development stack:
 
 #### Core Libraries
 - **[swift-html](https://github.com/coenttb/swift-html)** - Type-safe HTML & CSS DSL
-- **[swift-html-types](https://github.com/coenttb/swift-html)** - Domain accurate and type-safe HTML types
-- **[swift-css-types](https://github.com/coenttb/swift-css)** - Domain accurate and type-safe CSS types
+    - **[swift-html-types](https://github.com/coenttb/swift-html)** - Domain accurate and type-safe HTML types
+    - **[swift-css-types](https://github.com/coenttb/swift-css)** - Domain accurate and type-safe CSS types
 - **[swift-web](https://github.com/coenttb/swift-web)** - Web development fundamentals
 
 #### Extended Functionality
