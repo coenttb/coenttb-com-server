@@ -86,22 +86,27 @@ This project demonstrates a modern, type-safe web architecture:
 @Dependency(\.coenttb.website.router) var router
 app.mount(router, use: Route.response)
 
+let home = router.url(for: .home)
+let blog = router.url(for: .blog(.index))
+let blogPost = router.url(for: .blog(.post(1)))
 
 
 // Type-safe HTML generation
-struct BlogPostView: HTML {
-    let post: BlogPost
-    
-    var body: some HTML {
-        article {
-            h1 { post.title }
-                .fontSize(.rem(2.5))
-            
-            div { post.content }
-                .lineHeight(1.6)
+extension Blog.Post {
+    struct View: HTML {
+        let post: Blog.Post
+        
+        var body: some HTML {
+            article {
+                h1 { post.title }
+                    .fontSize(.rem(2.5))
+                
+                div { post.content }
+                    .lineHeight(1.6)
+            }
+            .maxWidth(.px(800))
+            .margin(.auto)
         }
-        .maxWidth(.px(800))
-        .margin(.auto)
     }
 }
 ```
@@ -114,44 +119,25 @@ This server is built on a comprehensive Swift web development stack:
 
 #### Core Libraries
 - **[swift-html](https://github.com/coenttb/swift-html)** - Type-safe HTML & CSS DSL
-- **[swift-css](https://github.com/coenttb/swift-css)** - Type-safe CSS generation
+- **[swift-html-types](https://github.com/coenttb/swift-html)** - Domain accurate and type-safe HTML types
+- **[swift-css-types](https://github.com/coenttb/swift-css)** - Domain accurate and type-safe CSS types
 - **[swift-web](https://github.com/coenttb/swift-web)** - Web development fundamentals
 
 #### Extended Functionality
 - **[coenttb-html](https://github.com/coenttb/coenttb-html)** - HTML extensions, Markdown, Email, PDF
 - **[coenttb-web](https://github.com/coenttb/coenttb-web)** - Advanced web utilities
-- **[coenttb-server](https://github.com/coenttb/coenttb-server)** - Server development tools
-- **[coenttb-vapor](https://github.com/coenttb/coenttb-vapor)** - Vapor & Fluent integration
+- **[coenttb-server](https://github.com/coenttb/coenttb-server)** - Cross-platform server development tools
+- **[coenttb-server-vapor](https://github.com/coenttb/coenttb-server-vapor)** - Vapor & Fluent integration
 
 #### Point-Free Foundations
 - **[pointfree-html](https://github.com/coenttb/pointfree-html)** - HTML rendering engine
-- **[pointfree-web](https://github.com/coenttb/pointfree-web)** - Web foundations
-- **[pointfree-server](https://github.com/coenttb/pointfree-server)** - Server foundations
 
 #### Additional Tools
-- **[swift-languages](https://github.com/coenttb/swift-languages)** - Cross-platform translations
-
-## Project Structure
-
-```
-coenttb-com-server/
-├── Sources/
-│   ├── Server/             # Main server executable
-│   ├── App/                # Application configuration
-│   ├── Models/             # Database models
-│   ├── Views/              # HTML views
-│   ├── Controllers/        # Route handlers
-│   └── Middleware/         # Custom middleware
-├── Tests/                  # Test suite
-├── Public/                 # Static assets
-└── Resources/              # Email templates, etc.
-```
+- **[swift-translating](https://github.com/coenttb/swift-translating)** - Cross-platform translations
 
 ## Features Demonstrated
 
-- 🔐 **Authentication** - Complete user system with email verification
 - 📝 **Blog Engine** - Markdown-based blog with syntax highlighting
-- 💳 **Payments** - Stripe integration for subscriptions
 - 📧 **Email System** - Type-safe transactional emails
 - 🌍 **Internationalization** - Multi-language support
 - 🎨 **Dark Mode** - Automatic theme switching
@@ -179,7 +165,7 @@ Contributions are welcome! This project serves as both a production website and 
 
 ## Acknowledgements
 
-This project is heavily inspired by the excellent work at [Point-Free](https://www.pointfree.co) by Brandon Williams and Stephen Celis. Their approach to building web applications in Swift has been instrumental in shaping this project.
+This project relies on and is inspired by the excellent work at [Point-Free](https://www.pointfree.co) by Brandon Williams and Stephen Celis.
 
 ## License
 
