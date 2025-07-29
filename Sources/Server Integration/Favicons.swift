@@ -6,21 +6,21 @@
 //
 
 import Coenttb_Com_Shared
-import Dependencies
 import Coenttb_Web_HTML
+import Dependencies
 import Foundation
 
 extension Favicons {
     package static var coenttb: Self {
 
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         return .init(
             icon: .init(
-                lightMode: serverRouter.url(for: .public(.asset(.logo(.favicon_dark)))),
-                darkMode: serverRouter.url(for: .public(.asset(.logo(.favicon_light))))
+                lightMode: router.url(for: .public(.asset(.logo(.favicon_dark)))),
+                darkMode: router.url(for: .public(.asset(.logo(.favicon_light))))
             ),
-            apple_touch_icon: serverRouter.url(for: .public(.asset(.logo(.favicon_light)))).relativeString,
+            apple_touch_icon: router.url(for: .public(.asset(.logo(.favicon_light)))).relativeString,
             manifest: "",
             maskIcon: ""
         )

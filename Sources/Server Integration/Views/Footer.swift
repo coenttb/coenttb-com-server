@@ -19,7 +19,7 @@ import FoundationNetworking
 
 package struct CoenttbFooter: HTML {
 
-    @Dependency(\.coenttb.website.router) var serverRouter
+    @Dependency(\.coenttb.website.router) var router
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.envVars) var envVars
 
@@ -33,7 +33,7 @@ package struct CoenttbFooter: HTML {
         Footer(
             tagline: .init(
                 title: "coenttb",
-                href: .init(serverRouter.href(for: .home)),
+                href: .init(router.href(for: .home)),
                 content: CoenttbHTML.Paragraph {
                     HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
                     Link("coenttb", href: "https://x.com/coenttb")
@@ -47,7 +47,7 @@ package struct CoenttbFooter: HTML {
                     links: [
                         !posts.isEmpty ? (
                             label: .blog.capitalizingFirstLetter().description,
-                            href: .init(serverRouter.href(for: .blog(.index)))
+                            href: .init(router.href(for: .blog(.index)))
                         ) : nil
                     ].compactMap { $0
                     }
@@ -58,28 +58,28 @@ package struct CoenttbFooter: HTML {
                         newsletterSubscribed == true
                         ? (
                             label: "\(String.unsubscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.unsubscribe)))
+                            href: .init(router.href(for: .newsletter(.unsubscribe)))
                         )
                         : (
                             label: "\(String.subscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.subscribe(.request))))
+                            href: .init(router.href(for: .newsletter(.subscribe(.request))))
                         ),
-                        (label: "RSS", href: .init(serverRouter.href(for: .rssXml))),
+                        (label: "RSS", href: .init(router.href(for: .rssXml))),
                         (
                             label: "\(String.contact.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .contact))
+                            href: .init(router.href(for: .contact))
                         ),
                         (
                             label: "\(String.privacyStatement.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .privacy_statement))
+                            href: .init(router.href(for: .privacy_statement))
                         ),
                         (
                             label: "\(String.general_terms_and_conditions.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .general_terms_and_conditions))
+                            href: .init(router.href(for: .general_terms_and_conditions))
                         ),
                         (
                             label: "\(String.terms_of_use.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .terms_of_use))
+                            href: .init(router.href(for: .terms_of_use))
                         )
                     ]
                         .compactMap { $0

@@ -48,8 +48,6 @@ extension Coenttb_Com_Router.Route.API {
     }
 }
 
-
-
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey
 //

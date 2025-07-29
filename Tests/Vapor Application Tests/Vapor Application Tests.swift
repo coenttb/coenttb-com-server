@@ -25,7 +25,7 @@ struct RouterLoadTests {
         } operation: {
             try await withApp { app in
                 // Configure your router
-                @Dependency(\.coenttb.website.router) var serverRouter
+                @Dependency(\.coenttb.website.router) var router
 
                 app.mount(serverRouter, use: Coenttb_Com_Router.Route.response)
 

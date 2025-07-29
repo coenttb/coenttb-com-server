@@ -14,11 +14,11 @@ package struct CoenttbNavigationBar: HTML {
 
     package init() {}
 
-    @Dependency(\.coenttb.website.router) var serverRouter
+    @Dependency(\.coenttb.website.router) var router
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.currentUser) var currentUser
 
-    private var blog: String { serverRouter.href(for: .blog(.index)) }
+    private var blog: String { router.href(for: .blog(.index)) }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
     package var body: some HTML {
@@ -42,7 +42,7 @@ package struct CoenttbNavigationBar: HTML {
                 NavigationBarCenteredNavItems(
                     items: [
                         !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil,
-                        .init(String.contact_me.capitalizingFirstLetter().description, href: .init(serverRouter.href(for: .contact)))
+                        .init(String.contact_me.capitalizingFirstLetter().description, href: .init(router.href(for: .contact)))
                     ].compactMap { $0 }
                 )
                 .dependency(\.color.text.link, .text.primary)
@@ -74,7 +74,7 @@ package struct CoenttbNavigationBar: HTML {
                             }
                         }
                         @Dependency(\.currentUser?.newsletterSubscribed) var newsletterSubscribed
-                        
+
                         if newsletterSubscribed != true {
                             li {
                                 Link(
@@ -83,20 +83,20 @@ package struct CoenttbNavigationBar: HTML {
                                 )
                             }
                         }
-                        
+
                         li {
                             Link(
                                 destination: .contact,
                                 String.contact_me.capitalizingFirstLetter().description
                             )
                         }
- 
+
 //                        switch currentUser?.authenticated == true {
 //                        case true:
 //                            li {
 //                                NavigationBarMobileNavItems.NavListItem.init(
 //                                    String.account.capitalizingFirstLetter().description,
-//                                    href: serverRouter.href(for: .account(.settings(.index)))
+//                                    href: router.href(for: .account(.settings(.index)))
 //                                )
 //                            }
 //                            .padding(top: .rem(1.5))
@@ -127,7 +127,7 @@ package struct CoenttbNavigationBar: HTML {
 extension CoenttbNavigationBar {
     package struct CoenttbLogo: HTML {
 
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         package init() {}
 
@@ -150,7 +150,7 @@ extension CoenttbNavigationBar {
                         .display(.flex)
                         .alignItems(.center)
 
-                        Link(href: .init(serverRouter.href(for: .home))) {
+                        Link(href: .init(router.href(for: .home))) {
                             SVG.coenttb()
                         }
                         .dependency(\.color.text.link, .text.primary)

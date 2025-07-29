@@ -78,7 +78,7 @@ let package = Package(
         .package(url: "https://github.com/coenttb/coenttb-syndication", branch: "main"),
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
-        .package(url: "https://github.com/vapor/vapor", from: "4.110.2"),
+        .package(url: "https://github.com/vapor/vapor", from: "4.110.2")
     ],
     targets: [
         .executableTarget(

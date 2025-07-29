@@ -56,8 +56,8 @@ extension [Sitemap.URL] {
     init(
         dictionary: [Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData]
     ) {
-        @Dependency(\.coenttb.website.router) var serverRouter
-        self = .init(router: serverRouter.url(for:), dictionary)
+        @Dependency(\.coenttb.website.router) var router
+        self = .init(router: router.url(for:), dictionary)
     }
 }
 

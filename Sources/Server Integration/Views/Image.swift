@@ -12,17 +12,17 @@ import Foundation
 
 extension HTMLElementTypes.Image {
     package static let coenttbGreenSuit: HTMLElementTypes.Image = {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         return Image(
-            src: .init(serverRouter.href(for: .asset(.image("coenttb-halftone.png")))),
+            src: .init(router.href(for: .asset(.image("coenttb-halftone.png")))),
             alt: "coenttb avatar"
         )
     }()
 
     package static let prehalftone: HTMLElementTypes.Image = {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         return Image(
-            src: .init(serverRouter.href(for: .asset(.image("prehalftone.png")))),
+            src: .init(router.href(for: .asset(.image("prehalftone.png")))),
             alt: "prehalftone"
         )
     }()

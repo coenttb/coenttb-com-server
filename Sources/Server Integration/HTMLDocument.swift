@@ -8,12 +8,11 @@
 import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import Dependencies
-import Coenttb_Web_HTML
 import Foundation
 import GoogleAnalytics
 import Hotjar
-import Translating
 import Server_EnvVars
+import Translating
 
 package struct HTMLDocument: HTMLDocumentProtocol {
     package let themeColor: HTMLColor

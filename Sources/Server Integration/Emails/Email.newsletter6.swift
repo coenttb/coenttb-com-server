@@ -17,8 +17,6 @@ extension Email {
         let index = 6
         let title = "#\(index) Modern Swift Library Architecture: Testing a Composition of Packages"
 
-        @Dependency(\.coenttb.website.router) var serverRouter
-
         return TableEmailDocument(
             preheader: title
         ) {
@@ -32,7 +30,7 @@ extension Email {
 
                         Circle {
                             Image(
-                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250721.png")))).absoluteString),
+                                src: .init(router.url(for: .public(.asset(.image("coenttb-20250721.png")))).absoluteString),
                                 alt: "coenttb image"
                             )
                             .objectPosition(.twoValues(.percentage(50), .percentage(50)))

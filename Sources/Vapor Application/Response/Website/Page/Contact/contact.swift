@@ -6,12 +6,12 @@
 //
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Web_HTML
 import Coenttb_Vapor
+import Coenttb_Web_HTML
+import HTMLTypesFoundation
 import Server_Dependencies
 import Server_Integration
 import Server_Models
-import HTMLTypesFoundation
 
 extension Coenttb_Com_Router.Route.Website {
     static func contact(
@@ -69,9 +69,9 @@ extension Coenttb_Com_Router.Route.Website {
                     """
                     I'm always interested in discussing new projects, opportunities,
                     or just connecting with fellow entrepreneurs, coders, and lawyers. Whether you're looking to collaborate, have questions about my work, or want to chat about (legal) tech or Swift, I'd love to hear from you.
-                    
+
                     \(responseTime)
-                    
+
                     \(location), \(timezone)
                     """
                 }

@@ -35,7 +35,6 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Coenttb_Com_Router.Route.Website.general_terms_and_conditions()
 
         case .home:
-            @Dependency(\.currentUser) var currentUser
             return try await Coenttb_Com_Router.Route.Website.home()
 
         case .privacy_statement:
@@ -45,7 +44,7 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Coenttb_Com_Router.Route.Website.termsOfUse()
 
         case let .newsletter(newsletter) where newsletter == .subscribe(.request):
-            @Dependency(\.coenttb.website.router) var serverRouter
+            @Dependency(\.coenttb.website.router) var router
             return HTMLDocument {
                 Circle {
                     Image.coenttbGreenSuit
@@ -121,7 +120,7 @@ extension Coenttb_Com_Router.Route.Website {
     -> any AsyncResponseEncodable {
         @Dependency(\.envVars.languages) var languages
         @Dependency(\.language) var language
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         throw Abort(.internalServerError)
     }

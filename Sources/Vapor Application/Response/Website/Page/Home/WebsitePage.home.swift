@@ -16,7 +16,7 @@ import Server_Translations
 extension Coenttb_Com_Router.Route.Website {
     package static func home() async throws -> any AsyncResponseEncodable {
         @Dependency(\.language) var translated
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         @Dependency(\.blog.getAll) var blogPosts
         @Dependency(\.currentUser) var currentUser
         @Dependency(\.newsletter.isSubscribed) var isNewsletterSubscribed
@@ -68,7 +68,7 @@ extension Coenttb_Com_Router.Route.Website {
                 if !posts.isEmpty {
                     Coenttb_Blog.Blog.FeaturedModule(
                         posts: posts,
-                        seeAllURL: serverRouter.url(for: .blog(.index))
+                        seeAllURL: router.url(for: .blog(.index))
                     )
                     .if(currentUser?.authenticated == true) {
                         $0.gradient(

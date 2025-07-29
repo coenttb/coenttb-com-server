@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
-import Foundation
 import Coenttb_Web_Dependencies
+import Foundation
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking

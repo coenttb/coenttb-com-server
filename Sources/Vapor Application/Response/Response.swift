@@ -32,12 +32,8 @@ extension Coenttb_Com_Router.Route {
                 @Dependency(\.envVars) var envVars
                 $0.logger.logLevel = envVars.logLevel ?? logger.logLevel
             } operation: {
-                return try await withDependencies { _ in
-//                    $0.currentUser = try await currentUser()
-                } operation: {
-
                     @Dependency(\.uuid) var uuid
-                    @Dependency(\.coenttb.website.router) var serverRouter
+                    @Dependency(\.coenttb.website.router) var router
                     @Dependency(\.currentUser) var currentUser
 
                     switch route {
@@ -46,9 +42,6 @@ extension Coenttb_Com_Router.Route {
 
                     case let .webhook(webhook):
                         return try await Webhook.response(webhook: webhook)
-
-//                    case .website(let page) where page.page == .home && page.language == nil:
-//                        return try await Website<Route.Website>.response(website: .init(language: nil, page: .home))
 
                     case let .website(website):
                         return try await Coenttb_Server.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
@@ -95,7 +88,7 @@ extension Coenttb_Com_Router.Route {
                     case let .public(`public`):
                         return try await request.fileio.streamFile(at: `public`)
                     }
-                }
+
             }
         }
     }
@@ -111,8 +104,8 @@ extension Server_Integration.HTMLDocument: AsyncResponseEncodable {
 
 extension FileIO {
     func streamFile(at public: Coenttb_Com_Router.Route.Public) async throws -> Vapor.Response {
-        @Dependency(\.coenttb.website.router) var serverRouter
-        return try await self.asyncStreamFile(at: serverRouter.url(for: .public(`public`)).absoluteString)
+        @Dependency(\.coenttb.website.router) var router
+        return try await self.asyncStreamFile(at: router.url(for: .public(`public`)).absoluteString)
     }
 }
 
@@ -120,7 +113,7 @@ extension RSS.Feed {
     init(
         posts: [Blog.Post]
     ) {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         @Dependency(\.envVars.baseUrl) var baseUrl
         @Dependency(\.envVars.companyName) var companyName
 
@@ -129,7 +122,7 @@ extension RSS.Feed {
                 title: companyName ?? "RSS",
                 link: baseUrl,
                 description: String.oneliner.english,
-                imageURL: serverRouter.url(for: .public(.asset(.logo(.favicon_dark))))
+                imageURL: router.url(for: .public(.asset(.logo(.favicon_dark))))
             ),
             items: posts.map { RSS.Feed.Item(from: $0, author: companyName ?? "Author") }
         )
@@ -138,12 +131,12 @@ extension RSS.Feed {
 
 extension RSS.Feed.Item {
     init(from post: Blog.Post, author: String) {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         self = RSS.Feed.Item(
             title: post.title,
-            link: serverRouter.url(for: .blog(.post(post))),
+            link: router.url(for: .blog(.post(post))),
             image: .init(
-                url: serverRouter.url(for: .api(.syndication(.image("Test")))),
+                url: router.url(for: .api(.syndication(.image("Test")))),
                 variant: .png
             ),
             creator: author,

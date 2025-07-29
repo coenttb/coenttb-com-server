@@ -7,9 +7,9 @@
 
 import Coenttb_Newsletter_Fluent
 import Coenttb_Server
+import EmailAddress
 import Fluent
 import Server_EnvVars
-import EmailAddress
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {

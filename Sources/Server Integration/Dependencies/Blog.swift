@@ -6,9 +6,9 @@
 //
 
 import Coenttb_Blog
-import Translating
-import Coenttb_Web
 import Coenttb_Newsletter
+import Coenttb_Web
+import Translating
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -91,8 +91,8 @@ extension Blog.Post {
 
 extension URL {
     public init(post: Blog.Post) {
-        @Dependency(\.coenttb.website.router) var serverRouter
-        self = serverRouter.url(for: .blog(.post(post)))
+        @Dependency(\.coenttb.website.router) var router
+        self = router.url(for: .blog(.post(post)))
     }
 }
 
@@ -103,7 +103,7 @@ extension Blog.Configuration: @retroactive DependencyKey {
             titleBlurb: String.oneliner,
             companyXComHandle: companyXComHandle,
             newsletterSection: {
-                @Dependency(\.coenttb.website.router) var serverRouter
+                @Dependency(\.coenttb.website.router) var router
                 @Dependency(\.currentUser) var currentUser
 
                 return HTMLGroup {

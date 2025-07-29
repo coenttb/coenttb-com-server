@@ -6,8 +6,8 @@
 //
 
 import Coenttb_Blog
-import Coenttb_Web_HTML
 import Coenttb_Web
+import Coenttb_Web_HTML
 import CoenttbMarkdown
 import DateExtensions
 import Dependencies
@@ -155,10 +155,10 @@ func position(
     y: LengthPercentage = .percent(50)
 ) -> some HTML {
     div {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         div {
             Image(
-                src: .init(serverRouter.href(for: .asset(.image(.init(stringLiteral: asset))))),
+                src: .init(router.href(for: .asset(.image(.init(stringLiteral: asset))))),
                 alt: "coenttb avatar",
                 loading: .lazy
             )
