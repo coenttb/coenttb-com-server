@@ -8,10 +8,6 @@
 import Coenttb_Web_Dependencies
 import Foundation
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension ProjectRootKey: @retroactive DependencyKey {
     public static var liveValue: URL {
         URL(fileURLWithPath: #filePath)

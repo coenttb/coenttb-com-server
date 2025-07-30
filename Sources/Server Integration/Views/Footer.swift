@@ -13,11 +13,7 @@ import CoenttbMarkdown
 import Dependencies
 import Foundation
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
-package struct CoenttbFooter: HTML {
+package struct Footer: HTML {
 
     @Dependency(\.coenttb.website.router) var router
     @Dependency(\.blog.getAll) var blogPosts
@@ -30,7 +26,7 @@ package struct CoenttbFooter: HTML {
     package var body: some HTML {
 
         let posts = blogPosts()
-        Footer(
+        Coenttb_Web_HTML.Footer(
             tagline: .init(
                 title: "coenttb",
                 href: .init(router.href(for: .home)),
@@ -90,7 +86,7 @@ package struct CoenttbFooter: HTML {
     }
 }
 
-extension CoenttbFooter {
+extension Footer {
     struct Licences: HTML {
 
         @Dependency(\.envVars.companyName) var companyName

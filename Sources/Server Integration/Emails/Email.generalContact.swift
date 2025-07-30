@@ -11,10 +11,6 @@ import Mailgun
 import Server_EnvVars
 import Translating
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Email {
     package static func generalContact(
         from: EmailAddress

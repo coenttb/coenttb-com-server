@@ -15,10 +15,6 @@ import Server_Client
 import Server_Dependencies
 import Server_Models
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Server_Client.Client: DependencyKey {
     package static var liveValue: Server_Client.Client {
         .init(

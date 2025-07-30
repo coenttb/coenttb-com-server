@@ -34,11 +34,11 @@ package struct HTMLDocument: HTMLDocumentProtocol {
         },
         @HTMLBuilder favicons: () -> Coenttb_Web_HTML.Favicons = { Coenttb_Web_HTML.Favicons.coenttb },
         @HTMLBuilder navigationBar: () -> any HTML = {
-            CoenttbNavigationBar()
+            NavigationBar()
         },
         @HTMLBuilder body: () -> any HTML,
         @HTMLBuilder footer: () -> any HTML = {
-            CoenttbFooter()
+            Footer()
                 .gradient(bottom: .branding.accent, middle: .background.primary, top: .background.primary)
         }
     ) {

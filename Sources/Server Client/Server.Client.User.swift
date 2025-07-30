@@ -8,10 +8,6 @@
 import Dependencies
 import DependenciesMacros
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Client {
     @DependencyClient
     package struct User: Sendable {

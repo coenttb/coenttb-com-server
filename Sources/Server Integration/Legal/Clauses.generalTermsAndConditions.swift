@@ -12,10 +12,6 @@ import CoenttbMarkdown
 import Dependencies
 import Translating
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Clauses {
     nonisolated(unsafe)
     package static let generalTermsAndConditions: Translated<Self> = {

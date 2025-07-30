@@ -10,10 +10,6 @@ import Coenttb_Newsletter
 import Coenttb_Web
 import Translating
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Blog: @retroactive DependencyKey {
     public static var liveValue: Blog {
         .init(

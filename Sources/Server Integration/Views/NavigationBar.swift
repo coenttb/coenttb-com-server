@@ -10,7 +10,7 @@ import Coenttb_Web_HTML
 import Dependencies
 import Foundation
 
-package struct CoenttbNavigationBar: HTML {
+package struct NavigationBar: HTML {
 
     package init() {}
 
@@ -33,7 +33,7 @@ package struct CoenttbNavigationBar: HTML {
             .fontWeight(.medium)
             .font(.body(.small))
 
-        NavigationBar(
+        Coenttb_Web_HTML.NavigationBar(
             logo: {
                 CoenttbLogo()
                 .height(.percent(100))
@@ -124,7 +124,7 @@ package struct CoenttbNavigationBar: HTML {
     }
 }
 
-extension CoenttbNavigationBar {
+extension NavigationBar {
     package struct CoenttbLogo: HTML {
 
         @Dependency(\.coenttb.website.router) var router

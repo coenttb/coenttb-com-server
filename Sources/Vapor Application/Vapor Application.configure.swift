@@ -11,7 +11,7 @@ import Server_EnvVars
 import Server_Integration
 import Server_Models
 
-extension Application {
+extension Vapor.Application {
     package static func configure(app: Vapor.Application) async throws {
 
         // necessary to set here because $0.color has a liveValue default
@@ -19,7 +19,7 @@ extension Application {
             $0.color = .coenttb
         }
 
-        Application.preloadStaticResources()
+        Vapor.Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
 
@@ -56,7 +56,7 @@ extension Application {
     }
 }
 
-extension Application {
+extension Vapor.Application {
     static func preloadStaticResources() {
         _ = Clauses.privacyStatement
         _ = Clauses.generalTermsAndConditions
