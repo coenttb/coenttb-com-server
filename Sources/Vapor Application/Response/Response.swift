@@ -15,7 +15,6 @@ import Server_EnvVars
 import Server_Integration
 import Server_Models
 
-
 extension Coenttb_Com_Router.Route {
     public static func response(
         route: Coenttb_Com_Router.Route
@@ -23,9 +22,6 @@ extension Coenttb_Com_Router.Route {
         return try await withDependencies {
             $0.route = route
         } operation: {
-            @Dependency(\.uuid) var uuid
-            @Dependency(\.coenttb.website.router) var router
-            @Dependency(\.currentUser) var currentUser
             
             switch route {
             case let .api(api):

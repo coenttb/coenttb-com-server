@@ -12,30 +12,30 @@ import Server_Integration
 import Server_Models
 
 extension Vapor.Application {
-    package static func configure(_ app: Vapor.Application) async throws {
+    package static func configure(_ application: Vapor.Application) async throws {
         
         Vapor.Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
 
-        app.environment = .init(envVarsEnvironment: envVars.appEnv)
+        application.environment = .init(envVarsEnvironment: envVars.appEnv)
 
-        app.databases.use(.postgres, as: .psql )
+        application.databases.use(.postgres, as: .psql )
 
-        [any Migration].allCases.forEach { app.migrations.add($0) }
+        [any Migration].allCases.forEach { application.migrations.add($0) }
 
-//            [any AsyncCommand].allCases.forEach { app.asyncCommands.use($0.0, as: $0.1) }
+//            [any AsyncCommand].allCases.forEach { application.asyncCommands.use($0.0, as: $0.1) }
 
-        app.migrations.add(JobMetadataMigrate())
+        application.migrations.add(JobMetadataMigrate())
 
         if envVars.appEnv == .development {
-            try await app.autoRevert()
+            try await application.autoRevert()
         }
 
-        try await app.autoMigrate()
+        try await application.autoMigrate()
 
-        app.queues.use(.fluent())
-        try app.queues.startInProcessJobs(on: .default)
+        application.queues.use(.fluent())
+        try application.queues.startInProcessJobs(on: .default)
     }
 }
 

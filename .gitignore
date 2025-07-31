@@ -49,12 +49,7 @@ Thumbs.db
 *.wmv
 
 # Environment files
-.env
 .env.*
-
-# Exclude specific env file
-!.env.example
-.env.development
 
 # Custom
 local-test-build.sh

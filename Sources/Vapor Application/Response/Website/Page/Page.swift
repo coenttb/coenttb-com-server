@@ -45,7 +45,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         case let .newsletter(newsletter) where newsletter == .subscribe(.request):
             @Dependency(\.coenttb.website.router) var router
-            return HTMLDocument {
+            return Server_Integration.HTMLDocument {
                 Circle {
                     Image.coenttbGreenSuit
                         .objectPosition(.twoValues(.percentage(50), .percentage(50)))
@@ -106,7 +106,7 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Newsletter.Route.View.response(
                 newsletter: newsletter,
                 htmlDocument: { html in
-                    HTMLDocument {
+                    Server_Integration.HTMLDocument {
                         AnyHTML(html)
                     }
                 }
@@ -131,7 +131,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: "Welcome back"
             ) {
@@ -157,7 +157,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .privacyStatement.capitalizingFirstLetter().description
             ) {
@@ -179,7 +179,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .terms_of_use.capitalizingFirstLetter().description
             ) {
@@ -202,7 +202,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .general_terms_and_conditions.capitalizingFirstLetter().description
             ) {
