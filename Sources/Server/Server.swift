@@ -1,44 +1,37 @@
 import Coenttb_Vapor
 import Vapor_Application
+import Coenttb_Com_Router
+
 
 @main
 struct Server {
     static func main() async throws {
-#if DEBUG && os(macOS)
+        
         prepareDependencies {
-            $0.coenttb = .testValue
+            $0.envVars =  try! EnvVars.live(
+                localEnvFile: {
+                    @Dependency(\.projectRoot) var projectRoot
+                    let envFile = projectRoot.appendingPathComponent(".env.development")
+                    print("envFile.path", envFile.path)
+                    return FileManager.default.fileExists(atPath: envFile.path) ? envFile : nil
+                }()
+            )
         }
-#endif
-
-        @Dependency(\.envVars) var envVars
-
-        let environment: Environment = .init(envVarsEnvironment: envVars.appEnv)
-        let logLevel = envVars.logLevel ?? .info
-
-        @Dependency(\.logger) var logger
-
-        do {
-            @Dependency(\.mainEventLoopGroup) var mainEventLoopGroup
-
-            let application = try await Vapor.Application.make(environment, .shared(mainEventLoopGroup))
-
-            defer { Task { try? await application.asyncShutdown() } }
-
-            do {
-                try await Application.execute(
-                    application: application,
-                    environment: environment,
-                    logLevel: logLevel,
-                    configure: Application.configure
-                )
-            } catch {
-                logger.critical("Application failed to start: \(error.localizedDescription)")
-                throw error
+        
+        prepareDependencies {
+            $0.color = .coenttb
+            
+            if $0.envVars.appEnv == .development {
+                $0.coenttb = .testValue
             }
-
-        } catch {
-            logger.critical("Critical failure: \(error.localizedDescription)")
-            throw error
         }
+        
+        @Dependency(\.coenttb.website.router) var router
+        
+        try await Vapor.Application.execute(
+            router: router,
+            use: Route.response,
+            configure: Vapor.Application.configure
+        )
     }
 }

@@ -38,7 +38,6 @@ extension [(URL, String)] {
 
         case .contact, .home, .privacy_statement, .terms_of_use, .general_terms_and_conditions, .newsletter:
             break
-        default: break
         }
         self = urls
     }

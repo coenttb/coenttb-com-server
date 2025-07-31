@@ -12,13 +12,8 @@ import Server_Integration
 import Server_Models
 
 extension Vapor.Application {
-    package static func configure(app: Vapor.Application) async throws {
-
-        // necessary to set here because $0.color has a liveValue default
-        prepareDependencies {
-            $0.color = .coenttb
-        }
-
+    package static func configure(_ app: Vapor.Application) async throws {
+        
         Vapor.Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
@@ -29,7 +24,7 @@ extension Vapor.Application {
 
         [any Migration].allCases.forEach { app.migrations.add($0) }
 
-        [any AsyncCommand].allCases.forEach { app.asyncCommands.use($0.0, as: $0.1) }
+//            [any AsyncCommand].allCases.forEach { app.asyncCommands.use($0.0, as: $0.1) }
 
         app.migrations.add(JobMetadataMigrate())
 
@@ -41,23 +36,11 @@ extension Vapor.Application {
 
         app.queues.use(.fluent())
         try app.queues.startInProcessJobs(on: .default)
-
-        try await Coenttb_Vapor.Application.configure(
-            application: app,
-            httpsRedirect: envVars.httpsRedirect,
-            canonicalHost: envVars.canonicalHost,
-            allowedInsecureHosts: envVars.allowedInsecureHosts,
-            baseUrl: envVars.baseUrl
-        )
-
-        @Dependency(\.coenttb.website.router) var router
-
-        app.mount(router, use: Route.response)
     }
 }
 
 extension Vapor.Application {
-    static func preloadStaticResources() {
+    package static func preloadStaticResources() {
         _ = Clauses.privacyStatement
         _ = Clauses.generalTermsAndConditions
         _ = Clauses.termsOfUse

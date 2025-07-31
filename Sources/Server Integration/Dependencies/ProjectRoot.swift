@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
-import Coenttb_Web_Dependencies
+import Coenttb_Server
 import Foundation
 
 extension ProjectRootKey: @retroactive DependencyKey {

@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Legal_Documents
-import Coenttb_Server_Router
+import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import CoenttbMarkdown
 import Dependencies
@@ -543,7 +543,8 @@ extension Clauses {
                                 topic: .init(
                                     dutch: "enige overeenkomsten en/of diensten waarop deze Algemene Voorwaarden van toepassing zijn",
                                     english: "any agreements and/or services to which these General Terms and Conditions apply"
-                                )
+                                ),
+                                entity: "coenttb"
                             )
                         )
 

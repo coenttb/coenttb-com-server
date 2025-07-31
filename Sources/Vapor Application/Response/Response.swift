@@ -15,81 +15,73 @@ import Server_EnvVars
 import Server_Integration
 import Server_Models
 
+
 extension Coenttb_Com_Router.Route {
-    static func response(
-        request: Request,
+    public static func response(
         route: Coenttb_Com_Router.Route
     ) async throws -> any AsyncResponseEncodable {
-        @Dependency(\.logger) var logger
-
         return try await withDependencies {
-            $0.request = request
             $0.route = route
-            // Necessary to get updated envVars on each request
-            $0.envVars = .liveValue
         } operation: {
-            return try await withDependencies {
-                @Dependency(\.envVars) var envVars
-                $0.logger.logLevel = envVars.logLevel ?? logger.logLevel
-            } operation: {
-                    @Dependency(\.uuid) var uuid
-                    @Dependency(\.coenttb.website.router) var router
-                    @Dependency(\.currentUser) var currentUser
-
-                    switch route {
-                    case let .api(api):
-                        return try await API.response(api: api)
-
-                    case let .webhook(webhook):
-                        return try await Webhook.response(webhook: webhook)
-
-                    case let .website(website):
-                        return try await Coenttb_Server.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
-
-                    case .public(.sitemap):
-                        return Response(
-                            status: .ok,
-                            body: .init(stringLiteral: try await Sitemap.default().xml)
+            @Dependency(\.uuid) var uuid
+            @Dependency(\.coenttb.website.router) var router
+            @Dependency(\.currentUser) var currentUser
+            
+            switch route {
+            case let .api(api):
+                return try await API.response(api: api)
+                
+            case let .webhook(webhook):
+                return try await Webhook.response(webhook: webhook)
+                
+            case let .website(website):
+                return try await Coenttb_Web.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
+                
+            case .public(.sitemap):
+                return Response(
+                    status: .ok,
+                    body: .init(stringLiteral: try await Sitemap.default().xml)
+                )
+                
+            case .public(.rssXml):
+                
+                @Dependency(\.blog.getAll) var blogPosts
+                
+                return await RSS.Feed.Response(
+                    feed: RSS.Feed.memoized {
+                        RSS.Feed(
+                            posts: blogPosts()
                         )
-
-                    case .public(.rssXml):
-
-                        @Dependency(\.blog.getAll) var blogPosts
-
-                        return await RSS.Feed.Response(
-                            feed: RSS.Feed.memoized {
-                                RSS.Feed(
-                                    posts: blogPosts()
-                                )
-                            }
-                        )
-
-                    case .public(.robots):
-                        return Response.robots(
-                            disallows: Translating.Language.allCases.map {
-                        """
-                        Disallow: /\($0.rawValue)/account/
-                        Disallow: /\($0.rawValue)/checkout/
-                        """
-                            }.joined(separator: "\n")
-                        )
-
-                    case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
-                        @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
-
-                        guard let appleDeveloperMerchantIdDomainAssociation
-                        else { throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association") }
-
-                        return appleDeveloperMerchantIdDomainAssociation
-
-                    case let .public(.favicon(favicon)):
-                        return try await request.fileio.streamFile(at: .favicon(favicon))
-
-                    case let .public(`public`):
-                        return try await request.fileio.streamFile(at: `public`)
                     }
-
+                )
+                
+            case .public(.robots):
+                return Response.robots(
+                    disallows: Translating.Language.allCases.map {
+                    """
+                    Disallow: /\($0.rawValue)/account/
+                    Disallow: /\($0.rawValue)/checkout/
+                    """
+                    }.joined(separator: "\n")
+                )
+                
+            case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
+                @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
+                
+                guard let appleDeveloperMerchantIdDomainAssociation
+                else { throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association") }
+                
+                return appleDeveloperMerchantIdDomainAssociation
+                
+            case let .public(.favicon(favicon)):
+                @Dependency(\.request!) var request
+                return try await request.fileio.streamFile(at: .favicon(favicon))
+                
+            case let .public(`public`):
+                @Dependency(\.request!) var request
+                return try await request.fileio.streamFile(at: `public`)
             }
+            
         }
     }
 }
@@ -116,7 +108,7 @@ extension RSS.Feed {
         @Dependency(\.coenttb.website.router) var router
         @Dependency(\.envVars.baseUrl) var baseUrl
         @Dependency(\.envVars.companyName) var companyName
-
+        
         self = RSS.Feed(
             metadata: .init(
                 title: companyName ?? "RSS",
