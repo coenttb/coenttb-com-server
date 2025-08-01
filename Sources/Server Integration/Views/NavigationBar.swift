@@ -10,38 +10,20 @@ import Coenttb_Web_HTML
 import Dependencies
 import Foundation
 
-package struct CoenttbNavigationBar: HTML {
+package struct NavigationBar: HTML {
 
     package init() {}
 
-    @Dependency(\.coenttb.website.router) var serverRouter
+    @Dependency(\.coenttb.website.router) var router
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.currentUser) var currentUser
 
-    private var blog: String { serverRouter.href(for: .blog(.index)) }
-    private var loginHref: String { serverRouter.href(for: .identity(.login)) }
-    private var signupHref: String { serverRouter.href(for: .identity(.create(.request))) }
+    private var blog: String { router.href(for: .blog(.index)) }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
     package var body: some HTML {
 
         let posts = blogPosts()
-
-        let loginButton = Link(
-            destination: .identity(.login),
-            String.login.capitalizingFirstLetter().description
-        )
-            .linkUnderline(false)
-            .fontWeight(.medium)
-            .font(.body(.small))
-
-        let signupButton = Link(
-            destination: .identity(.create(.request)),
-            String.signup.capitalizingFirstLetter().description
-        )
-            .linkUnderline(false)
-            .fontWeight(.medium)
-            .font(.body(.small))
 
         let subscribeButton = Link(
             destination: .newsletter(.subscribe(.request)),
@@ -51,7 +33,7 @@ package struct CoenttbNavigationBar: HTML {
             .fontWeight(.medium)
             .font(.body(.small))
 
-        NavigationBar(
+        Coenttb_Web_HTML.NavigationBar(
             logo: {
                 CoenttbLogo()
                 .height(.percent(100))
@@ -59,7 +41,8 @@ package struct CoenttbNavigationBar: HTML {
             centeredNavItems: {
                 NavigationBarCenteredNavItems(
                     items: [
-                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil
+                        !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil,
+                        .init(String.contact_me.capitalizingFirstLetter().description, href: .init(router.href(for: .contact)))
                     ].compactMap { $0 }
                 )
                 .dependency(\.color.text.link, .text.primary)
@@ -67,32 +50,11 @@ package struct CoenttbNavigationBar: HTML {
             },
             trailingNavItems: {
                 ul {
-                    HTMLGroup {
-                        if currentUser?.authenticated == true {
-                            li {
-                                CircleIconButton(
-                                    icon: .init(icon: "cog", size: .large),
-                                    color: .branding.primary,
-                                    href: .init(serverRouter.href(for: .account(.settings(.index)))),
-                                    buttonSize: .rem(2.5)
-                                )
-                            }
-
-                        } else {
-//                            li {
-//                                div {
-//                                loginButton
-//                                }
-//                                .display(.inlineBlock)
-//                            }
-
-                            li {
-                                div {
-                                    subscribeButton
-                                }
-                                .display(.inlineBlock)
-                            }
+                    li {
+                        div {
+                            subscribeButton
                         }
+                        .display(.inlineBlock)
                     }
                     .display(.inline)
                     .padding(left: .rem(1), pseudo: .not(.firstChild))
@@ -111,13 +73,30 @@ package struct CoenttbNavigationBar: HTML {
                                     .fontWeight(.medium)
                             }
                         }
+                        @Dependency(\.currentUser?.newsletterSubscribed) var newsletterSubscribed
+
+                        if newsletterSubscribed != true {
+                            li {
+                                Link(
+                                    destination: .newsletter(.subscribe(.request)),
+                                    String.subscribe.capitalizingFirstLetter().description
+                                )
+                            }
+                        }
+
+                        li {
+                            Link(
+                                destination: .contact,
+                                String.contact_me.capitalizingFirstLetter().description
+                            )
+                        }
 
 //                        switch currentUser?.authenticated == true {
 //                        case true:
 //                            li {
 //                                NavigationBarMobileNavItems.NavListItem.init(
 //                                    String.account.capitalizingFirstLetter().description,
-//                                    href: serverRouter.href(for: .account(.settings(.index)))
+//                                    href: router.href(for: .account(.settings(.index)))
 //                                )
 //                            }
 //                            .padding(top: .rem(1.5))
@@ -145,10 +124,10 @@ package struct CoenttbNavigationBar: HTML {
     }
 }
 
-extension CoenttbNavigationBar {
+extension NavigationBar {
     package struct CoenttbLogo: HTML {
 
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         package init() {}
 
@@ -171,7 +150,7 @@ extension CoenttbNavigationBar {
                         .display(.flex)
                         .alignItems(.center)
 
-                        Link(href: .init(serverRouter.href(for: .home))) {
+                        Link(href: .init(router.href(for: .home))) {
                             SVG.coenttb()
                         }
                         .dependency(\.color.text.link, .text.primary)

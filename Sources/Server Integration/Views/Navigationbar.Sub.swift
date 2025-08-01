@@ -7,17 +7,16 @@
 
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Server_HTML
-import Coenttb_Server_Models
+import Coenttb_Web_HTML
 import Dependencies
 import Foundation
-import Languages
 import Server_Translations
+import Translating
 import URLRouting
 
 extension [(URL, String)] {
     init(_ page: Coenttb_Com_Router.Route.Website) async throws {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         var urls: Self = []
 
@@ -33,13 +32,12 @@ extension [(URL, String)] {
 
         case .choose_country_region:
             urls.append((
-                serverRouter.url(for: .page(.choose_country_region)),
+                router.url(for: .page(.choose_country_region)),
                 String.choose_country_region.description
             ))
 
         case .contact, .home, .privacy_statement, .terms_of_use, .general_terms_and_conditions, .newsletter:
             break
-        default: break
         }
         self = urls
     }

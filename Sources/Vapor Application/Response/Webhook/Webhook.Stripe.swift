@@ -5,11 +5,11 @@
 ////  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 ////
 //
-// import Coenttb_Server_HTML
+// import Coenttb_Web_HTML
 // import Dependencies
 // import Fluent
 // import Foundation
-// import Languages
+// import Translating
 // import Prelude
 // import Server_Dependencies
 // import Vapor

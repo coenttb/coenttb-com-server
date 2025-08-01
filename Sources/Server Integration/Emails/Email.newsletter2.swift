@@ -1,12 +1,11 @@
 //
 //  File.swift
-//  coenttb-identities
+//  newsletter2
 //
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
 import Coenttb_Web
-import Identities
 import Mailgun
 import Messages
 
@@ -17,8 +16,6 @@ extension Email {
         @Dependency(\.coenttb.website.router) var router
         let index = 2
         let title = "#\(index) A journey building HTML documents in Swift"
-
-        @Dependency(\.coenttb.website.router) var serverRouter
 
         return TableEmailDocument(
             preheader: title
@@ -35,8 +32,7 @@ extension Email {
                             div {
                                 div {
                                     Image(
-//                                        base64EncodedFromURL: serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))),
-                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250320.png")))).absoluteString),
+                                        src: .init(router.url(for: .public(.asset(.image("coenttb-20250320.png")))).absoluteString),
                                         alt: "coenttb image",
                                         loading: .lazy
                                     )

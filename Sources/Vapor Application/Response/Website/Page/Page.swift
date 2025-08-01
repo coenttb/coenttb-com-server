@@ -8,20 +8,16 @@
 import Coenttb_Blog_Vapor
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Identity_Consumer
 import Coenttb_Newsletter
 import Coenttb_Vapor
-import Server_Integration
 import Server_EnvVars
+import Server_Integration
 
 extension Coenttb_Com_Router.Route.Website {
     static func response(
         page: Coenttb_Com_Router.Route.Website
     ) async throws -> any AsyncResponseEncodable {
         switch page {
-        case let .account(account):
-            return try await Coenttb_Com_Router.Route.Website.Account.response(account: account)
-
         case let .blog(route):
             let response = try await Blog.Route.View.response(route: route)
 
@@ -39,7 +35,6 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Coenttb_Com_Router.Route.Website.general_terms_and_conditions()
 
         case .home:
-            @Dependency(\.currentUser) var currentUser
             return try await Coenttb_Com_Router.Route.Website.home()
 
         case .privacy_statement:
@@ -49,8 +44,8 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Coenttb_Com_Router.Route.Website.termsOfUse()
 
         case let .newsletter(newsletter) where newsletter == .subscribe(.request):
-            @Dependency(\.coenttb.website.router) var serverRouter
-            return HTMLDocument {
+            @Dependency(\.coenttb.website.router) var router
+            return Server_Integration.HTMLDocument {
                 Circle {
                     Image.coenttbGreenSuit
                         .objectPosition(.twoValues(.percentage(50), .percentage(50)))
@@ -111,13 +106,11 @@ extension Coenttb_Com_Router.Route.Website {
             return try await Newsletter.Route.View.response(
                 newsletter: newsletter,
                 htmlDocument: { html in
-                    HTMLDocument {
+                    Server_Integration.HTMLDocument {
                         AnyHTML(html)
                     }
                 }
             )
-        case .identity(let identity):
-            return try await Identity.Consumer.View.response(view: identity)
         }
     }
 }
@@ -127,7 +120,7 @@ extension Coenttb_Com_Router.Route.Website {
     -> any AsyncResponseEncodable {
         @Dependency(\.envVars.languages) var languages
         @Dependency(\.language) var language
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         throw Abort(.internalServerError)
     }
@@ -138,7 +131,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.envVars.companyXComHandle) var companyXComHandle
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: "Welcome back"
             ) {
@@ -164,7 +157,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .privacyStatement.capitalizingFirstLetter().description
             ) {
@@ -186,7 +179,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .terms_of_use.capitalizingFirstLetter().description
             ) {
@@ -209,7 +202,7 @@ extension Coenttb_Com_Router.Route.Website {
 
         @Dependency(\.language) var language
 
-        return HTMLDocument {
+        return Server_Integration.HTMLDocument {
             PageHeader(
                 title: .general_terms_and_conditions.capitalizingFirstLetter().description
             ) {

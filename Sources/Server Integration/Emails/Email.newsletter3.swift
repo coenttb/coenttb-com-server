@@ -1,12 +1,11 @@
 //
 //  File.swift
-//  coenttb-identities
+//  newsletter3
 //
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
 import Coenttb_Web
-import Identities
 import Mailgun
 import Messages
 
@@ -17,8 +16,6 @@ extension Email {
         @Dependency(\.coenttb.website.router) var router
         let index = 3
         let title = "#\(index) A Tour of PointFreeHTML"
-
-        @Dependency(\.coenttb.website.router) var serverRouter
 
         return TableEmailDocument(
             preheader: title
@@ -35,7 +32,7 @@ extension Email {
                             div {
                                 div {
                                     Image(
-                                        src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250324.png")))).absoluteString),
+                                        src: .init(router.url(for: .public(.asset(.image("coenttb-20250324.png")))).absoluteString),
                                         alt: "coenttb image"
                                     )
                                     .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)")

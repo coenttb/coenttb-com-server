@@ -11,10 +11,10 @@ import Coenttb_Vapor
 import Dependencies
 import Fluent
 import Foundation
-import Languages
 import Mailgun
 import Prelude
 import Server_Dependencies
+import Translating
 // import Coenttb_Stripe
 
 extension Coenttb_Com_Router.Route.Webhook {

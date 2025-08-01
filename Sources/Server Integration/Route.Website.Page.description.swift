@@ -9,11 +9,11 @@ import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Dependencies
 import Foundation
-import Languages
 import Server_Dependencies
 import Server_Translations
+import Translating
 
-extension Route.Website {
+extension Coenttb_Com_Router.Route.Website {
     package func description() -> TranslatedString? {
 
         let x: TranslatedString? = switch self {
@@ -35,7 +35,6 @@ extension Route.Website {
             String.oneliner
         case .contact:
             String.oneliner
-        default: ""
         }
 
         return x?.capitalizingFirstLetter()

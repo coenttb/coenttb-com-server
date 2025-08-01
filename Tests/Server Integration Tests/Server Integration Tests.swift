@@ -7,11 +7,11 @@
 
 import Coenttb_Blog
 import Coenttb_Server
+import CoenttbHTML
 import Dependencies
 import DependenciesTestSupport
 import Foundation
 import Mailgun
-import CoenttbHTML
 @testable import Server_Integration
 import Testing
 
@@ -23,7 +23,6 @@ import Testing
     .dependency(\.coenttb, .liveValue)
 )
 struct EmailsTests {
-
 
 //    @Test("Generate newsletter 2 html")
 //    func newsletter2() async throws {
@@ -48,10 +47,10 @@ struct EmailsTests {
 //        let html: some HTML = Email.newsletter5()
 //        try String(html).write(toFile: URL.documentsDirectory.appending(path: "newsletter5.html"))
 //    }
-    
+
     @Test("Generate newsletter 6 html")
     func newsletter6() throws {
-        try AppleEmail.init(
+        try AppleEmail(
             emailDocument: Email.newsletter6(),
             from: "newsletter@mg.coenttb.com",
             subject: "coenttb #6 Modern Swift Library Architecture: 3 Testing a composition of packages",

@@ -25,7 +25,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
         "Resends verification emails to all unverified newsletter subscribers"
     }
 
-    @Dependency(\.coenttb.website.router) var serverRouter
+    @Dependency(\.coenttb.website.router) var router
     @Dependency(\.envVars.companyName) var companyName
     @Dependency(\.envVars.companyInfoEmailAddress) var supportEmail
     @Dependency(\.envVars.mailgun?.domain) var domain
@@ -90,7 +90,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
 //
 //                        // Send verification email
 //                        let email = try Email.requestEmailVerification(
-//                            verificationUrl: serverRouter.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
+//                            verificationUrl: router.url(for: .newsletter(.subscribe(.verify(.init(token: verificationToken.value, email: subscription.email))))),
 //                            businessName: companyName,
 //                            supportEmail: supportEmail,
 //                            from: .init(displayName: companyName, localPart: "postmaster", domain: domain.rawValue),

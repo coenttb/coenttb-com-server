@@ -1,13 +1,13 @@
+import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Coenttb_Vapor
-import Coenttb_Com_Router
 import DependenciesTestSupport
 import FluentPostgresDriver
 import Queues
 import QueuesFluentDriver
-import Server_Integration
 import Server_Client
 import Server_EnvVars
+import Server_Integration
 import Server_Models
 import Testing
 @testable import Vapor_Application
@@ -25,7 +25,7 @@ struct RouterLoadTests {
         } operation: {
             try await withApp { app in
                 // Configure your router
-                @Dependency(\.coenttb.website.router) var serverRouter
+                @Dependency(\.coenttb.website.router) var router
 
                 app.mount(serverRouter, use: Coenttb_Com_Router.Route.response)
 

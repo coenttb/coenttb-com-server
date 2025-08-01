@@ -6,12 +6,8 @@
 //
 
 import Coenttb_Com_Router
-import Coenttb_Com_Shared
-import Dependencies
-import Foundation
-import Languages
-import Server_Dependencies
 import Server_Translations
+import Foundation
 
 extension Route.Website {
     package var title: TranslatedString? {
@@ -23,9 +19,9 @@ extension Route.Website {
         case .privacy_statement:
             return String.privacyStatement
         case .blog(.index):
-            return String.blog + .space + "Index"
+            return String.blog + String.space + "Index"
         case let .blog(.post(string)):
-            return String.blog + .space + "\(string)"
+            return String.blog + String.space + "\(string)"
         case .terms_of_use:
             return String.terms_of_use
         case .general_terms_and_conditions:
@@ -34,7 +30,6 @@ extension Route.Website {
             return String.contact
         case .newsletter:
             return String.newsletter
-        default: return ""
         }
     }
 }

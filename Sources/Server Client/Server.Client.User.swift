@@ -7,7 +7,6 @@
 
 import Dependencies
 import DependenciesMacros
-import Foundation
 
 extension Client {
     @DependencyClient

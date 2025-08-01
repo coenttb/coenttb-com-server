@@ -6,20 +6,16 @@
 //
 
 import Coenttb_Com_Shared
-import Coenttb_Server_HTML
-import Coenttb_Server_Translations
+import Coenttb_Web_HTML
+import Coenttb_Web_Translations
 import CoenttbHTML
 import CoenttbMarkdown
 import Dependencies
 import Foundation
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
+package struct Footer: HTML {
 
-package struct CoenttbFooter: HTML {
-
-    @Dependency(\.coenttb.website.router) var serverRouter
+    @Dependency(\.coenttb.website.router) var router
     @Dependency(\.blog.getAll) var blogPosts
     @Dependency(\.envVars) var envVars
 
@@ -30,10 +26,10 @@ package struct CoenttbFooter: HTML {
     package var body: some HTML {
 
         let posts = blogPosts()
-        Footer(
+        Coenttb_Web_HTML.Footer(
             tagline: .init(
                 title: "coenttb",
-                href: .init(serverRouter.href(for: .home)),
+                href: .init(router.href(for: .home)),
                 content: CoenttbHTML.Paragraph {
                     HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
                     Link("coenttb", href: "https://x.com/coenttb")
@@ -47,7 +43,7 @@ package struct CoenttbFooter: HTML {
                     links: [
                         !posts.isEmpty ? (
                             label: .blog.capitalizingFirstLetter().description,
-                            href: .init(serverRouter.href(for: .blog(.index)))
+                            href: .init(router.href(for: .blog(.index)))
                         ) : nil
                     ].compactMap { $0
                     }
@@ -58,46 +54,28 @@ package struct CoenttbFooter: HTML {
                         newsletterSubscribed == true
                         ? (
                             label: "\(String.unsubscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.unsubscribe)))
+                            href: .init(router.href(for: .newsletter(.unsubscribe)))
                         )
                         : (
                             label: "\(String.subscribe.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .newsletter(.subscribe(.request))))
+                            href: .init(router.href(for: .newsletter(.subscribe(.request))))
                         ),
-                        (label: "RSS", href: .init(serverRouter.href(for: .rssXml))),
-                        envVars.companyXComHandle.map { handle in
-                            (
-                                label: "X/Twitter",
-                                href: .init("https://www.x.com/\(handle)")
-                            )
-                        },
-                        envVars.companyGitHubHandle.map { handle in
-                            (
-                                label: "Github",
-                                href: .init("https://github.com/\(handle)")
-                            )
-                        },
-                        envVars.companyLinkedInHandle.map { handle in
-                            (
-                                label: "LinkedIn",
-                                href: .init("https://www.linkedin.com/in/\(handle)")
-                            )
-                        },
+                        (label: "RSS", href: .init(router.href(for: .rssXml))),
+                        (
+                            label: "\(String.contact.capitalizingFirstLetter())",
+                            href: .init(router.href(for: .contact))
+                        ),
                         (
                             label: "\(String.privacyStatement.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .privacy_statement))
+                            href: .init(router.href(for: .privacy_statement))
                         ),
                         (
                             label: "\(String.general_terms_and_conditions.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .general_terms_and_conditions))
+                            href: .init(router.href(for: .general_terms_and_conditions))
                         ),
                         (
                             label: "\(String.terms_of_use.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .terms_of_use))
-                        ),
-                        (
-                            label: "\(String.contact_me.capitalizingFirstLetter())",
-                            href: .init(serverRouter.href(for: .contact))
+                            href: .init(router.href(for: .terms_of_use))
                         )
                     ]
                         .compactMap { $0
@@ -108,7 +86,7 @@ package struct CoenttbFooter: HTML {
     }
 }
 
-extension CoenttbFooter {
+extension Footer {
     struct Licences: HTML {
 
         @Dependency(\.envVars.companyName) var companyName

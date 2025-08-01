@@ -12,10 +12,6 @@ import Server_Client
 import Server_Dependencies
 import Server_Models
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Mailgun.Client: @retroactive DependencyKey {
     public static var liveValue: Mailgun.AuthenticatedClient? {
         @Dependency(\.envVars) var envVars
@@ -28,7 +24,7 @@ extension Mailgun.Client: @retroactive DependencyKey {
             return nil
         }
 
-        return Mailgun.Client.live(
+        return try! Mailgun.Client.live(
             apiKey: apiKey,
             baseUrl: baseURL,
             domain: domain

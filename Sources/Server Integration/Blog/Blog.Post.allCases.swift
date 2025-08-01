@@ -6,13 +6,13 @@
 //
 
 import Coenttb_Blog
-import Coenttb_Server_HTML
 import Coenttb_Web
+import Coenttb_Web_HTML
 import CoenttbMarkdown
-import Date
+import DateExtensions
 import Dependencies
 import Foundation
-import Languages
+import Translating
 
 extension [Coenttb_Blog.Blog.Post] {
     package static var allCases: [Coenttb_Blog.Blog.Post] {
@@ -155,10 +155,10 @@ func position(
     y: LengthPercentage = .percent(50)
 ) -> some HTML {
     div {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         div {
             Image(
-                src: .init(serverRouter.href(for: .asset(.image(.init(stringLiteral: asset))))),
+                src: .init(router.href(for: .asset(.image(.init(stringLiteral: asset))))),
                 alt: "coenttb avatar",
                 loading: .lazy
             )

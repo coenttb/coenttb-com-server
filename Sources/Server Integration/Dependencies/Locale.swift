@@ -5,11 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 //
 
-import Coenttb_Server
-
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
+import Dependencies
+import Translating
 
 extension LanguagesKey: @retroactive DependencyKey {
     public static var liveValue: Set<Language> {

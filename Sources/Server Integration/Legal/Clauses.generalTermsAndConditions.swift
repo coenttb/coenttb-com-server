@@ -6,21 +6,17 @@
 //
 
 import Coenttb_Legal_Documents
-import Coenttb_Server_HTML
-import Coenttb_Server_Router
+import Coenttb_Com_Shared
+import Coenttb_Web_HTML
 import CoenttbMarkdown
 import Dependencies
-import Languages
-
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
+import Translating
 
 extension Clauses {
     nonisolated(unsafe)
     package static let generalTermsAndConditions: Translated<Self> = {
 
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
 
         return .init { language in
             return withDependencies {
@@ -246,7 +242,7 @@ extension Clauses {
                                 dutch: "In het kader van onze opdracht zullen wij bepaalde persoonsgegevens verwerken, waaronder persoonsgegevens met betrekking tot u, uw vertegenwoordigers, werknemers, uiteindelijke begunstigden en contactpersonen, evenals andere door u aan ons verstrekte persoonsgegevens. Voor meer informatie over de manier waarop wij persoonsgegevens verwerken, verwijzen wij naar onze Privacyverklaring die beschikbaar is op onze website: ",
                                 english: "In the context of our engagement, we will process certain personal data, including personal data relating to you, your representatives, employees, ultimate beneficial owners and contact persons as well as other personal data provided to us by you. For further information about the way we process personal data, we refer to our Privacy Statement available on our website: "
                             )
-                        ) [privacy policy](\#(serverRouter.href(for: .privacy_statement)))
+                        ) [privacy policy](\#(router.href(for: .privacy_statement)))
 
                         2. \#(
                             TranslatedString(
@@ -547,7 +543,8 @@ extension Clauses {
                                 topic: .init(
                                     dutch: "enige overeenkomsten en/of diensten waarop deze Algemene Voorwaarden van toepassing zijn",
                                     english: "any agreements and/or services to which these General Terms and Conditions apply"
-                                )
+                                ),
+                                entity: "coenttb"
                             )
                         )
 

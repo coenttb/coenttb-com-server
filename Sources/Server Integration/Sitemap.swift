@@ -12,7 +12,7 @@ import Dependencies
 import Foundation
 import Sitemap
 
-extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
+extension [Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData] {
     static func `default`() async throws -> Self {
 
         @Dependency(\.blog.getAll) var blogPosts
@@ -31,17 +31,17 @@ extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
             .terms_of_use: .empty,
             .general_terms_and_conditions: .empty
         ]
-            .merging([Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData](blogPosts: blogPosts())) { current, _ in current }
+            .merging([Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData](blogPosts: blogPosts())) { current, _ in current }
     }
 }
 
-extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
+extension [Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData] {
     init(blogPosts: [Coenttb_Blog.Blog.Post]) {
         self = Dictionary(
             uniqueKeysWithValues: blogPosts.enumerated().map { index, post in
                 (
                     Route.Website.blog(.post(index)),
-                    SiteMap.URL.MetaData(
+                    Sitemap.URL.MetaData(
                         lastModification: post.publishedAt,
                         changeFrequency: .weekly,
                         priority: .one
@@ -52,23 +52,23 @@ extension [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData] {
     }
 }
 
-extension [SiteMap.URL] {
+extension [Sitemap.URL] {
     init(
-        dictionary: [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData]
+        dictionary: [Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData]
     ) {
-        @Dependency(\.coenttb.website.router) var serverRouter
-        self = .init(router: serverRouter.url(for:), dictionary)
+        @Dependency(\.coenttb.website.router) var router
+        self = .init(router: router.url(for:), dictionary)
     }
 }
 
-extension SiteMap {
+extension Sitemap {
     init(
-        dictionary: [Coenttb_Com_Router.Route.Website: SiteMap.URL.MetaData]
+        dictionary: [Coenttb_Com_Router.Route.Website: Sitemap.URL.MetaData]
     ) {
-        self = .init(urls: [SiteMap.URL](dictionary: dictionary))
+        self = .init(urls: [Sitemap.URL](dictionary: dictionary))
     }
 }
 
-extension SiteMap {
-    package static func `default`() async throws -> Self { try await SiteMap(dictionary: .default()) }
+extension Sitemap {
+    package static func `default`() async throws -> Self { try await Sitemap(dictionary: .default()) }
 }

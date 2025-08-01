@@ -7,16 +7,16 @@
 
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Server_HTML
+import Coenttb_Web_HTML
 import Dependencies
 import Foundation
 
 extension CoenttbHTML.Link {
     package init(destination: Coenttb_Com_Router.Route.Website, @HTMLBuilder label: () -> Label) {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         @Dependency(\.language) var language
         self.init(
-            href: .init(serverRouter.path(for: .website(.init(language: language, page: destination)))),
+            href: .init(router.path(for: .website(.init(language: language, page: destination)))),
             label: label
         )
     }
@@ -25,11 +25,11 @@ extension CoenttbHTML.Link {
         destination: Coenttb_Com_Router.Route.Website,
         _ title: String
     ) where Label == HTMLText {
-        @Dependency(\.coenttb.website.router) var serverRouter
+        @Dependency(\.coenttb.website.router) var router
         @Dependency(\.language) var language
         self.init(
             title,
-            href: .init(serverRouter.path(for: .website(.init(language: language, page: destination))))
+            href: .init(router.path(for: .website(.init(language: language, page: destination))))
         )
     }
 }

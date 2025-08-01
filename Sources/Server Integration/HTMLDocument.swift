@@ -6,14 +6,13 @@
 //
 
 import Coenttb_Com_Shared
-import Coenttb_Server_HTML
+import Coenttb_Web_HTML
 import Dependencies
-import Favicon
 import Foundation
 import GoogleAnalytics
 import Hotjar
-import Languages
 import Server_EnvVars
+import Translating
 
 package struct HTMLDocument: HTMLDocumentProtocol {
     package let themeColor: HTMLColor
@@ -22,7 +21,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
     package let navigationBar: any HTML
     package let _body: any HTML
     package let footer: any HTML
-    package let favicons: Favicons
+    package let favicons: Coenttb_Web_HTML.Favicons
 
     package init(
         themeColor: HTMLColor = .branding.accent,
@@ -33,13 +32,13 @@ package struct HTMLDocument: HTMLDocumentProtocol {
                 fontAwesomeScript
             }
         },
-        @HTMLBuilder favicons: () -> Favicons = { Favicons.coenttb },
+        @HTMLBuilder favicons: () -> Coenttb_Web_HTML.Favicons = { Coenttb_Web_HTML.Favicons.coenttb },
         @HTMLBuilder navigationBar: () -> any HTML = {
-            CoenttbNavigationBar()
+            NavigationBar()
         },
         @HTMLBuilder body: () -> any HTML,
         @HTMLBuilder footer: () -> any HTML = {
-            CoenttbFooter()
+            Footer()
                 .gradient(bottom: .branding.accent, middle: .background.primary, top: .background.primary)
         }
     ) {
@@ -110,7 +109,7 @@ package struct CoenttbHTMLDocumentHeader<
 
         let canonicalHref: URL = page.map { router.url(for: $0) } ?? baseUrl
         let description = page?.description()?.description
-        let hreflang: (Languages.Language) -> URL = { language in
+        let hreflang: (Translating.Language) -> URL = { language in
             page.map { page in
                 router.url(for: .init(language: language, page: page))
             } ?? baseUrl

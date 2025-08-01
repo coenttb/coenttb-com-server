@@ -6,16 +6,15 @@
 //
 
 import Coenttb_Server
-
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
+import Coenttb_Server_Dependencies
+import Foundation
+import Logging
 
 extension Logger: @retroactive DependencyKey {
     public static var liveValue: Logger {
         @Dependency(\.envVars) var envVars
         let logger = Logger(label: ProcessInfo.processInfo.processName) { _ in
-            CoenttbLogHandler(label: "coenttb.com", logLevel: envVars.logLevel ?? .trace, metadataProvider: nil)
+            Coenttb_Server.LogHandler(label: "coenttb.com", logLevel: envVars.logLevel ?? .trace, metadataProvider: nil)
         }
         return logger
     }

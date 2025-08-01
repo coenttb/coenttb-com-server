@@ -1,13 +1,12 @@
 import Coenttb_Com_Router
 import Coenttb_Com_Shared
-import Coenttb_Identity_Consumer
 import Coenttb_Newsletter
 import Coenttb_Server
 import Coenttb_Syndication_Vapor
 import Coenttb_Vapor
 import Mailgun
-import Server_Integration
 import Server_Client
+import Server_Integration
 import Server_Models
 
 extension Coenttb_Com_Router.Route.API {
@@ -23,9 +22,6 @@ extension Coenttb_Com_Router.Route.API {
                 @Dependency(\.serverClient.newsletter) var client
 
                 return try await Newsletter.Route.API.response(newsletter: newsletter)
-
-            case .identity(let identity):
-            return try await Coenttb_Identity_Consumer.Identity.Consumer.API.response(api: identity)
 
             case .syndication:
 
@@ -51,22 +47,6 @@ extension Coenttb_Com_Router.Route.API {
         }
     }
 }
-
-// extension Server_Models.User {
-//    init?(update: Coenttb_Identity.API.Update) {
-//        @Dependency(\.currentUser) var currentUser
-//
-//        guard var user = currentUser else {
-//            return nil
-//        }
-//
-//        if let newName = update.name {
-//            user.name = newName.isEmpty ? nil : newName
-//        }
-//
-//        self = user
-//    }
-// }
 
 //            case .stripe(let stripe):
 //                @Dependency(\.envVars.stripe.publishableKey) var publishableKey

@@ -1,13 +1,7 @@
-# These are some examples of commonly ignored file patterns.
-# You should customize this list as applicable to your project.
-# Learn more about .gitignore:
-#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
-
-# Swift and Vapor specific
+# Swift
 .build/
 .swiftpm
-*.swiftpm/
-*.swiftlint.yml
+Package.resolved
 
 # Node artifact files
 node_modules/
@@ -54,18 +48,11 @@ Thumbs.db
 *.mov
 *.wmv
 
-# GitHub token file
-github_token.txt
-
 # Environment files
-.env
 .env.*
-
-# Exclude specific env file
-!.env.example
-.env.development
 
 # Custom
 local-test-build.sh
-local-test-deploy.sh.claude
+local-test-deploy.sh
+.claude
 CLAUDE.md

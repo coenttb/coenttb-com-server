@@ -1,12 +1,11 @@
 //
 //  File.swift
-//  coenttb-identities
+//  newsletter4
 //
 //  Created by Coen ten Thije Boonkkamp on 04/10/2024.
 //
 
 import Coenttb_Web
-import Identities
 import Mailgun
 import Messages
 
@@ -17,8 +16,6 @@ extension Email {
         @Dependency(\.coenttb.website.router) var router
         let index = 4
         let title = "#\(index) Modern Swift Library Architecture: The Swift Package"
-
-        @Dependency(\.coenttb.website.router) var serverRouter
 
         return TableEmailDocument(
             preheader: title
@@ -33,7 +30,7 @@ extension Email {
 
                         Circle {
                             Image(
-                                src: .init(serverRouter.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
+                                src: .init(router.url(for: .public(.asset(.image("coenttb-20250710.png")))).absoluteString),
                                 alt: "coenttb image"
                             )
                                 .objectPosition(.twoValues(.percentage(50), .percentage(50)))

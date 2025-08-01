@@ -1,4 +1,53 @@
-.build/
-.swiftpm/
-.tenthijeboonkkamp-env
+.coenttb-env
 .env
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Swift build artifacts (keep .build/release for caching)
+.build/debug
+.build/*.yaml
+.build/*.json
+DerivedData/
+
+# IDE
+.swiftpm
+.vscode
+.idea
+*.xcodeproj
+*.xcworkspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+LICENSE
+docs/
+*.md
+
+# Testing
+# Tests/        # Keep Tests to avoid SPM validation errors
+test_reports/
+coverage/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Environment
+.env
+.env.*
+*.local
+
+# Logs and temp files
+*.log
+*.tmp
+tmp/
+logs/
+
+# NOTE: Keep Package.resolved, .build, Sources, Resources, and Public

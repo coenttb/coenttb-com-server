@@ -14,10 +14,6 @@ import Server_Client
 import Server_Dependencies
 import Server_Models
 
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 extension Newsletter: @retroactive DependencyKey {
     static public var liveValue: Self {
         @Dependency(\.coenttb.website.router) var router
