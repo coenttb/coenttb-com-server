@@ -2,20 +2,18 @@ FROM swift:6.1.2-jammy AS builder
 
 WORKDIR /build
 
-# Copy package files first for better caching
-COPY Package.swift Package.resolved ./
+COPY Package.* ./
 
 ARG GH_PAT
 RUN git config --global url."https://${GH_PAT}@github.com/".insteadOf "https://github.com/"
 
-# Resolve dependencies first - this layer will be cached if Package.resolved doesn't change
-RUN swift package resolve
+COPY . .
 
-# Copy source code after dependencies are resolved
-COPY Sources ./Sources
-COPY Public ./Public
+RUN rm -f Package.resolved && rm -rf .build && swift package update
 
-# Build only if source code or dependencies changed
+RUN swift package clean
+RUN rm -rf .build
+
 RUN swift build --product Server -c release
 
 FROM swift:6.1.2-jammy AS runtime
