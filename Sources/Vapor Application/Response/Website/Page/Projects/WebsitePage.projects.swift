@@ -27,6 +27,16 @@ extension Coenttb_Com_Router.Route.Website {
                 .github-link:hover {
                     background-color: rgba(var(--branding-accent-rgb), 0.2);
                 }
+                .projects-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+                    gap: 2rem;
+                    align-items: stretch;
+                }
+                .projects-grid > * {
+                    display: flex;
+                    flex-direction: column;
+                }
                 """
             }
             
@@ -62,7 +72,8 @@ extension Coenttb_Com_Router.Route.Website {
                             badges: [
                                 ("Swift 6.0", "#FF5722"),
                                 ("Alpha v0.1.0", "#f44336"),
-                                ("Apache 2.0", "#2196F3")
+//                                ("In Development", "#FF9800"),
+                                ("AGPL-3.0 / Commercial", "#2196F3")
                             ],
                             githubUrl: "https://github.com/coenttb/boiler",
                             headerImage: "boiler-badge.png"
@@ -105,9 +116,7 @@ extension Coenttb_Com_Router.Route.Website {
                             githubUrl: "https://github.com/coenttb/coenttb-mailgun"
                         )
                     }
-                    .display(.grid)
-                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                    .gap(.rem(2))
+                    .class("projects-grid")
                     .padding(bottom: .rem(3))
                     
                     Header(2) {
@@ -134,9 +143,7 @@ extension Coenttb_Com_Router.Route.Website {
                             githubUrl: "https://github.com/coenttb/coenttb-stripe"
                         )
                     }
-                    .display(.grid)
-                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                    .gap(.rem(2))
+                    .class("projects-grid")
                     
                     Header(2) {
                         "Infrastructure & Tools"
@@ -153,12 +160,11 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🖨️", "Convert HTML to PDF on iOS and macOS"),
                                 ("⚡", "Handle thousands of documents quickly"),
                                 ("📐", "Customizable margins and layouts"),
-                                ("🖼️", "Easy image embedding in PDFs"),
-                                ("⭐", "42 GitHub stars - Popular package")
+                                ("🖼️", "Easy image embedding in PDFs")
                             ],
                             badges: [
                                 ("Swift 6.0", "#FF5722"),
-                                ("Popular", "#9C27B0"),
+                                ("Popular (⭐ 42)", "#9C27B0"),
                                 ("Apache 2.0", "#2196F3")
                             ],
                             githubUrl: "https://github.com/coenttb/swift-html-to-pdf"
@@ -272,9 +278,7 @@ extension Coenttb_Com_Router.Route.Website {
                             githubUrl: "https://github.com/coenttb/swift-jwt"
                         )
                     }
-                    .display(.grid)
-                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                    .gap(.rem(2))
+                    .class("projects-grid")
                     .padding(bottom: .rem(3))
                     
                     Header(2) {
@@ -406,9 +410,7 @@ extension Coenttb_Com_Router.Route.Website {
                                 githubUrl: "https://github.com/swift-web-standards"
                             )
                         }
-                        .display(.grid)
-                        .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                        .gap(.rem(2))
+                        .class("projects-grid")
                         .padding(bottom: .rem(3))
                     }
                     
@@ -514,50 +516,81 @@ struct ProjectCard: HTML {
                 }
             },
             header: {
-                VStack {
-                    if let headerImage = headerImage {
-                        let src: Src = .init(router.url(for: .public(.asset(.image("\(headerImage)")))).absoluteString)
-                        
-                        Image(
-                            src: src,
-                            alt: "Boiler badge",
-                            loading: .lazy
-                        )
-                        
-//                        img(src: .init(headerImage), alt: "\(title)")
-//                            .width(.percent(100))
-//                            .height(.auto)
-//                            .maxHeight(.rem(4))
-//                            .objectFit(.contain)
-//                            .marginBottom(.rem(1))
-                    } else {
+                if let headerImage = headerImage {
+                    let src = router.url(for: .public(.asset(.image("\(headerImage)")))).absoluteString
+                    
+                    VStack {
                         Header(3) {
                             title
                         }
                         .marginBottom(.rem(0.5))
-                    }
-                    
-                    div {
-                        HTMLForEach(badges) { badge in
-                            span {
-                                badge.0
+                        .color(.white)
+                        .inlineStyle("text-shadow", "0 2px 4px rgba(0,0,0,0.3)")
+                        
+                        div {
+                            HTMLForEach(badges) { badge in
+                                span {
+                                    badge.0
+                                }
+                                .padding(vertical: .rem(0.25), horizontal: .rem(0.5))
+                                .backgroundColor(.hex("\(badge.1)"))
+                                .color(.white)
+                                .borderRadius(.px(4))
+                                .fontSize(.rem(0.75))
+                                .fontWeight(.medium)
+                                .marginRight(.rem(0.25))
+                                .marginBottom(.rem(0.25))
+                                .display(.inlineBlock)
                             }
-                            .padding(vertical: .rem(0.25), horizontal: .rem(0.5))
-                            .backgroundColor(.hex("\(badge.1)"))
-                            .color(.white)
-                            .borderRadius(.px(4))
-                            .fontSize(.rem(0.75))
-                            .fontWeight(.medium)
-                            .marginRight(.rem(0.25))
-                            .marginBottom(.rem(0.25))
-                            .display(.inlineBlock)
                         }
+                        .display(.flex)
+                        .flexWrap(.wrap)
+                        .gap(.rem(0.25))
                     }
-                    .display(.flex)
-                    .flexWrap(.wrap)
-                    .gap(.rem(0.25))
+                    .padding(.rem(1.5))
+                    .inlineStyle("background-image", "url('\(src)')")
+                    .backgroundSize(.cover)
+                    .backgroundPosition(.center)
+                    .backgroundRepeat(.noRepeat)
+//                    .borderRadius(.values(.init(.px(8), .px(8), .px(0), .px(0))))
+                } else {
+                    div {
+                        Header(3) {
+                            HTMLText(title)
+                        }
+                        .color(.text.primary.reverse())
+                        .marginBottom(.rem(1))
+                        
+                        div {
+                            HTMLForEach(badges) { badge in
+                                span {
+                                    badge.0
+                                }
+                                .padding(vertical: .rem(0.25), horizontal: .rem(0.5))
+                                .backgroundColor(.hex("\(badge.1)"))
+                                .color(.white)
+                                .borderRadius(.px(4))
+                                .fontSize(.rem(0.75))
+                                .fontWeight(.medium)
+                                .marginRight(.rem(0.25))
+                                .marginBottom(.rem(0.25))
+                                .display(.inlineBlock)
+                            }
+                        }
+                        .display(.flex)
+                        .flexWrap(.wrap)
+                        .gap(.rem(0.25))
+                        .position(.absolute)
+                        .bottom(.rem(1.5))
+                        .left(.rem(1.5))
+                        .right(.rem(1.5))
+                    }
+                    .backgroundColor(.background.primary.reverse())
+                    .padding(.rem(1.5))
+                    .height(.percent(100))
+                    .width(.percent(100))
+                    .position(.relative)
                 }
-                .padding(.rem(1.5))
             },
             footer: {
                 Link(href: .init(githubUrl)) {
