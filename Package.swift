@@ -3,6 +3,10 @@
 import Foundation
 import PackageDescription
 
+//let useLocalPackages = ProcessInfo.processInfo.environment["USE_LOCAL_PACKAGES"] != nil
+
+let useLocalPackages = (try? String(contentsOfFile: "\(Context.packageDirectory)/.env.development", encoding: .utf8).contains("USE_LOCAL_PACKAGES=true")) == true
+
 extension String {
     static let server: Self = "Server"
     static let serverClient: Self = "Server Client"
@@ -64,21 +68,58 @@ let package = Package(
         .library(name: .vaporApplication, targets: [.vaporApplication])
     ],
     dependencies: [
-        .package(url: "https://github.com/coenttb/boiler", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-server", branch: "main"),
-//        .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "main"),
-        .package(path: "../coenttb-com-shared"),
-//        .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
-        .package(path: "../coenttb-blog"),
-//        .package(url: "https://github.com/coenttb/coenttb-html", branch: "main"),
-        .package(path: "../coenttb-html"),
-        .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-postgres", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-hotjar", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-mailgun", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-syndication", branch: "main"),
+        // Boiler framework
+        useLocalPackages
+            ? .package(path: "../boiler")
+            : .package(url: "https://github.com/coenttb/boiler", branch: "main"),
+        
+        // Core coenttb packages
+        useLocalPackages
+            ? .package(path: "../coenttb")
+            : .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-server")
+            : .package(url: "https://github.com/coenttb/coenttb-server", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-com-shared")
+            : .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-blog")
+            : .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-html")
+            : .package(url: "https://github.com/coenttb/coenttb-html", branch: "main"),
+        
+        // Integration packages
+        useLocalPackages
+            ? .package(path: "../coenttb-google-analytics")
+            : .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-newsletter")
+            : .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-postgres")
+            : .package(url: "https://github.com/coenttb/coenttb-postgres", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-hotjar")
+            : .package(url: "https://github.com/coenttb/coenttb-hotjar", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-mailgun")
+            : .package(url: "https://github.com/coenttb/coenttb-mailgun", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-syndication")
+            : .package(url: "https://github.com/coenttb/coenttb-syndication", branch: "main"),
+        
+        // External dependencies (non-coenttb)
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
         .package(url: "https://github.com/vapor/vapor", from: "4.110.2")
