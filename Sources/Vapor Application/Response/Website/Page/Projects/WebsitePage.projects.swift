@@ -18,28 +18,6 @@ extension Coenttb_Com_Router.Route.Website {
     static func projects() async throws -> any AsyncResponseEncodable {
         
         return Server_Integration.HTMLDocument {
-            style {
-                """
-                .project-card:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                }
-                .github-link:hover {
-                    background-color: rgba(var(--branding-accent-rgb), 0.2);
-                }
-                .projects-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-                    gap: 2rem;
-                    align-items: stretch;
-                }
-                .projects-grid > * {
-                    display: flex;
-                    flex-direction: column;
-                }
-                """
-            }
-            
             PageHeader(
                 title: "Open Source Swift"
             ) {
@@ -58,65 +36,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .textAlign(.center)
                     .padding(bottom: .rem(2))
                     
-                    div {
-                        ProjectCard(
-                            title: "Boiler",
-                            description: "Swift server and website development made simple. A batteries-included approach with sensible defaults that gets you from 15 lines to production.",
-                            features: [
-                                ("🚀", "Start immediately - No complex configuration"),
-                                ("📈", "Learn incrementally - Grow from simple to production"),
-                                ("🛡️", "Type-safe HTML (`swift-html`), routing, and dependencies"),
-                                ("⚡", "Built on Vapor - Used by Apple"),
-                                ("🧩", "Encourages modular server architecture")
-                            ],
-                            badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("Alpha v0.1.0", "#f44336"),
-                                //                                ("In Development", "#FF9800"),
-                                ("AGPL-3.0 / Commercial", "#2196F3")
-                            ],
-                            githubUrl: "https://github.com/coenttb/boiler",
-                            headerImage: "boiler-badge.png"
-                        )
-                        
-                        ProjectCard(
-                            title: "swift-html",
-                            description: "Your entry point into comprehensive type-safe web development in Swift. Catch HTML and CSS errors at compile time, not runtime.",
-                            features: [
-                                ("🛡️", "Type-safe and domain-accurate HTML & CSS - Compile-time validation"),
-                                ("🧩", "SwiftUI-like syntax - Familiar patterns"),
-                                ("🎨", "Dark mode built-in"),
-                                ("⚡", "Zero runtime overhead - All validation at compile time"),
-                                ("📦", "Lightweight - Minimal dependencies"),
-                                ("🔄", "Renders efficiently as bytes or String")
-                            ],
-                            badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.0.1", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
-                            ],
-                            githubUrl: "https://github.com/coenttb/swift-html"
-                        )
-                        
-                        ProjectCard(
-                            title: "coenttb-mailgun",
-                            description: "Modern Swift SDK bringing the full power of Swift 6's concurrency to email automation. Production-tested with exhaustive API coverage.",
-                            features: [
-                                ("📋", "100% Mailgun API coverage - All endpoints"),
-                                ("✅", "200+ passing tests - Production proven"),
-                                ("🚀", "Swift 6 concurrency - Async/await throughout"),
-                                ("🔒", "Type-safe API - Compile-time validation"),
-                                ("💉", #"Use everywhere using `@Dependency(\.mailgun) var mailgun`"#)
-                            ],
-                            badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("Production Ready", "#4CAF50"),
-                                ("AGPL-3.0 / Commercial", "#2196F3")
-                            ],
-                            githubUrl: "https://github.com/coenttb/coenttb-mailgun"
-                        )
-                    }
-                    .class("projects-grid")
+                    FeaturedPackages()
                     .padding(bottom: .rem(3))
                     
                     Header(2) {
@@ -143,7 +63,10 @@ extension Coenttb_Com_Router.Route.Website {
                             githubUrl: "https://github.com/coenttb/coenttb-stripe"
                         )
                     }
-                    .class("projects-grid")
+                    .display(.grid)
+                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
+                    .gap(.rem(2))
+                    .alignItems(.stretch)
                     
                     Header(2) {
                         "Infrastructure & Tools"
@@ -278,7 +201,10 @@ extension Coenttb_Com_Router.Route.Website {
                             githubUrl: "https://github.com/coenttb/swift-jwt"
                         )
                     }
-                    .class("projects-grid")
+                    .display(.grid)
+                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
+                    .gap(.rem(2))
+                    .alignItems(.stretch)
                     .padding(bottom: .rem(3))
                     
                     Header(2) {
@@ -289,7 +215,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(bottom: .rem(2))
                     
                     div {
-                        p {
+                        CoenttbHTML.Paragraph {
                             HTMLText("The ")
                             Link(href: .init("https://github.com/swift-web-standards")) {
                                 "swift-web-standards"
@@ -410,7 +336,10 @@ extension Coenttb_Com_Router.Route.Website {
                                 githubUrl: "https://github.com/swift-web-standards"
                             )
                         }
-                        .class("projects-grid")
+                        .display(.grid)
+                        .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
+                        .gap(.rem(2))
+                        .alignItems(.stretch)
                         .padding(bottom: .rem(3))
                     }
                     
@@ -496,7 +425,7 @@ struct ProjectCard: HTML {
     var body: some HTML {
         Card(
             content: {
-                p {
+                CoenttbHTML.Paragraph {
                     description
                 }
                 .marginBottom(.rem(1))
@@ -580,14 +509,15 @@ struct ProjectCard: HTML {
                 .fontWeight(.medium)
                 .display(.inlineBlock)
                 .padding(.rem(0.75))
-                .inlineStyle("background-color", "rgba(var(--branding-accent-rgb), 0.1)")
+//                .backgroundColor(.branding.accent.map { $0.opacity(0.3)})
+//                .backgroundColor(.branding.accent.map { $0.opacity(0.6)}, pseudo: .hover)
                 .borderRadius(.px(6))
                 .transition(.all(duration: .ms(200)))
-                .class("github-link")
             }
         )
         .transition(.all(duration: .ms(200)))
-        .class("project-card")
+        .transform(.translateY(.px(-2)), pseudo: .hover)
+        .inlineStyle("box-shadow", "0 4px 12px rgba(0, 0, 0, 0.1)", pseudo: .hover)
     }
 }
 

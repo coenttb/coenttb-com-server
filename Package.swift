@@ -72,7 +72,7 @@ let package = Package(
 //        .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
         .package(path: "../coenttb-blog"),
 //        .package(url: "https://github.com/coenttb/coenttb-html", branch: "main"),
-        .package(path: "../../html/coenttb-html"),
+        .package(path: "../coenttb-html"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-postgres", branch: "main"),
