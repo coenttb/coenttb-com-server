@@ -30,6 +30,8 @@ extension Route.Website {
             return String.contact
         case .newsletter:
             return String.newsletter
+        case .projects:
+            return "projects"
         }
     }
 }
