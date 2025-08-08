@@ -22,27 +22,27 @@ extension Coenttb_Com_Router.Route {
         return try await withDependencies {
             $0.route = route
         } operation: {
-            
+
             switch route {
             case let .api(api):
                 return try await API.response(api: api)
-                
+
             case let .webhook(webhook):
                 return try await Webhook.response(webhook: webhook)
-                
+
             case let .website(website):
                 return try await Coenttb_Web.Website<Coenttb_Com_Router.Route.Website>.response(website: website)
-                
+
             case .public(.sitemap):
                 return Response(
                     status: .ok,
                     body: .init(stringLiteral: try await Sitemap.default().xml)
                 )
-                
+
             case .public(.rssXml):
-                
+
                 @Dependency(\.blog.getAll) var blogPosts
-                
+
                 return await RSS.Feed.Response(
                     feed: RSS.Feed.memoized {
                         RSS.Feed(
@@ -50,7 +50,7 @@ extension Coenttb_Com_Router.Route {
                         )
                     }
                 )
-                
+
             case .public(.robots):
                 return Response.robots(
                     disallows: Translating.Language.allCases.map {
@@ -60,24 +60,24 @@ extension Coenttb_Com_Router.Route {
                     """
                     }.joined(separator: "\n")
                 )
-                
+
             case .public(.wellKnown(.apple_developer_merchantid_domain_association)):
                 @Dependency(\.envVars.appleDeveloperMerchantIdDomainAssociation) var appleDeveloperMerchantIdDomainAssociation
-                
+
                 guard let appleDeveloperMerchantIdDomainAssociation
                 else { throw Abort(.internalServerError, reason: "Failed to get apple-developer-merchantid-domain-association") }
-                
+
                 return appleDeveloperMerchantIdDomainAssociation
-                
+
             case let .public(.favicon(favicon)):
                 @Dependency(\.request!) var request
                 return try await request.fileio.streamFile(at: .favicon(favicon))
-                
+
             case let .public(`public`):
                 @Dependency(\.request!) var request
                 return try await request.fileio.streamFile(at: `public`)
             }
-            
+
         }
     }
 }
@@ -104,7 +104,7 @@ extension RSS.Feed {
         @Dependency(\.coenttb.website.router) var router
         @Dependency(\.envVars.baseUrl) var baseUrl
         @Dependency(\.envVars.companyName) var companyName
-        
+
         self = RSS.Feed(
             metadata: .init(
                 title: companyName ?? "RSS",

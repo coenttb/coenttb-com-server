@@ -19,13 +19,13 @@ extension [any Fluent.Migration] {
                 migration.name = "Server_Database.User.Migration.Create"
                 return migration
             }()
-            
+
         ]
-        
+
         migrations.append(contentsOf: Coenttb_Newsletter_Fluent.Newsletter.Migration.allCases)
 
         @Dependency(\.envVars.appEnv) var appEnv
-        
+
         if appEnv == .development {
             migrations.append(CreateUnverifiedNewsletterMigration())
         }
@@ -33,8 +33,6 @@ extension [any Fluent.Migration] {
         return migrations
     }
 }
-
-
 
 package struct CreateUnverifiedNewsletterMigration: AsyncMigration {
     package init() {}

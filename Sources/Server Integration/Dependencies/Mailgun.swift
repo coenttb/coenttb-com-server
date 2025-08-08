@@ -5,14 +5,14 @@
 ////  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 ////
 //
-//import Coenttb_Com_Shared
-//import Coenttb_Server
-//import Mailgun
-//import Server_Client
-//import Server_Dependencies
-//import Server_Models
+// import Coenttb_Com_Shared
+// import Coenttb_Server
+// import Mailgun
+// import Server_Client
+// import Server_Dependencies
+// import Server_Models
 //
-//extension Mailgun: @retroactive DependencyKey {
+// extension Mailgun: @retroactive DependencyKey {
 //    public static var liveValue: Mailgun.AuthenticatedClient? {
 //        @Dependency(\.envVars) var envVars
 //
@@ -30,10 +30,10 @@
 //            domain: domain
 //        )
 //    }
-//}
+// }
 //
-//extension Mailgun.Client {
+// extension Mailgun.Client {
 //    enum Error: Swift.Error {
 //        case clientIsNil
 //    }
-//}
+// }

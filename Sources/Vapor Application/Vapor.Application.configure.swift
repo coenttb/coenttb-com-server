@@ -13,7 +13,7 @@ import Server_Models
 
 extension Vapor.Application {
     package static func configure(_ application: Vapor.Application) async throws {
-        
+
         Vapor.Application.preloadStaticResources()
 
         @Dependency(\.envVars) var envVars
