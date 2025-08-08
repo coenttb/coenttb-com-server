@@ -67,7 +67,7 @@ extension Newsletter.Client: @retroactive DependencyKey {
                 )
             },
             onSuccessfullyVerified: { email in
-                @Dependency(\.mailgun.client) var mailgun
+                
                 @Dependency(\.envVars.newsletterAddress) var listAddress
                 @Dependency(\.logger) var logger
                 @Dependency(\.envVars.appEnv) var appEnv
@@ -84,12 +84,15 @@ extension Newsletter.Client: @retroactive DependencyKey {
                     else { return }
 
                     @Dependency(\.envVars.appEnv) var appEnv
+                    @Dependency(\.mailgun) var mailgun
+                    
+                    let client = mailgun.client
 
-                    async let addMemberResponse = mailgun.mailingLists.addMember(
+                    async let addMemberResponse = client.mailingLists.addMember(
                         listAddress: listAddress,
                         request: .init(address: email)
                     )
-                    async let notificationResponse = mailgun.messages.send(
+                    async let notificationResponse = client.messages.send(
                         Email.notifyOfNewSubscription(
                             from: mailgunCompanyEmail,
                             to: mailgunCompanyEmail,
