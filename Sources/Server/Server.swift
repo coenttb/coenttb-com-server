@@ -7,8 +7,6 @@ import Vapor_Application
 struct Server {
     static func main() async throws {
         prepareDependencies {
-//            $0.envVars = try! EnvVars.live(localEnvFile: .localEnvFile)
-
             if $0.envVars.appEnv == .development {
                 $0.coenttb = .testValue
             }
@@ -22,7 +20,7 @@ struct Server {
             router: router,
             use: { route in
                 return try await withDependencies {
-                    $0.envVars = try EnvVars.live(localEnvFile: .localEnvFile)
+                    $0.envVars = try EnvVars.live(environmentConfiguration: .projectRoot($0.projectRoot, environment: $0.envVars.appEnv.rawValue))
                 } operation: {
                     @Dependency(\.envVars.emergencyMode) var emergencyMode
                     guard !emergencyMode else { return "emergency mode" }

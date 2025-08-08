@@ -169,6 +169,22 @@ extension Coenttb_Com_Router.Route.Website {
                     }
                 }
                 .backgroundColor(.background.primary)
+                
+                // Featured Packages Section
+                PageModule(theme: .content) {
+                    VStack {
+                        FeaturedPackages()
+                    }
+                } title: {
+                    @Dependency(\.coenttb.website.router) var router
+                    
+                    PageModuleSeeAllTitle(
+                        title: "Featured Open Source Packages",
+                        seeAllURL: router.url(for: .page(.projects)).absoluteString
+                    )
+                    .padding(bottom: .rem(2))
+                }
+                .backgroundColor(.background.primary)
 
             }
         }

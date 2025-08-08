@@ -5,6 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
+import Coenttb_Com_Router
 import Coenttb_Com_Shared
 import Coenttb_Web_HTML
 import Dependencies
@@ -19,6 +20,10 @@ package struct NavigationBar: HTML {
     @Dependency(\.currentUser) var currentUser
 
     private var blog: String { router.href(for: .blog(.index)) }
+    private var projects: String { 
+        let page: Coenttb_Com_Router.Route.Website = .projects
+        return router.href(for: page) 
+    }
     private var isLoggedIn: Bool { currentUser?.authenticated == true }
 
     package var body: some HTML {
@@ -42,6 +47,7 @@ package struct NavigationBar: HTML {
                 NavigationBarCenteredNavItems(
                     items: [
                         !posts.isEmpty ? .init(String.blog.capitalizingFirstLetter().description, href: .init(blog)) : nil,
+                        .init("Projects", href: .init(projects)),
                         .init(String.contact_me.capitalizingFirstLetter().description, href: .init(router.href(for: .contact)))
                     ].compactMap { $0 }
                 )
@@ -66,7 +72,8 @@ package struct NavigationBar: HTML {
                 ul {
                     HTMLGroup {
                         HTMLForEach([
-                            !posts.isEmpty ? NavigationBarMobileNavItems.NavListItem("Blog", href: .init(blog)) : nil
+                            !posts.isEmpty ? NavigationBarMobileNavItems.NavListItem("Blog", href: .init(blog)) : nil,
+                            NavigationBarMobileNavItems.NavListItem("Projects", href: .init(projects))
                         ].compactMap { $0 }) { item in
                             li {
                                 item

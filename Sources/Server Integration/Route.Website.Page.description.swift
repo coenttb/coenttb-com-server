@@ -35,6 +35,8 @@ extension Coenttb_Com_Router.Route.Website {
             String.oneliner
         case .contact:
             String.oneliner
+        case .projects:
+            "projects"
         }
 
         return x?.capitalizingFirstLetter()

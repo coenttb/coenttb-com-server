@@ -36,7 +36,7 @@ extension [(URL, String)] {
                 String.choose_country_region.description
             ))
 
-        case .contact, .home, .privacy_statement, .terms_of_use, .general_terms_and_conditions, .newsletter:
+        case .contact, .home, .privacy_statement, .terms_of_use, .general_terms_and_conditions, .newsletter, .projects:
             break
         }
         self = urls

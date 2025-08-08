@@ -37,6 +37,9 @@ extension Coenttb_Com_Router.Route.Website {
         case .home:
             return try await Coenttb_Com_Router.Route.Website.home()
 
+        case .projects:
+            return try await Coenttb_Com_Router.Route.Website.projects()
+
         case .privacy_statement:
             return try await Coenttb_Com_Router.Route.Website.privacy_policy()
 
