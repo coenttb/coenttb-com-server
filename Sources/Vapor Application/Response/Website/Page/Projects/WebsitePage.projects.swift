@@ -64,7 +64,7 @@ extension Coenttb_Com_Router.Route.Website {
                             description: "Swift server and website development made simple. A batteries-included approach with sensible defaults that gets you from 15 lines to production.",
                             features: [
                                 ("🚀", "Start immediately - No complex configuration"),
-                                ("📈", "Learn incrementally - Grow from simple to production"), 
+                                ("📈", "Learn incrementally - Grow from simple to production"),
                                 ("🛡️", "Type-safe HTML (`swift-html`), routing, and dependencies"),
                                 ("⚡", "Built on Vapor - Used by Apple"),
                                 ("🧩", "Encourages modular server architecture")
@@ -72,7 +72,7 @@ extension Coenttb_Com_Router.Route.Website {
                             badges: [
                                 ("Swift 6.0", "#FF5722"),
                                 ("Alpha v0.1.0", "#f44336"),
-//                                ("In Development", "#FF9800"),
+                                //                                ("In Development", "#FF9800"),
                                 ("AGPL-3.0 / Commercial", "#2196F3")
                             ],
                             githubUrl: "https://github.com/coenttb/boiler",
@@ -426,13 +426,13 @@ extension Coenttb_Com_Router.Route.Website {
                             "These packages are part of a comprehensive Swift web development ecosystem. Visit the GitHub repositories for more packages including:"
                         }
                         ul {
-                            li { 
+                            li {
                                 Link(href: .init("https://github.com/coenttb/swift-web-foundation")) {
                                     "swift-web-foundation"
                                 }
                                 span { " - Website foundation utilities" }
                             }
-                            li { 
+                            li {
                                 Link(href: .init("https://github.com/coenttb/swift-server-foundation")) {
                                     "swift-server-foundation"
                                 }
@@ -516,44 +516,7 @@ struct ProjectCard: HTML {
                 }
             },
             header: {
-                if let headerImage = headerImage {
-                    let src = router.url(for: .public(.asset(.image("\(headerImage)")))).absoluteString
-                    
-                    VStack {
-                        Header(3) {
-                            title
-                        }
-                        .marginBottom(.rem(0.5))
-                        .color(.white)
-                        .inlineStyle("text-shadow", "0 2px 4px rgba(0,0,0,0.3)")
-                        
-                        div {
-                            HTMLForEach(badges) { badge in
-                                span {
-                                    badge.0
-                                }
-                                .padding(vertical: .rem(0.25), horizontal: .rem(0.5))
-                                .backgroundColor(.hex("\(badge.1)"))
-                                .color(.white)
-                                .borderRadius(.px(4))
-                                .fontSize(.rem(0.75))
-                                .fontWeight(.medium)
-                                .marginRight(.rem(0.25))
-                                .marginBottom(.rem(0.25))
-                                .display(.inlineBlock)
-                            }
-                        }
-                        .display(.flex)
-                        .flexWrap(.wrap)
-                        .gap(.rem(0.25))
-                    }
-                    .padding(.rem(1.5))
-                    .inlineStyle("background-image", "url('\(src)')")
-                    .backgroundSize(.cover)
-                    .backgroundPosition(.center)
-                    .backgroundRepeat(.noRepeat)
-//                    .borderRadius(.values(.init(.px(8), .px(8), .px(0), .px(0))))
-                } else {
+                div {
                     div {
                         Header(3) {
                             HTMLText(title)
@@ -583,14 +546,30 @@ struct ProjectCard: HTML {
                         .position(.absolute)
                         .bottom(.rem(1.5))
                         .left(.rem(1.5))
-                        .right(.rem(1.5))
+                        .right(headerImage != nil ? .rem(7) : .rem(1.5))
+                        
+                        if let headerImage = headerImage {
+                            Image(
+                                src: .init(router.url(for: .public(.asset(.image("\(headerImage)"))))),
+                                alt: .init(title)
+                            )
+                            .height(.rem(4))
+                            .width(.auto)
+                            .objectFit(.contain)
+                            .position(.absolute)
+                            .bottom(.rem(1.5))
+                            .right(.rem(1.5))
+                        }
                     }
                     .backgroundColor(.background.primary.reverse())
                     .padding(.rem(1.5))
-                    .height(.percent(100))
+                    .minHeight(.rem(10))
                     .width(.percent(100))
                     .position(.relative)
                 }
+                .minHeight(.rem(10))
+                .display(.flex)
+                .alignItems(.center)
             },
             footer: {
                 Link(href: .init(githubUrl)) {
