@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0">
   <img src="https://img.shields.io/badge/Platforms-macOS%20|%20Linux-lightgray.svg" alt="Platforms">
-  <img src="https://img.shields.io/badge/License-AGPL%203.0-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/License-AGPL--3.0%20|%20Commercial-blue.svg" alt="License">
   <img src="https://img.shields.io/badge/Vapor-4-purple.svg" alt="Vapor 4">
 </p>
 
@@ -169,21 +169,19 @@ This project relies on and is inspired by the excellent work at [Point-Free](htt
 
 ## License
 
-### Source Code
-This project's source code is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See [LICENSE](LICENSE) for details.
+This project is available under **dual licensing**:
 
-### Content
+### Open Source License
+**GNU Affero General Public License v3.0 (AGPL-3.0)**  
+Free for open source projects. See [LICENSE](LICENSE.md) for details.
+
+### Commercial License
+For proprietary/commercial use without AGPL restrictions.  
+Contact **info@coenttb.com** for licensing options.
+
+### Content License
 - **Paid content** on [coenttb.com](https://coenttb.com) - All rights reserved
 - **Free content** (blog posts, docs) - [CC BY-NC-SA 4.0](CC%20BY-NC-SA%204.0%20LICENSE)
-
-### Commercial Licensing
-
-Need to use this codebase without AGPL-3.0 requirements? Commercial licenses are available for:
-- Proprietary software development
-- SaaS products
-- Avoiding open-source obligations
-
-Contact **info@coenttb.com** for commercial licensing.
 
 ---
 

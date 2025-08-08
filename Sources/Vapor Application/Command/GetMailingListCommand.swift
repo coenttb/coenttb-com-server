@@ -25,18 +25,13 @@ struct GetMailingListCommand: AsyncCommand {
         "Resends verification emails to all unverified newsletter subscribers"
     }
 
-    @Dependency(\.mailgunClient?.mailingLists.get) var getList
+    @Dependency(\.mailgun.client.mailingLists.get) var getList
 
     func run(using context: CommandContext, signature: Signature) async throws {
-        try await withDependencies {
+        await withDependencies {
             $0.databaseConfiguration.connectionPoolTimeout = .seconds(30)
             $0.databaseConfiguration.maxConnectionsPerEventLoop = 1
         } operation: {
-            guard let getList else {
-                context.console.error("Mailgun configuration is missing")
-                throw Abort(.internalServerError)
-            }
-
             context.console.info("Starting to process get Lists...")
 
             do {

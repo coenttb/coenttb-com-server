@@ -6,7 +6,6 @@
 //
 
 import Fluent
-// @preconcurrency import Coenttb_Stripe
 import Foundation
 
 extension Server_Database.User {
@@ -50,7 +49,6 @@ extension Server_Database.User {
 
             package init() {}
 
-//            package typealias Status = StripeKit.SubscriptionStatus
             package enum Status: String, Codable, Hashable, Sendable {
                 case trialing
                 case pastDue

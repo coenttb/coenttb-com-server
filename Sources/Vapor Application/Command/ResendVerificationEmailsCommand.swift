@@ -28,8 +28,7 @@ struct ResendVerificationEmailsCommand: AsyncCommand {
     @Dependency(\.coenttb.website.router) var router
     @Dependency(\.envVars.companyName) var companyName
     @Dependency(\.envVars.companyInfoEmailAddress) var supportEmail
-    @Dependency(\.envVars.mailgun?.domain) var domain
-    @Dependency(\.mailgunClient?.messages.send) var sendEmail
+    @Dependency(\.mailgun.client.messages.send) var sendEmail
 
     func run(using context: CommandContext, signature: Signature) async throws {
         fatalError()

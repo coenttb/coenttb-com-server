@@ -18,7 +18,7 @@ extension Email {
         subscriberEmail: EmailAddress,
         domain: String
     ) -> Email {
-        return Mailgun.Email.notifyOfNewSubscription(
+        return Email.notifyOfNewSubscription(
             from: companyEmail,
             to: to,
             subscriberEmail: subscriberEmail,

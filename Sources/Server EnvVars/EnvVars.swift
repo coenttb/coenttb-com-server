@@ -21,21 +21,21 @@ extension EnvVars {
         )
     }
 
-    package var mailgun: Mailgun.Client.EnvVars? {
-        guard
-            let baseURL = self.url("MAILGUN_BASE_URL"),
-            let apiKey = self["MAILGUN_PRIVATE_API_KEY"],
-            let domain = self["MAILGUN_DOMAIN"]
-        else {
-            return nil
-        }
-
-        return .init(
-            baseUrl: baseURL,
-            apiKey: .init(rawValue: apiKey),
-            domain: try! .init(domain)
-        )
-    }
+//    package var mailgun: Mailgun.EnvVars? {
+//        guard
+//            let baseURL = self.url("MAILGUN_BASE_URL"),
+//            let apiKey = self["MAILGUN_PRIVATE_API_KEY"],
+//            let domain = self["MAILGUN_DOMAIN"]
+//        else {
+//            return nil
+//        }
+//
+//        return .init(
+//            baseUrl: baseURL,
+//            apiKey: .init(rawValue: apiKey),
+//            domain: try! .init(domain)
+//        )
+//    }
 
 //    package var stripe: Coenttb_Stripe.Client.EnvVars? {
 //        guard

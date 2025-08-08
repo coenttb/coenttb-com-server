@@ -24,7 +24,7 @@ extension Vapor.Application {
 
         [any Migration].allCases.forEach { application.migrations.add($0) }
 
-//            [any AsyncCommand].allCases.forEach { application.asyncCommands.use($0.0, as: $0.1) }
+        [any AsyncCommand].allCases.forEach { application.asyncCommands.use($0.1, as: $0.0) }
 
         application.migrations.add(JobMetadataMigrate())
 

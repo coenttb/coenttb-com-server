@@ -7,7 +7,6 @@
 
 import Coenttb_Web
 import Mailgun
-import Messages
 
 extension Email {
     package static func newsletter5(

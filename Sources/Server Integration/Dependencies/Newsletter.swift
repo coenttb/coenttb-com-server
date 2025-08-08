@@ -49,14 +49,11 @@ extension Newsletter.Client: @retroactive DependencyKey {
     public static var liveValue: Self {
         Newsletter.Client.live(
             sendVerificationEmail: { email, token in
-                @Dependencies.Dependency(\.mailgunClient?.messages.send) var sendEmail
+                @Dependencies.Dependency(\.mailgun.client.messages.send) var sendEmail
                 @Dependencies.Dependency(\.coenttb.website.router) var router
                 @Dependencies.Dependency(\.envVars.companyName!) var businessName
                 @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var supportEmail
                 @Dependencies.Dependency(\.envVars.companyInfoEmailAddress!) var fromEmail
-
-                guard let sendEmail
-                else { throw Mailgun.Client.Error.clientIsNil }
 
                 return try await sendEmail(
                     .requestEmailVerification(
@@ -70,17 +67,13 @@ extension Newsletter.Client: @retroactive DependencyKey {
                 )
             },
             onSuccessfullyVerified: { email in
-                @Dependency(\.mailgunClient) var mailgunClient
+                @Dependency(\.mailgun.client) var mailgun
                 @Dependency(\.envVars.newsletterAddress) var listAddress
                 @Dependency(\.logger) var logger
                 @Dependency(\.envVars.appEnv) var appEnv
-                @Dependency(\.envVars.mailgun?.domain) var domain
                 @Dependency(\.envVars.mailgunCompanyEmail) var mailgunCompanyEmail
                 @Dependency(\.envVars.companyName) var companyName
                 @Dependency(\.envVars) var envVars
-
-                guard let mailgunClient
-                else { throw Mailgun.Client.Error.clientIsNil }
 
                 guard let listAddress else { return }
 
@@ -92,11 +85,11 @@ extension Newsletter.Client: @retroactive DependencyKey {
 
                     @Dependency(\.envVars.appEnv) var appEnv
 
-                    async let addMemberResponse = mailgunClient.mailingLists.addMember(
+                    async let addMemberResponse = mailgun.mailingLists.addMember(
                         listAddress: listAddress,
                         request: .init(address: email)
                     )
-                    async let notificationResponse = mailgunClient.messages.send(
+                    async let notificationResponse = mailgun.messages.send(
                         Email.notifyOfNewSubscription(
                             from: mailgunCompanyEmail,
                             to: mailgunCompanyEmail,
@@ -114,16 +107,13 @@ extension Newsletter.Client: @retroactive DependencyKey {
                 }
             },
             onUnsubscribed: { email in
-                @Dependency(\.mailgunClient) var mailgunClient
+                @Dependency(\.mailgun.client) var mailgun
                 @Dependency(\.envVars.newsletterAddress) var listAddress
                 @Dependency(\.logger) var logger
 
-                guard let mailgunClient
-                else { throw Mailgun.Client.Error.clientIsNil }
-
                 guard let listAddress else { return }
 
-                let response = try await mailgunClient.mailingLists.deleteMember(listAddress: listAddress, memberAddress: email)
+                let response = try await mailgun.mailingLists.deleteMember(listAddress: listAddress, memberAddress: email)
 
                 logger.info("\(response)")
             }

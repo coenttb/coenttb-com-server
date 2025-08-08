@@ -1,13 +1,14 @@
 import Coenttb_Vapor
 import Vapor_Application
 import Coenttb_Com_Router
+import Boiler
 
 
 @main
 struct Server {
     static func main() async throws {
         prepareDependencies {
-            $0.envVars = try! EnvVars.live(localEnvFile: .localEnvFile)
+//            $0.envVars = try! EnvVars.live(localEnvFile: .localEnvFile)
             
             if $0.envVars.appEnv == .development {
                 $0.coenttb = .testValue
@@ -18,7 +19,7 @@ struct Server {
         
         @Dependency(\.coenttb.website.router) var router
         
-        try await Vapor.Application.Foundation.execute(
+        try await Boiler.execute(
             router: router,
             use: { route in
                 return try await withDependencies {

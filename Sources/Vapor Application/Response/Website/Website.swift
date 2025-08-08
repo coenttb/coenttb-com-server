@@ -14,7 +14,6 @@ extension Website<Coenttb_Com_Router.Route.Website> {
     static func response(
         website: Website<Coenttb_Com_Router.Route.Website>
     ) async throws -> any AsyncResponseEncodable {
-        @Dependency(\.envVars.languages) var languages
         @Dependency(\.request) var request
 
         return try await withDependencies {

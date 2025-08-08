@@ -27,10 +27,9 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
+    static var boiler: Self { .product(name: "Boiler", package: "boiler") }
     static var coenttbComShared: Self { .product(name: "Coenttb Com Shared", package: "coenttb-com-shared") }
     static var coenttbServer: Self { .product(name: "Coenttb Server", package: "coenttb-server") }
-    static var coenttbServerVapor: Self { .product(name: "Coenttb Vapor", package: "coenttb-server-vapor") }
-    static var coenttbServerFluent: Self { .product(name: "Coenttb Fluent", package: "coenttb-server-vapor") }
     static var coenttbBlog: Self { .product(name: "Coenttb Blog", package: "coenttb-blog") }
     static var coenttbBlogVapor: Self { .product(name: "Coenttb Blog Vapor", package: "coenttb-blog") }
     static var coenttbNewsletter: Self { .product(name: "Coenttb Newsletter", package: "coenttb-newsletter") }
@@ -65,10 +64,10 @@ let package = Package(
         .library(name: .vaporApplication, targets: [.vaporApplication])
     ],
     dependencies: [
+        .package(url: "https://github.com/coenttb/boiler", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-server", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-com-shared", branch: "main"),
-        .package(url: "https://github.com/coenttb/coenttb-server-vapor", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-blog", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
         .package(url: "https://github.com/coenttb/coenttb-newsletter", branch: "main"),
@@ -85,7 +84,8 @@ let package = Package(
             name: .server,
             dependencies: [
                 .vaporApplication,
-                .coenttbServer
+                .coenttbServer,
+                .boiler
             ]
         ),
         .target(
@@ -112,7 +112,7 @@ let package = Package(
             name: .serverDatabase,
             dependencies: [
                 .coenttbServer,
-                .coenttbServerFluent,
+                .boiler,
                 .coenttbNewsletterFluent,
                 .serverDependencies,
                 .serverEnvVars,
@@ -206,7 +206,7 @@ let package = Package(
             name: .vaporApplication,
             dependencies: [
                 .coenttbServer,
-                .coenttbServerVapor,
+                .boiler,
                 .serverEnvVars,
                 .serverClient,
                 .serverDependencies,
@@ -230,8 +230,4 @@ let package = Package(
     swiftLanguageModes: [.v6]
 )
 
-extension String {
-    var tests: Self {
-        self + " Tests"
-    }
-}
+extension String { var tests: Self { self + " Tests" } }

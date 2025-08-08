@@ -9,20 +9,11 @@ import Coenttb_Vapor
 import Foundation
 
 extension [any AsyncCommand] {
-    static var allCases: [(any AsyncCommand, String)] {
-        [
-            (
-                HelloCommand(),
-                "hello"
-            ),
-            (
-                ResendVerificationEmailsCommand(),
-                "resend-verification-emails"
-            ),
-            (
-                GetMailingListCommand(),
-                "get-coenttb-mailing-list"
-            )
-        ]
+    static var allCases: [String: (any AsyncCommand)] {
+        .init {
+            ("hello", HelloCommand())
+            ("resend-verification-emails", ResendVerificationEmailsCommand())
+            ("get-mailing-list", GetMailingListCommand())
+        }
     }
 }

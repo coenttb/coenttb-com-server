@@ -18,41 +18,23 @@ extension [any Fluent.Migration] {
                 var migration = Server_Database.User.CreateMigration()
                 migration.name = "Server_Database.User.Migration.Create"
                 return migration
-            }(),
-            {
-                var migration = Newsletter.Migration.Create()
-                migration.name = "Coenttb_Newsletter.Newsletter.Migration.Create"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Newsletter_Fluent.Newsletter.Token.Migration.Create()
-                migration.name = "Coenttb_Newsletter.Newsletter.Token.Migration.Create"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_1_AddUpdatedAt()
-                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_1_AddUpdatedAt"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_2_AddEmailVerification()
-                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_2_AddEmailVerification"
-                return migration
-            }(),
-            {
-                var migration = Coenttb_Newsletter_Fluent.Newsletter.Migration.STEP_3_AddLastEmailMessageId()
-                migration.name = "Coenttb_Newsletter.Newsletter.Migration.STEP_3_AddLastEmailMessageId"
-                return migration
             }()
+            
         ]
+        
+        migrations.append(contentsOf: Coenttb_Newsletter_Fluent.Newsletter.Migration.allCases)
 
-#if DEBUG && os(macOS)
-        migrations.append(CreateUnverifiedNewsletterMigration())
-#endif
+        @Dependency(\.envVars.appEnv) var appEnv
+        
+        if appEnv == .development {
+            migrations.append(CreateUnverifiedNewsletterMigration())
+        }
 
         return migrations
     }
 }
+
+
 
 package struct CreateUnverifiedNewsletterMigration: AsyncMigration {
     package init() {}
