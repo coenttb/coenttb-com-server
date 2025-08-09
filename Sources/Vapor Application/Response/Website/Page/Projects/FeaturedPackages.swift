@@ -23,19 +23,17 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "Boiler",
                 description: #"""
-                Swift server and website development made simple. A batteries-included approach with sensible defaults that gets you from 15 lines to production.
+                The Swift server framework that gets you from idea to production in record time. Batteries-included with sensible defaults, type-safe throughout, and battle-tested in production.
                 ```swift
                 import Boiler
 
                 @main
                 struct Server {
                     static func main() async throws {
-                        let boiler = "Boiler"
-                        
                         try await Boiler.execute {
                             HTMLDocument {
-                                h1 { "Start cooking with \(boiler)!" }
-                                    .color(.red)
+                                h1 { "Hello, World!" }
+                                    .color(.accent)
                             }
                         }
                     }
@@ -45,9 +43,9 @@ public struct FeaturedPackages: HTML {
                 features: [
                     ("🚀", "Start immediately - No complex configuration"),
                     ("📈", "Learn incrementally - Grow from simple to production"),
-                    ("🛡️", "Type-safe HTML (`swift-html`), routing, and dependencies"),
+                    ("🛡️", "Type-safe HTML, routing, and dependencies"),
                     ("⚡", "Built on Vapor - Used by Apple"),
-                    ("🚀", "Swift 6 concurrency - Async/await throughout"),
+                    ("🧩", "Modular architecture - Compose what you need"),
                 ],
                 badges: [
                     ("Swift 6.0", .swift6),
@@ -61,22 +59,29 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "swift-html",
                 description: #"""
-                Your entry point into domain-accurate and type-safe HTML & CSS development in Swift.
+                Write HTML & CSS with the power and safety of Swift. Catch errors at compile-time, not runtime. SwiftUI-like syntax makes web development feel native to Swift developers.
                 ```swift
                 import HTML
                 
-                let document = HTMLDocument {
-                    h1 { "SwiftUI-syntax for HTML" }
-
-                    h2 { "CSS included!" }
-                        .color(.blue)
+                let page = HTMLDocument {
+                    h1 { "Type-safe HTML" }
+                        .color(.primary)
+                    
+                    div {
+                        p { "Compile-time validation" }
+                            .fontSize(.rem(1.2))
+                    }
+                    .backgroundColor(.init(light: .blue150, dark: .blue900))
                 }
                 ```
                 """#,
                 features: [
-                    ("🎨", "Dark mode built-in"),
+                    ("🛡️", "Type-safe HTML & CSS - Compile-time validation"),
+                    ("🎨", "Dark mode built-in - Responsive by default"),
+                    ("⚡", "Zero runtime overhead - All validation at compile time"),
+                    ("🧩", "SwiftUI-like syntax - Familiar patterns"),
                     ("📦", "Lightweight - Minimal dependencies"),
-                    ("🔄", "Renders efficiently as bytes or String")
+                    ("🔄", "Flexible rendering - Bytes or String")
                 ],
                 badges: [
                     ("Swift 6.0", .swift6),
@@ -89,7 +94,7 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "coenttb-mailgun",
                 description: #"""
-                Modern Swift SDK bringing the full power of Swift 6's concurrency to email automation. Production-tested with exhaustive API coverage.
+                Professional Swift SDK for Mailgun with complete API coverage. Production-proven with 200+ tests, modern async/await throughout, and type-safe from end to end.
                 ```swift
                 import Mailgun
                 
@@ -97,19 +102,21 @@ public struct FeaturedPackages: HTML {
                 
                 let response = try await mailgun.messages.send(
                     .init(
-                        from: try .init("coen@coenttb.com"),
-                        to: [try .init("you@domain.com")],
-                        subject: "Modern, type-safe Swift SDK for Mailgun!",
-                        html: "<h1>Production-ready</h1><p>Fully tested</p>"
-                    )
+                        from: try .init("hello@yourdomain.com"),
+                        to: [try .init("user@example.com")],
+                        subject: "Welcome to our service!"
+                    ) {
+                        h1 { "Welcome aboard!" }
+                    }
                 )
                 ```
                 """#,
                 features: [
-                    ("📋", "100% Mailgun API coverage - All endpoints"),
+                    ("📋", "100% Mailgun API coverage - Every endpoint"),
                     ("✅", "200+ passing tests - Production proven"),
                     ("🚀", "Swift 6 concurrency - Async/await throughout"),
-                    ("🔒", "Type-safe API - Compile-time validation")
+                    ("🔒", "Type-safe API - Compile-time validation"),
+                    ("🧪", "Dependency injection - Easy testing")
                 ],
                 badges: [
                     ("Swift 6.0", .swift6),
