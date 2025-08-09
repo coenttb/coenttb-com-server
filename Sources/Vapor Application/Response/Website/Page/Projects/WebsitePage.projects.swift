@@ -63,14 +63,9 @@ extension Coenttb_Com_Router.Route.Website {
                     div {
                         ProjectCard(
                             title: "coenttb-stripe",
-                            description: "Type-safe Swift SDK for Stripe payment processing. Bringing the same production quality approach to payment integration.",
-                            features: [
-                                ("💳", "100% Stripe API coverage - All endpoints"),
-                                ("💉", #"Use everywhere using `@Dependency(\.stripe) var stripe`"#),
-                                ("✅", "200+ passing tests - Production proven"),
-                                ("🚀", "Swift 6 concurrency - Async/await throughout"),
-                                ("🔒", "Type-safe API - Compile-time validation"),
-                            ],
+                            description: #"""
+                            Type-safe Swift SDK for Stripe payment processing with **100% API coverage**. Production-tested with **200+ tests**, built with modern **Swift 6 concurrency**, and integrates seamlessly via **dependency injection** (`@Dependency(\.stripe)`).
+                            """#,
                             badges: [
                                 ("In Development", .inDevelopment),
                                 ("AGPL-3.0 / Commercial", .dualLicense)
@@ -93,13 +88,9 @@ extension Coenttb_Com_Router.Route.Website {
                     Cards {
                         ProjectCard(
                             title: "swift-html-to-pdf",
-                            description: "Lightning-fast HTML to PDF conversion for iOS and macOS. Handle thousands of documents concurrently with customizable margins.",
-                            features: [
-                                ("🖨️", "Convert HTML to PDF on iOS and macOS"),
-                                ("⚡", "Handle thousands of documents quickly"),
-                                ("📐", "Customizable margins and layouts"),
-                                ("🖼️", "Easy image embedding in PDFs")
-                            ],
+                            description: #"""
+                            Lightning-fast **HTML to PDF conversion** for iOS and macOS. Handle **thousands of documents concurrently** with customizable margins and layouts. Seamlessly embed images and create professional PDFs from your HTML content.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("Popular (⭐ 42)", .popular),
@@ -110,14 +101,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-environment-variables",
-                            description: "Type-safe environment variable management with support for multiple file formats and environment-aware loading.",
-                            features: [
-                                ("🔐", "Type-safe environment access"),
-                                ("📄", "JSON and .env file support"),
-                                ("🔄", "Environment-aware overrides"),
-                                ("✅", "Required keys validation"),
-                                ("💉", "Dependencies integration ready")
-                            ],
+                            description: #"""
+                            **Type-safe environment variable management** with support for JSON and .env files. Features **environment-aware overrides**, required keys validation, and seamless **Dependencies integration** for clean dependency injection.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("v0.0.1", .version),
@@ -128,14 +114,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-authenticating",
-                            description: "Type-safe HTTP authentication with URL routing integration. Composable and testable API authentication.",
-                            features: [
-                                ("🔐", "Type-safe authentication"),
-                                ("🔑", "Basic and Bearer auth support"),
-                                ("🔄", "URL routing integration"),
-                                ("🧪", "Fully testable with mocks"),
-                                ("🧩", "Composable architecture")
-                            ],
+                            description: #"""
+                            **Type-safe HTTP authentication** with URL routing integration. Supports both **Basic and Bearer auth**, features a **composable architecture**, and is fully testable with comprehensive mocking support.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("v0.1.0", .version),
@@ -146,14 +127,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-translating",
-                            description: "Comprehensive internationalization with 180+ languages, intelligent fallbacks, and type-safe translations.",
-                            features: [
-                                ("🌍", "180+ languages support"),
-                                ("🔄", "Intelligent fallback chains"),
-                                ("🔒", "Type-safe translation API"),
-                                ("📅", "Localized date formatting"),
-                                ("📝", "Plural forms support")
-                            ],
+                            description: #"""
+                            Comprehensive internationalization with **180+ languages support**. Features **intelligent fallback chains**, type-safe translation API, localized date formatting, and proper **plural forms support** for natural language handling.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("In Development", .inDevelopment),
@@ -164,14 +140,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-emailaddress",
-                            description: "Type-safe email address validation and domain modeling. Never store invalid email addresses again.",
-                            features: [
-                                ("📧", "RFC-compliant email validation"),
-                                ("🔒", "Type-safe email handling"),
-                                ("🎯", "Domain model for emails"),
-                                ("✅", "Compile-time safety"),
-                                ("🧩", "Integrates with swift-authenticating")
-                            ],
+                            description: #"""
+                            **Type-safe email address validation** and domain modeling. **RFC-compliant** validation ensures you never store invalid email addresses. Features **compile-time safety** and seamless integration with swift-authenticating.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("v0.0.1", .version),
@@ -182,14 +153,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-ratelimiter",
-                            description: "Protect your APIs from abuse with configurable rate limiting. Token bucket and sliding window algorithms.",
-                            features: [
-                                ("🛡️", "Protect against API abuse"),
-                                ("⏱️", "Token bucket algorithm"),
-                                ("📊", "Sliding window support"),
-                                ("🔧", "Configurable limits"),
-                                ("💉", "Dependencies integration")
-                            ],
+                            description: #"""
+                            Protect your APIs from abuse with **configurable rate limiting**. Implements both **token bucket** and **sliding window algorithms** with flexible limits and seamless **Dependencies integration**.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("v0.0.1", .version),
@@ -200,14 +166,9 @@ extension Coenttb_Com_Router.Route.Website {
                         
                         ProjectCard(
                             title: "swift-jwt",
-                            description: "JSON Web Token handling for secure authentication. Sign, verify, and decode JWTs with ease.",
-                            features: [
-                                ("🔐", "JWT signing and verification"),
-                                ("🔑", "Multiple algorithm support"),
-                                ("📝", "Claims validation"),
-                                ("⏰", "Expiration handling"),
-                                ("🔒", "Type-safe API")
-                            ],
+                            description: #"""
+                            JSON Web Token handling for **secure authentication**. Sign, verify, and decode JWTs with **multiple algorithm support**, claims validation, expiration handling, and a **type-safe API**.
+                            """#,
                             badges: [
                                 ("Swift 6.0", .swift6),
                                 ("v0.0.1", .version),
@@ -241,14 +202,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "RFC 7519 - JWT",
-                                description: "Pure JWT implementation without cryptographic dependencies. Lightweight, flexible, and universally compatible across all platforms.",
-                                features: [
-                                    ("📜", "RFC 7519 compliant"),
-                                    ("🪶", "Zero dependencies - Pure Swift"),
-                                    ("🌐", "Cross-platform compatible"),
-                                    ("⚡", "Fast parsing and inspection"),
-                                    ("🧪", "Easy to mock for testing")
-                                ],
+                                description: #"""
+                                Pure JWT implementation **without cryptographic dependencies**. **RFC 7519 compliant**, lightweight, and universally **cross-platform compatible**. Features fast parsing and inspection with easy mocking for testing.
+                                """#,
                                 badges: [
                                     ("RFC Standard", .rfcStandard),
                                     ("v1.0.0", .version),
@@ -259,14 +215,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "RFC 5321 - SMTP",
-                                description: "Swift implementation of Simple Mail Transfer Protocol. Essential for email infrastructure and mail server communication.",
-                                features: [
-                                    ("📧", "SMTP protocol implementation"),
-                                    ("📜", "RFC 5321 compliant"),
-                                    ("🔧", "Mail server communication"),
-                                    ("✉️", "Email infrastructure support"),
-                                    ("🔒", "Type-safe protocol handling")
-                                ],
+                                description: #"""
+                                Swift implementation of **Simple Mail Transfer Protocol**. **RFC 5321 compliant** and essential for email infrastructure and mail server communication with **type-safe protocol handling**.
+                                """#,
                                 badges: [
                                     ("RFC Standard", .rfcStandard),
                                     ("Email", .email),
@@ -277,14 +228,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "RFC 5322 - Email Format",
-                                description: "Internet Message Format standard. Parse and validate email headers, addresses, and message structure.",
-                                features: [
-                                    ("📨", "Email format validation"),
-                                    ("📜", "RFC 5322 compliant"),
-                                    ("📅", "Date/time parsing"),
-                                    ("🔍", "Header field parsing"),
-                                    ("✅", "Message structure validation")
-                                ],
+                                description: #"""
+                                **Internet Message Format standard** implementation. **RFC 5322 compliant** parsing and validation of email headers, addresses, and message structure. Includes **date/time parsing** and comprehensive header field validation.
+                                """#,
                                 badges: [
                                     ("RFC Standard", .rfcStandard),
                                     ("Email", .email),
@@ -295,14 +241,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "RFC 7617 - Basic Auth",
-                                description: "HTTP Basic Authentication Scheme. Secure and standards-compliant authentication for web services.",
-                                features: [
-                                    ("🔐", "HTTP Basic Authentication"),
-                                    ("📜", "RFC 7617 compliant"),
-                                    ("🔑", "Credentials encoding/decoding"),
-                                    ("🛡️", "Secure authentication"),
-                                    ("🌐", "HTTP header handling")
-                                ],
+                                description: #"""
+                                **HTTP Basic Authentication Scheme** implementation. **RFC 7617 compliant** with secure credentials encoding/decoding and proper HTTP header handling for **standards-compliant authentication**.
+                                """#,
                                 badges: [
                                     ("RFC Standard", .rfcStandard),
                                     ("Auth", .auth),
@@ -313,14 +254,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "RFC 6750 - Bearer Token",
-                                description: "OAuth 2.0 Bearer Token Usage. Essential for modern API authentication and authorization.",
-                                features: [
-                                    ("🎫", "Bearer token handling"),
-                                    ("📜", "RFC 6750 compliant"),
-                                    ("🔒", "OAuth 2.0 support"),
-                                    ("🌐", "API authentication"),
-                                    ("🛡️", "Authorization header parsing")
-                                ],
+                                description: #"""
+                                **OAuth 2.0 Bearer Token Usage** implementation. **RFC 6750 compliant** and essential for modern API authentication with proper authorization header parsing and **OAuth 2.0 support**.
+                                """#,
                                 badges: [
                                     ("RFC Standard", .rfcStandard),
                                     ("OAuth", .auth),
@@ -331,14 +267,9 @@ extension Coenttb_Com_Router.Route.Website {
                             
                             ProjectCard(
                                 title: "More RFC Standards",
-                                description: "Additional RFC implementations including DNS (1035), Internet Host Requirements (1123), Email Date Formats (2822), and International Email (6531).",
-                                features: [
-                                    ("🌐", "RFC 1035 - DNS"),
-                                    ("🖥️", "RFC 1123 - Internet Hosts"),
-                                    ("📅", "RFC 2822 - Email Date Format"),
-                                    ("🌍", "RFC 6531 - International Email"),
-                                    ("📚", "Growing collection of standards")
-                                ],
+                                description: #"""
+                                Additional RFC implementations including **DNS (RFC 1035)**, **Internet Host Requirements (RFC 1123)**, **Email Date Formats (RFC 2822)**, and **International Email (RFC 6531)**. A growing collection of essential web standards.
+                                """#,
                                 badges: [
                                     ("RFC Standards", .rfcStandard),
                                     ("Collection", .collection),
@@ -406,7 +337,6 @@ extension Coenttb_Com_Router.Route.Website {
 struct ProjectCard: HTML {
     let title: String
     let description: String
-    let features: [(icon: String, text: String)]
     let badges: [(String, HTMLColor)]
     let githubUrl: String
     let headerImage: String?
@@ -414,14 +344,12 @@ struct ProjectCard: HTML {
     init(
         title: String,
         description: String,
-        features: [(icon: String, text: String)],
         badges: [(String, HTMLColor)],
         githubUrl: String,
         headerImage: String? = nil
     ) {
         self.title = title
         self.description = description
-        self.features = features
         self.badges = badges
         self.githubUrl = githubUrl
         self.headerImage = headerImage
@@ -437,21 +365,8 @@ struct ProjectCard: HTML {
 //                        .maxWidth(.percent(100))
 //                        .width(.percent(100))
 //                }
-                .marginBottom(.rem(1))
-                .lineHeight(1.6)
-                
-                if !features.isEmpty {
-                    VStack(spacing: .rem(0.66)) {
-                        HTMLForEach(features) { feature in
-                            Label {
-                                HTMLText(feature.icon)
-                            } title: {
-                                HTMLMarkdown(feature.text)
-                            }
-                        }
-                    }
-                    .marginBottom(.rem(0.25))
-                }
+//                .marginBottom(.rem(1))
+//                .lineHeight(1.6)
             },
             header: {
                 div {
@@ -509,11 +424,11 @@ struct ProjectCard: HTML {
                         )
                     )
                     .padding(.rem(1.5))
-                    .minHeight(.rem(10))
+                    .minHeight(.rem(8))
                     .width(.percent(100))
                     .position(.relative)
                 }
-                .minHeight(.rem(10))
+                .minHeight(.rem(8))
                 .display(.flex)
                 .alignItems(.center)
             },

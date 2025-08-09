@@ -23,7 +23,10 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "Boiler",
                 description: #"""
-                The Swift server framework that gets you from idea to production in record time. Batteries-included with sensible defaults, type-safe throughout, and battle-tested in production.
+                The Swift server framework that gets you from **idea to production** in record time. Start with zero configuration, then scale seamlessly to production complexity.
+                
+                Built on **Vapor** (used by Apple) with **type-safe HTML, routing, and dependencies** throughout. Its modular architecture lets you compose exactly what you need, when you need it.
+                
                 ```swift
                 import Boiler
 
@@ -40,13 +43,6 @@ public struct FeaturedPackages: HTML {
                 }
                 ```
                 """#,
-                features: [
-                    ("🚀", "Start immediately - No complex configuration"),
-                    ("📈", "Learn incrementally - Grow from simple to production"),
-                    ("🛡️", "Type-safe HTML, routing, and dependencies"),
-                    ("⚡", "Built on Vapor - Used by Apple"),
-                    ("🧩", "Modular architecture - Compose what you need"),
-                ],
                 badges: [
                     ("Swift 6.0", .swift6),
                     ("Alpha v0.1.0", .version),
@@ -59,7 +55,10 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "swift-html",
                 description: #"""
-                Write HTML & CSS with the power and safety of Swift. Catch errors at compile-time, not runtime. SwiftUI-like syntax makes web development feel native to Swift developers.
+                Write HTML & CSS with the **power and safety of Swift**. Catch errors at compile-time, not runtime.
+                
+                Features **SwiftUI-like syntax** that feels native to Swift developers, with **dark mode built-in** and **zero runtime overhead**. All validation happens at compile time, and it renders efficiently as bytes or String.
+                
                 ```swift
                 import HTML
                 
@@ -75,14 +74,6 @@ public struct FeaturedPackages: HTML {
                 }
                 ```
                 """#,
-                features: [
-                    ("🛡️", "Type-safe HTML & CSS - Compile-time validation"),
-                    ("🎨", "Dark mode built-in - Responsive by default"),
-                    ("⚡", "Zero runtime overhead - All validation at compile time"),
-                    ("🧩", "SwiftUI-like syntax - Familiar patterns"),
-                    ("📦", "Lightweight - Minimal dependencies"),
-                    ("🔄", "Flexible rendering - Bytes or String")
-                ],
                 badges: [
                     ("Swift 6.0", .swift6),
                     ("v0.0.1", .version),
@@ -94,7 +85,10 @@ public struct FeaturedPackages: HTML {
             ProjectCard(
                 title: "coenttb-mailgun",
                 description: #"""
-                Professional Swift SDK for Mailgun with complete API coverage. Production-proven with 200+ tests, modern async/await throughout, and type-safe from end to end.
+                Professional Swift SDK with **100% Mailgun API coverage**. Battle-tested with **200+ tests** in production environments.
+                
+                Built with modern **Swift 6 concurrency** (async/await throughout), **type-safe** from end to end, and includes **dependency injection** for easy testing.
+                
                 ```swift
                 import Mailgun
                 
@@ -111,13 +105,6 @@ public struct FeaturedPackages: HTML {
                 )
                 ```
                 """#,
-                features: [
-                    ("📋", "100% Mailgun API coverage - Every endpoint"),
-                    ("✅", "200+ passing tests - Production proven"),
-                    ("🚀", "Swift 6 concurrency - Async/await throughout"),
-                    ("🔒", "Type-safe API - Compile-time validation"),
-                    ("🧪", "Dependency injection - Easy testing")
-                ],
                 badges: [
                     ("Swift 6.0", .swift6),
                     ("Production Ready", .productionReady),
