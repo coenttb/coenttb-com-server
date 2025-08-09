@@ -20,3 +20,17 @@ extension HTMLColor.Theme {
         return theme
     }
 }
+
+extension HTMLColor.Theme {
+    package static var tenThijeBoonkkamp: Self {
+        var theme: HTMLColor.Theme = .coenttb
+        theme.branding.primary = .purple550.withDarkColor(.purple600)
+        theme.branding.accent = .purple850
+        theme.text.link = .purple550.withDarkColor(.purple600)
+        theme.background.secondary = .offWhite.withDarkColor(.offBlack)
+        theme.text.button = theme.text.primary.reverse()
+        theme.background.button = theme.branding.primary
+        
+        return theme
+    }
+}

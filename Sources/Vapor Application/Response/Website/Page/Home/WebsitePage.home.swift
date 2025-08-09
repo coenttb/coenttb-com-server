@@ -128,52 +128,12 @@ extension Coenttb_Com_Router.Route.Website {
                     .width(.percent(100))
                 }
 
-                CallToActionModule(
-                    title: (
-                        content: TranslatedString(
-                            dutch: "Ontdek de rol van legal in het succes van life science projecten",
-                            english: "Discover the role of legal in the success of life science projects"
-                        ).description,
-                        color: .text.primary
-                    ),
-                    blurb: (
-                        content: #"""
-                        \#(
-                            TranslatedString(
-                                dutch: "Ten Thije Boonkkamp is waar ik mijn persoonlijke juridische dienstverlening voor life science projecten aanbiedt",
-                                english: "Ten Thije Boonkkamp is where I offer my personal legal services for life science projects"
-                            ).period
-                        )
-                        """#,
-                        color: .text.primary
-                    )
-                ) {
-                    div {
-                        div {
-                            Link(href: .init("https://tenthijeboonkkamp.nl")) {
-                                Label {
-                                    span { FontAwesomeIcon(icon: "scale-balanced") }
-                                        .color(.branding.primary)
-                                        .fontWeight(.medium)
-                                } title: {
-                                    div {
-                                        HTMLText("tenthijeboonkkamp.nl" + " →")
-                                    }
-                                    .color(.branding.primary)
-                                    .fontWeight(.medium)
-                                }
-                            }
-                        }
-                        .display(.inlineBlock)
-                        .margin(top: .rem(3))
-                    }
-                }
-                .backgroundColor(.background.primary)
                 
-                // Featured Packages Section
                 PageModule(theme: .content) {
                     VStack {
-                        FeaturedPackages()
+                        Cards(columns: .two) {
+                            [ProjectCard].featured
+                        }
                     }
                 } title: {
                     @Dependency(\.coenttb.website.router) var router
@@ -185,7 +145,60 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(bottom: .rem(2))
                 }
                 .backgroundColor(.background.primary)
+                
+                TenThijeBoonkkampModule()
+                .backgroundColor(.background.primary)
 
+            }
+        }
+    }
+}
+
+
+struct TenThijeBoonkkampModule: HTML {
+    var body: some HTML {
+        withDependencies {
+            $0.theme = .tenThijeBoonkkamp
+        } operation: {
+            CallToActionModule(
+                title: (
+                    content: TranslatedString(
+                        dutch: "Ontdek de rol van legal in het succes van life science projecten",
+                        english: "Discover the role of legal in the success of life science projects"
+                    ).description,
+                    color: .text.primary
+                ),
+                blurb: (
+                    content: #"""
+                    \#(
+                        TranslatedString(
+                            dutch: "Ten Thije Boonkkamp is waar ik mijn persoonlijke juridische dienstverlening voor life science projecten aanbiedt",
+                            english: "Ten Thije Boonkkamp is where I offer my personal legal services for life science projects"
+                        ).period
+                    )
+                    """#,
+                    color: .text.primary
+                )
+            ) {
+                div {
+                    div {
+                        Link(href: .init("https://tenthijeboonkkamp.nl")) {
+                            Label {
+                                span { FontAwesomeIcon(icon: "scale-balanced") }
+                                    .color(.branding.primary)
+                                    .fontWeight(.medium)
+                            } title: {
+                                div {
+                                    HTMLText("tenthijeboonkkamp.nl" + " →")
+                                }
+                                .color(.branding.primary)
+                                .fontWeight(.medium)
+                            }
+                        }
+                    }
+                    .display(.inlineBlock)
+                    .margin(top: .rem(3))
+                }
             }
         }
     }

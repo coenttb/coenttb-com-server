@@ -35,7 +35,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 1,
                     category: category,
                     publishedAt: .init(year: 2024, month: 12, day: 16)!,
-                    image: position(
+                    image: Server_Integration.position(
                         asset: "coenttb-halftone.png",
                         y: .percentage(15)
                     ),
@@ -76,7 +76,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 2,
                     category: category,
                     publishedAt: .init(year: 2025, month: 03, day: 21)!,
-                    image: position(asset: "coenttb-20250320.png")
+                    image: Server_Integration.position(asset: "coenttb-20250320.png")
                         .inlineStyle("filter", "sepia(1) hue-rotate(-25deg) saturate(5) brightness(1.2)"),
                     title: "A journey building HTML documents in Swift",
                     hidden: .no,
@@ -91,7 +91,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 3,
                     category: category,
                     publishedAt: .init(year: 2025, month: 03, day: 24)!,
-                    image: position(asset: "coenttb-20250324.png")
+                    image: Server_Integration.position(asset: "coenttb-20250324.png")
                         .inlineStyle("filter", "sepia(1) hue-rotate(225deg) saturate(5) brightness(1.2)"),
                     title: "A Tour of PointFreeHTML",
                     hidden: .no,
@@ -106,7 +106,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 4,
                     category: "Modern Swift Library Architecture",
                     publishedAt: .init(year: 2025, month: 07, day: 10)!,
-                    image: position(asset: "coenttb-20250710.png"),
+                    image: Server_Integration.position(asset: "coenttb-20250710.png"),
                     title: "1 The Swift Package",
                     hidden: .no,
                     blurb: """
@@ -120,7 +120,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 5,
                     category: "Modern Swift Library Architecture",
                     publishedAt: .init(year: 2025, month: 07, day: 14)!,
-                    image: position(asset: "coenttb-20250714.png"),
+                    image: Server_Integration.position(asset: "coenttb-20250714.png"),
                     title: "2 Composition of Packages",
                     hidden: .no,
                     blurb: """
@@ -134,7 +134,7 @@ extension [Coenttb_Blog.Blog.Post] {
                     index: 6,
                     category: "Modern Swift Library Architecture",
                     publishedAt: .init(year: 2025, month: 07, day: 21)!,
-                    image: position(asset: "coenttb-20250721.png"),
+                    image: Server_Integration.position(asset: "coenttb-20250721.png"),
                     title: "3 Testing a composition of packages",
                     hidden: .no,
                     blurb: """

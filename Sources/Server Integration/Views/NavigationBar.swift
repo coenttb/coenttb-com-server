@@ -51,7 +51,7 @@ package struct NavigationBar: HTML {
                         .init(String.contact_me.capitalizingFirstLetter().description, href: .init(router.href(for: .contact)))
                     ].compactMap { $0 }
                 )
-                .dependency(\.color.text.link, .text.primary)
+                .dependency(\.theme.text.link, .text.primary)
 
             },
             trailingNavItems: {
@@ -160,7 +160,7 @@ extension NavigationBar {
                         Link(href: .init(router.href(for: .home))) {
                             SVG.coenttb()
                         }
-                        .dependency(\.color.text.link, .text.primary)
+                        .dependency(\.theme.text.link, .text.primary)
                         .linkStyle(.init(underline: false))
                         .display(.flex)
                         .alignItems(.center)

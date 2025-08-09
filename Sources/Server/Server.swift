@@ -11,7 +11,7 @@ struct Server {
                 $0.coenttb = .testValue
             }
 
-            $0.color = .coenttb
+            $0.theme = .coenttb
         }
 
         @Dependency(\.coenttb.website.router) var router
