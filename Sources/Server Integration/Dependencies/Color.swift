@@ -7,16 +7,16 @@
 
 import CoenttbHTML
 
-extension HTMLColor.Defaults {
+extension HTMLColor.Theme {
     package static var coenttb: Self {
-        var color: HTMLColor.Defaults = .liveValue
-        color.branding.primary = .green550.withDarkColor(.green600)
-        color.branding.accent = .green850
-        color.text.link = .green550.withDarkColor(.green600)
-        color.background.secondary = .offWhite.withDarkColor(.offBlack)
-        color.text.button = color.text.primary.reverse()
-        color.background.button = color.branding.primary
+        var theme: HTMLColor.Theme = .default
+        theme.branding.primary = .green550.withDarkColor(.green600)
+        theme.branding.accent = .green850
+        theme.text.link = .green550.withDarkColor(.green600)
+        theme.background.secondary = .offWhite.withDarkColor(.offBlack)
+        theme.text.button = theme.text.primary.reverse()
+        theme.background.button = theme.branding.primary
 
-        return color
+        return theme
     }
 }

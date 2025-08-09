@@ -66,12 +66,10 @@ let package = Package(
         .library(name: .vaporApplication, targets: [.vaporApplication])
     ],
     dependencies: [
-        // Boiler framework
         useLocalPackages
             ? .package(path: "../boiler")
             : .package(url: "https://github.com/coenttb/boiler", branch: "main"),
         
-        // Core coenttb packages
         useLocalPackages
             ? .package(path: "../coenttb")
             : .package(url: "https://github.com/coenttb/coenttb", branch: "main"),
@@ -123,10 +121,6 @@ let package = Package(
         useLocalPackages
             ? .package(path: "../coenttb-web")
             : .package(url: "https://github.com/coenttb/coenttb-web", branch: "main"),
-        
-        useLocalPackages
-            ? .package(path: "../swift-html")
-            : .package(url: "https://github.com/coenttb/swift-html", branch: "main"),
         
         // External dependencies (non-coenttb)
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),

@@ -18,6 +18,8 @@ public struct FeaturedPackages: HTML {
     
     public init() {}
     
+    @Dependency(\.coenttb.website.router) var router
+    
     public var body: some HTML {
         Cards(columns: .two) {
             ProjectCard(
@@ -49,7 +51,11 @@ public struct FeaturedPackages: HTML {
                     ("AGPL-3.0 / Commercial", .dualLicense)
                 ],
                 githubUrl: "https://github.com/coenttb/boiler",
-                headerImage: "boiler-badge.png"
+//                headerImage: "boiler-badge.png"
+                headerImage: Image(
+                    src: .init(router.url(for: .public(.asset(.image("boiler-badge.png"))))),
+                    alt: "boiler-badge"
+                )
             )
             
             ProjectCard(
@@ -70,7 +76,10 @@ public struct FeaturedPackages: HTML {
                         p { "Compile-time validation" }
                             .fontSize(.rem(1.2))
                     }
-                    .backgroundColor(.init(light: .blue150, dark: .blue900))
+                    .backgroundColor(
+                        light: .blue150, 
+                        dark: .blue900
+                    )
                 }
                 ```
                 """#,
@@ -112,7 +121,32 @@ public struct FeaturedPackages: HTML {
                 ],
                 githubUrl: "https://github.com/coenttb/coenttb-mailgun"
             )
+            
+            ProjectCard(
+                title: "coenttb-com-server",
+                description: #"""
+                The production source code for coenttb.com, showcasing real-world usage of the **Boiler framework** and **swift-html DSL** in a live production environment serving thousands of users daily.
+                
+                This repository demonstrates best practices for building modern Swift server applications with features including type-safe routing, **PostgreSQL database integration** with migrations, user authentication (coming soon) and session management (coming soon), transactional email via **Mailgun**, and RSS/Atom syndication feeds.
+                
+                Built with a modular architecture that separates concerns into reusable packages, making it an excellent reference for developers looking to understand how to structure and deploy **production-grade Swift web applications**. The codebase includes comprehensive environment-based configuration, Docker deployment support, and Heroku compatibility out of the box.
+                """#,
+                badges: [
+                    ("Swift 6.0", .swift6),
+                    ("Production Ready", .productionReady),
+                    ("AGPL-3.0 / Commercial", .dualLicense)
+                ],
+                githubUrl: "https://github.com/coenttb/coenttb-com-server",
+                headerImage: Circle(width: .rem(4), height: .rem(4)) {
+                    Image(
+                        src: .init(router.url(for: .public(.asset(.image("coenttb-halftone.png"))))),
+                        alt: "coenttb-logo"
+                    )
+                }
+            )
         }
     }
 }
+
+
 

@@ -339,17 +339,31 @@ struct ProjectCard: HTML {
     let description: String
     let badges: [(String, HTMLColor)]
     let githubUrl: String
-    let headerImage: String?
+    let headerImage: (any HTML)?
     
     init(
         title: String,
         description: String,
         badges: [(String, HTMLColor)],
         githubUrl: String,
-        headerImage: String? = nil
+        headerImage: (any HTML)? = nil
     ) {
         self.title = title
         self.description = description
+        self.badges = badges
+        self.githubUrl = githubUrl
+        self.headerImage = headerImage
+    }
+    
+    init(
+        title: String,
+        badges: [(String, HTMLColor)],
+        githubUrl: String,
+        headerImage: (any HTML)? = nil,
+        @MarkdownBuilder description: () -> String
+    ) {
+        self.title = title
+        self.description = description()
         self.badges = badges
         self.githubUrl = githubUrl
         self.headerImage = headerImage
@@ -360,13 +374,8 @@ struct ProjectCard: HTML {
     var body: some HTML {
         Card(
             content: {
-//                CoenttbHTML.Paragraph {
-                    HTMLMarkdown(description)
-//                        .maxWidth(.percent(100))
-//                        .width(.percent(100))
-//                }
-//                .marginBottom(.rem(1))
-//                .lineHeight(1.6)
+                HTMLMarkdown(description)
+                    .lineHeight(1.6)
             },
             header: {
                 div {
@@ -402,16 +411,17 @@ struct ProjectCard: HTML {
                         .marginTop(.rem(0.5))
                         
                         if let headerImage = headerImage {
-                            Image(
-                                src: .init(router.url(for: .public(.asset(.image("\(headerImage)"))))),
-                                alt: .init(title)
-                            )
-                            .height(.rem(4))
-                            .width(.auto)
-                            .objectFit(.contain)
-                            .position(.absolute)
-                            .top(.rem(1.5))
-                            .right(.rem(1.5))
+                            AnyHTML(headerImage)
+                            //                            Image(
+                            //                                src: .init(router.url(for: .public(.asset(.image("\(headerImage)"))))),
+                            //                                alt: .init(title)
+                            //                            )
+                                .height(.rem(4))
+                                .width(.auto)
+                                .objectFit(.contain)
+                                .position(.absolute)
+                                .top(.rem(1.5))
+                                .right(.rem(1.5))
                         }
                     }
                     .backgroundColor(
