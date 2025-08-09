@@ -399,10 +399,7 @@ struct ProjectCard: HTML {
                         .display(.flex)
                         .flexWrap(.wrap)
                         .gap(.rem(0.25))
-                        .position(.absolute)
-                        .bottom(.rem(1.5))
-                        .left(.rem(1.5))
-                        .right(headerImage != nil ? .rem(7) : .rem(1.5))
+                        .marginTop(.rem(0.5))
                         
                         if let headerImage = headerImage {
                             Image(
@@ -413,7 +410,7 @@ struct ProjectCard: HTML {
                             .width(.auto)
                             .objectFit(.contain)
                             .position(.absolute)
-                            .bottom(.rem(1.5))
+                            .top(.rem(1.5))
                             .right(.rem(1.5))
                         }
                     }
@@ -428,9 +425,8 @@ struct ProjectCard: HTML {
                     .width(.percent(100))
                     .position(.relative)
                 }
-                .minHeight(.rem(8))
                 .display(.flex)
-                .alignItems(.center)
+                .alignItems(.stretch)
             },
             footer: {
                 Link(href: .init(githubUrl)) {
