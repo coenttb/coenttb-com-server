@@ -66,19 +66,28 @@ extension Coenttb_Com_Router.Route.Website {
                 }
 
                 if !posts.isEmpty {
-                    Coenttb_Blog.Blog.FeaturedModule(
-                        posts: posts,
-                        seeAllURL: router.url(for: .blog(.index))
-                    )
-                    .if(currentUser?.authenticated == true) {
-                        $0.gradient(
-                            bottom: .background.primary,
-                            middle: .gradientMidpoint(from: .background.primary, to: .branding.accent)!,
-                            top: .branding.accent
+                    VStack {
+                        Coenttb_Blog.Blog.FeaturedModule(
+                            posts: posts,
+                            seeAllURL: router.url(for: .blog(.index))
                         )
+                        .if(currentUser?.authenticated == true) {
+                            $0.gradient(
+                                bottom: .background.primary,
+                                middle: .gradientMidpoint(from: .background.primary, to: .branding.accent)!,
+                                top: .branding.accent
+                            )
+                        }
+                        .backgroundColor(.background.primary)
+                        
+                        div {
+                            Link(destination: .blog(.index)) {
+                                "See all posts →"
+                            }
+                            .fontWeight(.medium)
+                        }
+                        .textAlign(.center, media: .desktop)
                     }
-
-                    .backgroundColor(.background.primary)
                 }
 
                 if isNewsletterSubscribed != true {
@@ -134,10 +143,17 @@ extension Coenttb_Com_Router.Route.Website {
                         Cards(columns: .two) {
                             [ProjectCard].featured
                         }
+                        
+                        div {
+                            Link(destination: .projects) {
+                                "See all projects →"
+                            }
+                            .fontWeight(.medium)
+                        }
+                        .textAlign(.center, media: .desktop)
+                        
                     }
                 } title: {
-                    @Dependency(\.coenttb.website.router) var router
-                    
                     PageModuleSeeAllTitle(
                         title: "Featured Open Source Packages",
                         seeAllURL: router.url(for: .page(.projects)).absoluteString
@@ -145,6 +161,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(bottom: .rem(2))
                 }
                 .backgroundColor(.background.primary)
+                
                 
                 TenThijeBoonkkampModule()
                 .backgroundColor(.background.primary)
