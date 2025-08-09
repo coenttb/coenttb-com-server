@@ -19,10 +19,12 @@ public struct FeaturedPackages: HTML {
     public init() {}
     
     public var body: some HTML {
-        div {
+        Cards(columns: .two) {
             ProjectCard(
                 title: "Boiler",
-                description: "Swift server and website development made simple. A batteries-included approach with sensible defaults that gets you from 15 lines to production.",
+                description: #"""
+                Swift server and website development made simple. A batteries-included approach with sensible defaults that gets you from 15 lines to production.
+                """#,
                 features: [
                     ("🚀", "Start immediately - No complex configuration"),
                     ("📈", "Learn incrementally - Grow from simple to production"),
@@ -31,9 +33,9 @@ public struct FeaturedPackages: HTML {
                     ("🧩", "Encourages modular server architecture")
                 ],
                 badges: [
-                    ("Swift 6.0", "#FF5722"),
-                    ("Alpha v0.1.0", "#f44336"),
-                    ("AGPL-3.0 / Commercial", "#2196F3")
+                    ("Swift 6.0", .swift6),
+                    ("Alpha v0.1.0", .version),
+                    ("AGPL-3.0 / Commercial", .dualLicense)
                 ],
                 githubUrl: "https://github.com/coenttb/boiler",
                 headerImage: "boiler-badge.png"
@@ -51,34 +53,43 @@ public struct FeaturedPackages: HTML {
                     ("🔄", "Renders efficiently as bytes or String")
                 ],
                 badges: [
-                    ("Swift 6.0", "#FF5722"),
-                    ("v0.0.1", "#4CAF50"),
-                    ("Apache 2.0", "#2196F3")
+                    ("Swift 6.0", .swift6),
+                    ("v0.0.1", .version),
+                    ("Apache 2.0", .apacheLicense)
                 ],
                 githubUrl: "https://github.com/coenttb/swift-html"
             )
             
             ProjectCard(
                 title: "coenttb-mailgun",
-                description: "Modern Swift SDK bringing the full power of Swift 6's concurrency to email automation. Production-tested with exhaustive API coverage.",
+                description: #"""
+                Modern Swift SDK bringing the full power of Swift 6's concurrency to email automation. Production-tested with exhaustive API coverage.
+                ```swift
+                @Dependency(\.mailgun.client) var mailgun
+                let response = try await mailgun.messages.send(
+                    .init(
+                        from: try .init("hello@yourdomain.com"),
+                        to: [try .init("user@example.com")],
+                        subject: "Modern, type-safe Swift SDK for Mailgun!",
+                        html: "<h1>Production-ready</h1><p>Fully tested</p>"
+                    )
+                )
+                ```
+                """#,
                 features: [
                     ("📋", "100% Mailgun API coverage - All endpoints"),
                     ("✅", "200+ passing tests - Production proven"),
                     ("🚀", "Swift 6 concurrency - Async/await throughout"),
-                    ("🔒", "Type-safe API - Compile-time validation"),
-                    ("💉", #"Use everywhere using `@Dependency(\.mailgun) var mailgun`"#)
+                    ("🔒", "Type-safe API - Compile-time validation")
                 ],
                 badges: [
-                    ("Swift 6.0", "#FF5722"),
-                    ("Production Ready", "#4CAF50"),
-                    ("AGPL-3.0 / Commercial", "#2196F3")
+                    ("Swift 6.0", .swift6),
+                    ("Production Ready", .productionReady),
+                    ("AGPL-3.0 / Commercial", .dualLicense)
                 ],
                 githubUrl: "https://github.com/coenttb/coenttb-mailgun"
             )
         }
-        .display(.grid)
-        .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-        .gap(.rem(2))
-        .alignItems(.stretch)
     }
 }
+

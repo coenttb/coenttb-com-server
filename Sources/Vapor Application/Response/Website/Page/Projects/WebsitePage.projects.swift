@@ -14,6 +14,21 @@ import Foundation
 import Server_EnvVars
 import Server_Integration
 
+extension HTMLColor {
+    static let swift6: Self = .orange500
+    static let apacheLicense: Self = .blue
+    static let dualLicense: Self = .blue300
+    static let mitLicense: Self = .blue
+    static let productionReady: Self = .green
+    static let version: Self = .green
+    static let popular: Self = .green
+    static let inDevelopment: Self = .orange300
+    static let rfcStandard: Self = .purple700
+    static let email: Self = .green
+    static let auth: Self = .orange
+    static let collection: Self = .purple300
+}
+
 extension Coenttb_Com_Router.Route.Website {
     static func projects() async throws -> any AsyncResponseEncodable {
         
@@ -37,7 +52,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(bottom: .rem(2))
                     
                     FeaturedPackages()
-                    .padding(bottom: .rem(3))
+                        .padding(bottom: .rem(3))
                     
                     Header(2) {
                         "In Development"
@@ -57,8 +72,8 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🔒", "Type-safe API - Compile-time validation"),
                             ],
                             badges: [
-                                ("In Development", "#FF9800"),
-                                ("AGPL-3.0 / Commercial", "#2196F3")
+                                ("In Development", .inDevelopment),
+                                ("AGPL-3.0 / Commercial", .dualLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/coenttb-stripe"
                         )
@@ -75,7 +90,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(top: .rem(3))
                     .padding(bottom: .rem(2))
                     
-                    div {
+                    Cards {
                         ProjectCard(
                             title: "swift-html-to-pdf",
                             description: "Lightning-fast HTML to PDF conversion for iOS and macOS. Handle thousands of documents concurrently with customizable margins.",
@@ -86,9 +101,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🖼️", "Easy image embedding in PDFs")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("Popular (⭐ 42)", "#9C27B0"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("Popular (⭐ 42)", .popular),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-html-to-pdf"
                         )
@@ -104,9 +119,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("💉", "Dependencies integration ready")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.0.1", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("v0.0.1", .version),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-environment-variables"
                         )
@@ -122,9 +137,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🧩", "Composable architecture")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.1.0", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("v0.1.0", .version),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-authenticating"
                         )
@@ -140,9 +155,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("📝", "Plural forms support")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("In Development", "#FF9800"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("In Development", .inDevelopment),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-translating"
                         )
@@ -158,9 +173,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🧩", "Integrates with swift-authenticating")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.0.1", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("v0.0.1", .version),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-emailaddress"
                         )
@@ -176,9 +191,9 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("💉", "Dependencies integration")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.0.1", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("v0.0.1", .version),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-ratelimiter"
                         )
@@ -194,18 +209,13 @@ extension Coenttb_Com_Router.Route.Website {
                                 ("🔒", "Type-safe API")
                             ],
                             badges: [
-                                ("Swift 6.0", "#FF5722"),
-                                ("v0.0.1", "#4CAF50"),
-                                ("Apache 2.0", "#2196F3")
+                                ("Swift 6.0", .swift6),
+                                ("v0.0.1", .version),
+                                ("Apache 2.0", .apacheLicense)
                             ],
                             githubUrl: "https://github.com/coenttb/swift-jwt"
                         )
                     }
-                    .display(.grid)
-                    .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                    .gap(.rem(2))
-                    .alignItems(.stretch)
-                    .padding(bottom: .rem(3))
                     
                     Header(2) {
                         "Web Standards (RFC Implementations)"
@@ -227,7 +237,8 @@ extension Coenttb_Com_Router.Route.Website {
                         .textAlign(.center)
                         .marginBottom(.rem(2))
                         
-                        div {
+                        Cards {
+                            
                             ProjectCard(
                                 title: "RFC 7519 - JWT",
                                 description: "Pure JWT implementation without cryptographic dependencies. Lightweight, flexible, and universally compatible across all platforms.",
@@ -239,9 +250,9 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("🧪", "Easy to mock for testing")
                                 ],
                                 badges: [
-                                    ("RFC Standard", "#673AB7"),
-                                    ("v1.0.0", "#4CAF50"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standard", .rfcStandard),
+                                    ("v1.0.0", .version),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards/swift-rfc-7519"
                             )
@@ -257,9 +268,9 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("🔒", "Type-safe protocol handling")
                                 ],
                                 badges: [
-                                    ("RFC Standard", "#673AB7"),
-                                    ("Email", "#4CAF50"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standard", .rfcStandard),
+                                    ("Email", .email),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards/swift-rfc-5321"
                             )
@@ -275,9 +286,9 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("✅", "Message structure validation")
                                 ],
                                 badges: [
-                                    ("RFC Standard", "#673AB7"),
-                                    ("Email", "#4CAF50"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standard", .rfcStandard),
+                                    ("Email", .email),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards/swift-rfc-5322"
                             )
@@ -293,9 +304,9 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("🌐", "HTTP header handling")
                                 ],
                                 badges: [
-                                    ("RFC Standard", "#673AB7"),
-                                    ("Auth", "#FF9800"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standard", .rfcStandard),
+                                    ("Auth", .auth),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards/swift-rfc-7617"
                             )
@@ -311,9 +322,9 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("🛡️", "Authorization header parsing")
                                 ],
                                 badges: [
-                                    ("RFC Standard", "#673AB7"),
-                                    ("OAuth", "#FF9800"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standard", .rfcStandard),
+                                    ("OAuth", .auth),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards/swift-rfc-6750"
                             )
@@ -329,18 +340,14 @@ extension Coenttb_Com_Router.Route.Website {
                                     ("📚", "Growing collection of standards")
                                 ],
                                 badges: [
-                                    ("RFC Standards", "#673AB7"),
-                                    ("Collection", "#9C27B0"),
-                                    ("MIT", "#2196F3")
+                                    ("RFC Standards", .rfcStandard),
+                                    ("Collection", .collection),
+                                    ("MIT", .mitLicense)
                                 ],
                                 githubUrl: "https://github.com/swift-web-standards"
                             )
+                            
                         }
-                        .display(.grid)
-                        .inlineStyle("grid-template-columns", "repeat(auto-fit, minmax(20rem, 1fr))")
-                        .gap(.rem(2))
-                        .alignItems(.stretch)
-                        .padding(bottom: .rem(3))
                     }
                     
                     Header(2) {
@@ -400,7 +407,7 @@ struct ProjectCard: HTML {
     let title: String
     let description: String
     let features: [(icon: String, text: String)]
-    let badges: [(String, String)]
+    let badges: [(String, HTMLColor)]
     let githubUrl: String
     let headerImage: String?
     
@@ -408,7 +415,7 @@ struct ProjectCard: HTML {
         title: String,
         description: String,
         features: [(icon: String, text: String)],
-        badges: [(String, String)],
+        badges: [(String, HTMLColor)],
         githubUrl: String,
         headerImage: String? = nil
     ) {
@@ -425,9 +432,11 @@ struct ProjectCard: HTML {
     var body: some HTML {
         Card(
             content: {
-                CoenttbHTML.Paragraph {
-                    description
-                }
+//                CoenttbHTML.Paragraph {
+                    HTMLMarkdown(description)
+//                        .maxWidth(.percent(100))
+//                        .width(.percent(100))
+//                }
                 .marginBottom(.rem(1))
                 .lineHeight(1.6)
                 
@@ -450,7 +459,10 @@ struct ProjectCard: HTML {
                         Header(3) {
                             HTMLText(title)
                         }
-                        .color(.text.primary.reverse())
+                        .color(
+                            light: HTMLColor.text.primary.dark,
+                            dark: HTMLColor.text.primary.dark
+                        )
                         .marginBottom(.rem(1))
                         
                         div {
@@ -459,7 +471,7 @@ struct ProjectCard: HTML {
                                     badge.0
                                 }
                                 .padding(vertical: .rem(0.25), horizontal: .rem(0.5))
-                                .backgroundColor(.hex("\(badge.1)"))
+                                .backgroundColor(.init(badge.1))
                                 .color(.white)
                                 .borderRadius(.px(4))
                                 .fontSize(.rem(0.75))
@@ -490,7 +502,12 @@ struct ProjectCard: HTML {
                             .right(.rem(1.5))
                         }
                     }
-                    .backgroundColor(.background.primary.reverse())
+                    .backgroundColor(
+                        .init(
+                            light: HTMLColor.background.primary.reverse().light,
+                            dark: HTMLColor.branding.accent.dark
+                        )
+                    )
                     .padding(.rem(1.5))
                     .minHeight(.rem(10))
                     .width(.percent(100))
@@ -509,8 +526,8 @@ struct ProjectCard: HTML {
                 .fontWeight(.medium)
                 .display(.inlineBlock)
                 .padding(.rem(0.75))
-//                .backgroundColor(.branding.accent.map { $0.opacity(0.3)})
-//                .backgroundColor(.branding.accent.map { $0.opacity(0.6)}, pseudo: .hover)
+                //                .backgroundColor(.branding.accent.map { $0.opacity(0.3)})
+                //                .backgroundColor(.branding.accent.map { $0.opacity(0.6)}, pseudo: .hover)
                 .borderRadius(.px(6))
                 .transition(.all(duration: .ms(200)))
             }

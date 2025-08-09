@@ -3,8 +3,6 @@
 import Foundation
 import PackageDescription
 
-//let useLocalPackages = ProcessInfo.processInfo.environment["USE_LOCAL_PACKAGES"] != nil
-
 let useLocalPackages = (try? String(contentsOfFile: "\(Context.packageDirectory)/.env.development", encoding: .utf8).contains("USE_LOCAL_PACKAGES=true")) == true
 
 extension String {
@@ -94,7 +92,6 @@ let package = Package(
             ? .package(path: "../coenttb-html")
             : .package(url: "https://github.com/coenttb/coenttb-html", branch: "main"),
         
-        // Integration packages
         useLocalPackages
             ? .package(path: "../coenttb-google-analytics")
             : .package(url: "https://github.com/coenttb/coenttb-google-analytics", branch: "main"),
@@ -118,6 +115,14 @@ let package = Package(
         useLocalPackages
             ? .package(path: "../coenttb-syndication")
             : .package(url: "https://github.com/coenttb/coenttb-syndication", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-server-vapor")
+            : .package(url: "https://github.com/coenttb/coenttb-server-vapor", branch: "main"),
+        
+        useLocalPackages
+            ? .package(path: "../coenttb-web")
+            : .package(url: "https://github.com/coenttb/coenttb-web", branch: "main"),
         
         // External dependencies (non-coenttb)
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),
