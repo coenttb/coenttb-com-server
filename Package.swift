@@ -124,6 +124,10 @@ let package = Package(
             ? .package(path: "../coenttb-web")
             : .package(url: "https://github.com/coenttb/coenttb-web", branch: "main"),
         
+        useLocalPackages
+            ? .package(path: "../swift-html")
+            : .package(url: "https://github.com/coenttb/swift-html", branch: "main"),
+        
         // External dependencies (non-coenttb)
         .package(url: "https://github.com/m-barthelemy/vapor-queues-fluent-driver", from: "3.0.0-beta1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
