@@ -21,7 +21,7 @@ extension Coenttb_Com_Router.Route.Website {
         @Dependency(\.currentUser) var currentUser
         @Dependency(\.newsletter.isSubscribed) var isNewsletterSubscribed
 
-        let posts = blogPosts()
+        let posts = blogPosts().suffix(3).reversed()
 
         return Server_Integration.HTMLDocument {
             HTMLGroup {
@@ -66,28 +66,43 @@ extension Coenttb_Com_Router.Route.Website {
                 }
 
                 if !posts.isEmpty {
-                    VStack {
-                        Coenttb_Blog.Blog.FeaturedModule(
-                            posts: posts,
-                            seeAllURL: router.url(for: .blog(.index))
-                        )
-                        .if(currentUser?.authenticated == true) {
-                            $0.gradient(
-                                bottom: .background.primary,
-                                middle: .gradientMidpoint(from: .background.primary, to: .branding.accent)!,
-                                top: .branding.accent
-                            )
-                        }
-                        .backgroundColor(.background.primary)
-                        
-                        div {
-                            Link(destination: .blog(.index)) {
-                                "See all posts →"
+                    
+                    PageModule(theme: .content) {
+                        VStack {
+                            Cards(columns: .three) {
+                                for post in posts {
+                                    Blog.Post.Card(post)
+                                }
                             }
-                            .fontWeight(.medium)
+                            
+                            div {
+                                Link(destination: .blog(.index)) {
+                                    "See all posts →"
+                                }
+                                .fontWeight(.medium)
+                            }
+                            .textAlign(.center, media: .desktop)
+                            
                         }
-                        .textAlign(.center, media: .desktop)
+                    } title: {
+                        PageModuleSeeAllTitle(
+                            title: TranslatedString(
+                                dutch: "Recente posts",
+                                english: "Recent posts"
+                            ).description,
+                            seeAllURL: router.url(for: .page(.blog(.index))).absoluteString
+                        )
+                        .padding(bottom: .rem(2))
                     }
+                    .if(currentUser?.authenticated == true) {
+                        $0.gradient(
+                            bottom: .background.primary,
+                            middle: .gradientMidpoint(from: .background.primary, to: .branding.accent)!,
+                            top: .branding.accent
+                        )
+                    }
+                    .backgroundColor(.background.primary)
+                    
                 }
 
                 if isNewsletterSubscribed != true {
