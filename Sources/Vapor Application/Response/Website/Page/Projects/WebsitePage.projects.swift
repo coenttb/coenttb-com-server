@@ -281,16 +281,14 @@ struct ProjectCard: HTML {
                         
                         if let headerImage = headerImage {
                             AnyHTML(headerImage)
-                            //                            Image(
-                            //                                src: .init(router.url(for: .public(.asset(.image("\(headerImage)"))))),
-                            //                                alt: .init(title)
-                            //                            )
                                 .height(.rem(4))
                                 .width(.auto)
                                 .objectFit(.contain)
                                 .position(.absolute)
-                                .top(.rem(1.5))
+                                .bottom(.rem(1.5))
                                 .right(.rem(1.5))
+                                .display(Display.none, media: .mobile)
+                                .display(.block, media: .tablet)
                         }
                     }
                     .backgroundColor(
