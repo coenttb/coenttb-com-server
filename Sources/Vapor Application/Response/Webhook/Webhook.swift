@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 17-12-2023.
 //
 
-import Coenttb_Com_Router
-import Coenttb_Com_Shared
+import CoenttbRouter
+import CoenttbShared
 import Coenttb_Vapor
 import Dependencies
 import Fluent

@@ -5,7 +5,7 @@
 ////  Created by Coen ten Thije Boonkkamp on 12/03/2025.
 ////
 //
-// import Coenttb_Com_Shared
+// import CoenttbShared
 // import Coenttb_Server
 // import Mailgun
 // import Server_Client

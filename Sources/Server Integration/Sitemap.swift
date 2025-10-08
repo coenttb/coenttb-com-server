@@ -6,8 +6,8 @@
 //
 
 import Coenttb_Blog
-import Coenttb_Com_Router
-import Coenttb_Com_Shared
+import CoenttbRouter
+import CoenttbShared
 import Dependencies
 import Foundation
 import Sitemap

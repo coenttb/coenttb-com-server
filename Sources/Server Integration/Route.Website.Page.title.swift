@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 20/05/2024.
 //
 
-import Coenttb_Com_Router
+import CoenttbRouter
 import Foundation
 import Server_Translations
 

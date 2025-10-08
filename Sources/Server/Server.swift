@@ -1,5 +1,5 @@
 import Boiler
-import Coenttb_Com_Router
+import CoenttbRouter
 import Coenttb_Vapor
 import Vapor_Application
 

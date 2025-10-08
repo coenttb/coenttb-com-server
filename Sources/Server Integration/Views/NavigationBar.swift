@@ -5,8 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
-import Coenttb_Com_Router
-import Coenttb_Com_Shared
+import CoenttbRouter
+import CoenttbShared
 import Coenttb_Web_HTML
 import Dependencies
 import Foundation

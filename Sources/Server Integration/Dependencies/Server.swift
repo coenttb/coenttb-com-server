@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Blog
-import Coenttb_Com_Shared
+import CoenttbShared
 import Coenttb_Newsletter
 import Coenttb_Newsletter_Live
 import Coenttb_Server

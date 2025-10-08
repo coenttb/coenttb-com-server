@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 20/08/2024.
 //
 
-import Coenttb_Com_Shared
+import CoenttbShared
 import Coenttb_Web_HTML
 import Coenttb_Web_Translations
 import CoenttbHTML

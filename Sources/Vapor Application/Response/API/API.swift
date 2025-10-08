@@ -1,5 +1,5 @@
-import Coenttb_Com_Router
-import Coenttb_Com_Shared
+import CoenttbRouter
+import CoenttbShared
 import Coenttb_Newsletter
 import Coenttb_Server
 import Coenttb_Syndication_Vapor
