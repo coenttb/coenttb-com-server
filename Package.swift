@@ -17,6 +17,7 @@ extension String {
     static let vaporApplication: Self = "Vapor Application"
     static let coenttbRouter: Self = "CoenttbRouter"
     static let coenttbShared: Self = "CoenttbShared"
+    static let coenttbUI: Self = "CoenttbUI"
 }
 
 extension Target.Dependency {
@@ -30,6 +31,7 @@ extension Target.Dependency {
     static var vaporApplication: Self { .target(name: .vaporApplication) }
     static var coenttbRouter: Self { .target(name: .coenttbRouter) }
     static var coenttbShared: Self { .target(name: .coenttbShared) }
+    static var coenttbUI: Self { .target(name: .coenttbUI) }
 }
 
 extension Target.Dependency {
@@ -71,7 +73,8 @@ let package = Package(
         .library(name: .serverIntegration, targets: [.serverIntegration]),
         .library(name: .vaporApplication, targets: [.vaporApplication]),
         .library(name: .coenttbRouter, targets: [.coenttbRouter]),
-        .library(name: .coenttbShared, targets: [.coenttbShared])
+        .library(name: .coenttbShared, targets: [.coenttbShared]),
+        .library(name: .coenttbUI, targets: [.coenttbUI])
     ],
     dependencies: [
         useLocalPackages
@@ -298,6 +301,22 @@ let package = Package(
                 .coenttbServer,
                 .issueReporting,
                 .coenttbRouter
+            ]
+        ),
+        .target(
+            name: .coenttbUI,
+            dependencies: [
+                .coenttbShared,
+                .coenttbRouter,
+                .coenttbServer,
+                .product(name: "Coenttb Web HTML", package: "coenttb-web"),
+                .product(name: "CoenttbHTML", package: "coenttb-html"),
+                .product(name: "CoenttbMarkdown", package: "coenttb-html"),
+                .product(name: "Translating", package: "swift-translating"),
+                .googleAnalytics,
+                .hotjar,
+                .serverEnvVars,
+                .translating
             ]
         )
     ],

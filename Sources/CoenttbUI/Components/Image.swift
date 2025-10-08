@@ -1,0 +1,29 @@
+//
+//  File.swift
+//  coenttb-nl-server
+//
+//  Created by Coen ten Thije Boonkkamp on 01/09/2024.
+//
+
+import CoenttbShared
+import CoenttbHTML
+import Dependencies
+import Foundation
+
+extension HTMLElementTypes.Image {
+    package static let coenttbGreenSuit: HTMLElementTypes.Image = {
+        @Dependency(\.coenttb.website.router) var router
+        return Image(
+            src: .init(router.href(for: .asset(.image("coenttb-halftone.png")))),
+            alt: "coenttb avatar"
+        )
+    }()
+
+    package static let prehalftone: HTMLElementTypes.Image = {
+        @Dependency(\.coenttb.website.router) var router
+        return Image(
+            src: .init(router.href(for: .asset(.image("prehalftone.png")))),
+            alt: "prehalftone"
+        )
+    }()
+}
