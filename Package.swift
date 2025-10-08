@@ -44,6 +44,7 @@ extension Target.Dependency {
     static var coenttbBlogVapor: Self { .product(name: "Coenttb Blog Vapor", package: "coenttb-blog") }
     static var coenttbNewsletter: Self { .product(name: "Coenttb Newsletter", package: "coenttb-newsletter") }
     static var coenttbNewsletterLive: Self { .product(name: "Coenttb Newsletter Live", package: "coenttb-newsletter") }
+    static var coenttbNewsletterRecords: Self { .product(name: "Coenttb Newsletter Records", package: "coenttb-newsletter") }
 
     // Syndication
     static var coenttbSyndication: Self { .product(name: "Coenttb Syndication", package: "coenttb-syndication") }
@@ -174,8 +175,7 @@ let package = Package(
             dependencies: [
                 .serverFoundation,
                 .boiler,
-                // TODO: Migrate from Fluent to swift-records
-                // .coenttbNewsletterLive,
+                .coenttbNewsletterRecords,
                 .serverDependencies,
                 .serverEnvVars,
                 .dependenciesMacros

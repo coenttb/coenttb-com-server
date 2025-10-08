@@ -1,16 +1,19 @@
 //
-//  File.swift
-//  coenttb-nl-server
+//  [any Migration].swift
+//  coenttb-com-server
 //
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-// TODO: Migrate from Fluent to swift-records
-// import Coenttb_Newsletter_Fluent
+import Coenttb_Newsletter_Records
 import Coenttb_Server
+import Dependencies
 import EmailAddress
 import Fluent
+import Records
 import Server_EnvVars
+
+// MARK: - Fluent Migrations (Legacy)
 
 extension [any Fluent.Migration] {
     package static var allCases: Self {
@@ -20,63 +23,89 @@ extension [any Fluent.Migration] {
                 migration.name = "Server_Database.User.Migration.Create"
                 return migration
             }()
-
         ]
-
-        // TODO: Migrate newsletter migrations from Fluent to swift-records
-        // migrations.append(contentsOf: Coenttb_Newsletter_Fluent.Newsletter.Migration.allCases)
 
         @Dependency(\.envVars.appEnv) var appEnv
 
-        if appEnv == .development {
-            migrations.append(CreateUnverifiedNewsletterMigration())
-        }
+        // TODO: Rewrite CreateUnverifiedNewsletterMigration to use Records instead of Fluent
+        // if appEnv == .development {
+        //     migrations.append(CreateUnverifiedNewsletterMigration())
+        // }
 
         return migrations
     }
 }
 
-package struct CreateUnverifiedNewsletterMigration: AsyncMigration {
-    package init() {}
+// MARK: - Records Migrations (New)
 
-    package func prepare(on database: Database) async throws {
-        @Dependency(\.envVars) var envVars
-        @Dependency(\.logger) var logger
+extension Records.Database.Migrator {
+    package static func coenttbCom() -> Records.Database.Migrator {
+        var migrator = Records.Database.Migrator()
 
-        guard let email: EmailAddress = envVars.demoNewsletterEmail else {
-            logger.log(.warning, "Environment variable for demo newsletter email is missing.")
-            return
+        // Register all newsletter migrations
+        for (name, statements) in NewsletterMigrations.allMigrations() {
+            migrator.registerMigration(name) { db in
+                for statement in statements {
+                    try await db.execute(statement)
+                }
+            }
         }
 
-        let newsletterSubscription = try Newsletter(
-            email: email.rawValue,
-            emailVerificationStatus: .unverified
-        )
-
-        do {
-            try await newsletterSubscription.save(on: database)
-            logger.log(.info, "Created unverified newsletter subscription for email: \(email)")
-        } catch {
-            logger.log(.error, "Failed to create unverified newsletter subscription: \(error)")
-        }
-    }
-
-    package func revert(on database: Database) async throws {
-        @Dependency(\.envVars) var envVars
-        @Dependency(\.logger) var logger
-
-        guard let email: EmailAddress = envVars.demoNewsletterEmail else {
-            logger.log(.warning, "Environment variable for demo newsletter email is missing.")
-            return
-        }
-
-        do {
-            try await Newsletter.query(on: database)
-                .filter(\.$email == email.rawValue)
-                .delete()
-            logger.log(.info, "Deleted unverified newsletter subscription for email: \(email)")
-        } catch {
-            logger.log(.error, "Failed to delete unverified newsletter subscription: \(error)")
-        }
+        return migrator
     }
 }
+
+// TODO: Rewrite to use Records instead of Fluent
+// package struct CreateUnverifiedNewsletterMigration: AsyncMigration {
+//     package init() {}
+//
+//     package func prepare(on database: Database) async throws {
+//         @Dependency(\.envVars) var envVars
+//         @Dependency(\.logger) var logger
+//
+//         guard let email: EmailAddress = envVars.demoNewsletterEmail else {
+//             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
+//             return
+//         }
+//
+//         let newsletterSubscription = try Newsletter.Record(
+//             email: email.rawValue,
+//             emailVerificationStatus: .unverified
+//         )
+//
+//         do {
+//             @Dependency(\.defaultDatabase) var database
+//             try await database.write { db in
+//                 try await Newsletter.Record
+//                     .insert { newsletterSubscription }
+//                     .execute(db)
+//             }
+//             logger.log(.info, "Created unverified newsletter subscription for email: \(email)")
+//         } catch {
+//             logger.log(.error, "Failed to create unverified newsletter subscription: \(error)")
+//         }
+//     }
+//
+//     package func revert(on database: Database) async throws {
+//         @Dependency(\.envVars) var envVars
+//         @Dependency(\.logger) var logger
+//
+//         guard let email: EmailAddress = envVars.demoNewsletterEmail else {
+//             logger.log(.warning, "Environment variable for demo newsletter email is missing.")
+//             return
+//         }
+//
+//         do {
+//             @Dependency(\.defaultDatabase) var database
+//             try await database.write { db in
+//                 try await Newsletter.Record
+//                     .delete()
+//                     .where { $0.email.eq(email.rawValue) }
+//                     .execute(db)
+//             }
+//             logger.log(.info, "Deleted unverified newsletter subscription for email: \(email)")
+//         } catch {
+//             logger.log(.error, "Failed to delete unverified newsletter subscription: \(error)")
+//         }
+//     }
+// }
