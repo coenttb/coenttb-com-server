@@ -8,7 +8,7 @@
 import Coenttb_Web
 import Mailgun
 
-extension Email {
+extension Mailgun.Email {
     package static func newsletter5(
     ) -> some HTML {
 
@@ -63,7 +63,7 @@ extension Email {
                             [I invite you to join the discussion on the Swift forums to adopt `swift-html-types` and `swift-css-types` as community packages.](https://forums.swift.org/t/pitch-community-maintained-html-and-css-swift-types).
                             """}
 
-                            CoenttbHTML.Paragraph {
+                            HTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
                                 "."

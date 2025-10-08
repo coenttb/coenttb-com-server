@@ -1,7 +1,7 @@
 import CoenttbRouter
 import CoenttbShared
 import Coenttb_Server
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Fluent
 import FluentPostgresDriver
 import Queues

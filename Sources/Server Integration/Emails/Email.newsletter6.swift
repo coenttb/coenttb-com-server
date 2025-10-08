@@ -7,7 +7,7 @@
 import Coenttb_Web
 import Mailgun
 
-extension Email {
+extension Mailgun.Email {
     package static func newsletter6(
 
     ) -> any EmailDocument {
@@ -64,7 +64,7 @@ extension Email {
                             These days, I feel great every time the thousand+ tests run cleanly and pass, giving me that much more confidence in my code-base.
                             """}
 
-                            CoenttbHTML.Paragraph {
+                            HTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
                                 "."

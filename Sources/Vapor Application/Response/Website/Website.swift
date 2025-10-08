@@ -7,7 +7,7 @@
 
 import CoenttbRouter
 import CoenttbShared
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Server_Dependencies
 
 extension Website<Coenttb_Com_Router.Route.Website> {

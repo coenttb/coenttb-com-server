@@ -7,7 +7,7 @@
 
 import CoenttbRouter
 import CoenttbShared
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Dependencies
 import Fluent
 import Foundation

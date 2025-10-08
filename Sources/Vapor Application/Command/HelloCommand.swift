@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Newsletter
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Dependencies
 import EmailAddress
 import Fluent

@@ -9,7 +9,7 @@ import Coenttb_Blog
 import CoenttbRouter
 import CoenttbShared
 import Coenttb_Newsletter
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Server_Integration
 import Server_Translations
 
@@ -109,7 +109,7 @@ extension Coenttb_Com_Router.Route.Website {
                     div {
                         PageModule(theme: .newsletterSubscription) {
                             VStack {
-                                CoenttbHTML.Paragraph {
+                                HTML.Paragraph {
                                     String.periodically_receive_articles_on.capitalizingFirstLetter().period
                                 }
                                 .textAlign(.center, media: .desktop)

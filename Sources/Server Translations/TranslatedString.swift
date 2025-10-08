@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 23-12-2023.
 //
 
-import CoenttbHTML
+import HTML
 import Foundation
 import Translating
 

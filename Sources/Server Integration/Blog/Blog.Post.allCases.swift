@@ -8,7 +8,7 @@
 import Coenttb_Blog
 import Coenttb_Web
 import Coenttb_Web_HTML
-import CoenttbMarkdown
+import HTMLMarkdown
 import DateExtensions
 import Dependencies
 import Foundation

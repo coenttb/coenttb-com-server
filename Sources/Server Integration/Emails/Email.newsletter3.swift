@@ -8,7 +8,7 @@
 import Coenttb_Web
 import Mailgun
 
-extension Email {
+extension Mailgun.Email {
     package static func newsletter3(
     ) -> some HTML {
 
@@ -86,7 +86,7 @@ extension Email {
                             I'm thrilled to begin sharing my work with a wider audience. While this journey starts modestly with a tour of PointFreeHTML, my goal is to soon showcase powerful Swift technologies designed to advance new legal tech solutions. I genuinely envision those tools will significantly increase the total legal output globally, resulting in more and better justice for all.
                             """}
 
-                            CoenttbHTML.Paragraph {
+                            HTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
                                 "."

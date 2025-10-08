@@ -7,7 +7,7 @@
 
 import Coenttb_Legal_Documents
 import Coenttb_Web_HTML
-import CoenttbMarkdown
+import HTMLMarkdown
 import Dependencies
 import Translating
 

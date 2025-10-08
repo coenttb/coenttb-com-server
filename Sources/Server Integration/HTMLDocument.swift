@@ -54,7 +54,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
     @Dependency(\.languages) var languages
 
     package var head: some HTML {
-        CoenttbHTMLDocumentHeader(
+        HTMLDocumentHeader(
             themeColor: themeColor,
             styles: { AnyHTML(styles) },
             scripts: { AnyHTML(scripts) },
@@ -80,7 +80,7 @@ package struct HTMLDocument: HTMLDocumentProtocol {
     }
 }
 
-package struct CoenttbHTMLDocumentHeader<
+package struct HTMLDocumentHeader<
     Styles: HTML,
     Scripts: HTML
 >: HTML {

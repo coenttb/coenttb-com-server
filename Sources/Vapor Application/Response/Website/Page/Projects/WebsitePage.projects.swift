@@ -7,7 +7,7 @@
 
 import CoenttbRouter
 import CoenttbShared
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Coenttb_Web_HTML
 import Dependencies
 import Foundation
@@ -87,7 +87,7 @@ extension Coenttb_Com_Router.Route.Website {
                     .padding(bottom: .rem(2))
                     
                     div {
-                        CoenttbHTML.Paragraph {
+                        HTML.Paragraph {
                             HTMLText("The ")
                             Link(href: .init("https://github.com/swift-web-standards")) {
                                 "swift-web-standards"

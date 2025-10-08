@@ -6,8 +6,9 @@
 //
 
 import Coenttb_Newsletter
-import Coenttb_Newsletter_Fluent
-import Coenttb_Vapor
+// TODO: Migrate from Fluent to swift-records
+// import Coenttb_Newsletter_Fluent
+import ServerFoundationVapor
 import Dependencies
 import EmailAddress
 import Fluent

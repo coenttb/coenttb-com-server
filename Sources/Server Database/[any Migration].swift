@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 16/09/2024.
 //
 
-import Coenttb_Newsletter_Fluent
+// TODO: Migrate from Fluent to swift-records
+// import Coenttb_Newsletter_Fluent
 import Coenttb_Server
 import EmailAddress
 import Fluent
@@ -22,7 +23,8 @@ extension [any Fluent.Migration] {
 
         ]
 
-        migrations.append(contentsOf: Coenttb_Newsletter_Fluent.Newsletter.Migration.allCases)
+        // TODO: Migrate newsletter migrations from Fluent to swift-records
+        // migrations.append(contentsOf: Coenttb_Newsletter_Fluent.Newsletter.Migration.allCases)
 
         @Dependency(\.envVars.appEnv) var appEnv
 

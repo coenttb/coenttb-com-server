@@ -9,7 +9,7 @@ import Coenttb_Blog_Vapor
 import CoenttbRouter
 import CoenttbShared
 import Coenttb_Newsletter
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Server_EnvVars
 import Server_Integration
 
@@ -65,7 +65,7 @@ extension Coenttb_Com_Router.Route.Website {
                 PageModule(theme: .newsletterSubscription) {
 
                     VStack {
-                        CoenttbHTML.Paragraph {
+                        HTML.Paragraph {
                             String.periodically_receive_articles_on.capitalizingFirstLetter().period
                         }
                         .textAlign(.center, media: .desktop)

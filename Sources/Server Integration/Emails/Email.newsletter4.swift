@@ -8,7 +8,7 @@
 import Coenttb_Web
 import Mailgun
 
-extension Email {
+extension Mailgun.Email {
     package static func newsletter4(
     ) -> some HTML {
 
@@ -63,7 +63,7 @@ extension Email {
                             This project became an exploration of how to architect Swift libraries for maximum modularity and reusability. Instead of building one monolithic package, I created an ecosystem of carefully designed packages that compose together: [swift-html-types](https://github.com/coenttb/swift-html-types) and [swift-css-types](https://github.com/coenttb/swift-css-types) provide standards-compliant Swift APIs, while [swift-html-css-pointfree](https://github.com/coenttb/swift-html-css-pointfree) integrates these domain models with HTML-rendering capabilities. [swift-html](https://github.com/coenttb/swift-html) layers on functionality that completes the developer experience at point of use.
                             """}
 
-                            CoenttbHTML.Paragraph {
+                            HTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
                                 "."

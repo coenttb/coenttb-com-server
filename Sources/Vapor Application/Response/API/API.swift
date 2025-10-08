@@ -3,7 +3,7 @@ import CoenttbShared
 import Coenttb_Newsletter
 import Coenttb_Server
 import Coenttb_Syndication_Vapor
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Mailgun
 import Server_Client
 import Server_Integration

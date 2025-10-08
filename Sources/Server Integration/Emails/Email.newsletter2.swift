@@ -8,7 +8,7 @@
 import Coenttb_Web
 import Mailgun
 
-extension Email {
+extension Mailgun.Email {
     package static func newsletter2(
     ) -> some HTML {
 
@@ -79,7 +79,7 @@ extension Email {
                             Visit the open-source [GitHub repository](https://github.com/coenttb/pointfree-html), star the project, submit feedback, or even contribute directly—I’d love your input to make this tool even better.
                             """}
 
-                            CoenttbHTML.Paragraph {
+                            HTML.Paragraph {
                                 "You are receiving this email because you have subscribed to this newsletter. If you no longer wish to receive emails like this, you can unsubscribe "
                                 Link("here", href: "%mailing_list_unsubscribe_url%")
                                 "."

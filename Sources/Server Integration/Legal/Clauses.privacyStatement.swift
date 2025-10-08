@@ -6,7 +6,7 @@
 //
 
 import Coenttb_Web_HTML
-import CoenttbMarkdown
+import HTMLMarkdown
 import Dependencies
 import Translating
 

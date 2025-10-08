@@ -6,7 +6,7 @@
 //
 
 import CoenttbShared
-import CoenttbHTML
+import HTML
 import Dependencies
 import Foundation
 

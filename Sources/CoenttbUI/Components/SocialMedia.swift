@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 04/09/2024.
 //
 
-import CoenttbHTML
+import HTML
 import Foundation
 
 package var x_com_light_background: some HTML {

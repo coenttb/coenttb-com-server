@@ -11,7 +11,7 @@ import Mailgun
 import Server_EnvVars
 import Translating
 
-extension Email {
+extension Mailgun.Email {
     package static func generalContact(
         from: EmailAddress
     ) -> Email {

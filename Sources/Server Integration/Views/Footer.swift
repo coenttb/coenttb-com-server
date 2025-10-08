@@ -8,8 +8,8 @@
 import CoenttbShared
 import Coenttb_Web_HTML
 import Coenttb_Web_Translations
-import CoenttbHTML
-import CoenttbMarkdown
+import HTML
+import HTMLMarkdown
 import Dependencies
 import Foundation
 
@@ -30,7 +30,7 @@ package struct Footer: HTML {
             tagline: .init(
                 title: "coenttb",
                 href: .init(router.href(for: .home)),
-                content: CoenttbHTML.Paragraph {
+                content: HTML.Paragraph {
                     HTMLText("\(String.oneliner) \(String.with.capitalizingFirstLetter()) ")
                     Link("coenttb", href: "https://x.com/coenttb")
                     "."

@@ -1,6 +1,6 @@
 import Boiler
 import CoenttbRouter
-import Coenttb_Vapor
+import ServerFoundationVapor
 import Vapor_Application
 
 @main
