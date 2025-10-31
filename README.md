@@ -167,6 +167,33 @@ Contributions are welcome! This project serves as both a production website and 
 
 This project relies on and is inspired by the excellent work at [Point-Free](https://www.pointfree.co) by Brandon Williams and Stephen Celis.
 
+## Related Packages
+
+### Dependencies
+
+- [boiler](https://github.com/coenttb/boiler): The Swift web framework for building type-safe servers and websites.
+- [coenttb](https://github.com/coenttb/coenttb): Personal profile repository showcasing Swift ecosystem contributions.
+- [coenttb-blog](https://github.com/coenttb/coenttb-blog): A Swift package for blog functionality with HTML generation.
+- [coenttb-google-analytics](https://github.com/coenttb/coenttb-google-analytics): A Swift package for Google Analytics integration.
+- [coenttb-hotjar](https://github.com/coenttb/coenttb-hotjar): A Swift package for Hotjar analytics integration.
+- [coenttb-newsletter](https://github.com/coenttb/coenttb-newsletter): A Swift package for newsletter subscription and email management.
+- [coenttb-postgres](https://github.com/coenttb/coenttb-postgres): A Swift package with PostgreSQL utilities for Vapor.
+- [coenttb-syndication](https://github.com/coenttb/coenttb-syndication): A Swift package for RSS and Atom feed generation.
+- [swift-favicon](https://github.com/coenttb/swift-favicon): A Swift package for type-safe favicons.
+- [swift-html](https://github.com/coenttb/swift-html): The Swift library for domain-accurate and type-safe HTML & CSS.
+- [swift-mailgun](https://github.com/coenttb/swift-mailgun): The Swift library for the Mailgun API.
+- [swift-server-foundation](https://github.com/coenttb/swift-server-foundation): A Swift package with tools to simplify server development.
+- [swift-server-foundation-vapor](https://github.com/coenttb/swift-server-foundation-vapor): A Swift package integrating swift-server-foundation with Vapor.
+- [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
+- [swift-translating](https://github.com/coenttb/swift-translating): A Swift package for inline translations.
+
+### Third-Party Dependencies
+
+- [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
+- [pointfreeco/xctest-dynamic-overlay](https://github.com/pointfreeco/xctest-dynamic-overlay): Define XCTest assertion helpers directly in production code.
+- [m-barthelemy/vapor-queues-fluent-driver](https://github.com/m-barthelemy/vapor-queues-fluent-driver): [Description needed for vapor-queues-fluent-driver]
+- [vapor/vapor](https://github.com/vapor/vapor): A server-side Swift HTTP web framework.
+
 ## License
 
 This project is available under **dual licensing**:
