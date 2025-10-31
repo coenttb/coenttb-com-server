@@ -187,7 +187,7 @@ This project relies on and is inspired by the excellent work at [Point-Free](htt
 
 - [pointfreeco/swift-dependencies](https://github.com/pointfreeco/swift-dependencies): A dependency management library for controlling dependencies in Swift.
 - [pointfreeco/xctest-dynamic-overlay](https://github.com/pointfreeco/xctest-dynamic-overlay): Define XCTest assertion helpers directly in production code.
-- [m-barthelemy/vapor-queues-fluent-driver](https://github.com/m-barthelemy/vapor-queues-fluent-driver): [Description needed for vapor-queues-fluent-driver]
+- [m-barthelemy/vapor-queues-fluent-driver](https://github.com/m-barthelemy/vapor-queues-fluent-driver): A Fluent implementation for Vapor queues.
 - [vapor/vapor](https://github.com/vapor/vapor): A server-side Swift HTTP web framework.
 
 ## License
