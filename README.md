@@ -18,25 +18,23 @@
 
 Read more about me in my [introductory post on coenttb.com](https://www.coenttb.com/blog/1-from-broke-to-building-in-public-open-sourcing-coenttb-com).
 
-### ✨ Key Features
+## Key Features
 
-- 🚀 **100% Swift** - Frontend to backend, all Swift
-- 🛡️ **Type-safe HTML & CSS** - Catch errors at compile time
-- 🧩 **Hypermodular architecture** - Clean separation of concerns
-- ⚡ **Server-side rendering** - Fast, SEO-friendly pages
-- 🎨 **Point-Free inspired** - Functional, composable patterns
+- Written entirely in Swift - frontend to backend
+- Type-safe HTML & CSS - Catch errors at compile time
+- Modular architecture - Clean separation of concerns
+- Server-side rendering - SEO-friendly pages
+- Point-Free inspired - Functional, composable patterns
 
 ## Why Open Source?
 
-### 🎯 Mission
+Swift for web development is a viable approach that lacks production examples. By open-sourcing coenttb.com, I aim to:
 
-Swift for web development is powerful but underexplored. By open-sourcing coenttb.com, I aim to:
-
-1. **Demonstrate** - Show how to structure a production Swift website elegantly
+1. **Demonstrate** - Show how to structure a production Swift website
 2. **Inspire** - Encourage others to build web applications in Swift
 3. **Collaborate** - Gather feedback to improve the Swift web ecosystem
 
-This is a real production website serving real users - not just a demo. Learn from actual patterns used in production.
+This is a production website serving real users. Learn from actual patterns used in production.
 
 ## Quick Start
 
@@ -113,8 +111,6 @@ extension Blog.Post {
 
 ## Ecosystem
 
-### 🏗️ The coenttb Stack
-
 This server is built on a comprehensive Swift web development stack:
 
 #### Core Libraries
@@ -137,12 +133,12 @@ This server is built on a comprehensive Swift web development stack:
 
 ## Features Demonstrated
 
-- 📝 **Blog Engine** - Markdown-based blog with syntax highlighting
-- 📧 **Email System** - Type-safe transactional emails
-- 🌍 **Internationalization** - Multi-language support
-- 🎨 **Dark Mode** - Automatic theme switching
-- 📱 **Responsive Design** - Mobile-first approach
-- 🚀 **Performance** - Optimized for speed
+- Blog Engine - Markdown-based blog with syntax highlighting
+- Email System - Type-safe transactional emails
+- Internationalization - Multi-language support
+- Dark Mode - Automatic theme switching
+- Responsive Design - Mobile-first approach
+- Performance - Optimized for speed
 
 ## Contributing
 
@@ -157,11 +153,11 @@ Contributions are welcome! This project serves as both a production website and 
 
 ## Support
 
-- 🐛 **[Issue Tracker](https://github.com/coenttb/coenttb-com-server/issues)** - Report bugs or request features
-- 💬 **[Discussions](https://github.com/coenttb/coenttb-com-server/discussions)** - Ask questions and share ideas
-- 📧 **[Newsletter](http://coenttb.com/en/newsletter/subscribe)** - Swift web development tips
-- 🐦 **[X (Twitter)](http://x.com/coenttb)** - Follow for updates
-- 💼 **[LinkedIn](https://www.linkedin.com/in/tenthijeboonkkamp)** - Connect professionally
+- Issue Tracker - [Report bugs or request features](https://github.com/coenttb/coenttb-com-server/issues)
+- Discussions - [Ask questions and share ideas](https://github.com/coenttb/coenttb-com-server/discussions)
+- Newsletter - [Swift web development updates](http://coenttb.com/en/newsletter/subscribe)
+- X (Twitter) - [Follow for updates](http://x.com/coenttb)
+- LinkedIn - [Connect professionally](https://www.linkedin.com/in/tenthijeboonkkamp)
 
 ## Acknowledgements
 
@@ -212,7 +208,6 @@ Contact **info@coenttb.com** for licensing options.
 
 ---
 
-<p align="center">
-  Made with ❤️ by <a href="https://coenttb.com">coenttb</a><br>
-  <em>Building the future of Swift on the server</em>
-</p>
+---
+
+Made by [coenttb](https://coenttb.com)
